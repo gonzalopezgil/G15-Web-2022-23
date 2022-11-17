@@ -1,7 +1,7 @@
 echo "[+] Bienvenido a la instalación inicial del servidor: $HOSTNAME"
 
 echo "[+] Instalando paquetes necesarios..."
-sudo apt install maven -y > /dev/null && echo -e "\t[-] Maven instalado correctamente" || echo -e "\t[!] Error al instalar maven"
+sudo apt install maven -y > /dev/null && echo -e "\t[-] Maven instalado correctamente" || echo -e "\t[!] Error al instalar maven, pruebe a instalarlo con 'apt --fix-broken install && apt install maven -y'"
 
 echo -e "[+] Instalando dependencias del proyecto backend..."
 cd backend
