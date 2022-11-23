@@ -75,7 +75,7 @@ ALTER TABLE `responsable` ADD FOREIGN KEY (`id_responsable`) REFERENCES `usuario
 
 ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
 
-ALTER TABLE `empresa` ADD FOREIGN KEY (`id_tutor`) REFERENCES `tutor` (`id_tutor`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_tutor`) REFERENCES `empresa` (`id_tutor`);
 
 ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
 
