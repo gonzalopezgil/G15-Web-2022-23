@@ -7,11 +7,13 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: gestion_de_practicas
+            MYSQL_DATABASE: gestion_de_practica
             MYSQL_USER: admin
             MYSQL_PASSWORD: 1234
         volumes:
-            - /tmp/database:/var/lib/mysql
-            - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+            - ./database/init/:/docker-entrypoint-initdb.d/
+        command: 
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
         ports:  
             - 3308:3306
