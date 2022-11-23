@@ -1,10 +1,12 @@
-package test.java.com.uah.gestion_de_practicas.model;
+package com.uah.gestion_de_practicas.model;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Assertions;
 
+
+@DisplayName("UserTest")
 public class UserTest{
     private User user;
     
@@ -14,7 +16,8 @@ public class UserTest{
     }
 
     @Test
-    public `should get id`(){
+    @DisplayName("`getId` should return the id of the user.")
+    public void TestGetId(){
         // Given
         Long id = 1L;
         user.setId(id);
@@ -27,7 +30,8 @@ public class UserTest{
     }
 
     @Test
-    public `should get username`(){
+    @DisplayName("`getUsername` should return the username of the user.")
+    public void TestGetUsername(){
         // Given
         String username = "daniel21";
         user.setUsername(username);
@@ -40,7 +44,8 @@ public class UserTest{
     }
 
     @Test
-    public `should get password`(){
+    @DisplayName("`getPassword` should return the password of the user.")
+    public void TestGetPassword(){
         // Given
         String password = "markevans21";
         user.setPassword(password);
@@ -53,46 +58,50 @@ public class UserTest{
     }
 
     @Test
-    public `should get first_name`(){
+    @DisplayName("`getFirst_name` should return the first name of the user.")
+    public void TestGetFirstName(){
         // Given
         String first_name = "Daniel";
-        user.setFirst_name(first_name);
+        user.setFirstName(first_name);
         
         // When
-        String result = user.getFirst_name();
+        String result = user.getFirstName();
         
         // Then
         Assertions.assertEquals(first_name, result);
     }
 
     @Test
-    public `should get last_name`(){
+    @DisplayName("`getLast_name` should return the last name of the user.")
+    public void TestGetLastName(){
         // Given
         String last_name = "Martinez";
-        user.setLast_name(last_name);
+        user.setLastName(last_name);
         
         // When
-        String result = user.getLast_name();
+        String result = user.getLastName();
         
         // Then
         Assertions.assertEquals(last_name, result);
     }
 
     @Test
-    public `should get nif`(){
+    @DisplayName("`getNif` should return the nif of the user.")
+    public void TestGetNif(){
         // Given
-        String nif = "01234567N";
+        String nif = "12345678A";
         user.setNif(nif);
-        
+
         // When
         String result = user.getNif();
-        
+
         // Then
         Assertions.assertEquals(nif, result);
     }
 
     @Test
-    public `should get email`(){
+    @DisplayName("`getEmail` should return the email of the user.")
+    public void TestGetEmail(){
         // Given
         String email = "daniel21@edu.uah.es";
         user.setEmail(email);
