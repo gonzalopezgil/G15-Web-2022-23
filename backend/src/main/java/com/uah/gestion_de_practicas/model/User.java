@@ -12,7 +12,7 @@ import javax.persistence.*;
 * @attribute email, the email of the user.
 */
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class User {
     
     private Long id;
@@ -27,6 +27,24 @@ public class User {
     Empty constructor needed for Hibernate.
     */
     public User() {
+    }
+
+    /**
+     * Constructor for the User class.
+     * @param username, the username of the user.
+     * @param password, the password of the user.
+     * @param first_name, the first name of the user.
+     * @param last_name, the last name of the user.
+     * @param nif, the nif of the user.
+     * @param email, the email of the user.
+     */
+    public User(String username, String password, String first_name, String last_name, String nif, String email) {
+        this.username = username;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.nif = nif;
+        this.email = email;
     }
 
     // ----------------- GETTERS -----------------
