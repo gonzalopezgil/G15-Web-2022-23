@@ -1,0 +1,17 @@
+version: '3.8' # Por tener docker v19.03.0 o superior
+
+services:
+    database:
+        image: mariadb:latest
+        container_name: mariadb_gdp
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: gestion_de_practicas
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 1234
+        volumes:
+            - /tmp/database:/var/lib/mysql
+            - ./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+        ports:  
+            - 3308:3306
