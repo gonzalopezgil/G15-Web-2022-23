@@ -7,7 +7,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: gestion_de_practica
+            MYSQL_DATABASE: gestion_de_practicas
             MYSQL_USER: admin
             MYSQL_PASSWORD: 1234
         volumes:
