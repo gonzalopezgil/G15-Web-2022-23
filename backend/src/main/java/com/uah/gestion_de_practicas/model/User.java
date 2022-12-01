@@ -4,23 +4,24 @@ import javax.persistence.*;
 
 /**
 * User class, represents a user in the database.
-* @attribute id, the id of the user.
-* @attribute username, the username of the user.
-* @attribute password, the password of the user.
-* @attribute first_name, the first name of the user.
-* @attribute last_name, the last name of the user.
-* @attribute email, the email of the user.
 */
 @Entity
 @Table(name = "usuario")
 public class User {
     
+    @Column(name = "id_usuario")
     private Long id;
+    @Column(name = "nombre_usuario")
     private String username;
+    @Column(name = "contrasena")
     private String password;
+    @Column(name = "nombre")
     private String first_name;
+    @Column(name = "apellidos")
     private String last_name;
+    @Column(name = "DNI")
     private String nif;
+    @Column(name = "correo")
     private String email;
     
     /**
@@ -153,6 +154,7 @@ public class User {
     // ----------------- TO STRING -----------------
     /**
     * Returns a string representation of the user.
+    * @return user to string.
     */
     @Override
     public String toString() {
