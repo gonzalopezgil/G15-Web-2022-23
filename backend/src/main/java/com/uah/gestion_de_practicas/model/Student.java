@@ -32,18 +32,6 @@ public class Student extends User {
 
     /**
      * Constructor for the Student class.
-     * @param username
-     * @param password
-     * @param first_name
-     * @param last_name
-     * @param nif
-     * @param email
-     * @param grade
-     * @param birth_date
-     * @param phone
-     * @param exp_note
-     * @param total_hours
-     * @param id, the id of the student.
      * @param username, the username of the student.
      * @param password, the password of the student.
      * @param first_name, the first name of the student.
