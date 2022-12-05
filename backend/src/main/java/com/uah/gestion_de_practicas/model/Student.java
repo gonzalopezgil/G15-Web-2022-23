@@ -162,7 +162,7 @@ public class Student extends User {
      */
     @Override
     public String toString() {
-        return "Student {birth_date=" + birth_date + ", exp_note=" + exp_note + ", grade=" + grade + ", id=" + id
-                + ", phone=" + phone + ", total_hours=" + total_hours + "}";
+        return "Student {id=" + id + ", grade=" + grade + ", birth_date=" + birth_date + ", phone=" + phone + ", exp_note=" + exp_note
+                + ", total_hours=" + total_hours + "}";
     }
 }
