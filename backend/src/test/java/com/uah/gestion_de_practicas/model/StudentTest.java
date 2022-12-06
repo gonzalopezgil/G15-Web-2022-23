@@ -115,17 +115,17 @@ public class StudentTest {
     }
 
     @Test
-    @DisplayName("`getGrade' should return the grade of the student.")
-    public void TestGetGrade() {
+    @DisplayName("`getDegree' should return the degree of the student.")
+    public void TestGetDegree() {
         // Given
-        String grade = "GII";
-        student.setGrade(grade);
+        String degree = "GII";
+        student.setDegree(degree);
 
         // When
-        String result = student.getGrade();
+        String result = student.getDegree();
 
         // Then
-        Assertions.assertEquals(grade, result);
+        Assertions.assertEquals(degree, result);
     }
     
     @Test
