@@ -14,7 +14,7 @@ public class Student extends User {
     @Column(name = "id_alumno")
     private Long id;
     @Column(name = "grado")
-    private String grade;
+    private String degree;
     @Column(name = "f_nacimiento")
     private Date birth_date;
     @Column(name = "telefono")
@@ -38,16 +38,16 @@ public class Student extends User {
      * @param last_name, the last name of the student.
      * @param nif, the NIF of the student.
      * @param email, the email of the student.
-     * @param grade, the grade of the student.
+     * @param degree, the degree of the student.
      * @param birth_date, the birth date of the student.
      * @param phone, the phone of the student.
      * @param exp_note, the average grade of the student.
      * @param total_hours, the total hours of practice corresponding to the student.
      */
     public Student(String username, String password, String first_name, String last_name, String nif, String email,
-            String grade, Date birth_date, String phone, Double exp_note, Integer total_hours) {
+            String degree, Date birth_date, String phone, Double exp_note, Integer total_hours) {
         super(username, password, first_name, last_name, nif, email);
-        this.grade = grade;
+        this.degree = degree;
         this.birth_date = birth_date;
         this.phone = phone;
         this.exp_note = exp_note;
@@ -67,11 +67,11 @@ public class Student extends User {
     }
 
     /**
-     * Get the grade of the student.
-     * @return the grade of the student.
+     * Get the degree of the student.
+     * @return the degree of the student.
      */
-    public String getGrade() {
-        return grade;
+    public String getDegree() {
+        return degree;
     }
 
     /**
@@ -116,11 +116,11 @@ public class Student extends User {
     }
 
     /**
-     * Set the grade of the student.
-     * @param grade, the grade of the student.
+     * Set the degree of the student.
+     * @param degree, the degree of the student.
      */
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 
     /**
@@ -162,7 +162,7 @@ public class Student extends User {
      */
     @Override
     public String toString() {
-        return "Student {id=" + id + ", grade=" + grade + ", birth_date=" + birth_date + ", phone=" + phone + ", exp_note=" + exp_note
+        return "Student {id=" + id + ", degree=" + degree + ", birth_date=" + birth_date + ", phone=" + phone + ", exp_note=" + exp_note
                 + ", total_hours=" + total_hours + "}";
     }
 }
