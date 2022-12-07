@@ -2,6 +2,8 @@ package com.uah.gestion_de_practicas.model;
 
 import javax.persistence.*;
 
+import com.uah.gestion_de_practicas.repository.DAO.SelectionIdentity;
+
 /**
  * Selection class, represents a selection of internship offers made by a student in the database.
  */
@@ -9,10 +11,8 @@ import javax.persistence.*;
 @Table(name = "oferta_seleccionada")
 public class Selection {
 
-    @Column(name = "id_alumno")
-    private Long student_id;
-    @Column(name = "id_oferta")
-    private Long offer_id;
+    @EmbeddedId
+    private SelectionIdentity selectionIdentity;
     @Column(name = "preferencia")
     private Integer preference;
 
@@ -28,27 +28,18 @@ public class Selection {
      * @param offer_id, the id of the internship offer selected.
      * @param preference, the preference of the internship offer selected (from 1 to 10).
      */
-    public Selection(Long student_id, Long offer_id, Integer preference) {
-        this.student_id = student_id;
-        this.offer_id = offer_id;
+    public Selection(SelectionIdentity selectionIdentity, Integer preference) {
+        this.selectionIdentity = selectionIdentity;
         this.preference = preference;
     }
 
     // -------------------- GETTERS --------------------
     /**
-     * Get the id of the student that made the selection.
-     * @return the id of the student that made the selection.
+     * Get the selection identity object that contains the primary key of the selection class.
+     * @return the selection identity object that contains the primary key of the selection class.
      */
-    public Long getStudent_id() {
-        return student_id;
-    }
-
-    /**
-     * Get the id of the internship offer selected.
-     * @return the id of the internship offer selected.
-     */
-    public Long getOffer_id() {
-        return offer_id;
+    public SelectionIdentity getSelectionIdentity() {
+        return selectionIdentity;
     }
 
     /**
@@ -61,19 +52,11 @@ public class Selection {
 
     // -------------------- SETTERS --------------------
     /**
-     * Set the id of the student that made the selection.
-     * @param student_id, the id of the student that made the selection.
+     * Set the selection identity object that contains the primary key of the selection class.
+     * @param selectionIdentity, the selection identity object that contains the primary key of the selection class.
      */
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
-    }
-
-    /**
-     * Set the id of the internship offer selected.
-     * @param offer_id, the id of the internship offer selected.
-     */
-    public void setOffer_id(Long offer_id) {
-        this.offer_id = offer_id;
+    public void setSelectionIdentity(SelectionIdentity selectionIdentity) {
+        this.selectionIdentity = selectionIdentity;
     }
 
     /**
@@ -92,8 +75,8 @@ public class Selection {
     @Override
     public String toString() {
         return "Selection{" +
-                "student_id=" + student_id +
-                ", offer_id=" + offer_id +
+                "student_id=" + selectionIdentity.getStudent_id() +
+                ", offer_id=" + selectionIdentity.getOffer_id() +
                 ", preference=" + preference +
                 '}';
     }
