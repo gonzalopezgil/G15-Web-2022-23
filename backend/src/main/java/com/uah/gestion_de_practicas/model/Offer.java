@@ -5,8 +5,8 @@ import javax.persistence.*;
 /**
  * Offer class, represents an internship offer in the database.
  */
-@Entity
-@Table(name = "oferta")
+// @Entity
+// @Table(name = "oferta")
 public class Offer {
 
     @Column(name = "id")

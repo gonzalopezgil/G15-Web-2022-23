@@ -5,8 +5,8 @@ import javax.persistence.*;
 /**
  * Selection class, represents a selection of internship offers made by a student in the database.
  */
-@Entity
-@Table(name = "oferta_seleccionada")
+// @Entity
+// @Table(name = "oferta_seleccionada")
 public class Selection {
 
     @Column(name = "id_alumno")
@@ -39,6 +39,8 @@ public class Selection {
      * Get the id of the student that made the selection.
      * @return the id of the student that made the selection.
      */
+    // @Id
+    // @ManyToOne
     public Long getStudent_id() {
         return student_id;
     }
@@ -47,6 +49,8 @@ public class Selection {
      * Get the id of the internship offer selected.
      * @return the id of the internship offer selected.
      */
+    @Id
+    @ManyToOne
     public Long getOffer_id() {
         return offer_id;
     }

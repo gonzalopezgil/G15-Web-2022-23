@@ -5,8 +5,8 @@ import javax.persistence.*;
 /**
  * Company class, represents a company in the database.
  */
-@Entity
-@Table(name = "empresa")
+// @Entity
+// @Table(name = "empresa")
 public class Company {
 
     @Column(name = "id")

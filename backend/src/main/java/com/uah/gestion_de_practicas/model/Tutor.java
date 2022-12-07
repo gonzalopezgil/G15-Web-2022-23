@@ -7,8 +7,7 @@ import javax.persistence.*;
 /**
  * Tutor class, represents a tutor in the database.
  */
-@Entity
-@Table(name = "tutor")
+// @Entity(name = "tutor")
 public class Tutor extends User {
 
     @Column(name = "id_tutor")
