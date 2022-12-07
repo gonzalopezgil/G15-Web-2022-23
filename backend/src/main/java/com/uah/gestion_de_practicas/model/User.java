@@ -1,5 +1,7 @@
 package com.uah.gestion_de_practicas.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 
 /**
@@ -149,6 +151,33 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    // ------------------ EQUALS ------------------
+    /**
+     * Compares this user to the specified object. The result is true if and only if the argument is not null and is a User object that represents the same user as this object.
+     * 
+     * @param obj the object to compare this User against.
+     * @return true if the given object represents a User equivalent to this user, false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(nif, user.nif) && Objects.equals(email, user.email);
+    }
+
+    /**
+     * Returns a hash code for this user.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, first_name, last_name, nif, email);
+    }
+   
 
     // ----------------- TO STRING -----------------
     /**

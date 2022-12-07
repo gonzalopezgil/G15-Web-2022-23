@@ -18,6 +18,7 @@ public class UserService {
     /**
      * Data access repository for the User class.
      */
+    @Autowired
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -30,8 +31,8 @@ public class UserService {
      * Saves a user in the database.
      * @param user User to be saved.
      */
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     /**
