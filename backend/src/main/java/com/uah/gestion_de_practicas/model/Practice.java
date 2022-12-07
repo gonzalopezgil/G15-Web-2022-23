@@ -7,8 +7,8 @@ import javax.persistence.*;
 /**
  * Practice class, represents a student's practice in the database.
  */
-@Entity
-@Table(name = "practica")
+// @Entity
+// @Table(name = "practica")
 public class Practice {
 
     @Column(name = "id_practica")

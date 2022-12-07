@@ -7,8 +7,7 @@ import javax.persistence.*;
 /**
  * Student class, represents a student in the database.
  */
-@Entity
-@Table(name = "alumno")
+// @Entity(name = "alumno")
 public class Student extends User {
 
     @Column(name = "id_alumno")

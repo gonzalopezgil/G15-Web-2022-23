@@ -7,8 +7,8 @@ import com.uah.gestion_de_practicas.repository.DAO.SelectionIdentity;
 /**
  * Selection class, represents a selection of internship offers made by a student in the database.
  */
-@Entity
-@Table(name = "oferta_seleccionada")
+// @Entity
+// @Table(name = "oferta_seleccionada")
 public class Selection {
 
     @EmbeddedId
