@@ -5,13 +5,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.uah.gestion_de_practicas.repository.DAO.SelectionIdentity;
+
 @DisplayName("SelectionTest")
 public class SelectionTest {
     private Selection selection;
+    private SelectionIdentity selectionIdentity;
 
     @BeforeEach
     public void setUp() {
         selection = new Selection();
+        selectionIdentity = new SelectionIdentity();
     }
 
     @Test
@@ -19,10 +23,11 @@ public class SelectionTest {
     public void TestGetStudent_id() {
         // Given
         Long student_id = 1L;
-        selection.setStudent_id(student_id);
+        selectionIdentity.setStudent_id(student_id);
+        selection.setSelectionIdentity(selectionIdentity);
 
         // When
-        Long result = selection.getStudent_id();
+        Long result = selection.getSelectionIdentity().getStudent_id();
 
         // Then
         Assertions.assertEquals(student_id, result);
@@ -33,10 +38,11 @@ public class SelectionTest {
     public void TestGetOffer_id() {
         // Given
         Long offer_id = 1L;
-        selection.setOffer_id(offer_id);
+        selectionIdentity.setOffer_id(offer_id);
+        selection.setSelectionIdentity(selectionIdentity);
 
         // When
-        Long result = selection.getOffer_id();
+        Long result = selection.getSelectionIdentity().getOffer_id();
 
         // Then
         Assertions.assertEquals(offer_id, result);
