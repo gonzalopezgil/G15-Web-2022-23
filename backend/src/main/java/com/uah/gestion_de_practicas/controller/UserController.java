@@ -71,9 +71,13 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable (name="id") Long id) {
+    public ResponseEntity deleteUser(@PathVariable (name="id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
-    
+
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> logInUser(String username, String password) {
+        return ResponseEntity.ok(userService.logInUser(username, password));
+    }    
 }

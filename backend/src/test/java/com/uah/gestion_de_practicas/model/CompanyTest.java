@@ -55,19 +55,5 @@ public class CompanyTest {
         // Then
         Assertions.assertEquals(description, result);
     }
-
-    @Test
-    @DisplayName("`getTutorId` should return the id of the tutor.")
-    public void TestGetTutorId() {
-        // Given
-        Long tutor_id = 1L;
-        company.setTutor_id(tutor_id);
-
-        // When
-        Long result = company.getTutor_id();
-
-        // Then
-        Assertions.assertEquals(tutor_id, result);
-    }
     
 }
