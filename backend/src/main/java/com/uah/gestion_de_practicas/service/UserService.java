@@ -1,6 +1,5 @@
 package com.uah.gestion_de_practicas.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.User;
@@ -18,7 +17,6 @@ public class UserService {
     /**
      * Data access repository for the User class.
      */
-    @Autowired
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -39,8 +37,8 @@ public class UserService {
      * Gets a user from the database.
      * @param id Id of the user to be retrieved.
      */
-    public void getUser(Long id) {
-        userRepository.findById(id);
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     /**
@@ -49,14 +47,6 @@ public class UserService {
      */
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
-    }
-
-    /**
-     * Updates a user in the database.
-     * @param user User to be updated.
-     */
-    public void updateUser(User user) {
-        userRepository.save(user);
     }
 
     /**

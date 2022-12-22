@@ -5,8 +5,7 @@ import javax.persistence.*;
 /**
  * Company class, represents a company in the database.
  */
-// @Entity
-// @Table(name = "empresa")
+@Entity(name = "empresa")
 public class Company {
 
     @Column(name = "id")
@@ -15,8 +14,6 @@ public class Company {
     private String name;
     @Column(name = "descripcion")
     private String description;
-    @Column(name = "id_tutor")
-    private Long tutor_id;
 
     /**
      * Empty constructor needed for Hibernate.
@@ -28,12 +25,10 @@ public class Company {
      * Constructor for the Company class.
      * @param name, the name of the company.
      * @param description, the description of the company.
-     * @param tutor_id, the id of the tutor of the company.
      */
-    public Company(String name, String description, Long tutor_id) {
+    public Company(String name, String description) {
         this.name = name;
         this.description = description;
-        this.tutor_id = tutor_id;
     }
 
     // ------------------- GETTERS -------------------
@@ -64,13 +59,6 @@ public class Company {
         return description;
     }
 
-    /**
-     * Get the id of the tutor of the company.
-     * @return the id of the tutor of the company.
-     */
-    public Long getTutor_id() {
-        return tutor_id;
-    }
 
     // ------------------- SETTERS -------------------
     /**
@@ -97,14 +85,6 @@ public class Company {
         this.description = description;
     }
 
-    /**
-     * Set the id of the tutor of the company.
-     * @param tutor_id, the id of the tutor of the company.
-     */
-    public void setTutor_id(Long tutor_id) {
-        this.tutor_id = tutor_id;
-    }
-
     // ------------------- METHODS -------------------
     /**
      * Method to convert the company object to a string.
@@ -116,7 +96,6 @@ public class Company {
                 "id=" + id +
                 ", name=" + name +
                 ", description=" + description +
-                ", tutor_id=" + tutor_id +
                 '}';
     }
     

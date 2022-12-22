@@ -16,6 +16,8 @@ public class Tutor extends User {
     private Date admission_date;
     @Column(name = "f_baja")
     private Date removal_date;
+    @Column(name = "id_empresa")
+    private Company company;
 
     /**
      * Empty constructor needed for Hibernate.
@@ -33,12 +35,14 @@ public class Tutor extends User {
      * @param email, the email of the tutor.
      * @param admission_date, the admission date of the tutor.
      * @param removal_date, the removal date of the tutor.
+     * @param company_id, the id of the company of the tutor.
      */
     public Tutor(String username, String password, String first_name, String last_name, String nif, String email,
-            Date admission_date, Date removal_date) {
+            Date admission_date, Date removal_date, Company company) {
         super(username, password, first_name, last_name, nif, email);
         this.admission_date = admission_date;
         this.removal_date = removal_date;
+        this.company = company;
     }
 
     // ----------------- GETTERS -----------------
@@ -69,6 +73,15 @@ public class Tutor extends User {
         return removal_date;
     }
 
+    /**
+     * Get the id of the company of the tutor.
+     * @return the id of the company of the tutor.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Company getCompany() {
+        return company;
+    }
+
     // ----------------- SETTERS -----------------
     /**
      * Set the id of the tutor.
@@ -94,6 +107,14 @@ public class Tutor extends User {
         this.removal_date = removal_date;
     }
 
+    /**
+     * Set the id of the company of the tutor.
+     * @param company_id the new company id of the tutor.
+     */
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     // ----------------- METHODS -----------------
     /**
      * Method to print the tutor.
@@ -101,7 +122,7 @@ public class Tutor extends User {
      */
     @Override
     public String toString() {
-        return "Tutor {id=" + id + ", admission_date=" + admission_date + ", removal_date=" + removal_date + "}";
+        return "Tutor {id=" + id + ", admission_date=" + admission_date + ", removal_date=" + removal_date + ", company_id=" + company.getId() + "}";
     }
     
 }

@@ -142,4 +142,19 @@ public class TutorTest {
         Assertions.assertEquals(removalDate, result);
     }
 
+    @Test
+    @DisplayName("`getCompany` should return the company id of the tutor.")
+    public void TestGetCompany() {
+        // Given
+        Company company = new Company();
+        company.setId(1L);
+        tutor.setCompany(company);
+
+        // When
+        Company result = tutor.getCompany();
+
+        // Then
+        Assertions.assertEquals(company, result);
+    }
+
 }
