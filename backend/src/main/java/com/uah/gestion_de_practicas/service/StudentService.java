@@ -2,10 +2,12 @@ package com.uah.gestion_de_practicas.service;
 
 import org.springframework.stereotype.Service;
 
+import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.StudentRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service class for the Student class.
@@ -55,6 +57,17 @@ public class StudentService {
      */
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    // ------------------- SPECIFIC OPERATIONS ------------------- //
+    /**
+     * Gets all the students from a company.
+     * @param id Id of the company.
+     * @return A list with all the students from the company.
+     */
+    public List<StudentDTO> getStudentsFromCompany(Long id) {
+        List<Student> students = studentRepository.getStudentsFromCompany(id);
+        return students.stream().map(StudentDTO::new).collect(Collectors.toList());
     }
     
 }

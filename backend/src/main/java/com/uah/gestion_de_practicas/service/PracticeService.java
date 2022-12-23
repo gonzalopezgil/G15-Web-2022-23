@@ -34,7 +34,7 @@ public class PracticeService {
 
     /**
      * Gets a practice from the database.
-     * @param id Id of the practice to be retrieved.
+     * @param id, Id of the practice to be retrieved.
      */
     public Practice getPractice(Long id) {
         return practiceRepository.findById(id).orElse(null);
@@ -42,7 +42,7 @@ public class PracticeService {
 
     /**
      * Deletes a practice from the database.
-     * @param id Id of the practice to be deleted.
+     * @param id, Id of the practice to be deleted.
      */
     public void deletePractice(Long id) {
         practiceRepository.deleteById(id);
@@ -54,6 +54,27 @@ public class PracticeService {
      */
     public List<Practice> getAllPractices() {
         return practiceRepository.findAll();
+    }
+
+    /**
+     * Saves a list of practices in the database.
+     * @param practices, List of practices to be saved.
+     * @return A list with all the saved practices.
+     */
+    public List<Practice> saveAllPractices(List<Practice> practices) {
+        return practiceRepository.saveAll(practices);
+    }
+
+    // ------------------- SPECIFIC OPERATIONS ------------------- //
+
+    /**
+     * Gets the practice history of the company.
+     * Done or in progress practices.
+     * @param id, Id of the student.
+     * @return A list with all the practices of the student.
+     */
+    public List<Practice> getPracticeHistory(Long id) {
+        return practiceRepository.getPracticeHistory(id);
     }
     
 }

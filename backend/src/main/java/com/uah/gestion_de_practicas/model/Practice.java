@@ -4,11 +4,14 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Practice class, represents a student's practice in the database.
  */
-// @Entity
-// @Table(name = "practica")
+@Entity
+@Table(name = "practica")
+@EqualsAndHashCode
 public class Practice {
 
     @Column(name = "id_practica")

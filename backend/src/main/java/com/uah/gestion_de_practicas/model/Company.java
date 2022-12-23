@@ -2,10 +2,14 @@ package com.uah.gestion_de_practicas.model;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Company class, represents a company in the database.
  */
-@Entity(name = "empresa")
+@Entity
+@Table(name = "empresa")
+@EqualsAndHashCode
 public class Company {
 
     @Column(name = "id")

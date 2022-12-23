@@ -4,10 +4,14 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Student class, represents a student in the database.
  */
-// @Entity(name = "alumno")
+@Entity
+@Table(name = "alumno")
+@EqualsAndHashCode(callSuper = true)
 public class Student extends User {
 
     @Column(name = "id_alumno")

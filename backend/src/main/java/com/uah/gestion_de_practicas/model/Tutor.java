@@ -4,10 +4,14 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Tutor class, represents a tutor in the database.
  */
-@Entity(name = "tutor")
+@Entity
+@Table(name = "tutor")
+@EqualsAndHashCode(callSuper = true)
 public class Tutor extends User {
 
     @Column(name = "id_tutor")

@@ -7,7 +7,8 @@ import javax.persistence.*;
 /**
 * User class, represents a user in the database.
 */
-@Entity(name = "usuario")
+@Entity
+@Table(name = "usuario")
 public class User {
     
     @Column(name = "id_usuario")
