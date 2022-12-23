@@ -2,11 +2,14 @@ package com.uah.gestion_de_practicas.model;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Request class, represents a request of a student to an offer in the database.
  */
-// @Entity
-// @Table(name = "oferta_seleccionada")
+@Entity
+@Table(name = "oferta_seleccionada")
+@EqualsAndHashCode
 public class Request {
 
     @Column(name = "id_oferta")

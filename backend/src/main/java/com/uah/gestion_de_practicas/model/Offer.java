@@ -2,11 +2,14 @@ package com.uah.gestion_de_practicas.model;
 
 import javax.persistence.*;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Offer class, represents an internship offer in the database.
  */
-// @Entity
-// @Table(name = "oferta")
+@Entity
+@Table(name = "oferta")
+@EqualsAndHashCode
 public class Offer {
 
     @Column(name = "id")
