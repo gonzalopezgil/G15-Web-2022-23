@@ -65,9 +65,8 @@ public class StudentService {
      * @param id Id of the company.
      * @return A list with all the students from the company.
      */
-    public List<StudentDTO> getStudentsFromCompany(Long id) {
-        List<Student> students = studentRepository.getStudentsFromCompany(id);
-        return students.stream().map(StudentDTO::new).collect(Collectors.toList());
+    public List<Student> getStudentsFromCompany(Long id) {
+        return studentRepository.getStudentsFromCompany(id);
     }
     
 }

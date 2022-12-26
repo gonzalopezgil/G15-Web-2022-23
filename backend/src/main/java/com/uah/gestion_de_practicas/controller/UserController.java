@@ -33,6 +33,10 @@ public class UserController {
     }
 
 
+    /**
+     * Get all the users
+     * @return ResponseEntity<List<UserDTO>> list of all the users
+     */
     @GetMapping("")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -43,6 +47,11 @@ public class UserController {
         return ResponseEntity.ok(userDTOs);
     }
 
+    /**
+     * Get a user by its id
+     * @param id Long id of the user
+     * @return ResponseEntity<UserDTO> the user
+     */
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable(name="id") Long id) {
         User user = userService.getUser(id);
@@ -52,12 +61,23 @@ public class UserController {
             return ResponseEntity.status(Response.SC_NOT_FOUND).build();
     }
 
+    /**
+     * Register a user by all its fields
+     * @param User User json containing all the fields of the user
+     * @return ResponseEntity<UserDTO> the registered user
+    */
     @PostMapping("")
     public ResponseEntity<UserDTO> registerUser(@RequestBody User user) {
         User registered_user = userService.saveUser(user);
         return ResponseEntity.ok(new UserDTO(registered_user));
     }
 
+    /**
+     * Update a user by its id and all its fields
+     * @param id Long id of the user
+     * @param User User json containing all the fields of the user
+     * @return ResponseEntity<UserDTO> the updated user
+    */
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable (name="id") Long id, @RequestBody User user) {
         if (userService.getUser(id) != null ){
@@ -70,12 +90,23 @@ public class UserController {
         
     }
 
+    /**
+     * Delete a user by its id
+     * @param id Long id of the user
+     * @return ResponseEntity<Void> empty response
+    */
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable (name="id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Logs in a user by its username and password
+     * @param username String username
+     * @param password String encoded password
+     * @return ResponseEntity<Boolean> true if the user was logged in, false otherwise
+     */
     @PostMapping("/login")
     public ResponseEntity<Boolean> logInUser(String username, String password) {
         return ResponseEntity.ok(userService.logInUser(username, password));

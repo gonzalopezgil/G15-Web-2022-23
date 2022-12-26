@@ -1,6 +1,7 @@
 package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class CompanyController {
             return ResponseEntity.badRequest().build();
         }
 
+        // TODO: Check if the tutor is registered to another company first
         Company registered_company = companyService.saveCompany(company);
         return ResponseEntity.ok(registered_company);
     }
@@ -60,7 +62,7 @@ public class CompanyController {
             return ResponseEntity.badRequest().build();
         }
 
-        List<CompanyStudentsDTO> companies_with_students = companyService.getAllCompaniesWithStudents();
+        List<CompanyStudentsDTO> companies_with_students = CompanyStudentsDTO.fromDAO(companyService.getAllCompaniesWithStudents());
         return ResponseEntity.ok(companies_with_students);
     }
     
@@ -117,7 +119,7 @@ public class CompanyController {
         if (companyService.getCompany(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        List<StudentDTO> students = companyService.getStudentsInCompany(id);
+        List<StudentDTO> students = StudentDTO.fromStudents(companyService.getStudentsInCompany(id));
         return ResponseEntity.ok(students);
     }
     

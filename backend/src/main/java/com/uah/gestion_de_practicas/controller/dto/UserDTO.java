@@ -1,5 +1,8 @@
 package com.uah.gestion_de_practicas.controller.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.uah.gestion_de_practicas.model.User;
 
 import lombok.AllArgsConstructor;
@@ -29,4 +32,11 @@ public class UserDTO {
         this.email = user.getEmail();
     }
 
+    public static UserDTO fromUser(User user) {
+        return new UserDTO(user);
+    }
+
+    public static List<UserDTO> fromUsers(List<User> users) {
+        return users.stream().map(UserDTO::fromUser).collect(Collectors.toList());
+    }
 }

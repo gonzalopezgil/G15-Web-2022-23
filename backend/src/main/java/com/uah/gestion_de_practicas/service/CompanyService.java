@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.CompanyRepository;
 import com.uah.gestion_de_practicas.repository.dao.CompanyStudentsDAO;
 
@@ -84,7 +85,7 @@ public class CompanyService {
      * @param id, Id of the company.
      * @return A list with all the students from the company.
      */
-    public List<StudentDTO> getStudentsInCompany(Long id) {
+    public List<Student> getStudentsInCompany(Long id) {
         return studentService.getStudentsFromCompany(id);
     }
 

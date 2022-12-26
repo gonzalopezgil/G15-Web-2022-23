@@ -8,11 +8,11 @@ import lombok.EqualsAndHashCode;
  * Request class, represents a request of a student to an offer in the database.
  */
 @Entity
-@Table(name = "oferta_seleccionada")
+@Table(name = "solicitud_practicas")
 @EqualsAndHashCode
 public class Request {
 
-    @Column(name = "id_oferta")
+    @Column(name = "id")
     private Long id;
     @Column(name = "id_alumno")
     private Long student_id;

@@ -1,5 +1,8 @@
 package com.uah.gestion_de_practicas.controller.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.uah.gestion_de_practicas.model.Student;
 
 import lombok.Data;
@@ -34,4 +37,11 @@ public class StudentDTO {
         this.total_hours = student.getTotal_hours();
     }
     
+    public static StudentDTO fromStudent(Student student) {
+        return new StudentDTO(student);
+    }
+
+    public static List<StudentDTO> fromStudents(List<Student> students) {
+        return students.stream().map(StudentDTO::fromStudent).collect(Collectors.toList());
+    }
 }
