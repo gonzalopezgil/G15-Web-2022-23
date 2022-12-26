@@ -1,4 +1,4 @@
-package com.uah.gestion_de_practicas.controller.dto;
+package com.uah.gestion_de_practicas.repository.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
-public class CompanyStudentsDTO {
+public class CompanyStudentsDAO {
 
     private Long id;
     private String name;

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Rest Controller for the User endpoint
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
     
     private final UserService userService;

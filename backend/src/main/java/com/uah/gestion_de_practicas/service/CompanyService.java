@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.CompanyRepository;
+import com.uah.gestion_de_practicas.repository.dao.CompanyStudentsDAO;
 
 /**
  * Service class for the Company class.
@@ -75,7 +75,7 @@ public class CompanyService {
      * Gets all the companies from the database with their students.
      * @return A list with all the companies and their students.
      */
-    public List<CompanyStudentsDTO> getAllCompaniesWithStudents() {
+    public List<CompanyStudentsDAO> getAllCompaniesWithStudents() {
         return companyRepository.getAllCompaniesWithStudents();
     }
 
