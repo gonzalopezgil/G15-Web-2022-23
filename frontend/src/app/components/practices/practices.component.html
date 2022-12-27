@@ -1,0 +1,71 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Posicion Column -->
+  <ng-container matColumnDef="Posicion">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
+  </ng-container>
+
+  <!-- Titulo Column -->
+  <ng-container matColumnDef="Titulo">
+    <th mat-header-cell *matHeaderCellDef> Titulo </th>
+    <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+  </ng-container>
+
+  <!-- Empresa Column -->
+  <ng-container matColumnDef="Empresa">
+    <th mat-header-cell *matHeaderCellDef> Empresa </th>
+    <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
+  </ng-container>
+
+  <!-- Plazas Column -->
+  <ng-container matColumnDef="Plazas">
+    <th mat-header-cell *matHeaderCellDef> Plazas </th>
+    <td mat-cell *matCellDef="let element"> {{element.plazas}} </td>
+  </ng-container>
+
+  <!-- Horario Column -->
+  <ng-container matColumnDef="Horario">
+    <th mat-header-cell *matHeaderCellDef> Horario </th>
+    <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+  </ng-container>
+
+  <!-- Dias Column -->
+  <ng-container matColumnDef="Dias de la semana">
+    <th mat-header-cell *matHeaderCellDef> Dias de la semana </th>
+    <td mat-cell *matCellDef="let element"> {{element.dias}} </td>
+  </ng-container>
+
+  <!-- Semanas Column -->
+  <ng-container matColumnDef="Semanas">
+    <th mat-header-cell *matHeaderCellDef> Semanas </th>
+    <td mat-cell *matCellDef="let element"> {{element.semanas}} </td>
+  </ng-container>
+
+  
+  <!-- Select Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="selection.toggle(row)">
+  </tr>
+
+</table>
+  <div class="button">
+    <button mat-raised-button (click)="guardar()">Guardar la seleccion de practicas</button>
+  </div>
