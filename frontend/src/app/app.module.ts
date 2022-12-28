@@ -16,6 +16,7 @@ import { NavigationUsersComponent } from './components/navigation-users/navigati
 import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users.component';
 import { PracticesComponent } from './components/practices/practices.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     ToolbarComponent,
     NavigationUsersComponent,
     PracticesComponent,
-    HomePageComponent
+    HomePageComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,

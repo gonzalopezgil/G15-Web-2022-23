@@ -14,6 +14,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSidenavModule,
     MatListModule,
     MatCheckboxModule,
-
+    MatDialogModule,
   ]
 })
 export class MaterialModule { }
