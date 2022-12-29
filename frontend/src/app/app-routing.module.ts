@@ -4,7 +4,8 @@ import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { PracticesComponent } from './components/practices/practices.component';
+import { PracticesComponent } from './components/users/practices/practices.component';
+import { ReportsComponent } from './components/users/reports/reports.component';
 
 const routes: Routes = [
   { 
@@ -26,7 +27,13 @@ const routes: Routes = [
         path: 'practices', 
         component: PracticesComponent, 
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'reports', 
+        component: ReportsComponent, 
+        canActivate: [AuthGuard]
+      },
+      
     ]
   },
   { 

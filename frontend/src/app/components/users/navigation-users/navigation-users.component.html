@@ -8,7 +8,7 @@
           Seleccion de practicas
         </h3>
       </a>
-      <a mat-list-item >
+      <a mat-list-item [routerLink]="['/dashboard-users/reports']">
         <h3 style="color:rgb(255, 255, 255)">
           Informe de practicas
         </h3>
@@ -16,6 +16,11 @@
       <a mat-list-item >
         <h3 style="color:rgb(255, 255, 255)">
           Practicas asignadas sin terminar
+        </h3>
+      </a>
+      <a mat-list-item >
+        <h3 style="color:rgb(255, 255, 255)">
+          Ver datos de la cuenta
         </h3>
       </a>
       <a mat-list-item (click)="logout()">
