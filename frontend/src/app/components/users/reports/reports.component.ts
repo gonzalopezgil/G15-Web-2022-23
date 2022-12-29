@@ -2,6 +2,9 @@ import { Component ,OnInit} from '@angular/core';
 import { Practica } from 'src/app/interfaces/practica';
 import { User } from 'src/app/interfaces/user';
 import { Tutor } from 'src/app/interfaces/tutor';
+import { UsersService } from 'src/app/services/users.service';
+import { TutorsService } from 'src/app/services/tutors.service';
+import { PracticesService } from 'src/app/services/practices.service';
 
 @Component({
   selector: 'app-reports',
@@ -12,12 +15,12 @@ export class ReportsComponent {
   practice: Practica | undefined;
   user: User | undefined;
   tutor: Tutor | undefined;
-  constructor() { }
+  constructor(private UserService: UsersService,private TutorService: TutorsService,private PracticeService: PracticesService) { }
 
   ngOnInit(): void {
-    this.user = {name: 'John'};
-    this.tutor = {name: 'Carlos'};
-    this.practice = {id:1,posicion: 1,titulo: 'Practica 1', empresa: 'Empresa 1', plazas: 3, horario: '8:00-14:00', dias: 'Lunes a Viernes', semanas: 4};
+    this.user = this.UserService.getUser();
+    this.tutor = this.TutorService.getTutor();
+    this.practice = this.PracticeService.getPractice(0);
   }
 
 }
