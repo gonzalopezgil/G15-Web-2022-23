@@ -17,4 +17,7 @@ export class AuthService {
       
       return this.http.post('https://reqres.in/api/login', body);
     }
+    logout(): void {
+      sessionStorage.removeItem('token');
+    }
 }

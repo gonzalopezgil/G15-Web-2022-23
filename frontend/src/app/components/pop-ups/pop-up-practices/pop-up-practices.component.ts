@@ -3,11 +3,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Practica } from 'src/app/interfaces/practica';
 
 @Component({
-  selector: 'app-pop-up',
-  templateUrl: './pop-up.component.html',
-  styleUrls: ['./pop-up.component.scss']
+  selector: 'app-pop-up-practices',
+  templateUrl: './pop-up-practices.component.html',
+  styleUrls: ['./pop-up-practices.component.scss']
 })
-export class PopUpComponent implements OnInit{
+export class PopUpPracticesComponent implements OnInit{
   practicas : Practica[] = [];
   seleccioncorrecta:boolean = false;
 

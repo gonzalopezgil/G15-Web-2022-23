@@ -16,8 +16,12 @@ import { NavigationUsersComponent } from './components/users/navigation-users/na
 import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users.component';
 import { PracticesComponent } from './components/users/practices/practices.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { PopUpComponent } from './components/users/pop-up/pop-up.component';
+import { PopUpPracticesComponent } from './components/pop-ups/pop-up-practices/pop-up-practices.component';
 import { ReportsComponent } from './components/users/reports/reports.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
+import { UserdataComponent } from './components/users/userdata/userdata.component';
+import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +33,12 @@ import { ReportsComponent } from './components/users/reports/reports.component';
     NavigationUsersComponent,
     PracticesComponent,
     HomePageComponent,
-    PopUpComponent,
-    ReportsComponent
+    PopUpPracticesComponent,
+    ReportsComponent,
+    WelcomeComponent,
+    PracticesOngoingComponent,
+    UserdataComponent,
+    PopUpPasswordComponent
   ],
   imports: [
     BrowserModule,

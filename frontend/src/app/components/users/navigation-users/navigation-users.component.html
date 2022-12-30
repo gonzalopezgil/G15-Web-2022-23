@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="header">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/dashboard-users/practices']">
+      <a mat-list-item [routerLink]="['/dashboard-users/practices']" >
         <h3 style="color:rgb(255, 255, 255)">
           Seleccion de practicas
         </h3>
@@ -13,12 +13,12 @@
           Informe de practicas
         </h3>
       </a>
-      <a mat-list-item >
+      <a mat-list-item [routerLink]="['/dashboard-users/practicesongoing']">
         <h3 style="color:rgb(255, 255, 255)">
           Practicas asignadas sin terminar
         </h3>
       </a>
-      <a mat-list-item >
+      <a mat-list-item [routerLink]="['/dashboard-users/userdata']">
         <h3 style="color:rgb(255, 255, 255)">
           Ver datos de la cuenta
         </h3>

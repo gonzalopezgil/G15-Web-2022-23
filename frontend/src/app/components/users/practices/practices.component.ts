@@ -1,10 +1,10 @@
 import {SelectionModel} from '@angular/cdk/collections';
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output,OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Practica } from 'src/app/interfaces/practica';
-import { ELEMENT_DATA } from 'src/app/mocks/practicas.mock';
-import { PopUpComponent } from '../pop-up/pop-up.component';
+import { PracticesService } from 'src/app/services/practices.service';
+import { PopUpPracticesComponent } from '../../pop-ups/pop-up-practices/pop-up-practices.component';
 
 @Component({
   selector: 'app-practices',
@@ -13,19 +13,22 @@ import { PopUpComponent } from '../pop-up/pop-up.component';
 })
 export class PracticesComponent {
   displayedColumns: string[] = [ 'Posicion','Titulo', 'Empresa', 'Plazas', 'Horario','Dias de la semana','Semanas','select'];
-  dataSource = new MatTableDataSource<Practica>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Practica>();
   selection = new SelectionModel<Practica>(true, []);
   @Output() messageEvent = new EventEmitter<Practica[]>();
 
-  constructor(private dialog: MatDialog){}
-  /** Whether the number of selected elements matches the total number of rows. */
+  constructor(private dialog: MatDialog,private PracticesService: PracticesService){}
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  ngOnInit(): void{
+    this.dataSource.data = this.PracticesService.getPractices();
+  }
+
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -35,7 +38,7 @@ export class PracticesComponent {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
+  
   checkboxLabel(row?: Practica): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
@@ -49,7 +52,7 @@ export class PracticesComponent {
          console.log(item.id);
          practicasSeleccionadas.push(item);
        }
-       this.dialog.open(PopUpComponent, {
+       this.dialog.open(PopUpPracticesComponent, {
          data: practicasSeleccionadas});       
   }
 }
