@@ -1,0 +1,15 @@
+<mat-card class="practices-ongoing-card">
+    <mat-card-header>
+      <mat-card-title>Datos de tu practica en curso</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <h1> Nombre de la practica: {{practice?.titulo}}</h1>
+        <h1> Empresa: {{practice?.empresa}}</h1>
+        <h1> Horario: {{practice?.horario}}</h1>
+        <h1> Días de la semana: {{practice?.dias}}</h1>
+        <h1> Semanas: {{practice?.semanas}}</h1>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button [routerLink]="['/dashboard-users']">Volver</button>
+    </mat-card-actions>
+  </mat-card>
