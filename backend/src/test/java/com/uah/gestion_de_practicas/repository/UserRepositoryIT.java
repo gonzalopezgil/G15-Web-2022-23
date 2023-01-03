@@ -2,7 +2,6 @@ package com.uah.gestion_de_practicas.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Test;

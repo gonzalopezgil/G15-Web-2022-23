@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;

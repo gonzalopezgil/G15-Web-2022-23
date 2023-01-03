@@ -76,5 +76,12 @@ public class PracticeService {
     public List<Practice> getPracticeHistory(Long id) {
         return practiceRepository.getPracticeHistory(id);
     }
-    
+
+    /**
+     * Gets the practices that are completed.
+     * @return A list with all the completed practices.
+     */
+    public List<Practice> getReport(){
+        return practiceRepository.getCompletedPractices();
+    }
 }
