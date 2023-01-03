@@ -1,5 +1,7 @@
 package com.uah.gestion_de_practicas.model;
 
+import java.sql.Date;
+
 import javax.persistence.*;
 
 import lombok.EqualsAndHashCode;
@@ -34,6 +36,8 @@ public class Offer {
     private Double salary;
     @Column(name = "plazas")
     private Integer vacancies;
+    @Column(name = "f_inicio")
+    private Date start_date;
 
     /**
      * Empty constructor needed for Hibernate.
@@ -160,6 +164,14 @@ public class Offer {
         return vacancies;
     }
 
+    /**
+     * Get the start date of the internship offer.
+     * @return the start date of the internship offer.
+     */
+    public Date getStart_date() {
+        return start_date;
+    }
+
     // ----------------- SETTERS -----------------
     /**
      * Set the id of the offer
@@ -249,6 +261,14 @@ public class Offer {
         this.vacancies = vacancies;
     }
 
+    /**
+     * Set the start date of the internship offer.
+     * @param start_date, the start date of the internship offer.
+     */
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
     // ----------------- METHODS -----------------
     /**
      * Method to convert the offer object to a string.
@@ -259,7 +279,7 @@ public class Offer {
         return "Offer{" + "id=" + id + ", position=" + position + ", category=" + category
                 + ", company_id=" + company_id + ", address=" + address + ", requirements=" + requirements
                 + ", description=" + description + ", schedule=" + schedule + ", weeks=" + weeks
-                + ", salary=" + salary + ", vacancies=" + vacancies + '}';
+                + ", salary=" + salary + ", vacancies=" + vacancies + ", start_date=" + start_date + '}';
     }
     
 }

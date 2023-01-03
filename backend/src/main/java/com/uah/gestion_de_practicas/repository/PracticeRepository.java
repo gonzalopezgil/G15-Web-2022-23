@@ -13,5 +13,7 @@ public interface PracticeRepository extends JpaRepository<Practice,Long> {
 
     @Query("SELECT p FROM Practice p INNER JOIN Offer o ON p.offer_id = o.id WHERE o.company_id = ?1")
     List<Practice> getPracticeHistory(Long id);
-    
+
+    @Query("SELECT p FROM Practice p WHERE p.end_date IS NOT NULL ")
+    List<Practice> getCompletedPractices();
 }
