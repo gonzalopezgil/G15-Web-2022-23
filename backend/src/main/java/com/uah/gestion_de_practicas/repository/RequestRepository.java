@@ -8,6 +8,6 @@ import com.uah.gestion_de_practicas.model.Request;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request,Long> {
-    @Query("DELETE FROM Request r WHERE r.student.id = ?1")
-    void deleteRequestsByStudentId(Long id);
+    @Query("DELETE FROM Request r WHERE r.student_id = :id")
+    void deleteByStudentId(Long id);
 }

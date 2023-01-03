@@ -49,8 +49,10 @@ public class RequestService {
         return requestRepository.findById(id).orElse(null);
     }
 
-    
-
+    /**
+     * Assign practice offers to students.
+     * @return List of practices created.
+     */
     public List<Practice> getPracticeAssignments() {
         // Assign practices to students with the greater exp_grade and no practice assigned.
         List<Request> requests = requestRepository.findAll();

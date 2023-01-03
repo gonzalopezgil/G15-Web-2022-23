@@ -18,7 +18,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("SELECT s FROM Student s WHERE s.id NOT IN (SELECT p.student_id FROM Practice p)")
     public List<Student> getAllUnassignedStudents();
 
-    @Query("SELECT s FROM Student s WHERE s.id IN (SELECT q.student_id FROM Request q) ORDER BY s.exp_grade DESC")
-    public List<Student> getElegibleForOffer(@Param("offer_id") Long offer_id);
+    @Query("SELECT s FROM Student s WHERE s.id IN (SELECT p.student_id FROM Practice p WHERE p.offer_id = :offer_id)")
+    public List<Student> getElegibleForOffer(Long offer_id);
     
 }
