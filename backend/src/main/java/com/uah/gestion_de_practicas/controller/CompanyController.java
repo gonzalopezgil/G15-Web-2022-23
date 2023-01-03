@@ -40,11 +40,10 @@ public class CompanyController {
      */
     @PostMapping("")
     public ResponseEntity<Company> registerCompany(@RequestBody Company company, @RequestBody Tutor tutor) {
-        if (company == null || tutor == null || company.getId() != null) {
+        if (company == null || tutor == null || company.getId() != null || tutor.getCompany() != null) {
             return ResponseEntity.badRequest().build();
         }
 
-        // TODO: Check if the tutor is registered to another company first
         Company registered_company = companyService.saveCompany(company);
         return ResponseEntity.ok(registered_company);
     }
