@@ -9,7 +9,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
@@ -33,12 +32,12 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiDetails(){
-        return new ApiInfo("Spring Boot Book API REST",
-                "Library Api rest docs",
+        return new ApiInfo("Gestión de Practicas API REST",
+                "Documentación de la API REST que gestiona las prácticas de los alumnos de la UAH",
                 "1.0",
                 "http://www.google.com",
-                new Contact("Alan", "http://www.google.com", "alan@example.com"),
-                "MIT",
+                new Contact("Backend Team", "https://github.com/gonzalopezgil/G15-Web-2022-23", "gonzalo.lopezg@edu.uah.es"),
+                "UAH License",
                 "http://www.google.com",
                 Collections.emptyList());
     }
