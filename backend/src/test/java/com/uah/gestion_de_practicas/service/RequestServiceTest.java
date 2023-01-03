@@ -1,7 +1,5 @@
 package com.uah.gestion_de_practicas.service;
 
-package com.uah.gestion_de_practicas.service;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -10,6 +8,15 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+
+import com.uah.gestion_de_practicas.model.Request;
+import com.uah.gestion_de_practicas.service.OfferService;
+import com.uah.gestion_de_practicas.service.RequestService;
+import com.uah.gestion_de_practicas.repository.RequestRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @DisplayName("User Service Test")
@@ -79,6 +86,6 @@ public class RequestServiceTest {
 
         // Verify results
         verify(requestRepository).findById(1L);
-        verify(requestRepository).delete(request);
+        verify(requestRepository).deleteById(1L);
     }
 }

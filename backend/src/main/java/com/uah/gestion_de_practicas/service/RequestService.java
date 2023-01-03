@@ -72,7 +72,7 @@ public class RequestService {
                     
                     // Remove the student from the list of elegible students.
                     elegibleStudents.remove(0);
-                    requestRepository.deleteRequestsByStudentId(student.getId());
+                    requestRepository.deleteByStudentId(student.getId());
 
                     // Update the number of vacancies of the offer and save the practice.
                     offer.setVacancies(offer.getVacancies() - 1);
@@ -89,7 +89,8 @@ public class RequestService {
      * @param id Id of the request to be deleted.
      */
     public void deleteRequest(Long id) {
-        requestRepository.deleteById(id);
+        if (requestRepository.findById(id).isPresent())
+            requestRepository.deleteById(id);
     }
 
     /**
