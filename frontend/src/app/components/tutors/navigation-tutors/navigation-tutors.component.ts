@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Component ,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, map, shareReplay } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-navigation-users',
-  templateUrl: './navigation-users.component.html',
-  styleUrls: ['./navigation-users.component.scss']
+  selector: 'app-navigation-tutors',
+  templateUrl: './navigation-tutors.component.html',
+  styleUrls: ['./navigation-tutors.component.scss']
 })
-export class NavigationUsersComponent implements OnInit{
-
+export class NavigationTutorsComponent  implements OnInit{
+  
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -21,7 +20,7 @@ export class NavigationUsersComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,private AuthService: AuthService) { }
 
   ngOnInit(): void {
-    this.router.navigate(['dashboard-users/welcome']);
+    this.router.navigate(['dashboard-tutors/welcome']);
   }
 
   logout(): void {

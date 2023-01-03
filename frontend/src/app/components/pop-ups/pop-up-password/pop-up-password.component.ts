@@ -7,7 +7,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './pop-up-password.component.html',
   styleUrls: ['./pop-up-password.component.scss']
 })
-export class PopUpPasswordComponent {
+export class PopUpPasswordComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 

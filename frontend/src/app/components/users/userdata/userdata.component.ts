@@ -10,7 +10,7 @@ import { PopUpPasswordComponent } from '../../pop-ups/pop-up-password/pop-up-pas
   styleUrls: ['./userdata.component.scss']
 })
 
-export class UserdataComponent {
+export class UserdataComponent  implements OnInit{
   user: User | undefined;
   constructor(private usersService: UsersService,private dialog: MatDialog) { }
 

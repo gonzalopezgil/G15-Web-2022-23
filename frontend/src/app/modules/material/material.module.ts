@@ -15,7 +15,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }
