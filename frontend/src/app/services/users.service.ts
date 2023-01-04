@@ -32,7 +32,7 @@ export class UsersService {
   }
 
   user_type(){
-    let user_type = 1;
+    let user_type = 2;
     return user_type;
   }
 }

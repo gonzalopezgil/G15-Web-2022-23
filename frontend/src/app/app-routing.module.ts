@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users.component';
@@ -11,6 +10,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,16 @@ const routes: Routes = [
       {
         path: 'welcome',
         component: WelcomeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'registercompany',
+        component: RegistercompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'deletecompany',
+        component: DeletecompanyComponent,
         canActivate: [AuthGuard],
       },
       {

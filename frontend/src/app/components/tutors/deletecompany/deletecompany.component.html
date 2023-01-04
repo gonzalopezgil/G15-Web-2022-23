@@ -1,0 +1,24 @@
+<form class="form" [formGroup]="form" (submit)="onSubmit()">
+  <div>
+    <input
+      matInput
+      placeholder="Nombre de la empresa a borrar:"
+      formControlName="empresa"
+    />
+    <div *ngIf="empresa?.errors?.['required'] && empresa?.touched">
+      <p [ngStyle]="{ color: 'blue' }">Este campo es obligatorio</p>
+    </div>
+  </div>
+</form>
+<div class="button">
+  <button
+    type="submit"
+    mat-raised-button
+    [disabled]="form.invalid"
+    (click)="onSubmit()"
+  >
+    Enviar
+  </button>
+  <button mat-raised-button (click)="clearForm()">Borrar datos</button>
+  <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
+</div>

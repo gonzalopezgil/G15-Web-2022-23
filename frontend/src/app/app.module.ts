@@ -24,6 +24,8 @@ import { UserdataComponent } from './components/users/userdata/userdata.componen
 import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
 import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { NavigationTutorsComponent } from './components/tutors/navigation-tutors
     UserdataComponent,
     PopUpPasswordComponent,
     DashboardTutorsComponent,
-    NavigationTutorsComponent
+    NavigationTutorsComponent,
+    RegistercompanyComponent,
+    DeletecompanyComponent,
   ],
   imports: [
     BrowserModule,

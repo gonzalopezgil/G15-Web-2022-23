@@ -1,0 +1,43 @@
+<form class="form" [formGroup]="form" (submit)="onSubmit()">
+    <div>
+      <input matInput placeholder="Titulo de la practica:" formControlName="titulo" />
+      <div *ngIf="titulo?.errors?.['required'] && titulo?.touched">
+        <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+      </div>
+    </div>
+    <div>
+      <input matInput placeholder="Empresa:" formControlName="empresa" />
+      <div *ngIf="empresa?.errors?.['required'] && empresa?.touched">
+        <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+      </div>
+    </div>
+    <div>
+        <input matInput placeholder="Plazas:" formControlName="plazas" />
+        <div *ngIf="plazas?.errors?.['required'] && plazas?.touched">
+          <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+        </div>
+      </div>
+      <div>
+        <input matInput placeholder="Horario:" formControlName="horario" />
+        <div *ngIf="empresa?.errors?.['required'] && empresa?.touched">
+          <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+        </div>
+      </div>
+      <div>
+        <input matInput placeholder="Dias de la semana:" formControlName="dias" />
+        <div *ngIf="dias?.errors?.['required'] && dias?.touched">
+          <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+        </div>
+      </div>
+      <div>
+        <input matInput placeholder="Semanas:" formControlName="semanas" />
+        <div *ngIf="semanas?.errors?.['required'] && semanas?.touched">
+          <p [ngStyle]="{color:'blue'}">Este campo es obligatorio</p>
+        </div>
+      </div>
+  </form>
+  <div class="button">
+    <button type="submit" mat-raised-button [disabled]="form.invalid" (click)="onSubmit()">Enviar</button>
+    <button mat-raised-button (click)="clearForm()">Borrar datos</button>
+    <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
+  </div>
