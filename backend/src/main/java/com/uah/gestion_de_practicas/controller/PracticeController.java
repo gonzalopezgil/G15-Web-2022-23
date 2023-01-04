@@ -16,6 +16,9 @@ import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 /**
  * Rest Controller for the Practice endpoint
  */
@@ -35,7 +38,8 @@ public class PracticeController {
      * @return a list of all the practices
      */
     @GetMapping("")
-    public ResponseEntity<List<Practice>> getPractices() {
+    @ApiOperation("Get all the practices")
+    public ResponseEntity <List<Practice>> getPractices() {
         return ResponseEntity.ok(practiceService.getAllPractices());
     }
 
@@ -45,17 +49,19 @@ public class PracticeController {
      * @return the practice with the given id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Practice> getPracticeById(@PathVariable Long id) {
+    @ApiOperation("Get a practice by its id")
+    public ResponseEntity<Practice> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
         return ResponseEntity.ok(practiceService.getPractice(id));
     }
 
     /**
      * Endpoint to save a new practice
-     * @param practice, the practice to be save
+     * @param practice, the practice to be saved
      * @return the saved practice
      */
     @PostMapping("")
-    public ResponseEntity<Practice> savePractice(@RequestBody Practice practice) {
+    @ApiOperation("Save a new practice")
+    public ResponseEntity<Practice> savePractice(@ApiParam("The practice to be saved") @RequestBody Practice practice) {
         return ResponseEntity.ok(practiceService.savePractice(practice));
     }
 
@@ -66,7 +72,8 @@ public class PracticeController {
      * @return the deleted practice
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Practice> deletePractice(@PathVariable Long id) {
+    @ApiOperation("Delete a practice by its id")
+    public ResponseEntity<Practice> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
         practiceService.deletePractice(id);
         return ResponseEntity.ok().build();
     }
@@ -78,7 +85,8 @@ public class PracticeController {
      * @return a list of practices with the assigned offers
      */
     @PostMapping("/assignation")
-    public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices() {
+    @ApiOperation("Assign available offers to students with greater exp_grades")
+    public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices(){
         List<Practice> practices = requestService.getPracticeAssignments();
         practiceService.saveAllPractices(practices);
         
@@ -91,7 +99,8 @@ public class PracticeController {
      * @return a list of practices with the assigned offers
      */
     @GetMapping("/report")
-    public ResponseEntity<List<Practice>> getPracticesReport() {
+    @ApiOperation("Obtain a report of all the practices completed and their evaluation")
+    public ResponseEntity<List<Practice>> getPracticesReport(){
         List<Practice> practices = practiceService.getReport();
         return ResponseEntity.ok(practices);
     }
