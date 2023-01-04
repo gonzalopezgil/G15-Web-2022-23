@@ -15,6 +15,9 @@ import com.uah.gestion_de_practicas.controller.dto.UserDTO;
 import com.uah.gestion_de_practicas.model.User;
 import com.uah.gestion_de_practicas.service.UserService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +41,8 @@ public class UserController {
      * @return ResponseEntity<List<UserDTO>> list of all the users
      */
     @GetMapping("")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
+    @ApiOperation("Get all the users")
+    public ResponseEntity <List<UserDTO>> getAllUsers() {
         List<User> users = userService.getAllUsers();
 
         // Convert the list of users to a list of UserDTOs
@@ -53,7 +57,8 @@ public class UserController {
      * @return ResponseEntity<UserDTO> the user
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable(name="id") Long id) {
+    @ApiOperation("Get a user by its id")
+    public ResponseEntity <UserDTO> getUserById(@ApiParam ("The id of the user") @PathVariable(name = "id") Long id) {
         User user = userService.getUser(id);
         if (user != null)
             return ResponseEntity.ok(new UserDTO(user));
@@ -67,7 +72,8 @@ public class UserController {
      * @return ResponseEntity<UserDTO> the registered user
     */
     @PostMapping("")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody User user) {
+    @ApiOperation("Register a user by all its fields")
+    public ResponseEntity <UserDTO> registerUser(@ApiParam("Json containing all the fields of the user") @RequestBody User user) {
         User registered_user = userService.saveUser(user);
         return ResponseEntity.ok(new UserDTO(registered_user));
     }
@@ -79,7 +85,9 @@ public class UserController {
      * @return ResponseEntity<UserDTO> the updated user
     */
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable (name="id") Long id, @RequestBody User user) {
+    @ApiOperation("Update a user by its id and all its fields")
+    public ResponseEntity<UserDTO> updateUser(@ApiParam("The id of the user") @PathVariable(name = "id") Long id, 
+    @ApiParam("Json containing all the fields of the user") @RequestBody User user) {
         if (userService.getUser(id) != null ){
             user.setId(id);
             User updated_user = userService.saveUser(user);
@@ -96,7 +104,8 @@ public class UserController {
      * @return ResponseEntity<Void> empty response
     */
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable (name="id") Long id) {
+    @ApiOperation("Delete a user by its id")
+    public ResponseEntity deleteUser(@ApiParam("The id of the user") @PathVariable(name = "id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
@@ -108,7 +117,9 @@ public class UserController {
      * @return ResponseEntity<Boolean> true if the user was logged in, false otherwise
      */
     @PostMapping("/login")
-    public ResponseEntity<Boolean> logInUser(String username, String password) {
+    @ApiOperation("Logs in a user by its username and password")
+    public ResponseEntity<Boolean> logInUser(@ApiParam("Username") @RequestBody String username, 
+    @ApiParam("Encoded password") @RequestBody String password) {
         return ResponseEntity.ok(userService.logInUser(username, password));
     }    
 }
