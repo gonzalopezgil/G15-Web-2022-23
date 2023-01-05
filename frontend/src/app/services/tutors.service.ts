@@ -11,7 +11,14 @@ export class TutorsService {
   constructor(private http: HttpClient) { }
 
   getTutor(): Tutor {
-    return {name: 'Juan'};
+    return {
+      name: 'Juan',
+      lastname: 'Pérez',
+      username: 'juanperez',
+      nif: '12345678A',
+      email: 'xd@gmail.com',
+      admissionDate: new Date(),
+    };
   }
 
   registerPractice(form: FormGroup) {
@@ -31,6 +38,30 @@ export class TutorsService {
       empresa: form.value.empresa
     });**/
     console.log(form.value);
+  }
+
+  changeTutor(form: FormGroup) {
+    /**return this.http.put('http://localhost:3000/api/tutors', {
+      company: form.value.company,
+      newtutor: form.value.newtutor
+    });**/
+    console.log(form.value);
+  }
+
+  createTutor(form: FormGroup): boolean {
+    /**return this.http.post('http://localhost:3000/api/tutors', {
+      company: form.value.company,
+      newtutor: form.value.newtutor
+    });**/
+    console.log(form.value);
+    return true;
+  }
+  
+  changePassword(password: string, oldpassword: string, confirmPassword: string) {
+    console.log("Cambio password de tutor");
+    console.log('oldpassword: ' + oldpassword);
+    console.log('Password changed to: ' + password);
+    console.log('Confirm password: ' + confirmPassword);
   }
 }
 

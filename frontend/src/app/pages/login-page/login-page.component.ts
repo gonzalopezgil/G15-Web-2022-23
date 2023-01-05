@@ -18,6 +18,8 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  
+
   loginUser(value: any): void {
     let { email, password } = value;
     

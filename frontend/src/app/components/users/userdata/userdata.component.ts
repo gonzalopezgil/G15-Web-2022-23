@@ -19,6 +19,6 @@ export class UserdataComponent  implements OnInit{
   }
 
   changePassword() {
-    this.dialog.open(PopUpPasswordComponent); 
+    this.dialog.open(PopUpPasswordComponent, { data: true}); 
   }
 }

@@ -1,3 +1,7 @@
+import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
+import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
+import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
+import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users.component';
@@ -29,6 +33,10 @@ const routes: Routes = [
     component: LoginPageComponent,
   },
   {
+    path: 'tutorregister',
+    component: TutorregisterPagesComponent,
+  },
+  {
     path: 'dashboard-tutors',
     component: DashboardTutorsComponent,
     canActivate: [AuthGuard],
@@ -46,6 +54,16 @@ const routes: Routes = [
       {
         path:'deletecompany',
         component: DeletecompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'changetutor',
+        component: ChangetutorcompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'tutordata',
+        component: TutordataComponent,
         canActivate: [AuthGuard],
       },
       {

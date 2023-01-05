@@ -1,6 +1,24 @@
-.welcome-card {
-    display: flex;
-    justify-content: center;
-    margin-top: 10%;
-    margin-left: 30%;
-  }
+:host {
+  flex: layout;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header {
+  justify-content: center;
+  margin-top: 20%;
+}
+
+.subheader{
+  margin-left:10%
+}
+
+.button {
+  align-items: center;
+  margin-top: 2%;
+  margin-left: 35%;
+}
+
+.errors {
+  color: red;
+}

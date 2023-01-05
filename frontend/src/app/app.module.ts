@@ -26,6 +26,11 @@ import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tut
 import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
+import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
+import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
+import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
+import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
+import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,11 @@ import { DeletecompanyComponent } from './components/tutors/deletecompany/delete
     NavigationTutorsComponent,
     RegistercompanyComponent,
     DeletecompanyComponent,
+    ChangetutorcompanyComponent,
+    TutorregisterformComponent,
+    TutorregisterPagesComponent,
+    PopUpTutorregisterComponent,
+    TutordataComponent
   ],
   imports: [
     BrowserModule,
