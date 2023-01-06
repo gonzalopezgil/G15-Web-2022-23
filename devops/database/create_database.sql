@@ -20,7 +20,8 @@ CREATE TABLE `alumno` (
 CREATE TABLE `tutor` (
   `id_tutor` int PRIMARY KEY,
   `f_alta` date NOT NULL,
-  `f_baja` date
+  `f_baja` date,
+  `id_empresa` int
 );
 
 CREATE TABLE `responsable` (
@@ -32,8 +33,12 @@ CREATE TABLE `responsable` (
 CREATE TABLE `empresa` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(255),
-  `descripcion` varchar(255),
-  `id_tutor` int
+  `sufijo_correo` varchar(255),
+  `telefono` varchar(20),
+  `direccion` varchar(255),
+  `ciudad` varchar(100),
+  `codigo_postal` int,
+  `descripcion` varchar(255)
 );
 
 CREATE TABLE `oferta` (
@@ -47,7 +52,8 @@ CREATE TABLE `oferta` (
   `horario` varchar(255),
   `semanas` int,
   `sueldo` double,
-  `plazas` int
+  `plazas` int,
+  `f_inicio` date NOT NULL
 );
 
 CREATE TABLE `practica` (
@@ -60,11 +66,11 @@ CREATE TABLE `practica` (
   `f_fin` date
 );
 
-CREATE TABLE `oferta_seleccionada` (
+CREATE TABLE `solicitud_practicas` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `id_alumno` int,
   `id_oferta` int,
-  `preferencia` int,
-  PRIMARY KEY (`id_alumno`, `id_oferta`)
+  `preferencia` int
 );
 
 ALTER TABLE `alumno` ADD FOREIGN KEY (`id_alumno`) REFERENCES `usuario` (`id_usuario`);
@@ -75,12 +81,12 @@ ALTER TABLE `responsable` ADD FOREIGN KEY (`id_responsable`) REFERENCES `usuario
 
 ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
 
-ALTER TABLE `tutor` ADD FOREIGN KEY (`id_tutor`) REFERENCES `empresa` (`id_tutor`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
 
 ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
 
 ALTER TABLE `practica` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
 
-ALTER TABLE `oferta_seleccionada` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
 
-ALTER TABLE `oferta_seleccionada` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
