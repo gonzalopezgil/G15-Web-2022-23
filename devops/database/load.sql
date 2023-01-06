@@ -1,116 +1,98 @@
 --------------------RESPONSABLES--------------------
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('anselmo.vallejo.arias', '95utEMui@t', 'Anselmo', 'Vallejo Arias', '61836147A', 'anselmo.vallejo.arias@uah.es');
-INSERT INTO responsables (f_alta, f_baja) VALUES ('2020-12-07', 'NULL');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (1,'dani.telmo.alba.carrasco', '&pHS#BYf^3', 'Dani', 'Telmo Alba Carrasco', '69587614X', 'dani.telmo.alba.carrasco@uah.es');
+INSERT INTO responsable (id_responsable, f_alta, f_baja) VALUES (1,'2022-09-03', NULL);
 
 --------------------ALUMNOS--------------------
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('vanesa.peña.meléndez', 'iu2N%xi_8&', 'Vanesa', 'Peña Meléndez', '05077988W', 'vanesa.peña.meléndez@edu.uah.es');
-INSERT INTO alumnos(id, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ('Ingeniería de computadores y sistemas', '0', '1999-03-21', '+34 715 258 406', '350');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (2,'delfina.roldan.carpio', '7fjRT!8t*L', 'Delfina', 'Roldan Carpio', '08107613K', 'delfina.roldan.carpio@edu.uah.es');
+INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (2,'Ingeniería de computadores y software', 8, '1999-11-06', '+34681 318 901', 300);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('concha.alvarado.ramón', 'J3hWZwiz!9', 'Concha', 'Alvarado Ramón', '23712919B', 'concha.alvarado.ramón@edu.uah.es');
-INSERT INTO alumnos(id, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ('Ingeniería informática', '6', '1997-08-07', '+34 939 49 61 24', '350');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (3,'clemente.aliaga.santos', '))S9U5Hqx4', 'Clemente', 'Aliaga Santos', '09904235K', 'clemente.aliaga.santos@edu.uah.es');
+INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (3,'Ingeniería de computadores y software', 1, '1997-08-09', '+34727 21 48 48', 350);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('ismael.pepito.aragonés.barberá', '*bM0F7qZ8T', 'Ismael', 'Pepito Aragonés Barberá', '86155895B', 'ismael.pepito.aragonés.barberá@edu.uah.es');
-INSERT INTO alumnos(id, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ('Ingeniería de telecomunicaciones y software', '9', '2002-06-01', '+34 740 002 932', '300');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (4,'espiridión.del.miró', 'g2m)8jHl%_', 'Espiridión', 'del Miró', '96629430J', 'espiridión.del.miró@edu.uah.es');
+INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (4,'Ingeniería de telecomunicaciones y sistemas', 4, '2002-05-13', '+34 730 173 746', 300);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('lorenzo.peiró.valls', 'lSFG4Lg6w@', 'Lorenzo', 'Peiró Valls', '67421134S', 'lorenzo.peiró.valls@edu.uah.es');
-INSERT INTO alumnos(id, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ('Ingeniería de telecomunicaciones y software', '0', '2002-04-24', '+34714573545', '300');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (5,'delia.aroca', '071L0A2c#p', 'Delia', 'Aroca', '07865987X', 'delia.aroca@edu.uah.es');
+INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (5,'Ingeniería de sistemas y software', 2, '2004-10-09', '+34 704796066', 350);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('rufino.lledó.reguera', '@5ZpRZSRGd', 'Rufino', 'Lledó Reguera', '76844843A', 'rufino.lledó.reguera@edu.uah.es');
-INSERT INTO alumnos(id, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ('Ingeniería de telecomunicaciones y software', '8', '2002-06-20', '+34998 463 573', '300');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (6,'amalia.leal', '_5WJz$ATBf', 'Amalia', 'Leal', '40917830W', 'amalia.leal@edu.uah.es');
+INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (6,'Ingeniería informática', 0, '2004-06-08', '+34 921 76 43 78', 350);
 
 --------------------EMPRESAS--------------------
-INSERT INTO empresas (id, nombre, sufijo_correo, telefono, direccion, ciudad, codigo_postal, descripcion) VALUES ('0','Anaya Ltd', 'anaya-ltd.es', '+34 745141725', 'Alameda de Concha Alsina 2 Apt. 67 ', 'Cuenca,', '13030', 'Explicabo delectus quod laborum rem. Beatae nobis magni excepturi suscipit amet.
-Maiores illo adipisci. Minima autem corporis. Unde fuga quo quos officia.');
+INSERT INTO empresa (id, nombre, sufijo_correo, telefono, direccion, ciudad, codigo_postal, descripcion) VALUES (1,'Gallo-Fonseca', 'gallo-fonseca.es', '+34 713 68 46 23', 'C. de Trini Flores 48', 'Valencia,', '13156', 'Dolorem odit necessitatibus cumque laudantium iusto at. Quo eius quos cumque aut quae optio. Repellat voluptatem quasi dolorem.');
 
-INSERT INTO empresas (id, nombre, sufijo_correo, telefono, direccion, ciudad, codigo_postal, descripcion) VALUES ('1','Reyes, Rojas and Andrade', 'reyes-rojas-and-andrade.es', '+34878 114 732', 'Cuesta de Rogelio Abril 15 Apt. 76 ', 'Guadalajara,', '30064', 'Commodi minima distinctio magnam excepturi.
-Repudiandae ducimus dolorum. Corporis suscipit aut voluptatum doloribus itaque temporibus. Voluptatem quisquam officia fuga cupiditate at.');
+INSERT INTO empresa (id, nombre, sufijo_correo, telefono, direccion, ciudad, codigo_postal, descripcion) VALUES (2,'Rosselló, Tomás and Romero', 'rosselló-tomás-and-romero.es', '+34739384575', 'Rambla Gastón Galán 56 Piso 4 ', 'Madrid,', '46901', 'Delectus nulla harum soluta. Blanditiis doloremque quo debitis voluptatibus. Ab cumque consequatur.');
 
 --------------------TUTORES--------------------
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('loida.pedrero.montesinos', '!hKIATtHS1', 'Loida', 'Pedrero Montesinos', '97100356Z', 'loida.pedrero.montesinos@anaya-ltd.es');
-INSERT INTO tutores (f_alta, f_baja,id_empresa) VALUES ('2021-01-21', 'NULL','0');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (7,'emilio.del.noguera', 'gihUxd6i+7', 'Emilio', 'del Noguera', '22596447M', 'emilio.del.noguera@gallo-fonseca.es');
+INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES (7, '2021-12-01', NULL, 1);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('borja.cuéllar.carvajal', '&oqOf9Xb(c', 'Borja', 'Cuéllar Carvajal', '76935488M', 'borja.cuéllar.carvajal@reyes-rojas-and-andrade.es');
-INSERT INTO tutores (f_alta, f_baja,id_empresa) VALUES ('2022-09-09', 'NULL','1');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (8,'sabina.aramburu-alemán', '))aJ0oPbu9', 'Sabina', 'Aramburu-Alemán', '70808839G', 'sabina.aramburu-alemán@rosselló-tomás-and-romero.es');
+INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES (8, '2022-05-17', NULL, 2);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('francisco.jose.tejada.arias', 'Y2YMKyPz!j', 'Francisco', 'Jose Tejada Arias', '83661135S', 'francisco.jose.tejada.arias@reyes-rojas-and-andrade.es');
-INSERT INTO tutores (f_alta, f_baja,id_empresa) VALUES ('2022-07-13', '2022-10-21','1');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (9,'bernardita.tirado.alba', 'c_N4Pmk^W7', 'Bernardita', 'Tirado Alba', '67225286N', 'bernardita.tirado.alba@rosselló-tomás-and-romero.es');
+INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES (9, '2022-01-16', '2022-05-27', 2);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('teresa.ponce.yáñez', '!_CrCheBV2', 'Teresa', 'Ponce Yáñez', '68163269D', 'teresa.ponce.yáñez@anaya-ltd.es');
-INSERT INTO tutores (f_alta, f_baja,id_empresa) VALUES ('2022-03-30', '2022-10-18','0');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (10,'celso.bernardo.acosta.andres', 'Wn#S$8Bu+i', 'Celso', 'Bernardo Acosta Andres', '29992520Z', 'celso.bernardo.acosta.andres@gallo-fonseca.es');
+INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES (10, '2022-07-18', '2022-11-10', 1);
 
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ('albert.tirado.españa', 's8UAAf4Z$1', 'Albert', 'Tirado España', '20877026H', 'albert.tirado.españa@reyes-rojas-and-andrade.es');
-INSERT INTO tutores (f_alta, f_baja,id_empresa) VALUES ('2022-04-06', '2022-08-21','1');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (11,'melisa.garcés.pujol', 'h_5NsVoh(J', 'Melisa', 'Garcés Pujol', '03565641C', 'melisa.garcés.pujol@rosselló-tomás-and-romero.es');
+INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES (11, '2022-07-26', '2022-10-15', 2);
 
 --------------------OFERTAS--------------------
-INSERT INTO ofertas (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ('0', 'Empleado de control de abastecimientos e inventario', 'Machine Learning Engineer', '1', 'Cuesta de Rogelio Abril 15 Apt. 76 ', 'Necessitatibus perferendis veritatis doloribus nisi rerum voluptatibus suscipit. Vitae odit nam voluptatum impedit.', 'Suscipit nisi nobis voluptates maxime. Quasi velit ducimus blanditiis consectetur quibusdam. Eius exercitationem perferendis non asperiores soluta dolores.', '9-19 5 days a week', '5', '413', '2');
+INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES (1, 'Técnico en seguridad aeronáutica', 'Database Manager', 1, 'C. de Trini Flores 48', 'Consequatur quis officiis itaque eveniet. Pariatur dicta doloribus incidunt omnis quaerat numquam rem. Veritatis ullam hic beatae inventore quia.', 'Ipsam nam nihil aliquam. Deleniti quidem fugit vel nesciunt nulla natus.', '8-18 5 days a week', 11, 594, 9);
 
-INSERT INTO ofertas (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ('1', 'Decorador de interior', 'Database Manager', '0', 'Alameda de Concha Alsina 2 Apt. 67 ', 'Dolorem consequatur voluptates quas aliquid quia corrupti. Voluptatem laboriosam magni voluptatem neque quibusdam.
-Eius aspernatur labore dolores ratione. Nesciunt a nobis vero ut assumenda harum ad.', 'Sequi maiores ad assumenda iste amet. Molestiae nulla porro.
-Reiciendis voluptate maiores debitis consectetur ab ab. Nihil veritatis eos nobis asperiores repudiandae quaerat iste.', '8-19 5 days a week', '10', '401', '9');
+INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES (2, 'Tasador', 'Database Developer', 2, 'Rambla Gastón Galán 56 Piso 4 ', 'Illo neque laboriosam ullam soluta beatae. At numquam hic reiciendis odio deserunt. Eum dicta repellat eveniet fugiat itaque ullam maiores. Temporibus perspiciatis ut earum at.', 'Tempora dignissimos a tenetur dolores ut delectus. Veniam modi nobis impedit ratione nisi. Nihil consequatur dolorem recusandae asperiores.', '8-19 5 days a week', 11, 1079, 3);
 
-INSERT INTO ofertas (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ('2', 'Operario de la conservación de frutas, legumbres y verduras', 'Database Developer', '0', 'Alameda de Concha Alsina 2 Apt. 67 ', 'Voluptatem voluptate aut alias maxime fuga. Praesentium veritatis maiores officiis provident ab. Vel quis praesentium adipisci porro omnis repellendus praesentium.', 'Atque quo voluptates quae id. Eaque harum expedita tenetur nobis quia nihil.
-Expedita molestias modi id voluptatibus.
-Eum ducimus tenetur. Modi maiores doloremque deleniti possimus eos.', '9-19 5 days a week', '8', '790', '2');
+INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES (3, 'Herramentista', 'Database Systems Engineer', 2, 'Rambla Gastón Galán 56 Piso 4 ', 'Quo alias aspernatur. In harum dolore facilis itaque quidem dolores. Animi suscipit libero fugiat quis dolore non praesentium.', 'Incidunt ea sit sit perspiciatis ducimus placeat. Officiis natus iste quidem. Quia quaerat soluta facere.
+Dolorem odit ullam illum saepe cumque. Incidunt quos vero ipsa laborum.', '9-19 5 days a week', 7, 736, 6);
 
-INSERT INTO ofertas (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ('3', 'Agrimensor', 'Data Warehouse Engineer', '0', 'Alameda de Concha Alsina 2 Apt. 67 ', 'Quidem repellat doloribus voluptates eveniet dolorum. Doloremque perferendis possimus optio eum.
-Architecto architecto in.', 'Dolore sint libero animi velit tempora culpa. Quos debitis qui corrupti qui corporis unde. Quos placeat nostrum quidem itaque et.
-Dignissimos neque harum. Nulla porro in. Ullam illum animi alias.', '9-18 5 days a week', '9', '837', '7');
+INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES (4, 'Trabajador de cuidados personales a domicilio', 'Data Visualization Engineer', 2, 'Rambla Gastón Galán 56 Piso 4 ', 'Nihil quia consequatur iusto esse ipsum minima. Reprehenderit laboriosam enim libero nulla eius beatae.
+Id non voluptatibus atque. Nesciunt amet laborum sapiente magnam eaque.', 'Laborum aliquid accusantium eius quia. Exercitationem iste placeat consequatur nihil. Repellendus eveniet aspernatur ipsum vitae.', '9-18 5 days a week', 5, 691, 3);
 
-INSERT INTO ofertas (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ('4', 'Operador de máquinas lavarropas', 'Data Security Analyst', '1', 'Cuesta de Rogelio Abril 15 Apt. 76 ', 'Asperiores amet itaque iusto eius. Ab unde occaecati.
-Magni quia nihil aut. Aut ipsam autem id.
-Quam perspiciatis doloribus eos. Minima nulla quia ab temporibus et nulla excepturi.', 'Totam unde qui inventore quaerat animi.
-Neque deserunt qui. Atque et quam optio.
-Modi cum ab molestias consequatur. Iste officia architecto a id. Molestias dolorem provident quis molestiae ad dolore.', '8-19 5 days a week', '5', '1089', '7');
+INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES (5, 'Trabajador ambulante de servicios', 'Database Security Administrator', 1, 'C. de Trini Flores 48', 'Molestias veritatis neque molestias explicabo esse facere. Enim voluptate saepe molestiae enim cumque non dolor. Eum ut dolorum doloribus perferendis occaecati.', 'Sed provident iure quia aspernatur odit. Suscipit magni adipisci facere dignissimos. Fugiat doloremque quibusdam ab corrupti iure ullam.
+Est sed accusamus. Quod pariatur deserunt.', '8-19 5 days a week', 4, 1016, 1);
 
 --------------------OFERTA_SELECCIONADA--------------------
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('0', '2', '1');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (2, 4, 1);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('0', '3', '2');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (2, 5, 2);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('0', '1', '3');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (2, 1, 3);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('1', '2', '1');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (3, 4, 1);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('1', '3', '2');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (3, 5, 2);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('2', '3', '1');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (4, 2, 1);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('2', '0', '2');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (4, 5, 2);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('2', '1', '3');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (4, 3, 3);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('2', '4', '4');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (4, 1, 4);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('2', '2', '5');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (5, 2, 1);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('3', '2', '1');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (5, 1, 2);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('3', '3', '2');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (5, 4, 3);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('3', '4', '3');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (6, 2, 1);
 
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('3', '0', '4');
-
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('4', '2', '1');
-
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('4', '4', '2');
-
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('4', '3', '3');
-
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('4', '1', '4');
-
-INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ('4', '0', '5');
+INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES (6, 4, 2);
 
 --------------------PRACTICA--------------------
-INSERT INTO practica(id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES ('2', '2', '5.8', 'Praesentium saepe dicta sequi expedita quasi similique. Aut id deserunt pariatur voluptatum soluta.', '2021-03-15', '2022-06-21');
+INSERT INTO practica (id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES (2, 4, 1.2, 'Tenetur placeat ullam veritatis asperiores nihil. Aliquam eum aliquid excepturi voluptatem minus blanditiis. Aut sunt sint.
+Libero illum fugit.', '2021-10-30', NULL);
 
-INSERT INTO practica(id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES ('4', '2', '0.4', 'Natus sapiente dicta saepe nihil saepe eveniet. Vero quisquam numquam vitae alias qui.', '2021-04-28', '2022-09-18');
+INSERT INTO practica (id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES (5, 4, 2.1, 'Suscipit inventore repudiandae tempore itaque perspiciatis. Architecto alias dignissimos mollitia iusto modi perspiciatis. Laborum qui quasi qui veniam magni odit.', '2022-05-01', '2022-06-28');
 
-INSERT INTO practica(id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES ('1', '2', '5.2', 'Itaque ea natus est magni mollitia. Accusamus autem praesentium labore quis illum hic. Cumque voluptate sit necessitatibus corrupti voluptatum.
-Veniam eos totam alias.', '2021-09-10', '2021-12-20');
+INSERT INTO practica (id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES (3, 4, 3.1, 'Minima minus esse repellendus harum. Porro ea vel omnis eum consequuntur.', '2021-09-25', NULL);
 
-INSERT INTO practica(id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES ('0', '2', '1.6', 'Itaque facere nisi dolorem facere.
-Repellat consectetur ullam voluptatibus non. Assumenda possimus recusandae voluptate vero. Ut dolores soluta dolores.', '2021-05-12', '2021-11-22');
+INSERT INTO practica (id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES (6, 4, 7.0, 'Qui voluptate sint. Tenetur ipsa voluptatem sequi.
+Saepe aspernatur ipsum exercitationem. Commodi iure ut occaecati consequatur in cum. Facilis suscipit assumenda aperiam porro.
+Minima magnam nisi.', '2021-04-26', '2022-05-02');
 
-INSERT INTO practica(id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES ('3', '2', '0.7', 'Molestias quod eos quos laborum fuga. Esse veritatis omnis.
-Sequi eveniet doloribus nisi nostrum. Libero illum cum doloremque eum repellat itaque. Veritatis similique nulla iure.', '2021-08-14', 'NULL');
+INSERT INTO practica (id_alumno, id_oferta, nota, informe, f_inicio, f_fin) VALUES (2, 5, 2.4, 'Sed soluta aspernatur corrupti. Esse quia libero cumque asperiores. Impedit molestiae voluptates. Enim earum perspiciatis perferendis.', '2021-01-09', NULL);
+

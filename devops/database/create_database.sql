@@ -20,7 +20,8 @@ CREATE TABLE `alumno` (
 CREATE TABLE `tutor` (
   `id_tutor` int PRIMARY KEY,
   `f_alta` date NOT NULL,
-  `f_baja` date
+  `f_baja` date,
+  `id_empresa` int
 );
 
 CREATE TABLE `responsable` (
@@ -32,8 +33,12 @@ CREATE TABLE `responsable` (
 CREATE TABLE `empresa` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(255),
-  `descripcion` varchar(255),
-  `id_tutor` int
+  `sufijo_correo` varchar(255),
+  `telefono` varchar(255),
+  `direccion` varchar(255),
+  `ciudad` varchar(255),
+  `codigo_postal` varchar(5),
+  `descripcion` varchar(255)
 );
 
 CREATE TABLE `oferta` (
@@ -75,7 +80,7 @@ ALTER TABLE `responsable` ADD FOREIGN KEY (`id_responsable`) REFERENCES `usuario
 
 ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
 
-ALTER TABLE `empresa` ADD FOREIGN KEY (`id_tutor`) REFERENCES `tutor` (`id_tutor`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
 
 ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
 
