@@ -44,7 +44,9 @@ class Data_Generator:
         companies = []
         for i in range(n):
             address,city_postal_code = fake.address().splitlines()
-            city,postal_code = city_postal_code.split(' ',1)
+            city,postal_code = city_postal_code.split(',',1)
+            city = city.strip()
+            postal_code = postal_code.strip()
             company_name = fake.unique.company()
             company = {
                 'id': i+1,
@@ -150,7 +152,8 @@ class Data_Generator:
                 'schedule': "{}-{} 5 days a week".format(randrange(8, 10), randrange(18, 20)),
                 'weeks': randrange(4, 12),
                 'salary': randrange(300, 1200),
-                'vacants': randrange(1, 10)
+                'vacants': randrange(1, 10),
+                'start_date': fake.date_between(start_date='today', end_date='+3m')
             }
             offers.append(offer)
         return offers

@@ -22,11 +22,11 @@ def insert_tutor(tutor):
     return sql_template.format(tutor['id'], tutor['start_date'], "'{}'".format(tutor['end_date']) if tutor['end_date'] is not None else 'NULL',tutor['company_id'])
 
 def insert_offer(offer):
-    sql_template = "INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas) VALUES ({}, '{}', '{}', {}, '{}', '{}', '{}', '{}', {}, {}, {});\n"
-    return sql_template.format(offer['id'], offer['title'], offer['category'], offer['company_id'], offer['address'], offer['requirements'], offer['description'], offer['schedule'], offer['weeks'], offer['salary'], offer['vacants'])
+    sql_template = "INSERT INTO oferta (id, puesto, categoria, id_empresa, direccion, requisitos, descripcion, horario, semanas, sueldo, plazas, f_inicio) VALUES ({}, '{}', '{}', {}, '{}', '{}', '{}', '{}', {}, {}, {}, '{}');\n"
+    return sql_template.format(offer['id'], offer['title'], offer['category'], offer['company_id'], offer['address'], offer['requirements'], offer['description'], offer['schedule'], offer['weeks'], offer['salary'], offer['vacants'], offer['start_date'])
 
 def insert_applications(application):
-    sql_template = "INSERT INTO oferta_seleccionada (id_alumno, id_oferta, preferencia) VALUES ({}, {}, {});\n"
+    sql_template = "INSERT INTO solicitud_practicas (id_alumno, id_oferta, preferencia) VALUES ({}, {}, {});\n"
     return sql_template.format(application['student_id'], application['offer_id'], application['preference'])
 
 def insert_contracts(contracts):
