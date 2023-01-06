@@ -2,6 +2,8 @@ import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Tutor } from '../interfaces/tutor';
+import { Report } from '../interfaces/report';
+import { reports } from '../mocks/reports.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +65,14 @@ export class TutorsService {
     console.log('Password changed to: ' + password);
     console.log('Confirm password: ' + confirmPassword);
   }
+
+  getReports(): Report[] {
+    return reports;
+  }
+
+  saveReports(reports: Report[]) {
+    console.log(reports);
+  }
+    
 }
 

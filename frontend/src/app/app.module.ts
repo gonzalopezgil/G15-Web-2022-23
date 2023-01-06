@@ -31,6 +31,7 @@ import { TutorregisterformComponent } from './components/forms/tutorregisterform
 import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
 import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
+import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TutordataComponent } from './components/tutors/tutordata/tutordata.comp
     TutorregisterformComponent,
     TutorregisterPagesComponent,
     PopUpTutorregisterComponent,
-    TutordataComponent
+    TutordataComponent,
+    TutorreportsComponent
   ],
   imports: [
     BrowserModule,

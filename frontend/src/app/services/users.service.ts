@@ -33,7 +33,7 @@ export class UsersService {
   }
 
   user_type(){
-    let user_type = 2;
+    let user_type = sessionStorage.getItem('user-type');
     return user_type;
   }
 }

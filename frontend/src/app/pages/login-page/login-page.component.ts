@@ -26,6 +26,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(email,password).subscribe(
       (response) => {
         if(response.token){
+          sessionStorage.setItem('user-type','2');
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         }

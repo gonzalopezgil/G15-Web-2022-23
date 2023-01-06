@@ -13,9 +13,9 @@ export class HomePageComponent implements OnInit{
 
   ngOnInit(): void {
     let user_type = this.UsersService.user_type();
-    if(user_type == 1){
+    if(user_type == '1'){
       this.router.navigate(['dashboard-users']);
-    }else if (user_type == 2){
+    }else if (user_type == '2'){
       this.router.navigate(['dashboard-tutors']);
     }
   }
