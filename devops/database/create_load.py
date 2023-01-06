@@ -1,5 +1,19 @@
 from data_generator import Data_Generator
 from faker import Faker
+import argparse
+
+parser = argparse.ArgumentParser(description='Generate data and insert it into the database')
+parser.add_argument('--users', type=int, default=100, help='Number of users to generate', dest="users")
+parser.add_argument('--supervisors', type=int, default=10, help='Number of supervisors to generate', dest="supervisors")
+parser.add_argument('--students', type=int, default=100, help='Number of students to generate', dest="students")
+parser.add_argument('--companies', type=int, default=10, help='Number of companies to generate', dest="companies")
+parser.add_argument('--tutors', type=int, default=10, help='Number of tutors to generate', dest="tutors")
+parser.add_argument('--offers', type=int, default=100, help='Number of offers to generate', dest="offers")
+parser.add_argument('--applications', type=int, default=100, help='Number of applications to generate', dest="applications")
+parser.add_argument('--contracts', type=int, default=100, help='Number of contracts to generate', dest="contracts")
+parser.add_argument('-f', '--file', type=str, default='data.sql', help='File to write the data to', dest="file")
+args = parser.parse_args()
+
 
 def insert_user(user):
     sql_template = "INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES ({},'{}', '{}', '{}', '{}', '{}', '{}');\n"
