@@ -16,6 +16,16 @@ public class Company {
     private Long id;
     @Column(name = "nombre")
     private String name;
+    @Column(name = "sufijo_correo")
+    private String mail_suffix;
+    @Column(name = "telefono")
+    private String phone;
+    @Column(name = "direccion")
+    private String address;
+    @Column(name = "ciudad")
+    private String city;
+    @Column(name = "codigo_postal") 
+    private int postal_code;
     @Column(name = "descripcion")
     private String description;
 
@@ -63,6 +73,45 @@ public class Company {
         return description;
     }
 
+    /**
+     * Get the email suffix of the company.
+     * @return the email suffix of the company.
+     */
+    public String getMail_suffix() {
+        return mail_suffix;
+    }
+
+    /**
+     * Get the phone number of the company.
+     * @return the phone number of the company.
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * Get the address of the company.
+     * @return the address of the company.
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Get the city of the company.
+     * @return the city of the company.
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Get the postal code of the company.
+     * @return the postal code of the company.
+     */
+    public int getPostal_code() {
+        return postal_code;
+    }
 
     // ------------------- SETTERS -------------------
     /**
@@ -87,6 +136,46 @@ public class Company {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Set a new email suffix for the company.
+     * @param mail_suffix, the new email suffix for the company.
+     */
+    public void setMail_suffix(String mail_suffix) {
+        this.mail_suffix = mail_suffix;
+    }
+
+    /**
+     * Set a new phone number for the company.
+     * @param phone, the new phone number for the company.
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * Set a new address for the company.
+     * @param address, the new address for the company.
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * Set a new city for the company.
+     * @param city, the new city for the company.
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * Set a new postal code for the company.
+     * @param postal_code, the new postal code for the company.
+     */
+    public void setPostal_code(int postal_code) {
+        this.postal_code = postal_code;
     }
 
     // ------------------- METHODS -------------------
