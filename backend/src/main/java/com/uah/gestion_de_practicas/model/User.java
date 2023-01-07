@@ -9,21 +9,15 @@ import javax.persistence.*;
 */
 @Entity
 @Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     
-    @Column(name = "id_usuario")
     private Long id;
-    @Column(name = "nombre_usuario")
     private String username;
-    @Column(name = "contrasena")
     private String password;
-    @Column(name = "nombre")
     private String first_name;
-    @Column(name = "apellidos")
     private String last_name;
-    @Column(name = "DNI")
     private String nif;
-    @Column(name = "correo")
     private String email;
     
     /**
@@ -57,6 +51,7 @@ public class User {
     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     public Long getId() {
         return id;
     }
@@ -64,6 +59,7 @@ public class User {
     /**
     * Get the username of the user.
     */
+    @Column(name = "nombre_usuario")
     public String getUsername() {
         return username;
     }
@@ -71,6 +67,7 @@ public class User {
     /**
     * Get the password of the user, as it is saved in the database, not unencrypted.
     */
+    @Column(name = "contrasena")
     public String getPassword() {
         return password;
     }
@@ -78,6 +75,7 @@ public class User {
     /**
     * Get the first name of the user.
     */
+    @Column(name = "nombre")
     public String getFirstName() {
         return first_name;
     }
@@ -85,6 +83,7 @@ public class User {
     /**
     * Get the last name of the user.
     */
+    @Column(name = "apellidos")
     public String getLastName() {
         return last_name;
     }
@@ -92,6 +91,7 @@ public class User {
     /**
     * Get the nif of the user.
     */
+    @Column(name = "DNI")
     public String getNif() {
         return nif;
     }
@@ -99,6 +99,7 @@ public class User {
     /**
     * Get the email of the user.
     */
+    @Column(name = "correo")
     public String getEmail() {
         return email;
     }

@@ -14,19 +14,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Practice {
 
-    @Column(name = "id_practica")
     private Long id;
-    @Column(name = "id_alumno")
     private Long student_id;
-    @Column(name = "id_oferta")
     private Long offer_id;
-    @Column(name = "nota")
     private Double mark;
-    @Column(name = "informe")
     private String report;
-    @Column(name = "f_inicio")
     private Date start_date;
-    @Column(name = "f_fin")
     private Date end_date;
 
     /**
@@ -61,6 +54,7 @@ public class Practice {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_practica")
     public Long getId() {
         return id;
     }
@@ -69,6 +63,7 @@ public class Practice {
      * Get the id of the student.
      * @return the id of the student.
      */
+    @Column(name = "id_alumno")
     public Long getStudent_id() {
         return student_id;
     }
@@ -77,6 +72,7 @@ public class Practice {
      * Get the id of the offer.
      * @return the id of the offer.
      */
+    @Column(name = "id_oferta")
     public Long getOffer_id() {
         return offer_id;
     }
@@ -85,6 +81,7 @@ public class Practice {
      * Get the mark of the student in the practice.
      * @return the mark of the student in the practice.
      */
+    @Column(name = "nota")
     public Double getMark() {
         return mark;
     }
@@ -93,6 +90,7 @@ public class Practice {
      * Get the tutor's comments on the student in the practice.
      * @return the report of the practice.
      */
+    @Column(name = "informe")
     public String getReport() {
         return report;
     }
@@ -101,6 +99,7 @@ public class Practice {
      * Get the start date of the practice.
      * @return the start date of the practice.
      */
+    @Column(name = "f_inicio")
     public Date getStart_date() {
         return start_date;
     }
@@ -109,6 +108,7 @@ public class Practice {
      * Get the end date of the practice.
      * @return the end date of the practice.
      */
+    @Column(name = "f_fin")
     public Date getEnd_date() {
         return end_date;
     }

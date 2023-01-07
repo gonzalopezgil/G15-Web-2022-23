@@ -12,13 +12,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Request {
 
-    @Column(name = "id")
     private Long id;
-    @Column(name = "id_alumno")
     private Long student_id;
-    @Column(name = "id_oferta")
     private Long offer_id;
-    @Column(name = "preferencia")
     private Integer preference;
 
     /**
@@ -47,6 +43,7 @@ public class Request {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -55,6 +52,7 @@ public class Request {
      * Get the id of the student.
      * @return the id of the student.
      */
+    @Column(name = "id_alumno")
     public Long getStudent_id() {
         return student_id;
     }
@@ -63,6 +61,7 @@ public class Request {
      * Get the id of the offer.
      * @return the id of the offer.
      */
+    @Column(name = "id_oferta")
     public Long getOffer_id() {
         return offer_id;
     }
@@ -71,6 +70,7 @@ public class Request {
      * Get the preference of the student for the offer.
      * @return the preference of the student for the offer.
      */
+    @Column(name = "preferencia")
     public Integer getPreference() {
         return preference;
     }
