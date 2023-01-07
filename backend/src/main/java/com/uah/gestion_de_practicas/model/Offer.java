@@ -14,29 +14,17 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Offer {
 
-    @Column(name = "id")
     private Long id;
-    @Column(name = "puesto")
     private String position;
-    @Column(name = "categoria")
     private String category;
-    @Column(name = "id_empresa")
     private Long company_id;
-    @Column(name = "direccion")
     private String address;
-    @Column(name = "requisitos")
     private String requirements;
-    @Column(name = "descripcion")
     private String description;
-    @Column(name = "horario")
     private String schedule;
-    @Column(name = "semanas")
     private Integer weeks;
-    @Column(name = "sueldo")
     private Double salary;
-    @Column(name = "plazas")
     private Integer vacancies;
-    @Column(name = "f_inicio")
     private Date start_date;
 
     /**
@@ -80,6 +68,7 @@ public class Offer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -88,6 +77,7 @@ public class Offer {
      * Get the job position of the internship offer.
      * @return the job position of the internship offer.
      */
+    @Column(name = "puesto")
     public String getPosition() {
         return position;
     }
@@ -96,6 +86,7 @@ public class Offer {
      * Get the category of the internship offer.
      * @return the category of the internship offer.
      */
+    @Column(name = "categoria")
     public String getCategory() {
         return category;
     }
@@ -104,6 +95,7 @@ public class Offer {
      * Get the id of the company that offers the internship.
      * @return the id of the company that offers the internship.
      */
+    @Column(name = "id_empresa")
     public Long getCompany_id() {
         return company_id;
     }
@@ -112,6 +104,7 @@ public class Offer {
      * Get the address of the company that offers the internship.
      * @return the address of the company that offers the internship.
      */
+    @Column(name = "direccion")
     public String getAddress() {
         return address;
     }
@@ -120,6 +113,7 @@ public class Offer {
      * Get the requirements of the internship offer.
      * @return the requirements of the internship offer.
      */
+    @Column(name = "requisitos")
     public String getRequirements() {
         return requirements;
     }
@@ -128,6 +122,7 @@ public class Offer {
      * Get the description of the internship offer.
      * @return the description of the internship offer.
      */
+    @Column(name = "descripcion")
     public String getDescription() {
         return description;
     }
@@ -136,6 +131,7 @@ public class Offer {
      * Get the schedule of the internship offer.
      * @return the schedule of the internship offer.
      */
+    @Column(name = "horario")
     public String getSchedule() {
         return schedule;
     }
@@ -144,6 +140,7 @@ public class Offer {
      * Get the weeks of the internship offer.
      * @return the weeks of the internship offer.
      */
+    @Column(name = "semanas")
     public Integer getWeeks() {
         return weeks;
     }
@@ -152,6 +149,7 @@ public class Offer {
      * Get the salary of the internship offer.
      * @return the salary of the internship offer.
      */
+    @Column(name = "sueldo")
     public Double getSalary() {
         return salary;
     }
@@ -160,6 +158,7 @@ public class Offer {
      * Get the number of total vacancies of the internship offer.
      * @return the number of total vacancies of the internship offer.
      */
+    @Column(name = "plazas")
     public Integer getVacancies() {
         return vacancies;
     }
@@ -168,6 +167,7 @@ public class Offer {
      * Get the start date of the internship offer.
      * @return the start date of the internship offer.
      */
+    @Column(name = "f_inicio")
     public Date getStart_date() {
         return start_date;
     }

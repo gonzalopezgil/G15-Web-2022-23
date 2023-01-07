@@ -11,22 +11,14 @@ import lombok.EqualsAndHashCode;
 @Table(name = "empresa")
 @EqualsAndHashCode
 public class Company {
-
-    @Column(name = "id")
+    
     private Long id;
-    @Column(name = "nombre")
     private String name;
-    @Column(name = "sufijo_correo")
     private String mail_suffix;
-    @Column(name = "telefono")
     private String phone;
-    @Column(name = "direccion")
     private String address;
-    @Column(name = "ciudad")
     private String city;
-    @Column(name = "codigo_postal") 
     private int postal_code;
-    @Column(name = "descripcion")
     private String description;
 
     /**
@@ -40,9 +32,14 @@ public class Company {
      * @param name, the name of the company.
      * @param description, the description of the company.
      */
-    public Company(String name, String description) {
+    public Company(String name, String description, String mail_suffix, String phone, String address, String city, int postal_code) {
         this.name = name;
         this.description = description;
+        this.mail_suffix = mail_suffix;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.postal_code = postal_code;
     }
 
     // ------------------- GETTERS -------------------
@@ -53,6 +50,7 @@ public class Company {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -61,6 +59,7 @@ public class Company {
      * Get the name of the company.
      * @return the name of the company.
      */
+    @Column(name = "nombre")
     public String getName() {
         return name;
     }
@@ -69,6 +68,7 @@ public class Company {
      * Get the description of the company.
      * @return the description of the company.
      */
+    @Column(name = "descripcion")
     public String getDescription() {
         return description;
     }
@@ -77,6 +77,7 @@ public class Company {
      * Get the email suffix of the company.
      * @return the email suffix of the company.
      */
+    @Column(name = "sufijo_correo")
     public String getMail_suffix() {
         return mail_suffix;
     }
@@ -85,6 +86,7 @@ public class Company {
      * Get the phone number of the company.
      * @return the phone number of the company.
      */
+    @Column(name = "telefono")
     public String getPhone() {
         return phone;
     }
@@ -93,6 +95,7 @@ public class Company {
      * Get the address of the company.
      * @return the address of the company.
      */
+    @Column(name = "direccion")
     public String getAddress() {
         return address;
     }
@@ -101,6 +104,7 @@ public class Company {
      * Get the city of the company.
      * @return the city of the company.
      */
+    @Column(name = "ciudad")
     public String getCity() {
         return city;
     }
@@ -109,6 +113,7 @@ public class Company {
      * Get the postal code of the company.
      * @return the postal code of the company.
      */
+    @Column(name = "codigo_postal")
     public int getPostal_code() {
         return postal_code;
     }
@@ -188,6 +193,10 @@ public class Company {
         return "Company{" +
                 "id=" + id +
                 ", name=" + name +
+                ", mail_suffix=" + mail_suffix +
+                ", address=" + address +
+                ", city=" + city +
+                ", postal_code=" + postal_code +
                 ", description=" + description +
                 '}';
     }
