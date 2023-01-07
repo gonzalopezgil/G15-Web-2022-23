@@ -2,6 +2,7 @@ package com.uah.gestion_de_practicas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,6 +12,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Collections;
+import java.util.Properties;
 
 /**
  * Configuración Swagger para la generación de documentación de la API REST
@@ -34,7 +36,7 @@ public class SwaggerConfig {
     private ApiInfo apiDetails(){
         return new ApiInfo("Gestión de Practicas API REST",
                 "Documentación de la API REST que gestiona las prácticas de los alumnos de la UAH",
-                "1.0",
+                "1.1-SNAPSHOT",
                 "http://www.google.com",
                 new Contact("Backend Team", "https://github.com/gonzalopezgil/G15-Web-2022-23", "gonzalo.lopezg@edu.uah.es"),
                 "UAH License",

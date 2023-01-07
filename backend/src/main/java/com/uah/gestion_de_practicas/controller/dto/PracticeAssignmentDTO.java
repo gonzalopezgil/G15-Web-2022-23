@@ -25,7 +25,7 @@ public class PracticeAssignmentDTO {
     }
 
     public static PracticeAssignmentDTO fromPractice(Practice practice) {
-        return new PracticeAssignmentDTO(practice.getStudent_id(), practice.getId());
+        return new PracticeAssignmentDTO(practice.getStudent().getId(), practice.getId());
     }
     
     public static List<PracticeAssignmentDTO> fromPractices(List<Practice> practices) {

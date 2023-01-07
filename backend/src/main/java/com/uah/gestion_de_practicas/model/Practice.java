@@ -1,8 +1,11 @@
 package com.uah.gestion_de_practicas.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 
@@ -15,8 +18,8 @@ import lombok.EqualsAndHashCode;
 public class Practice {
 
     private Long id;
-    private Long student_id;
-    private Long offer_id;
+    private Student student;
+    private Offer offer;
     private Double mark;
     private String report;
     private Date start_date;
@@ -37,9 +40,9 @@ public class Practice {
      * @param start_date, the start date of the practice.
      * @param end_date, the end date of the practice.
      */
-    public Practice(Long student_id, Long offer_id, Double mark, String report, Date start_date, Date end_date) {
-        this.student_id = student_id;
-        this.offer_id = offer_id;
+    public Practice(Student student, Offer offer, Double mark, String report, Date start_date, Date end_date) {
+        this.student = student;
+        this.offer = offer;
         this.mark = mark;
         this.report = report;
         this.start_date = start_date;
@@ -63,18 +66,20 @@ public class Practice {
      * Get the id of the student.
      * @return the id of the student.
      */
-    @Column(name = "id_alumno")
-    public Long getStudent_id() {
-        return student_id;
+    @JoinColumn(name = "id_alumno")
+    @ManyToOne(targetEntity = Student.class, cascade = CascadeType.REMOVE)
+    public Student getStudent() {
+        return student;
     }
 
     /**
      * Get the id of the offer.
      * @return the id of the offer.
      */
-    @Column(name = "id_oferta")
-    public Long getOffer_id() {
-        return offer_id;
+    @JoinColumn(name = "id_oferta")
+    @ManyToOne(targetEntity = Offer.class, cascade = CascadeType.REMOVE)
+    public Offer getOffer() {
+        return offer;
     }
 
     /**
@@ -126,16 +131,16 @@ public class Practice {
      * Set the id of the student.
      * @param student_id, the id of the student.
      */
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
      * Set the id of the offer.
      * @param offer_id, the id of the offer.
      */
-    public void setOffer_id(Long offer_id) {
-        this.offer_id = offer_id;
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
     /**
@@ -179,8 +184,8 @@ public class Practice {
     public String toString() {
         return "Practice{" +
                 "id=" + id +
-                ", student_id=" + student_id +
-                ", offer_id=" + offer_id +
+                ", student_id=" + student +
+                ", offer_id=" + offer +
                 ", mark=" + mark +
                 ", report=" + report +
                 ", start_date=" + start_date +

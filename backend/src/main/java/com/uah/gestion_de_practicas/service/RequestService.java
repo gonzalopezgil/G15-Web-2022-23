@@ -59,28 +59,28 @@ public class RequestService {
         List<Practice> new_practices = new ArrayList<Practice>();
         
         // For each offer, get the student with the greatest exp_grade and assign the offer to him.
-        for (Request request : requests){
-            Offer offer = offerService.getOffer(request.getOffer_id());
-            if (offer.getVacancies() > 0){
-                List<Student> elegibleStudents = studentService.getElegibleStudents(offer.getId());
-                while (elegibleStudents.size() > 0){
-                    Student student = elegibleStudents.get(0);
-                    Practice practice = new Practice();
-                    practice.setStudent_id(student.getId());
-                    practice.setOffer_id(offer.getId());
-                    practice.setStart_date(offer.getStart_date());
+        // for (Request request : requests){
+        //     Offer offer = offerService.getOffer(request.getOffer_id());
+        //     if (offer.getVacancies() > 0){
+        //         List<Student> elegibleStudents = studentService.getElegibleStudents(offer.getId());
+        //         while (elegibleStudents.size() > 0){
+        //             Student student = elegibleStudents.get(0);
+        //             Practice practice = new Practice();
+        //             practice.setStudent(student.getId());
+        //             practice.setOffer_id(offer.getId());
+        //             practice.setStart_date(offer.getStart_date());
                     
-                    // Remove the student from the list of elegible students.
-                    elegibleStudents.remove(0);
-                    requestRepository.deleteByStudentId(student.getId());
+        //             // Remove the student from the list of elegible students.
+        //             elegibleStudents.remove(0);
+        //             requestRepository.deleteByStudentId(student.getId());
 
-                    // Update the number of vacancies of the offer and save the practice.
-                    offer.setVacancies(offer.getVacancies() - 1);
-                    new_practices.add(practice);
-                }
-                offerService.saveOffer(offer);
-            }
-        }
+        //             // Update the number of vacancies of the offer and save the practice.
+        //             offer.setVacancies(offer.getVacancies() - 1);
+        //             new_practices.add(practice);
+        //         }
+        //         offerService.saveOffer(offer);
+        //     }
+        // }
         return new_practices;
     }
 
