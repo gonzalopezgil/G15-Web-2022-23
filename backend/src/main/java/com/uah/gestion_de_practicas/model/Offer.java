@@ -96,7 +96,7 @@ public class Offer {
      * @return the id of the company that offers the internship.
      */
     @JoinColumn(name = "id_empresa")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, targetEntity = Company.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Company.class)
     public Company getCompany() {
         return company;
     }
