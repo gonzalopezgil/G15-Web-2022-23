@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
+
 import lombok.EqualsAndHashCode;
 
 /**
@@ -14,19 +15,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Practice {
 
-    @Column(name = "id_practica")
     private Long id;
-    @Column(name = "id_alumno")
-    private Long student_id;
-    @Column(name = "id_oferta")
-    private Long offer_id;
-    @Column(name = "nota")
+    private Student student;
+    private Offer offer;
     private Double mark;
-    @Column(name = "informe")
     private String report;
-    @Column(name = "f_inicio")
     private Date start_date;
-    @Column(name = "f_fin")
     private Date end_date;
 
     /**
@@ -44,9 +38,9 @@ public class Practice {
      * @param start_date, the start date of the practice.
      * @param end_date, the end date of the practice.
      */
-    public Practice(Long student_id, Long offer_id, Double mark, String report, Date start_date, Date end_date) {
-        this.student_id = student_id;
-        this.offer_id = offer_id;
+    public Practice(Student student, Offer offer, Double mark, String report, Date start_date, Date end_date) {
+        this.student = student;
+        this.offer = offer;
         this.mark = mark;
         this.report = report;
         this.start_date = start_date;
@@ -61,6 +55,7 @@ public class Practice {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_practica")
     public Long getId() {
         return id;
     }
@@ -69,22 +64,27 @@ public class Practice {
      * Get the id of the student.
      * @return the id of the student.
      */
-    public Long getStudent_id() {
-        return student_id;
+    @JoinColumn(name = "id_alumno")
+    @ManyToOne(targetEntity = Student.class, cascade = CascadeType.REMOVE)
+    public Student getStudent() {
+        return student;
     }
 
     /**
      * Get the id of the offer.
      * @return the id of the offer.
      */
-    public Long getOffer_id() {
-        return offer_id;
+    @JoinColumn(name = "id_oferta")
+    @ManyToOne(targetEntity = Offer.class, cascade = CascadeType.REMOVE)
+    public Offer getOffer() {
+        return offer;
     }
 
     /**
      * Get the mark of the student in the practice.
      * @return the mark of the student in the practice.
      */
+    @Column(name = "nota")
     public Double getMark() {
         return mark;
     }
@@ -93,6 +93,7 @@ public class Practice {
      * Get the tutor's comments on the student in the practice.
      * @return the report of the practice.
      */
+    @Column(name = "informe")
     public String getReport() {
         return report;
     }
@@ -101,6 +102,7 @@ public class Practice {
      * Get the start date of the practice.
      * @return the start date of the practice.
      */
+    @Column(name = "f_inicio")
     public Date getStart_date() {
         return start_date;
     }
@@ -109,6 +111,7 @@ public class Practice {
      * Get the end date of the practice.
      * @return the end date of the practice.
      */
+    @Column(name = "f_fin")
     public Date getEnd_date() {
         return end_date;
     }
@@ -126,16 +129,16 @@ public class Practice {
      * Set the id of the student.
      * @param student_id, the id of the student.
      */
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
      * Set the id of the offer.
      * @param offer_id, the id of the offer.
      */
-    public void setOffer_id(Long offer_id) {
-        this.offer_id = offer_id;
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
     /**
@@ -179,8 +182,8 @@ public class Practice {
     public String toString() {
         return "Practice{" +
                 "id=" + id +
-                ", student_id=" + student_id +
-                ", offer_id=" + offer_id +
+                ", student_id=" + student +
+                ", offer_id=" + offer +
                 ", mark=" + mark +
                 ", report=" + report +
                 ", start_date=" + start_date +

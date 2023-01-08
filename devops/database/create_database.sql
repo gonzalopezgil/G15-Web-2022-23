@@ -1,5 +1,5 @@
 CREATE TABLE `usuario` (
-  `id_usuario` int PRIMARY KEY AUTO_INCREMENT,
+  `id_usuario` bigint PRIMARY KEY AUTO_INCREMENT,
   `nombre_usuario` varchar(255) UNIQUE,
   `contrasena` varchar(255),
   `nombre` varchar(255),
@@ -9,7 +9,7 @@ CREATE TABLE `usuario` (
 );
 
 CREATE TABLE `alumno` (
-  `id_alumno` int PRIMARY KEY,
+  `id_usuario` bigint PRIMARY KEY,
   `grado` varchar(255),
   `f_nacimiento` date,
   `telefono` varchar(255),
@@ -18,20 +18,20 @@ CREATE TABLE `alumno` (
 );
 
 CREATE TABLE `tutor` (
-  `id_tutor` int PRIMARY KEY,
+  `id_usuario` bigint PRIMARY KEY,
   `f_alta` date NOT NULL,
   `f_baja` date,
-  `id_empresa` int
+  `id_empresa` bigint
 );
 
 CREATE TABLE `responsable` (
-  `id_responsable` int PRIMARY KEY,
+  `id_usuario` bigint PRIMARY KEY,
   `f_alta` date NOT NULL,
   `f_baja` date
 );
 
 CREATE TABLE `empresa` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(255),
   `sufijo_correo` varchar(255),
   `telefono` varchar(20),
@@ -42,10 +42,10 @@ CREATE TABLE `empresa` (
 );
 
 CREATE TABLE `oferta` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `puesto` varchar(255),
   `categoria` varchar(255),
-  `id_empresa` int,
+  `id_empresa` bigint,
   `direccion` varchar(255),
   `requisitos` varchar(255),
   `descripcion` varchar(255),
@@ -57,9 +57,9 @@ CREATE TABLE `oferta` (
 );
 
 CREATE TABLE `practica` (
-  `id_practica` int PRIMARY KEY AUTO_INCREMENT,
-  `id_alumno` int,
-  `id_oferta` int,
+  `id_practica` bigint PRIMARY KEY AUTO_INCREMENT,
+  `id_alumno` bigint,
+  `id_oferta` bigint,
   `nota` double,
   `informe` varchar(255),
   `f_inicio` date NOT NULL,
@@ -67,26 +67,26 @@ CREATE TABLE `practica` (
 );
 
 CREATE TABLE `solicitud_practicas` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `id_alumno` int,
-  `id_oferta` int,
+  `id` bigint PRIMARY KEY AUTO_INCREMENT,
+  `id_alumno` bigint,
+  `id_oferta` bigint,
   `preferencia` int
 );
 
-ALTER TABLE `alumno` ADD FOREIGN KEY (`id_alumno`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `alumno` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `tutor` ADD FOREIGN KEY (`id_tutor`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `responsable` ADD FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `responsable` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
+ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
+ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `practica` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
+ALTER TABLE `practica` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`)  ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

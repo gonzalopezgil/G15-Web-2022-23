@@ -2,12 +2,7 @@ package com.uah.gestion_de_practicas.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.EqualsAndHashCode;
 
@@ -16,14 +11,25 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Table(name = "responsable")
+@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(callSuper = true)
 public class Supervisor extends User {
 
-    @Column(name = "id_responsable")
+    @Transient
+    private String username;
+    @Transient
+    private String password;
+    @Transient
+    private String first_name;
+    @Transient
+    private String last_name;
+    @Transient
+    private String nif;
+    @Transient
+    private String email;
+
     private Long id;
-    @Column(name = "f_alta")
     private Date admission_date;
-    @Column(name = "f_baja")
     private Date removal_date;
 
     /**
@@ -59,6 +65,7 @@ public class Supervisor extends User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, mappedBy = "id_usuario")
     public Long getId() {
         return id;
     }
@@ -67,6 +74,7 @@ public class Supervisor extends User {
      * Get the admission date of the supervisor.
      * @return the admission date of the supervisor.
      */
+    @Column(name = "f_alta")
     public Date getAdmission_date() {
         return admission_date;
     }
@@ -75,6 +83,7 @@ public class Supervisor extends User {
      * Get the removal date of the supervisor.
      * @return the removal date of the supervisor.
      */
+    @Column(name = "f_baja")
     public Date getRemoval_date() {
         return removal_date;
     }

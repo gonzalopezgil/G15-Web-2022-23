@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.PracticeRepository;
+import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 
 /**
  * Service class for the Practice class.
@@ -36,8 +37,8 @@ public class PracticeService {
      * Gets a practice from the database.
      * @param id, Id of the practice to be retrieved.
      */
-    public Practice getPractice(Long id) {
-        return practiceRepository.findById(id).orElse(null);
+    public SimplePracticeDAO getPractice(Long id) {
+        return practiceRepository.findPracticeById(id).orElse(null);
     }
 
     /**
@@ -52,8 +53,8 @@ public class PracticeService {
      * Gets all the practices from the database.
      * @return A list with all the practices.
      */
-    public List<Practice> getAllPractices() {
-        return practiceRepository.findAll();
+    public List<SimplePracticeDAO> getAllPractices() {
+        return practiceRepository.findAllPractices();
     }
 
     /**
@@ -81,7 +82,7 @@ public class PracticeService {
      * Gets the practices that are completed.
      * @return A list with all the completed practices.
      */
-    public List<Practice> getReport(){
+    public List<SimplePracticeDAO> getReport(){
         return practiceRepository.getCompletedPractices();
     }
 }

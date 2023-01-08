@@ -11,16 +11,26 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Table(name = "tutor")
+@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(callSuper = true)
 public class Tutor extends User {
 
-    @Column(name = "id_tutor")
+    @Transient
+    private String username;
+    @Transient
+    private String password;
+    @Transient
+    private String first_name;
+    @Transient
+    private String last_name;
+    @Transient
+    private String nif;
+    @Transient
+    private String email;
+
     private Long id;
-    @Column(name = "f_alta")
     private Date admission_date;
-    @Column(name = "f_baja")
     private Date removal_date;
-    @Column(name = "id_empresa")
     private Company company;
 
     /**
@@ -57,6 +67,7 @@ public class Tutor extends User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, mappedBy = "id_usuario")
     public Long getId() {
         return id;
     }
@@ -65,6 +76,7 @@ public class Tutor extends User {
      * Get the admission date of the tutor.
      * @return the admission date of the tutor.
      */
+    @Column(name = "f_alta")
     public Date getAdmission_date() {
         return admission_date;
     }
@@ -73,6 +85,7 @@ public class Tutor extends User {
      * Get the removal date of the tutor.
      * @return the removal date of the tutor.
      */
+    @Column(name = "f_baja")
     public Date getRemoval_date() {
         return removal_date;
     }
@@ -81,6 +94,7 @@ public class Tutor extends User {
      * Get the id of the company of the tutor.
      * @return the id of the company of the tutor.
      */
+    @JoinColumn(name = "id_empresa")
     @ManyToOne(fetch = FetchType.LAZY)
     public Company getCompany() {
         return company;

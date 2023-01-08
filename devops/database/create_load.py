@@ -20,11 +20,11 @@ def insert_user(user):
     return sql_template.format(user['id'], user['username'], user['password'], user['name'], user['last_name'], user['DNI'], user['email'])
 
 def insert_supervisor(supervisor):
-    sql_template = "INSERT INTO responsable (id_responsable, f_alta, f_baja) VALUES ({},'{}', {});\n"
+    sql_template = "INSERT INTO responsable (id_usuario, f_alta, f_baja) VALUES ({},'{}', {});\n"
     return sql_template.format(supervisor['id'],supervisor['start_date'], "'{}'".format(supervisor['end_date']) if supervisor['end_date'] is not None else 'NULL')
     
 def insert_student(student):
-    sql_template = "INSERT INTO alumno (id_alumno, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ({},'{}', {}, '{}', '{}', {});\n"
+    sql_template = "INSERT INTO alumno (id_usuario, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES ({},'{}', {}, '{}', '{}', {});\n"
     return sql_template.format(student['id'], student['university_degree'], student['expedient_grade'], student['birth_date'], student['phone'], student['total_hours'])
 
 def insert_company(company):
@@ -32,7 +32,7 @@ def insert_company(company):
     return sql_template.format(company['id'],company['name'], company['email_suffix'], company['phone'], company['address'], company['city'], company['postal_code'], company['description'])
 
 def insert_tutor(tutor):
-    sql_template = "INSERT INTO tutor (id_tutor, f_alta, f_baja,id_empresa) VALUES ({}, '{}', {}, {});\n"
+    sql_template = "INSERT INTO tutor (id_usuario, f_alta, f_baja,id_empresa) VALUES ({}, '{}', {}, {});\n"
     return sql_template.format(tutor['id'], tutor['start_date'], "'{}'".format(tutor['end_date']) if tutor['end_date'] is not None else 'NULL',tutor['company_id'])
 
 def insert_offer(offer):

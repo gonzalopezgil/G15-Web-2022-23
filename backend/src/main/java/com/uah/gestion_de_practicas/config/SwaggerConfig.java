@@ -34,7 +34,7 @@ public class SwaggerConfig {
     private ApiInfo apiDetails(){
         return new ApiInfo("Gestión de Practicas API REST",
                 "Documentación de la API REST que gestiona las prácticas de los alumnos de la UAH",
-                "1.0",
+                "1.1-SNAPSHOT",
                 "http://www.google.com",
                 new Contact("Backend Team", "https://github.com/gonzalopezgil/G15-Web-2022-23", "gonzalo.lopezg@edu.uah.es"),
                 "UAH License",

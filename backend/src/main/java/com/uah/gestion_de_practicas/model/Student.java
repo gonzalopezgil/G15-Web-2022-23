@@ -11,20 +11,28 @@ import lombok.EqualsAndHashCode;
  */
 @Entity
 @Table(name = "alumno")
+@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User {
+    
+    @Transient
+    private String username;
+    @Transient
+    private String password;
+    @Transient
+    private String first_name;
+    @Transient
+    private String last_name;
+    @Transient
+    private String nif;
+    @Transient
+    private String email;
 
-    @Column(name = "id_alumno")
     private Long id;
-    @Column(name = "grado")
     private String degree;
-    @Column(name = "f_nacimiento")
     private Date birth_date;
-    @Column(name = "telefono")
     private String phone;
-    @Column(name = "nota_exp")
     private Double exp_note;
-    @Column(name = "horas_totales")
     private Integer total_hours;
 
     /**
@@ -65,6 +73,7 @@ public class Student extends User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, mappedBy = "id_usuario")
     public Long getId() {
         return id;
     }
@@ -73,6 +82,7 @@ public class Student extends User {
      * Get the degree of the student.
      * @return the degree of the student.
      */
+    @Column(name = "grado")
     public String getDegree() {
         return degree;
     }
@@ -81,6 +91,7 @@ public class Student extends User {
      * Get the birth date of the student.
      * @return the birth date of the student.
      */
+    @Column(name = "f_nacimiento")
     public Date getBirth_date() {
         return birth_date;
     }
@@ -89,6 +100,7 @@ public class Student extends User {
      * Get the phone of the student.
      * @return the phone of the student.
      */
+    @Column(name = "telefono")
     public String getPhone() {
         return phone;
     }
@@ -97,6 +109,7 @@ public class Student extends User {
      * Get the average grade of the student.
      * @return the average grade of the student.
      */
+    @Column(name = "nota_exp")
     public Double getExp_note() {
         return exp_note;
     }
@@ -105,6 +118,7 @@ public class Student extends User {
      * Get the total hours of practice corresponding to the student.
      * @return the total hours of practice corresponding to the student.
      */
+    @Column(name = "horas_totales")
     public Integer getTotal_hours() {
         return total_hours;
     }
