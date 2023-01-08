@@ -2,7 +2,6 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +14,7 @@ import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
-import com.uah.gestion_de_practicas.model.Supervisor;
-import com.uah.gestion_de_practicas.model.Tutor;
+
 import com.uah.gestion_de_practicas.service.CompanyService;
 
 import io.swagger.annotations.ApiOperation;
@@ -44,12 +42,9 @@ public class CompanyController {
      */
     @PostMapping("")
     @ApiOperation("Registration of a new company by a tutor")
-    public ResponseEntity<Company> registerCompany(@ApiParam("The company to be registered") @RequestBody Company company, @ApiParam("The tutor who is registering the company") @RequestBody Tutor tutor) {
-        if (company == null || tutor == null || company.getId() != null || tutor.getCompany() != null) {
+    public ResponseEntity<Company> registerCompany(@ApiParam("The company to be registered") @RequestBody Company company) {
+        if (company == null || company.getId() != null) {
             return ResponseEntity.badRequest().build();
-        }
-        if (tutor.getCompany() != null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         Company registered_company = companyService.saveCompany(company);
@@ -64,11 +59,7 @@ public class CompanyController {
      */
     @GetMapping("")
     @ApiOperation("The supervisor gets an overview of the companies with the number of students doing their practices in each one")
-    public ResponseEntity<List<CompanyStudentsDTO>> getAllCompaniesWithStudents(@ApiParam("The supervisor who is requesting the list") @RequestBody Supervisor supervisor) {
-        if (supervisor == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
+    public ResponseEntity<List<CompanyStudentsDTO>> getAllCompaniesWithStudents() {
         List<CompanyStudentsDTO> companies_with_students = CompanyStudentsDTO.fromDAO(companyService.getAllCompaniesWithStudents());
         return ResponseEntity.ok(companies_with_students);
     }
@@ -122,8 +113,8 @@ public class CompanyController {
      */
     @GetMapping("/{id}/students")
     @ApiOperation("The tutor of a company gets the list of actual students in the company")
-    public ResponseEntity<List<StudentDTO>> getStudentsInCompany(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The tutor of the company") @RequestBody Tutor tutor) {
-        if (id == null || tutor == null || tutor.getCompany().getId() != id || tutor.getRemoval_date() != null) {
+    public ResponseEntity<List<StudentDTO>> getStudentsInCompany(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
+        if (id == null) {
             return ResponseEntity.badRequest().build();
         }
         if (companyService.getCompany(id) == null) {
@@ -162,8 +153,8 @@ public class CompanyController {
      */
     @GetMapping("/{id}/practice")
     @ApiOperation("The tutor of a company gets the history of practices of the company, completed or in progress")
-    public ResponseEntity<List<Practice>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The tutor who is requesting the history") @RequestBody Tutor tutor) {
-        if (id == null || tutor == null || tutor.getCompany().getId() != id || tutor.getRemoval_date() != null) {
+    public ResponseEntity<List<Practice>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
+        if (id == null) {
             return ResponseEntity.badRequest().build();
         }
         if (companyService.getCompany(id) == null) {

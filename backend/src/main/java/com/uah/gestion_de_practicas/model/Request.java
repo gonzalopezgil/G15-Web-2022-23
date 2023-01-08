@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
 public class Request {
 
     private Long id;
-    private Long student_id;
-    private Long offer_id;
+    private Student student;
+    private Offer offer;
     private Integer preference;
 
     /**
@@ -29,9 +29,9 @@ public class Request {
      * @param offer_id, the id of the offer.
      * @param preference, the preference of the student for the offer.
      */
-    public Request(Long student_id, Long offer_id, Integer preference) {
-        this.student_id = student_id;
-        this.offer_id = offer_id;
+    public Request(Student student, Offer offer, Integer preference) {
+        this.student = student;
+        this.offer = offer;
         this.preference = preference;
     }
 
@@ -52,18 +52,20 @@ public class Request {
      * Get the id of the student.
      * @return the id of the student.
      */
-    @Column(name = "id_alumno")
-    public Long getStudent_id() {
-        return student_id;
+    @JoinColumn(name = "id_alumno")
+    @ManyToOne(targetEntity = Student.class, cascade = CascadeType.REMOVE)
+    public Student getStudent() {
+        return student;
     }
 
     /**
      * Get the id of the offer.
      * @return the id of the offer.
      */
-    @Column(name = "id_oferta")
-    public Long getOffer_id() {
-        return offer_id;
+    @JoinColumn(name = "id_oferta")
+    @ManyToOne(targetEntity = Offer.class, cascade = CascadeType.REMOVE)
+    public Offer getOffer() {
+        return offer;
     }
 
     /**
@@ -89,16 +91,16 @@ public class Request {
      * Set the id of the student.
      * @param student_id, the id of the student.
      */
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
      * Set the id of the offer.
      * @param offer_id, the id of the offer.
      */
-    public void setOffer_id(Long offer_id) {
-        this.offer_id = offer_id;
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
     /**
@@ -119,8 +121,8 @@ public class Request {
     public String toString() {
         return "Request{" +
                 "id=" + id +
-                ", student_id=" + student_id +
-                ", offer_id=" + offer_id +
+                ", student_id=" + student +
+                ", offer_id=" + offer +
                 ", preference=" + preference +
                 '}';
     }
