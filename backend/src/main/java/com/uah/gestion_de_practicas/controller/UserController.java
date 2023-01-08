@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uah.gestion_de_practicas.controller.dto.AuthDTO;
 import com.uah.gestion_de_practicas.controller.dto.UserDTO;
 import com.uah.gestion_de_practicas.model.User;
 import com.uah.gestion_de_practicas.service.UserService;
@@ -58,7 +59,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ApiOperation("Get a user by its id")
-    public ResponseEntity <UserDTO> getUserById(@ApiParam ("The id of the user") @PathVariable(name = "id") Long id) {
+    public ResponseEntity<UserDTO> getUserById(@ApiParam ("The id of the user") @PathVariable(name = "id") Long id) {
         User user = userService.getUser(id);
         if (user != null)
             return ResponseEntity.ok(new UserDTO(user));
@@ -118,8 +119,7 @@ public class UserController {
      */
     @PostMapping("/login")
     @ApiOperation("Logs in a user by its username and password")
-    public ResponseEntity<Boolean> logInUser(@ApiParam("Username") @RequestBody String username, 
-    @ApiParam("Encoded password") @RequestBody String password) {
-        return ResponseEntity.ok(userService.logInUser(username, password));
+    public ResponseEntity<Boolean> logInUser(@ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
+        return ResponseEntity.ok(userService.logInUser(authDTO.getUsername(), authDTO.getPassword()));
     }    
 }

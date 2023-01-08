@@ -2,6 +2,7 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
 
@@ -39,7 +41,7 @@ public class PracticeController {
      */
     @GetMapping("")
     @ApiOperation("Get all the practices")
-    public ResponseEntity <List<Practice>> getPractices() {
+    public ResponseEntity <List<SimplePracticeDAO>> getPractices() {
         return ResponseEntity.ok(practiceService.getAllPractices());
     }
 
@@ -50,7 +52,7 @@ public class PracticeController {
      */
     @GetMapping("/{id}")
     @ApiOperation("Get a practice by its id")
-    public ResponseEntity<Practice> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
+    public ResponseEntity<SimplePracticeDAO> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
         return ResponseEntity.ok(practiceService.getPractice(id));
     }
 
@@ -73,9 +75,9 @@ public class PracticeController {
      */
     @DeleteMapping("/{id}")
     @ApiOperation("Delete a practice by its id")
-    public ResponseEntity<Practice> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
+    public ResponseEntity<String> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
         practiceService.deletePractice(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Practice "+ id + " deleted");
     }
 
 
@@ -100,8 +102,8 @@ public class PracticeController {
      */
     @GetMapping("/report")
     @ApiOperation("Obtain a report of all the practices completed and their evaluation")
-    public ResponseEntity<List<Practice>> getPracticesReport(){
-        List<Practice> practices = practiceService.getReport();
+    public ResponseEntity<List<SimplePracticeDAO>> getPracticesReport(){
+        List<SimplePracticeDAO> practices = practiceService.getReport();
         return ResponseEntity.ok(practices);
     }
 }
