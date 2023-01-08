@@ -1,0 +1,8 @@
+# Ignore all node_modules
+src
+.mvn
+
+# Ignore all .gitignore files
+**/.gitignore
+**/.apt_generated
+
