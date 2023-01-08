@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
+import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
 
@@ -27,10 +29,12 @@ import io.swagger.annotations.ApiParam;
 public class PracticeController {
     private final PracticeService practiceService;
     private final RequestService requestService;
+    private final OfferService offerService;
 
-    public PracticeController(PracticeService practiceService, RequestService requestService) {
+    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService) {
         this.practiceService = practiceService;
         this.requestService = requestService;
+        this.offerService = offerService;
     }
 
     /**
@@ -39,7 +43,7 @@ public class PracticeController {
      */
     @GetMapping("")
     @ApiOperation("Get all the practices")
-    public ResponseEntity <List<Practice>> getPractices() {
+    public ResponseEntity <List<SimplePracticeDAO>> getPractices() {
         return ResponseEntity.ok(practiceService.getAllPractices());
     }
 
@@ -50,7 +54,7 @@ public class PracticeController {
      */
     @GetMapping("/{id}")
     @ApiOperation("Get a practice by its id")
-    public ResponseEntity<Practice> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
+    public ResponseEntity<SimplePracticeDAO> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
         return ResponseEntity.ok(practiceService.getPractice(id));
     }
 
@@ -73,9 +77,9 @@ public class PracticeController {
      */
     @DeleteMapping("/{id}")
     @ApiOperation("Delete a practice by its id")
-    public ResponseEntity<Practice> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
+    public ResponseEntity<String> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
         practiceService.deletePractice(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Practice "+ id + " deleted");
     }
 
 
@@ -88,8 +92,12 @@ public class PracticeController {
     @ApiOperation("Assign available offers to students with greater exp_grades")
     public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices(){
         List<Practice> practices = requestService.getPracticeAssignments();
-        practiceService.saveAllPractices(practices);
+        practices = practiceService.saveAllPractices(practices);
         
+        for (Practice practice : practices) {
+            offerService.saveOffer(practice.getOffer());
+        }
+
         List<PracticeAssignmentDTO> assignmentDTO = PracticeAssignmentDTO.fromPractices(practices);
         return ResponseEntity.ok(assignmentDTO);
     }
@@ -100,8 +108,8 @@ public class PracticeController {
      */
     @GetMapping("/report")
     @ApiOperation("Obtain a report of all the practices completed and their evaluation")
-    public ResponseEntity<List<Practice>> getPracticesReport(){
-        List<Practice> practices = practiceService.getReport();
+    public ResponseEntity<List<SimplePracticeDAO>> getPracticesReport(){
+        List<SimplePracticeDAO> practices = practiceService.getReport();
         return ResponseEntity.ok(practices);
     }
 }

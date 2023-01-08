@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
+import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
 
 /**
  * Service class for the Tutor class.
@@ -36,8 +37,17 @@ public class TutorService {
      * Gets a tutor from the database.
      * @param id Id of the tutor to be retrieved.
      */
-    public Tutor getTutor(Long id) {
-        return tutorRepository.findById(id).orElse(null);
+    public TutorDAO getTutor(Long id) {
+        return tutorRepository.getTutorById(id).orElse(null);
+    }
+
+    /**
+     * Updates a tutor in the database.
+     * @param id Id of the tutor to be updated.
+     * @param tutor Tutor object with the new data.
+     */
+    public void updateTutor(Tutor tutor) {
+        tutorRepository.save(tutor);
     }
 
     /**
@@ -52,8 +62,8 @@ public class TutorService {
      * Gets all the tutors from the database.
      * @return A list with all the tutors.
      */
-    public List<Tutor> getAllTutors() {
-        return tutorRepository.findAll();
+    public List<TutorDAO> getAllTutors() {
+        return tutorRepository.getAllTutors();
     }
     
 }

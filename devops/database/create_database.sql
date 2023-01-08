@@ -73,20 +73,20 @@ CREATE TABLE `solicitud_practicas` (
   `preferencia` int
 );
 
-ALTER TABLE `alumno` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `alumno` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `tutor` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `responsable` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `responsable` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
+ALTER TABLE `oferta` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);
+ALTER TABLE `tutor` ADD FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`);
+ALTER TABLE `practica` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `practica` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
+ALTER TABLE `practica` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_usuario`)  ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`);
+ALTER TABLE `solicitud_practicas` ADD FOREIGN KEY (`id_oferta`) REFERENCES `oferta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

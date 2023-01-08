@@ -17,7 +17,7 @@ public class Offer {
     private Long id;
     private String position;
     private String category;
-    private Long company_id;
+    private Company company;
     private String address;
     private String requirements;
     private String description;
@@ -47,12 +47,12 @@ public class Offer {
      * @param vacancies, the number of total vacancies of the internship offer.
      */
     public Offer(String position, String category, Long company_id, String address, String requirements,
-            String description, String schedule, Integer weeks, Double salary, Integer vacancies) {
+            String description, String schedule, Integer weeks, Double salary, Integer vacancies, Company company) {
         this.position = position;
         this.category = category;
-        this.company_id = company_id;
         this.address = address;
         this.requirements = requirements;
+        this.company = company;
         this.description = description;
         this.schedule = schedule;
         this.weeks = weeks;
@@ -95,9 +95,10 @@ public class Offer {
      * Get the id of the company that offers the internship.
      * @return the id of the company that offers the internship.
      */
-    @Column(name = "id_empresa")
-    public Long getCompany_id() {
-        return company_id;
+    @JoinColumn(name = "id_empresa")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, targetEntity = Company.class)
+    public Company getCompany() {
+        return company;
     }
 
     /**
@@ -201,8 +202,8 @@ public class Offer {
      * Set the id of the company that offers the internship.
      * @param company_id, the id of the company that offers the internship.
      */
-    public void setCompany_id(Long company_id) {
-        this.company_id = company_id;
+    public void setCompany(Company new_company) {
+        this.company = new_company;
     }
 
     /**
@@ -277,7 +278,7 @@ public class Offer {
     @Override
     public String toString() {
         return "Offer{" + "id=" + id + ", position=" + position + ", category=" + category
-                + ", company_id=" + company_id + ", address=" + address + ", requirements=" + requirements
+                + ", company_id=" + company + ", address=" + address + ", requirements=" + requirements
                 + ", description=" + description + ", schedule=" + schedule + ", weeks=" + weeks
                 + ", salary=" + salary + ", vacancies=" + vacancies + ", start_date=" + start_date + '}';
     }
