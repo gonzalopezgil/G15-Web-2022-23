@@ -1,13 +1,10 @@
 package com.uah.gestion_de_practicas.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,51 +61,7 @@ public class UserController {
         if (user != null)
             return ResponseEntity.ok(new UserDTO(user));
         else
-            return ResponseEntity.status(Response.SC_NOT_FOUND).build();
-    }
-
-    /**
-     * Register a user by all its fields
-     * @param User User json containing all the fields of the user
-     * @return ResponseEntity<UserDTO> the registered user
-    */
-    @PostMapping("")
-    @ApiOperation("Register a user by all its fields")
-    public ResponseEntity <UserDTO> registerUser(@ApiParam("Json containing all the fields of the user") @RequestBody User user) {
-        User registered_user = userService.saveUser(user);
-        return ResponseEntity.ok(new UserDTO(registered_user));
-    }
-
-    /**
-     * Update a user by its id and all its fields
-     * @param id Long id of the user
-     * @param User User json containing all the fields of the user
-     * @return ResponseEntity<UserDTO> the updated user
-    */
-    @PutMapping("/{id}")
-    @ApiOperation("Update a user by its id and all its fields")
-    public ResponseEntity<UserDTO> updateUser(@ApiParam("The id of the user") @PathVariable(name = "id") Long id, 
-    @ApiParam("Json containing all the fields of the user") @RequestBody User user) {
-        if (userService.getUser(id) != null ){
-            user.setId(id);
-            User updated_user = userService.saveUser(user);
-            return ResponseEntity.ok(new UserDTO(updated_user));
-        }else{
-            return ResponseEntity.status(Response.SC_NOT_FOUND).build();
-        }
-        
-    }
-
-    /**
-     * Delete a user by its id
-     * @param id Long id of the user
-     * @return ResponseEntity<Void> empty response
-    */
-    @DeleteMapping("/{id}")
-    @ApiOperation("Delete a user by its id")
-    public ResponseEntity deleteUser(@ApiParam("The id of the user") @PathVariable(name = "id") Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.ok().build();
+            return ResponseEntity.notFound().build();
     }
 
     /**

@@ -2,7 +2,6 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
+import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
 
@@ -29,10 +29,12 @@ import io.swagger.annotations.ApiParam;
 public class PracticeController {
     private final PracticeService practiceService;
     private final RequestService requestService;
+    private final OfferService offerService;
 
-    public PracticeController(PracticeService practiceService, RequestService requestService) {
+    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService) {
         this.practiceService = practiceService;
         this.requestService = requestService;
+        this.offerService = offerService;
     }
 
     /**
@@ -90,8 +92,12 @@ public class PracticeController {
     @ApiOperation("Assign available offers to students with greater exp_grades")
     public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices(){
         List<Practice> practices = requestService.getPracticeAssignments();
-        practiceService.saveAllPractices(practices);
+        practices = practiceService.saveAllPractices(practices);
         
+        for (Practice practice : practices) {
+            offerService.saveOffer(practice.getOffer());
+        }
+
         List<PracticeAssignmentDTO> assignmentDTO = PracticeAssignmentDTO.fromPractices(practices);
         return ResponseEntity.ok(assignmentDTO);
     }

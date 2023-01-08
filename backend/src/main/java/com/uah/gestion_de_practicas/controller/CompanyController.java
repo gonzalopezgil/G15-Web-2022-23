@@ -2,7 +2,6 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +14,7 @@ import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
-import com.uah.gestion_de_practicas.model.Supervisor;
-import com.uah.gestion_de_practicas.model.Tutor;
+
 import com.uah.gestion_de_practicas.service.CompanyService;
 
 import io.swagger.annotations.ApiOperation;

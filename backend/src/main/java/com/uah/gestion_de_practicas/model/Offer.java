@@ -47,12 +47,12 @@ public class Offer {
      * @param vacancies, the number of total vacancies of the internship offer.
      */
     public Offer(String position, String category, Long company_id, String address, String requirements,
-            String description, String schedule, Integer weeks, Double salary, Integer vacancies) {
+            String description, String schedule, Integer weeks, Double salary, Integer vacancies, Company company) {
         this.position = position;
         this.category = category;
-        this.company = company;
         this.address = address;
         this.requirements = requirements;
+        this.company = company;
         this.description = description;
         this.schedule = schedule;
         this.weeks = weeks;

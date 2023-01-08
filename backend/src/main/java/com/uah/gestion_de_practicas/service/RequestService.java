@@ -22,14 +22,10 @@ public class RequestService {
      * Data access repository for the Request class.
      */
     private final RequestRepository requestRepository;
-    private final StudentService studentService;
-    private final OfferService offerService;
 
 
-    public RequestService(RequestRepository requestRepository, StudentService studentService, OfferService offerService) {
+    public RequestService(RequestRepository requestRepository, OfferService offerService) {
         this.requestRepository = requestRepository;
-        this.studentService = studentService;
-        this.offerService = offerService;
     }
 
     // ------------------- CRUD OPERATIONS ------------------- //
@@ -58,29 +54,28 @@ public class RequestService {
         List<Request> requests = requestRepository.findAll();
         List<Practice> new_practices = new ArrayList<Practice>();
         
-        // For each offer, get the student with the greatest exp_grade and assign the offer to him.
-        // for (Request request : requests){
-        //     Offer offer = offerService.getOffer(request.getOffer_id());
-        //     if (offer.getVacancies() > 0){
-        //         List<Student> elegibleStudents = studentService.getElegibleStudents(offer.getId());
-        //         while (elegibleStudents.size() > 0){
-        //             Student student = elegibleStudents.get(0);
-        //             Practice practice = new Practice();
-        //             practice.setStudent(student.getId());
-        //             practice.setOffer_id(offer.getId());
-        //             practice.setStart_date(offer.getStart_date());
+        //For each offer, get the student with the greatest exp_grade and assign the offer to him.
+        for (Request request : requests){
+            Offer offer = request.getOffer();
+            if (offer.getVacancies() > 0){
+                List<Student> elegibleStudents = requestRepository.getStudentsByOfferId(offer.getId());
+                while (elegibleStudents.size() > 0){
+                    Student student = elegibleStudents.get(0);
+                    Practice practice = new Practice();
+                    practice.setStudent(student);
+                    practice.setOffer(offer);
+                    practice.setStart_date(offer.getStart_date());
                     
-        //             // Remove the student from the list of elegible students.
-        //             elegibleStudents.remove(0);
-        //             requestRepository.deleteByStudentId(student.getId());
+                    // Remove the student from the list of elegible students.
+                    elegibleStudents.remove(0);
+                    requestRepository.deleteByStudentId(student.getId());
 
-        //             // Update the number of vacancies of the offer and save the practice.
-        //             offer.setVacancies(offer.getVacancies() - 1);
-        //             new_practices.add(practice);
-        //         }
-        //         offerService.saveOffer(offer);
-        //     }
-        // }
+                    // Update the number of vacancies of the offer and save the practice.
+                    offer.setVacancies(offer.getVacancies() - 1);
+                    new_practices.add(practice);
+                }
+            }
+        }
         return new_practices;
     }
 
@@ -100,5 +95,13 @@ public class RequestService {
     public List<Request> getAllRequests() {
         return requestRepository.findAll();
     }
-    
+ 
+    public List<Request> getRequestsByStudentId(Long studentId) {
+        return requestRepository.findAllByStudentId(studentId);
+    }
+
+    public void deleteRequestsByStudentId(Long student_id) {
+        requestRepository.deleteByStudentId(student_id);
+    }
+
 }

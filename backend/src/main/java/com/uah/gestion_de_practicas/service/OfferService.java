@@ -56,4 +56,7 @@ public class OfferService {
         return offerRepository.findAll();
     }
     
+
+    // ------------------- OTHER METHODS ------------------- //
+    
 }
