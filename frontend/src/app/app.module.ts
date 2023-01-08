@@ -29,6 +29,7 @@ import { UsersReportsComponent } from './components/responsable/users-reports/us
 import { DashboardresponsableComponent } from './components/responsable/dashboardresponsable/dashboardresponsable.component';
 import { DashboardResponsableComponent } from './components/responsable/dashboard-responsable/dashboard-responsable.component';
 import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
+import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AssignPracticeComponent } from './components/responsable/assign-practic
     UsersReportsComponent,
     DashboardresponsableComponent,
     DashboardResponsableComponent,
-    AssignPracticeComponent
+    AssignPracticeComponent,
+    PopUpAssignPracticesComponent
   ],
   imports: [
     BrowserModule,
