@@ -22,6 +22,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop
     WelcomeComponent,
     PracticesOngoingComponent,
     UserdataComponent,
-    PopUpPasswordComponent
+    PopUpPasswordComponent,
+    AboutUsPageComponent
   ],
   imports: [
     BrowserModule,
