@@ -23,6 +23,8 @@ import { PracticesOngoingComponent } from './components/users/practices-ongoing/
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
     PracticesOngoingComponent,
     UserdataComponent,
     PopUpPasswordComponent,
-    AboutUsPageComponent
+    AboutUsPageComponent,
+    RegisterPageComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
