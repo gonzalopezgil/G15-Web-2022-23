@@ -24,6 +24,21 @@ import com.uah.gestion_de_practicas.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String[] AUTH_WHITELIST = {
+        // -- swagger ui
+        "/v2/api-docs",
+        "/swagger-resources",
+        "/swagger-resources/**",
+        "/configuration/ui",
+        "/configuration/security",
+        "/swagger-ui/indext.html",
+        "/swagger-ui/**",
+        "/webjars/**",
+
+        // -- auth 
+        "/api/users/login",
+    };
+
     @Autowired
     private UserService userService;
 
@@ -61,11 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() // Exception Handler
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // Not creating sessions, only using tokens
-                .authorizeRequests().antMatchers("/api/users/login").permitAll() // Allow access to the login
-                .anyRequest().authenticated(); // The rest petitions requiere login
+                .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll() // Allow access to swagger and login endpoints
+                .anyRequest().authenticated(); // Restrict the access to any other request
+        
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-    
 }
 
