@@ -1,39 +1,22 @@
 <div class="header">
     <h1>Estas son las prácticas que puedes seleccionar.El orden de preferencia se establecera en función del orden de selección.</h1>
-  </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <!-- Posicion Column -->
-    <ng-container matColumnDef="Posicion">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
-    </ng-container>
-  
-    <!-- Aplicante Column -->
-    <ng-container matColumnDef="Aplicante">
-      <th mat-header-cell *matHeaderCellDef> Titulo </th>
-      <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-    </ng-container>
-  
-    <!-- Empresa Column -->
-    <ng-container matColumnDef="Empresa">
-      <th mat-header-cell *matHeaderCellDef> Empresa </th>
-      <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
-    </ng-container>
-  
-    
-    
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-        (click)="selection.toggle(row)">
-    </tr>
-  
-  </table>
+</div>
+<table mat-table dataSource = "dataSource" class="mat-elevation-z8">
 
-  
-  <div class="button">
-    <button mat-raised-button (click)="aceptar()">Aceptar la asignación de practicas</button>
-    <button mat-raised-button [routerLink]="['/dashboard-responsable']">Volver</button>
-  </div>
-  
+  <!-- Aplicante Column -->
+  <ng-container matColumnDef="Aplicante">
+    <th mat-header-cell *matHeaderCellDef> Aplicante </th>
+    <td mat-cell *matCellDef="let element"> {{element.aplicante}} </td>
+  </ng-container>
+
+  <!-- Empresa Column -->
+  <ng-container matColumnDef="Empresa">
+    <th mat-header-cell *matHeaderCellDef> Empresa </th>
+    <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+</table>
+<div class="button">
+  <button mat-raised-button (click)="aceptar()">Aceptar la asignación de practicas</button>
+  <button mat-raised-button routerLink = "'/dashboard-responsable'" >Volver</button>
+</div>
