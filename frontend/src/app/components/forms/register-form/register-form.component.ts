@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-form',
@@ -7,8 +7,24 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent {
-  registerForm: FormGroup = new FormGroup({});
+  registerForm: FormGroup = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ]),
+    passwordConfirm: new FormControl('', [
+      Validators.required,
+      //this.passwordValidator.validate(this.registerForm.get('password'))
+    ]),
+    nif: new FormControl('', [Validators.required, Validators.pattern('[0-9]{8}-[A-Z]{1}')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
+    surname: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
+  });
   @Output() registerAction: EventEmitter<{}> = new EventEmitter<{}>();
+
+
 
   constructor() { }
 
@@ -16,8 +32,5 @@ export class RegisterFormComponent {
   }
 
   ngOnSubmit() {
-    if (this.registerForm.valid) {
-      this.registerAction.emit(this.registerForm.value);
-    }
   }
 }

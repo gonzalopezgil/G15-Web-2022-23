@@ -25,6 +25,7 @@ import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
+import { PasswordsMatchValidator } from './validators/passwords-match-validator/passwords-match-validator.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RegisterFormComponent } from './components/forms/register-form/register
     PopUpPasswordComponent,
     AboutUsPageComponent,
     RegisterPageComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    PasswordsMatchValidator
   ],
   imports: [
     BrowserModule,
