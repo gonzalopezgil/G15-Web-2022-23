@@ -1,6 +1,10 @@
 package com.uah.gestion_de_practicas.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uah.gestion_de_practicas.controller.dto.AuthDTO;
 import com.uah.gestion_de_practicas.controller.dto.UserDTO;
 import com.uah.gestion_de_practicas.model.User;
+import com.uah.gestion_de_practicas.security.jwt.JwtTokenUtil;
+import com.uah.gestion_de_practicas.security.payload.JwtResponse;
 import com.uah.gestion_de_practicas.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -29,8 +35,13 @@ public class UserController {
     
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final AuthenticationManager authManager;
+    private final JwtTokenUtil jwtTokenUtil;
+
+    public UserController(UserService userService, AuthenticationManager authManager, JwtTokenUtil jwtTokenUtil) {
         this.userService = userService;
+        this.authManager = authManager;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
 
@@ -68,11 +79,21 @@ public class UserController {
      * Logs in a user by its username and password
      * @param username String username
      * @param password String encoded password
-     * @return ResponseEntity<Boolean> true if the user was logged in, false otherwise
+     * @return ResponseEntity<JwtResponse> the JWT token if the user was logged in, Unauthorized otherwise
      */
     @PostMapping("/login")
     @ApiOperation("Logs in a user by its username and password")
-    public ResponseEntity<Boolean> logInUser(@ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
-        return ResponseEntity.ok(userService.logInUser(authDTO.getUsername(), authDTO.getPassword()));
+    public ResponseEntity<JwtResponse> logInUser(@ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
+        Authentication authentication = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authDTO.getUsername(),
+                        authDTO.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtTokenUtil.generateJwtToken(authentication);
+
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }    
 }

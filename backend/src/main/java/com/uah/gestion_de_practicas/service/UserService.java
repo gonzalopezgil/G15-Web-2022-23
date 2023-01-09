@@ -1,10 +1,14 @@
 package com.uah.gestion_de_practicas.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.User;
 import com.uah.gestion_de_practicas.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +16,7 @@ import java.util.List;
  * Implements the business logic for the User class.
  */
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     /**
      * Data access repository for the User class.
@@ -65,7 +69,7 @@ public class UserService {
      * @return The user with the given username.
      */
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     /**
@@ -77,14 +81,24 @@ public class UserService {
         return userRepository.findById(nif);
     }
 
+    // ------------------- OVERRIDDEN METHODS ------------------- //
+
     /**
+     * Loads a user from the database by its username.
      * @param username Username inserted by the user
      * @param password Password inserted by the user
-     * @return True if the credentials correspond to a valid user.
+     * @return UserDetails object with the user's data
      */
-    public boolean logInUser(String username, String password) {
-        User stored_user = userRepository.findByUsername(username);
-        return stored_user != null && stored_user.getPassword().equals(password);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = getUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+            
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
+
+
     
 }
