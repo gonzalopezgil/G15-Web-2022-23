@@ -16,7 +16,6 @@ import { PopUpAssignPracticesComponent } from '../../pop-ups/pop-up-assign-pract
 export class AssignPracticeComponent {
   displayedColumns: string[] = [ 'Aplicante', 'Empresa'];
   dataSource = new MatTableDataSource<Solicitud>();
-  selection = new SelectionModel<Solicitud>(true, []);
   @Output() messageEvent = new EventEmitter<Solicitud[]>();
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
   constructor(private dialog : MatDialog, private SolicitudService: SolicitudService){ }
