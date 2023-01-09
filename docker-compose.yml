@@ -1,14 +1,14 @@
 version: '3.8' # Por tener docker v19.03.0 o superior
 
 services:
-    frontend:
-        image: nicolaemolnar/gestion-de-practicas-front:0.1
-        container_name: front_gdp
-        restart: always
-        ports:
-            - 4201:4200
-        networks:
-            - backend
+    # frontend:
+    #     image: nicolaemolnar/gestion-de-practicas-front:0.1
+    #     container_name: front_gdp
+    #     restart: always
+    #     ports:
+    #         - 4201:4200
+    #     networks:
+    #         - backend
     backend:
         image: nicolaemolnar/gestion-de-practicas-back:1.1
         container_name: back_gdp
@@ -35,7 +35,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: 1234
         volumes:
-            - /tmp/database:/var/lib/mysql
+            # - /tmp/database:/var/lib/mysql
             - ./devops/database/create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
             - ./devops/database/load.sql:/docker-entrypoint-initdb.d/load.sql
         ports:  
