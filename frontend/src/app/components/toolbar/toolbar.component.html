@@ -2,6 +2,17 @@
     <mat-toolbar class="fondo">
         <span class="texto">Gestion de practicas</span>
         <span class="espaciado"></span>
-        <img src="favicon.ico">
+        <mat-menu #menu="matMenu" id="menu">
+            <button mat-menu-item routerLink="/about-us">
+                <mat-icon>info</mat-icon>
+                <span>About us</span>
+            </button>
+            <button mat-menu-item routerLink="/login">
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+            </button>
+        </mat-menu>
+        
+        <img [matMenuTriggerFor]="menu" src="favicon.ico">
     </mat-toolbar>
 </p>
