@@ -32,5 +32,6 @@ export class RegisterFormComponent {
   }
 
   ngOnSubmit() {
+    this.registerAction.emit(this.registerForm.value);
   }
 }
