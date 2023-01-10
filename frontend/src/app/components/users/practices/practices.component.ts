@@ -3,7 +3,7 @@ import {Component, EventEmitter, Output,OnInit, AfterViewInit, ViewChild, Change
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Practica } from 'src/app/interfaces/practica';
+import { Offer } from 'src/app/interfaces/offer';
 import { PracticesService } from 'src/app/services/practices.service';
 import { PopUpPracticesComponent } from '../../pop-ups/pop-up-practices/pop-up-practices.component';
 
@@ -14,9 +14,9 @@ import { PopUpPracticesComponent } from '../../pop-ups/pop-up-practices/pop-up-p
 })
 export class PracticesComponent implements AfterViewInit{
   displayedColumns: string[] = [ 'Posicion','Titulo', 'Empresa', 'Plazas', 'Horario','Dias de la semana','Semanas','select'];
-  dataSource = new MatTableDataSource<Practica>();
-  selection = new SelectionModel<Practica>(true, []);
-  @Output() messageEvent = new EventEmitter<Practica[]>();
+  dataSource = new MatTableDataSource<Offer>();
+  selection = new SelectionModel<Offer>(true, []);
+  @Output() messageEvent = new EventEmitter<Offer[]>();
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);;
 
   constructor(private dialog: MatDialog,private PracticesService: PracticesService){}
@@ -44,7 +44,7 @@ export class PracticesComponent implements AfterViewInit{
   }
 
   
-  checkboxLabel(row?: Practica): string {
+  checkboxLabel(row?: Offer): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -52,7 +52,7 @@ export class PracticesComponent implements AfterViewInit{
   }
 
   guardar(): void {
-    let practicasSeleccionadas: Practica[] = [];
+    let practicasSeleccionadas: Offer[] = [];
        for (let item of this.selection.selected) {
          console.log(item.id);
          practicasSeleccionadas.push(item);

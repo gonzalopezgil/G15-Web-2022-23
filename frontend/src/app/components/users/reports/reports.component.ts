@@ -1,5 +1,5 @@
 import { Component ,OnInit} from '@angular/core';
-import { Practica } from 'src/app/interfaces/practica';
+import { Offer } from 'src/app/interfaces/offer';
 import { User } from 'src/app/interfaces/user';
 import { Tutor } from 'src/app/interfaces/tutor';
 import { UsersService } from 'src/app/services/users.service';
@@ -12,7 +12,7 @@ import { PracticesService } from 'src/app/services/practices.service';
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnInit {
-  practice: Practica | undefined;
+  practice: Offer | undefined;
   user: User | undefined;
   tutor: Tutor | undefined;
   constructor(private UserService: UsersService,private TutorService: TutorsService,private PracticeService: PracticesService) { }

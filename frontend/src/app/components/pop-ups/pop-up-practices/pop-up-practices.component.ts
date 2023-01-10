@@ -1,6 +1,6 @@
 import { Component ,Inject,OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Practica } from 'src/app/interfaces/practica';
+import { Offer } from 'src/app/interfaces/offer';
 
 @Component({
   selector: 'app-pop-up-practices',
@@ -8,10 +8,10 @@ import { Practica } from 'src/app/interfaces/practica';
   styleUrls: ['./pop-up-practices.component.scss']
 })
 export class PopUpPracticesComponent implements OnInit{
-  practicas : Practica[] = [];
+  practicas : Offer[] = [];
   seleccioncorrecta:boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Practica[]) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Offer[]) {
     this.practicas = data;
   }
   ngOnInit(): void {
