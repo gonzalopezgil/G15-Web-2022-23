@@ -9,9 +9,12 @@
         <mat-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                 <mat-form-field>
-                    <input matInput placeholder="Username" formControlName="username" />
-                    <mat-error *ngIf="username?.errors?.['required'] && username?.touched">
-                        Nombre de usuario obligatorio
+                    <input matInput placeholder="Email" formControlName="email" />
+                    <mat-error *ngIf="email?.errors?.['required'] && email?.touched">
+                        Email obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="email?.errors?.['email'] && email?.touched">
+                        El formato es incorrecto
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
