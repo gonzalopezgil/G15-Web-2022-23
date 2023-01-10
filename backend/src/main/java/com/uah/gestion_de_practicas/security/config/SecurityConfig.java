@@ -41,6 +41,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/api/users/login",
     };
 
+    private static final String[] STUDENT_WHITELIST = {
+        "/api/users/students/**",
+        "/api/company/**",
+        "/api/practice/**",
+    };
+
+    private static final String[] TUTOR_WHITELIST = {
+        "/api/users/tutors/**",
+        "/api/practice/**",
+        "/api/company/**"
+    };
+
+    private static final String[] ADMIN_WHITELIST = {
+        "/api/**",
+        "/api/**/**"
+    };
+
     @Autowired
     private UserService userService;
 
@@ -79,6 +96,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() // Exception Handler
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // Not creating sessions, only using tokens
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll() // Allow access to swagger and login endpoints
+                .antMatchers(STUDENT_WHITELIST).hasRole("STUDENT")
+                .antMatchers(TUTOR_WHITELIST).hasRole("TUTOR")
+                .antMatchers(ADMIN_WHITELIST).hasRole("ADMIN")
                 .anyRequest().authenticated(); // Restrict the access to any other request
         
 
