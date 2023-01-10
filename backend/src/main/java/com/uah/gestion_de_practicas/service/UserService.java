@@ -1,5 +1,7 @@
 package com.uah.gestion_de_practicas.service;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,8 +25,26 @@ public class UserService implements UserDetailsService {
      */
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    /**
+     * Service class for the Tutor class.
+     */
+    private final TutorService tutorService;
+
+    /**
+     * Service class for the Student class.
+     */
+    private final StudentService studentService;
+    
+    /** 
+     * Service class for the Supervisor class.
+     */
+    private final SupervisorService supervisorService;
+
+    public UserService(UserRepository userRepository, TutorService tutorService, StudentService studentService, SupervisorService supervisorService) {
         this.userRepository = userRepository;
+        this.tutorService = tutorService;
+        this.studentService = studentService;
+        this.supervisorService = supervisorService;
     }
 
 
@@ -81,6 +101,26 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(nif);
     }
 
+    /**
+     * Gets the role of a user from the database.
+     * @param id Id of the user to be retrieved.
+     * @return The role of the user
+     */
+    public SimpleGrantedAuthority getRole(Long id) {
+        User user = getUser(id);
+        if (user == null) {
+            return new SimpleGrantedAuthority("NONE");
+        } else if (tutorService.getTutor(id) != null) {
+            return new SimpleGrantedAuthority("ROLE_TUTOR");
+        } else if (studentService.getStudent(id) != null) {
+            return new SimpleGrantedAuthority("ROLE_STUDENT");
+        } else if (supervisorService.getSupervisor(id) != null) {
+            return new SimpleGrantedAuthority("ROLE_SUPERVISOR");
+        } else {
+            return new SimpleGrantedAuthority("NONE");
+        }
+    }
+
     // ------------------- OVERRIDDEN METHODS ------------------- //
 
     /**
@@ -95,8 +135,11 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-            
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(getRole(user.getId()));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
 

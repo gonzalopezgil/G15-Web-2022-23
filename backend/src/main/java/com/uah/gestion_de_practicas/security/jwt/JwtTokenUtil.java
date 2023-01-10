@@ -24,12 +24,15 @@ public class JwtTokenUtil {
     @Value("${app.jwt.expiration-ms}")
     private int jwtExpirationMs;
 
+    @Value("${app.jwt.authorities-key}")
+    private String AUTHORITIES_KEY;
+
     public String generateJwtToken(Authentication authentication) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
-
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
+                .claim(AUTHORITIES_KEY, userPrincipal.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

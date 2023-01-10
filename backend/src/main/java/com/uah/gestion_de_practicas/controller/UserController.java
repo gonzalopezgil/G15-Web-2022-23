@@ -1,6 +1,7 @@
 package com.uah.gestion_de_practicas.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,6 +50,7 @@ public class UserController {
      * Get all the users
      * @return ResponseEntity<List<UserDTO>> list of all the users
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     @ApiOperation("Get all the users")
     public ResponseEntity <List<UserDTO>> getAllUsers() {
