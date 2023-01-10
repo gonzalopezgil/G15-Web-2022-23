@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this._isLoggedIn$.asObservable();
+
+  constructor(private http: HttpClient) {
+    const token = sessionStorage.getItem('token');
+    this._isLoggedIn$.next(!!token);
+   }
   
-    login(email: string, password: string): Observable<any> {
+    login(username: string, password: string): Observable<any> {
       let body = {
-        email: email,
-        password: password
+        password: password,
+        username: username,
       }
       
-      return this.http.post('https://reqres.in/api/login', body);
+      return this.http.post('http://localhost:8080/api/users/login', body).pipe(
+        tap((res: any) => {
+          this._isLoggedIn$.next(true);
+          sessionStorage.setItem('token', res.token);
+        }));
     }
+    
     logout(): void {
       sessionStorage.removeItem('token');
     }
