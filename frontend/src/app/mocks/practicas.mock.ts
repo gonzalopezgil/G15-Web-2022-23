@@ -1,6 +1,6 @@
-import { Offer } from "../interfaces/offer";
+import { Practica } from "../interfaces/practica";
 
-export const ELEMENT_DATA: Offer[] = [
+export const ELEMENT_DATA: Practica[] = [
     {id:1,posicion: 1,titulo: 'Practica 1', empresa: 'Empresa 1', plazas: 3, horario: '8:00-14:00', dias: 'Lunes a Viernes', semanas: 4},
     {id:2,posicion: 2,titulo: 'Practica 2', empresa: 'Empresa 2', plazas: 2, horario: '8:00-14:00', dias: 'Lunes a Viernes', semanas: 4},
     {id:3,posicion: 3,titulo: 'Practica 3', empresa: 'Empresa 3', plazas: 1, horario: '8:00-14:00', dias: 'Lunes a Viernes', semanas: 4},

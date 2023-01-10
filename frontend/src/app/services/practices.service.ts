@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Offer } from '../interfaces/offer';
+import { Practica } from '../interfaces/practica';
 import { ELEMENT_DATA } from '../mocks/practicas.mock';
 
 @Injectable({
@@ -9,12 +9,12 @@ import { ELEMENT_DATA } from '../mocks/practicas.mock';
 export class PracticesService {
   constructor(private http: HttpClient) { }
   
-    getPractices(): Offer[] {
+    getPractices(): Practica[] {
       let data= ELEMENT_DATA;
       return data;
     }
 
-    getPractice(id: number): Offer {
+    getPractice(id: number): Practica {
       let data= ELEMENT_DATA;
       return data[id];
     }

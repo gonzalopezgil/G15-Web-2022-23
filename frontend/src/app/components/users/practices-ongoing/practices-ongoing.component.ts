@@ -1,5 +1,5 @@
 import { Component ,OnInit} from '@angular/core';
-import { Offer } from 'src/app/interfaces/offer';
+import { Practica } from 'src/app/interfaces/practica';
 import { PracticesService } from 'src/app/services/practices.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { PracticesService } from 'src/app/services/practices.service';
   styleUrls: ['./practices-ongoing.component.scss']
 })
 export class PracticesOngoingComponent implements OnInit {
-    practice: Offer | undefined;
+    practice: Practica | undefined;
     constructor(private PracticeService: PracticesService) { }
   
     ngOnInit(): void {
