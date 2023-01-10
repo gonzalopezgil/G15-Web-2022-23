@@ -21,10 +21,11 @@ export class LoginPageComponent implements OnInit {
   
 
   loginUser(value: any): void {
-    let { email, password } = value;
+    let { username, password } = value;
     
-    this.authService.login(email,password).subscribe(
+    this.authService.login(username,password).subscribe(
       (response) => {
+        console.log(response);
         if(response.token){
           sessionStorage.setItem('user-type','2');
           sessionStorage.setItem('token', response.token);

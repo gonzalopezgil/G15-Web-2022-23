@@ -15,13 +15,13 @@ export class LoginFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['',Validators.compose([Validators.required, Validators.email])],
+      username: ['',Validators.required],
       password: ['',Validators.required]
     });
   }
 
-  get email() { 
-    return this.loginForm.get('email'); 
+  get username() { 
+    return this.loginForm.get('username'); 
   }
 
   get password() { 
