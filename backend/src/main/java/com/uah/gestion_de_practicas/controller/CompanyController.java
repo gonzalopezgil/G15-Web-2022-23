@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
+import com.uah.gestion_de_practicas.controller.dto.ReportDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.repository.dao.ReportDAO;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.CompanyService;
 
@@ -159,7 +161,7 @@ public class CompanyController {
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}/practice")
     @ApiOperation("The tutor of a company publishes the reports of the students in the company")
-    public ResponseEntity<List<SimplePracticeDAO>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<SimplePracticeDAO> practices) {
+    public ResponseEntity<List<SimplePracticeDAO>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<ReportDTO> practices) {
         if (id == null || practices == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -167,7 +169,7 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Practice> updated_practices = companyService.publishReports(practices, username);
+        List<Practice> updated_practices = companyService.publishReports(ReportDAO.fromDTO(practices), username);
         if (updated_practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

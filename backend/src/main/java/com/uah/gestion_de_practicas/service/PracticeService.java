@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.PracticeRepository;
+import com.uah.gestion_de_practicas.repository.dao.ReportDAO;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 
 /**
@@ -84,14 +85,14 @@ public class PracticeService {
      * @param tutor_username, Username of the tutor.
      * @return A list with all the saved practices.
      */
-    public List<Practice> saveAllPractices(List<SimplePracticeDAO> practices, String tutor_username) {
-        HashMap<Long, SimplePracticeDAO> map = new HashMap<>();
-        for (SimplePracticeDAO p: practices) {
+    public List<Practice> saveAllPractices(List<ReportDAO> practices, String tutor_username) {
+        HashMap<Long, ReportDAO> map = new HashMap<>();
+        for (ReportDAO p: practices) {
             map.put(p.getId(), p);
         }
         List<Practice> practices_all_info = practiceRepository.findAllById(map.keySet());
         for (Practice p : practices_all_info) {
-            SimplePracticeDAO p_dto = map.get(p.getId());
+            ReportDAO p_dto = map.get(p.getId());
             p.setMark(p_dto.getMark());
             p.setReport(p_dto.getReport());
             p.setEnd_date(Date.valueOf(LocalDate.now()));
