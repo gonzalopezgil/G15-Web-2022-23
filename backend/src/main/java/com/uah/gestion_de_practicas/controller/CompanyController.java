@@ -2,8 +2,10 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,19 +39,26 @@ public class CompanyController {
     /**
      * Endpoint to register a new company
      * Only the tutor can register a new company
+     * The company will be assigned to the tutor who is registering it
      * @param company, the company to be registered
-     * @param tutor, the tutor who is registering the company
      * @return the registered company in the body of the response
      */
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("")
     @ApiOperation("Registration of a new company by a tutor")
-    public ResponseEntity<Company> registerCompany(@ApiParam("The company to be registered") @RequestBody Company company) {
+    public ResponseEntity<Company> registerCompany(
+            @ApiParam("The company to be registered") @RequestBody Company company) {
         if (company == null || company.getId() != null) {
             return ResponseEntity.badRequest().build();
         }
 
-        Company registered_company = companyService.saveCompany(company);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Company registered_company = companyService.saveCompanyByTutor(company, username);
+        if (registered_company == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         return ResponseEntity.ok(registered_company);
     }
 

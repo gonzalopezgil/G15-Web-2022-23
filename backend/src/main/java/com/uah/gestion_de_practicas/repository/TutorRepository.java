@@ -18,4 +18,6 @@ public interface TutorRepository extends JpaRepository<Tutor,Long> {
     
     @Query("SELECT new com.uah.gestion_de_practicas.repository.dao.TutorDAO(t.id, t.company.id, t.admission_date, t.removal_date) FROM Tutor t WHERE t.id = ?1")
     Optional<TutorDAO> getTutorById(Long id);
+
+    Optional<Tutor> findTutorByUsername(String username);
 }

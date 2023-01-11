@@ -3,6 +3,7 @@ package com.uah.gestion_de_practicas.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
@@ -32,16 +33,23 @@ public class CompanyService {
      */
     private final PracticeService practiceService;
 
-    public CompanyService(CompanyRepository companyRepository, StudentService studentService, PracticeService practiceService) {
+    /** 
+     * Service class for the Tutor class.
+     */
+    private final TutorService tutorService;
+
+    public CompanyService(CompanyRepository companyRepository, StudentService studentService, PracticeService practiceService, TutorService tutorService) {
         this.companyRepository = companyRepository;
         this.studentService = studentService;
         this.practiceService = practiceService;
+        this.tutorService = tutorService;
     }
 
     // ------------------- CRUD OPERATIONS ------------------- //
 
     /**
      * Saves a company in the database.
+     * @param company, Company to be saved.
      */
     public Company saveCompany(Company company) {
         return companyRepository.save(company);
@@ -69,6 +77,27 @@ public class CompanyService {
      */
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
+    }
+
+    // ------------------- CUSTOM OPERATIONS ------------------- //
+
+    /** 
+     * A tutor saves a company in the database.
+     * @param company, Company to be saved.
+     * @param tutor_username Username of the tutor that saves the company.
+     */
+    @Transactional
+    public Company saveCompanyByTutor(Company company, String tutor_username) {
+        if (!tutorService.isAuthorized(tutor_username)) {
+            return null;
+        }
+
+        Company saved_company = companyRepository.save(company);
+        if (tutorService.updateTutorCompany(tutor_username, saved_company) == null) {
+            return null;
+        }
+
+        return saved_company;
     }
 
     /**

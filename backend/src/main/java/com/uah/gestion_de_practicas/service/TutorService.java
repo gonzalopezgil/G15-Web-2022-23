@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
@@ -64,6 +65,32 @@ public class TutorService {
      */
     public List<TutorDAO> getAllTutors() {
         return tutorRepository.getAllTutors();
+    }
+
+    // ------------------- CUSTOM OPERATIONS ---------------- //
+
+    /** 
+     * Checks if a tutor is authorized to access the information.
+     * @param username Username of the tutor.
+     * @return True if the tutor is authorized, false otherwise.
+     */
+    public boolean isAuthorized(String username) {
+        Tutor tutor = tutorRepository.findTutorByUsername(username).orElse(null);
+        if (tutor == null) return false;
+        return (tutor.getRemoval_date() == null);
+    }
+
+    /** 
+     * Updates the company of a tutor.
+     * @param username Username of the tutor to be updated.
+     * @param company Company object with the information of the new company.
+     * @return The updated tutor.
+     */
+    public Tutor updateTutorCompany(String username, Company company) {
+        Tutor tutor = tutorRepository.findTutorByUsername(username).orElse(null);
+        if (tutor == null) return null;
+        tutor.setCompany(company);
+        return tutorRepository.save(tutor);
     }
     
 }

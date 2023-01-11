@@ -89,8 +89,7 @@ public class UserController {
 
     /**
      * Logs in a user by its username and password
-     * @param username String username
-     * @param password String encoded password
+     * @param authDTO AuthDTO containing the username and password of the user
      * @return ResponseEntity<JwtResponse> the JWT token if the user was logged in, Unauthorized otherwise
      */
     @PostMapping("/login")
