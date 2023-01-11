@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
-import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
-
+import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.CompanyService;
 
 import io.swagger.annotations.ApiOperation;
@@ -160,7 +159,7 @@ public class CompanyController {
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}/practice")
     @ApiOperation("The tutor of a company publishes the reports of the students in the company")
-    public ResponseEntity<List<PracticeDTO>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<PracticeDTO> practices) {
+    public ResponseEntity<List<SimplePracticeDAO>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<SimplePracticeDAO> practices) {
         if (id == null || practices == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -168,7 +167,7 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<PracticeDTO> updated_practices = companyService.publishReports(practices, username);
+        List<SimplePracticeDAO> updated_practices = companyService.publishReports(practices, username);
         if (updated_practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
@@ -184,7 +183,7 @@ public class CompanyController {
     @PreAuthorize("hasAnyRole('ROLE_TUTOR','ROLE_SUPERVISOR')")
     @GetMapping("/{id}/practice")
     @ApiOperation("The tutor of a company gets the history of practices of the company, completed or in progress")
-    public ResponseEntity<List<Practice>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
+    public ResponseEntity<List<SimplePracticeDAO>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
         if (id == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -192,7 +191,7 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Practice> practices = companyService.getPracticeHistory(id, username);
+        List<SimplePracticeDAO> practices = companyService.getPracticeHistory(id, username);
         if (practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

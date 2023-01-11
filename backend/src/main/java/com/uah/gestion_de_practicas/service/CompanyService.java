@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.CompanyRepository;
 import com.uah.gestion_de_practicas.repository.dao.CompanyStudentsDAO;
+import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 
 /**
  * Service class for the Company class.
@@ -155,7 +155,7 @@ public class CompanyService {
      * @param username, Username of the user trying to obtain this information.
      * @return A list with the history of practices of the company.
      */
-    public List<Practice> getPracticeHistory(Long id, String username) {
+    public List<SimplePracticeDAO> getPracticeHistory(Long id, String username) {
         if (!tutorService.isAuthorized(username, id) && !supervisorService.isAuthorized(username)) {
             return null;
         }
@@ -169,7 +169,7 @@ public class CompanyService {
      * @param tutor_username, Username of the tutor that wants to publish the reports.
      * @return A list with the practices updated of the company.
      */
-    public List<PracticeDTO> publishReports(List<PracticeDTO> practices, String tutor_username) {
+    public List<SimplePracticeDAO> publishReports(List<SimplePracticeDAO> practices, String tutor_username) {
         if (!tutorService.isAuthorized(tutor_username)) {
             return null;
         }

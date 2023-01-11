@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.PracticeRepository;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
@@ -85,14 +84,14 @@ public class PracticeService {
      * @param tutor_username, Username of the tutor.
      * @return A list with all the saved practices.
      */
-    public List<PracticeDTO> saveAllPractices(List<PracticeDTO> practices, String tutor_username) {
-        HashMap<Long, PracticeDTO> map = new HashMap<>();
-        for (PracticeDTO p: practices) {
+    public List<SimplePracticeDAO> saveAllPractices(List<SimplePracticeDAO> practices, String tutor_username) {
+        HashMap<Long, SimplePracticeDAO> map = new HashMap<>();
+        for (SimplePracticeDAO p: practices) {
             map.put(p.getId(), p);
         }
         List<Practice> practices_all_info = practiceRepository.findAllById(map.keySet());
         for (Practice p : practices_all_info) {
-            PracticeDTO p_dto = map.get(p.getId());
+            SimplePracticeDAO p_dto = map.get(p.getId());
             p.setMark(p_dto.getMark());
             p.setReport(p_dto.getReport());
             p.setEnd_date(Date.valueOf(LocalDate.now()));
@@ -105,8 +104,7 @@ public class PracticeService {
             return null;
         }
         List<Practice> saved_practices = practiceRepository.saveAll(practices_all_info);
-
-        return PracticeDTO.fromPractices(saved_practices);
+        return SimplePracticeDAO.fromPractices(saved_practices);
     }
 
     // ------------------- SPECIFIC OPERATIONS ------------------- //
@@ -117,8 +115,9 @@ public class PracticeService {
      * @param id, Id of the student.
      * @return A list with all the practices of the student.
      */
-    public List<Practice> getPracticeHistory(Long id) {
-        return practiceRepository.getPracticeHistory(id);
+    public List<SimplePracticeDAO> getPracticeHistory(Long id) {
+        List<Practice> practice_history = practiceRepository.getPracticeHistory(id);
+        return SimplePracticeDAO.fromPractices(practice_history);
     }
 
     /**
