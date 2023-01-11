@@ -19,7 +19,7 @@ mat-card-content{
     border-radius: 50%;
     width: 50%;
     height: 50%;
-    margin: 0 auto;   
+    margin: 0 auto;
 }
 
 .flex-container{
@@ -38,4 +38,18 @@ mat-card-content{
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     justify-content: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

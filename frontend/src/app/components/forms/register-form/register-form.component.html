@@ -66,8 +66,10 @@
                 </mat-error>
             </mat-form-field>
 
-            <!-- Hide the button after been clicked and wait for response showing a spinner -->
-            <button mat-raised-button color="primary" type="submit" [disabled]="!this.registerForm.valid">Register</button>
+            <div class="row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!this.registerForm.valid">Registrate</button>
+              <a [routerLink]="['/register']"> Volver al login</a>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>

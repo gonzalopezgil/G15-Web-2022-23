@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,10 +10,14 @@ export class ToolbarComponent {
 
   isLoggedIn: Boolean = false;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     if (sessionStorage.getItem('token')) {
       this.isLoggedIn = true;
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 

@@ -11,10 +11,15 @@
                 <mat-icon>login</mat-icon>
                 <span>Login</span>
             </button>
-            <button mat-menu-item routerLink="/register">
+            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/register">
                 <mat-icon>person_add</mat-icon>
                 <span>Register</span>
             </button>
+            <button *ngIf="isLoggedIn" mat-menu-item routerLink="/login" (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+          </button>
+
         </mat-menu>
 
         <img [matMenuTriggerFor]="menu" src="favicon.ico">
