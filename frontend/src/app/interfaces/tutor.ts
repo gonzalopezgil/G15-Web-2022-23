@@ -1,8 +1,8 @@
 export interface Tutor {
     username: string;
-    password: string;
-    email: string;
-    nif: string;
     name: string;
-    surname: string;
+    lastname: string;
+    nif: string;
+    email: string;
+    admissionDate: Date;
 }

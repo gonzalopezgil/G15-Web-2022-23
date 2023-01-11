@@ -1,5 +1,11 @@
+import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
+import { UserGuard } from './guards/user.guard';
+import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
+import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
+import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
+import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { DashboardUsersComponent } from './pages/dashboard-users/dashboard-users.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -11,21 +17,71 @@ import { PracticesOngoingComponent } from './components/users/practices-ongoing/
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
+import { TutorGuard } from './guards/tutor.guard';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
     component: HomePageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+  },
+  {
+    path: 'tutorregister',
+    component: TutorregisterPagesComponent,
+  },
+  {
+    path: 'dashboard-tutors',
+    component: DashboardTutorsComponent,
+    canActivate: [AuthGuard, TutorGuard],
+    children: [
+      {
+        path: 'welcome',
+        component: WelcomeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'registercompany',
+        component: RegistercompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'deletecompany',
+        component: DeletecompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'changetutor',
+        component: ChangetutorcompanyComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'reports',
+        component: TutorreportsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'tutordata',
+        component: TutordataComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: 'register',
@@ -34,32 +90,32 @@ const routes: Routes = [
   {
     path: 'dashboard-users',
     component: DashboardUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,UserGuard],
     children: [
       {
         path: 'welcome',
         component: WelcomeComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: 'practices',
         component: PracticesComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: 'reports',
         component: ReportsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: 'practicesongoing',
         component: PracticesOngoingComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: 'userdata',
         component: UserdataComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: '',
@@ -72,11 +128,11 @@ const routes: Routes = [
     path: 'about-us',
     component: AboutUsPageComponent,
     pathMatch: 'full'
-  }
+  }    
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

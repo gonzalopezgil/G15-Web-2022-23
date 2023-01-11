@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navigation-users.component.html',
   styleUrls: ['./navigation-users.component.scss']
 })
-export class NavigationUsersComponent {
+export class NavigationUsersComponent implements OnInit{
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

@@ -2,7 +2,10 @@
     <app-toolbar></app-toolbar>
 </div>
 
-<div class="center">
-  <app-login-form *ngIf="!this.loadingState" (loginAction)="loginUser($event)" [loginError]="loginError"></app-login-form>
-  <mat-spinner *ngIf="this.loadingState"></mat-spinner>
+<app-login-form (loginAction)="loginUser($event)">
+    
+</app-login-form>
+<div class="register">
+    <p>Quieres ofertar practicas?</p>
+    <a routerLink="/tutorregister">Registrate como tutor </a>
 </div>

@@ -21,14 +21,18 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  
+
   loginUser(value: any): void {
     let { username, password } = value;
 
     this.loadingState = true;
-
+    
     this.authService.login(username,password).subscribe(
       (response) => {
+        console.log(response);
         if(response.token){
+          sessionStorage.setItem('user-type','2');
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         }

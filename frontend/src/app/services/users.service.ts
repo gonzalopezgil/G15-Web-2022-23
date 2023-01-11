@@ -26,8 +26,14 @@ export class UsersService {
   }
 
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
+    console.log("Cambio password de user");
     console.log('oldpassword: ' + oldpassword);
     console.log('Password changed to: ' + password);
     console.log('Confirm password: ' + confirmPassword);
+  }
+
+  user_type(){
+    let user_type = sessionStorage.getItem('user-type');
+    return user_type;
   }
 }
