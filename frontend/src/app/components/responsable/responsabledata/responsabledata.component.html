@@ -1,0 +1,32 @@
+<mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Datos de tu cuenta:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <label for="username">Nombre de usuario: {{reszponsable?.username}}</label>
+        </div>
+        <div>
+            <label for="name">Nombre: {{responsable?.name}}</label>
+        </div>
+        <div>
+            <label for="lastname">Apellidos: {{responsable?.lastname}}</label>
+        </div>
+        <div>
+            <label for="dni">DNI: {{responsable?.dni}}</label>
+        </div>
+        <div>
+            <label for="mail">Correo: {{responsable?.mail}}</label>
+        </div>
+        <div>
+            <label for="f_alta">Fecha de alta: {{responsable?.f_alta}}</label>
+        </div>
+        <div>
+            <label for="f_baja">Fecha de baja: {{responsable?.f_baja}}</label>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="changePassword()">Modificar contraseña</button>
+        <button mat-raised-button [routerLink]="['/dashboard-users']">Volver</button>
+    </mat-card-actions>
+  </mat-card>

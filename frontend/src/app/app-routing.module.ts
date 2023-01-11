@@ -15,6 +15,9 @@ import { ReportsComponent } from './components/users/reports/reports.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
+import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
+import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
+import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
@@ -116,6 +119,38 @@ const routes: Routes = [
         path: 'userdata',
         component: UserdataComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  { 
+    path: 'dashboard-responsable',
+    component: DashboardResponsableComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'welcome',
+        component: WelcomeComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'usersreports',
+        component: UsersReportsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'assignpractices',
+        component: AssignPracticeComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'responsabledata',
+        component: UserdataComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '',

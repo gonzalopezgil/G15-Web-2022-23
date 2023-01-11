@@ -22,6 +22,14 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
+import { NavigationResponsableComponent } from './components/responsable/navigation-responsable/navigation-responsable.component';
+import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
+import { AssignpracticeComponent } from './components/responsable/assignpractice/assignpractice.component';
+import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
+import { DashboardresponsableComponent } from './components/responsable/dashboardresponsable/dashboardresponsable.component';
+import { DashboardResponsableComponent } from './components/responsable/dashboard-responsable/dashboard-responsable.component';
+import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
+import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
@@ -53,6 +61,14 @@ import { TutorreportsComponent } from './components/tutors/tutorreports/tutorrep
     PracticesOngoingComponent,
     UserdataComponent,
     PopUpPasswordComponent,
+    NavigationResponsableComponent,
+    ResponsabledataComponent,
+    AssignpracticeComponent,
+    UsersReportsComponent,
+    DashboardresponsableComponent,
+    DashboardResponsableComponent,
+    AssignPracticeComponent,
+    PopUpAssignPracticesComponent,
     AboutUsPageComponent,
     RegisterPageComponent,
     RegisterFormComponent,
