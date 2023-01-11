@@ -22,6 +22,11 @@ export class AuthService {
       sessionStorage.removeItem('token');
     }
 
+    getToken(): String {
+      return sessionStorage.getItem('token') || '';
+    }
+
+
     getRole(): String {
       const helper = new JwtHelperService();
       let token = sessionStorage.getItem('token');

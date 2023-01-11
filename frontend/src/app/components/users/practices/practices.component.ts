@@ -3,7 +3,8 @@ import {Component, EventEmitter, Output,OnInit, AfterViewInit, ViewChild, Change
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Practica } from 'src/app/interfaces/practica';
+import { Company } from 'src/app/interfaces/company';
+import { Offer } from 'src/app/interfaces/offer';
 import { PracticesService } from 'src/app/services/practices.service';
 import { PopUpPracticesComponent } from '../../pop-ups/pop-up-practices/pop-up-practices.component';
 
@@ -13,13 +14,13 @@ import { PopUpPracticesComponent } from '../../pop-ups/pop-up-practices/pop-up-p
   styleUrls: ['./practices.component.scss']
 })
 export class PracticesComponent implements AfterViewInit{
-  displayedColumns: string[] = [ 'Posicion','Titulo', 'Empresa', 'Plazas', 'Horario','Dias de la semana','Semanas','select'];
-  dataSource = new MatTableDataSource<Practica>();
-  selection = new SelectionModel<Practica>(true, []);
-  @Output() messageEvent = new EventEmitter<Practica[]>();
+  displayedColumns: string[] = [ 'Posicion','Titulo', 'Empresa', 'Plazas', 'Horario','Semanas','select'];
+  dataSource = new MatTableDataSource<Offer>();
+  selection = new SelectionModel<Offer>(true, []);
+  @Output() messageEvent = new EventEmitter<Offer[]>();
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);;
 
-  constructor(private dialog: MatDialog,private PracticesService: PracticesService){}
+  constructor(private dialog: MatDialog,private PracticesService: PracticesService,private practiceService: PracticesService){}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -31,7 +32,15 @@ export class PracticesComponent implements AfterViewInit{
   }
 
   ngOnInit(): void{
-    this.dataSource.data = this.PracticesService.getPractices();
+    this.PracticesService.getOffers().subscribe((data: Offer[]) => {
+      for (let i = 0; i < data.length; i++) {
+        data[i].positiontable = data[i].id;
+        this.PracticesService.getCompanyName(data[i].company_id).subscribe((company:Company) => {
+          data[i].empresa = company.name;
+        });
+      }
+      this.dataSource.data = data;
+    });
   }
 
   toggleAllRows() {
@@ -44,15 +53,15 @@ export class PracticesComponent implements AfterViewInit{
   }
 
   
-  checkboxLabel(row?: Practica): string {
+  checkboxLabel(row?: Offer): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.posicion + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.positiontable + 1}`;
   }
 
   guardar(): void {
-    let practicasSeleccionadas: Practica[] = [];
+    let practicasSeleccionadas: Offer[] = [];
        for (let item of this.selection.selected) {
          console.log(item.id);
          practicasSeleccionadas.push(item);

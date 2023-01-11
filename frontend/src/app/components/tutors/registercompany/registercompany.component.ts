@@ -1,6 +1,6 @@
-import { TutorsService } from 'src/app/services/tutors.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TutorsService } from 'src/app/services/tutors.service';
 
 @Component({
   selector: 'app-registercompany',
@@ -14,21 +14,23 @@ export class RegistercompanyComponent {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      titulo: ['', Validators.required],
-      empresa: ['', Validators.required],
-      plazas:  ['', Validators.required],
-      horario: ['', Validators.required],
-      dias: ['', Validators.required],
-      semanas: ['', Validators.required]
+      name: ['', Validators.required],
+      mail_suffix: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      postal_code: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 
-  get titulo() { return this.form.get('titulo'); }
-  get empresa() { return this.form.get('empresa'); }
-  get plazas() { return this.form.get('plazas'); }
-  get horario() { return this.form.get('horario'); }
-  get dias() { return this.form.get('dias'); }
-  get semanas() { return this.form.get('semanas'); }
+  get name() {return this.form.get('name')};
+  get mail_suffix() {return this.form.get('mail_suffix')};
+  get phone() {return this.form.get('phone')};
+  get address() {return this.form.get('address')};
+  get city() {return this.form.get('city')};
+  get postal_code() {return this.form.get('postal_code')};
+  get description() {return this.form.get('description')};
 
   clearForm() {
     this.form.reset();
@@ -36,7 +38,7 @@ export class RegistercompanyComponent {
 
   onSubmit() {
     if(this.form.valid) {
-      this.TutorsService.registerPractice(this.form);
+      this.TutorsService.registerCompany(this.form);
     }
   }
 

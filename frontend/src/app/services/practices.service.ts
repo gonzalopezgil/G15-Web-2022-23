@@ -1,21 +1,34 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Practica } from '../interfaces/practica';
-import { ELEMENT_DATA } from '../mocks/practicas.mock';
+import { Offer } from '../interfaces/offer';
+import { Observable } from 'rxjs';
+import { Company } from '../interfaces/company';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PracticesService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService: AuthService) { }
   
-    getPractices(): Practica[] {
-      let data= ELEMENT_DATA;
-      return data;
+    
+    getOffers(): Observable<Offer[]>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.get<Offer[]>("http://localhost:8080/api/practices/offers", httpOptions);
     }
 
-    getPractice(id: number): Practica {
-      let data= ELEMENT_DATA;
-      return data[id];
+    getCompanyName(id: number): Observable<Company>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.get<Company>("http://localhost:8080/api/company/"+id, httpOptions);
     }
 }
