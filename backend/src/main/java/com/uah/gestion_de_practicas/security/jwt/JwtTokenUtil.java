@@ -27,12 +27,14 @@ public class JwtTokenUtil {
     @Value("${app.jwt.authorities-key}")
     private String AUTHORITIES_KEY;
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication, Long id) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         return Jwts.builder()
+                .setId(id.toString())
                 .setSubject((userPrincipal.getUsername()))
                 .claim(AUTHORITIES_KEY, userPrincipal.getAuthorities())
+                .claim("id", id)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

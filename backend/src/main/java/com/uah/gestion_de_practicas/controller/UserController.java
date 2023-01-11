@@ -118,6 +118,14 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation("Logs in a user by its username and password")
     public ResponseEntity<JwtResponse> logInUser(@ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
+        if (authDTO.getUsername() == null || authDTO.getPassword() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        User user = userService.getUserByUsername(authDTO.getUsername());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authDTO.getUsername(),
@@ -126,7 +134,7 @@ public class UserController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtTokenUtil.generateJwtToken(authentication);
+        String jwt = jwtTokenUtil.generateJwtToken(authentication, user.getId());
 
         return ResponseEntity.ok(new JwtResponse(jwt));
     }    
