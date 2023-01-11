@@ -69,6 +69,15 @@ public class PracticeService {
         return practiceRepository.findAllPractices();
     }
 
+    /** 
+     * Saves a list of practices in the database.
+     * @param practices, List of practices to be saved.
+     * @return A list with all the saved practices.
+     */
+    public List<Practice> saveAllPractices(List<Practice> practices) {
+        return practiceRepository.saveAll(practices);
+    }
+
     /**
      * Saves a list of practices in the database.
      * Only the tutor of the company can save this information.
@@ -76,7 +85,7 @@ public class PracticeService {
      * @param tutor_username, Username of the tutor.
      * @return A list with all the saved practices.
      */
-    public List<Practice> saveAllPractices(List<PracticeDTO> practices, String tutor_username) {
+    public List<PracticeDTO> saveAllPractices(List<PracticeDTO> practices, String tutor_username) {
         HashMap<Long, PracticeDTO> map = new HashMap<>();
         for (PracticeDTO p: practices) {
             map.put(p.getId(), p);
@@ -95,8 +104,9 @@ public class PracticeService {
         if (!tutorService.isAuthorized(tutor_username, practices_ids)) {
             return null;
         }
+        List<Practice> saved_practices = practiceRepository.saveAll(practices_all_info);
 
-        return practiceRepository.saveAll(practices_all_info);
+        return PracticeDTO.fromPractices(saved_practices);
     }
 
     // ------------------- SPECIFIC OPERATIONS ------------------- //

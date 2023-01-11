@@ -160,7 +160,7 @@ public class CompanyController {
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}/practice")
     @ApiOperation("The tutor of a company publishes the reports of the students in the company")
-    public ResponseEntity<List<Practice>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<PracticeDTO> practices) {
+    public ResponseEntity<List<PracticeDTO>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<PracticeDTO> practices) {
         if (id == null || practices == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -168,7 +168,7 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Practice> updated_practices = companyService.publishReports(practices, username);
+        List<PracticeDTO> updated_practices = companyService.publishReports(practices, username);
         if (updated_practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
