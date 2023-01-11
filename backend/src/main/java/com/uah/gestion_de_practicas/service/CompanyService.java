@@ -90,7 +90,7 @@ public class CompanyService {
     /** 
      * A tutor saves a company in the database.
      * @param company, Company to be saved.
-     * @param tutor_username Username of the tutor that saves the company.
+     * @param tutor_username, Username of the tutor that saves the company.
      */
     @Transactional
     public Company saveCompanyByTutor(Company company, String tutor_username) {
@@ -109,7 +109,7 @@ public class CompanyService {
     /** 
      * Update a company by a tutor.
      * @param company, Company to be updated.
-     * @param tutor_username Username of the tutor that updates the company.
+     * @param tutor_username, Username of the tutor that updates the company.
      */
     public Company updateCompanyByTutor(Company company, String tutor_username) {
         if (!tutorService.isAuthorized(tutor_username, company.getId())) {
@@ -122,7 +122,7 @@ public class CompanyService {
     /**
      * Gets all the companies from the database with their students.
      * Only the supervisor can obtain this information.
-     * @param supervisor_username Username of the supervisor that wants to obtain the information.
+     * @param supervisor_username, Username of the supervisor that wants to obtain the information.
      * @return A list with all the companies and their students.
      */
     public List<CompanyStudentsDAO> getAllCompaniesWithStudents(String supervisor_username) {
@@ -134,20 +134,30 @@ public class CompanyService {
 
     /**
      * Gets all the students from a company.
+     * Only the tutor of the company or the supervisor can obtain this information.
      * @param id, Id of the company.
+     * @param username, Username of the user trying to obtain this information. 
      * @return A list with all the students from the company.
      */
-    public List<Student> getStudentsInCompany(Long id) {
+    public List<Student> getStudentsInCompany(Long id, String username) {
+        if (!tutorService.isAuthorized(username, id) && !supervisorService.isAuthorized(username)) {
+            return null;
+        }
         return studentService.getStudentsFromCompany(id);
     }
 
     /**
-     * Gets the history of practices of a student.
+     * Gets the history of practices of a company.
      * Those practices that have been done or are being done in the company.
+     * Only the tutor of the company or the supervisor can obtain this information.
      * @param id, Id of the company.
+     * @param username, Username of the user trying to obtain this information.
      * @return A list with the history of practices of the company.
      */
-    public List<Practice> getPracticeHistory(Long id) {
+    public List<Practice> getPracticeHistory(Long id, String username) {
+        if (!tutorService.isAuthorized(username, id) && !supervisorService.isAuthorized(username)) {
+            return null;
+        }
         return practiceService.getPracticeHistory(id);
     }
 

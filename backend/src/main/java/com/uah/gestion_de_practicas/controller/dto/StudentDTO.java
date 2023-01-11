@@ -42,6 +42,9 @@ public class StudentDTO {
     }
 
     public static List<StudentDTO> fromStudents(List<Student> students) {
+        if (students == null) {
+            return null;
+        }
         return students.stream().map(StudentDTO::fromStudent).collect(Collectors.toList());
     }
 }

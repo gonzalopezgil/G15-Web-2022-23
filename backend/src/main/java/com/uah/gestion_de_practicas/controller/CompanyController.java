@@ -65,7 +65,6 @@ public class CompanyController {
     /**
      * Endpoint to obtain the list of companies with the number of students doing their practices in each one
      * Only the supervisor can obtain this list
-     * @param supervisor, the supervisor who is requesting the list
      * @return the list of companies with their students in the body of the response
      */
     @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
@@ -128,9 +127,8 @@ public class CompanyController {
 
     /**
      * Endpoint to obtain the list of actual students in a company
-     * Only the tutor of the company can obtain this list
+     * Only the tutor of the company or the supervisor can obtain this list
      * @param id, the id of the company
-     * @param tutor, the tutor of the company
      * @return the list of students in the body of the response
      */
     @PreAuthorize("hasRole('ROLE_TUTOR')")
@@ -143,7 +141,11 @@ public class CompanyController {
         if (companyService.getCompany(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        List<StudentDTO> students = StudentDTO.fromStudents(companyService.getStudentsInCompany(id));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<StudentDTO> students = StudentDTO.fromStudents(companyService.getStudentsInCompany(id, username));
+        if (students == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(students);
     }
     
@@ -170,12 +172,11 @@ public class CompanyController {
     
     /**
      * Endpoint to obtain the history of practices of a company
-     * Only the tutor of the company can obtain this history
+     * Only the tutor of the company or the supervisor can obtain this history
      * @param id, the id of the company
-     * @param tutor, the tutor who is requesting the history
      * @return the list of practices in the body of the response
      */
-    @PreAuthorize("hasRole('ROLE_TUTOR')")
+    @PreAuthorize("hasAnyRole('ROLE_TUTOR','ROLE_SUPERVISOR')")
     @GetMapping("/{id}/practice")
     @ApiOperation("The tutor of a company gets the history of practices of the company, completed or in progress")
     public ResponseEntity<List<Practice>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
@@ -185,7 +186,11 @@ public class CompanyController {
         if (companyService.getCompany(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        List<Practice> practices = companyService.getPracticeHistory(id);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Practice> practices = companyService.getPracticeHistory(id, username);
+        if (practices == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(practices);
     }
     
