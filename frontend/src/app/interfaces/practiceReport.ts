@@ -1,9 +1,8 @@
 export interface practiceReport{
     name: string,
     lastname: string,
-    company: string,
     grade:string,
+    company: string,
     hours:string,
     mark:string,
-
 }

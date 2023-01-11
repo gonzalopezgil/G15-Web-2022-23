@@ -42,6 +42,7 @@ import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorre
 import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
+import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { TutorreportsComponent } from './components/tutors/tutorreports/tutorrep
     TutorregisterPagesComponent,
     PopUpTutorregisterComponent,
     TutordataComponent,
-    TutorreportsComponent
+    TutorreportsComponent,
+    PracticeAssignedComponent
   ],
   imports: [
     BrowserModule,

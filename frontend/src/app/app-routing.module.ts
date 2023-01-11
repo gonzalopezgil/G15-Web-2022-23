@@ -24,6 +24,7 @@ import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tut
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { TutorGuard } from './guards/tutor.guard';
+import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
 
 
 const routes: Routes = [
@@ -141,7 +142,13 @@ const routes: Routes = [
       {
         path: 'practices',
         component: PracticesReportComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'practice-assigned',
+            component: PracticeAssignedComponent
+          }
+        ]
       },
       {
         path: 'responsable-data',
