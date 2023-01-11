@@ -1,0 +1,48 @@
+version: '3.8' # Por tener docker v19.03.0 o superior
+
+services:
+    # frontend:
+    #     image: nicolaemolnar/gestion-de-practicas-front:0.1
+    #     container_name: front_gdp
+    #     restart: always
+    #     ports:
+    #         - 4201:4200
+    #     networks:
+    #         - backend
+    backend:
+        image: nicolaemolnar/gestion-de-practicas-back:1.1
+        container_name: back_gdp
+        restart: always
+        environment:
+            DB_NAME: gestion_de_practicas
+            DB_USER: admin
+            DB_PASS: 1234
+            DB_HOST: database
+            DB_PORT: 3306
+        ports:
+            - 8080:8080
+        networks:
+            - backend
+        depends_on:
+            - database
+    database:
+        image: mariadb:latest
+        container_name: mariadb_gdp
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: gestion_de_practicas
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 1234
+        volumes:
+            # - /tmp/database:/var/lib/mysql
+            - ./devops/database/create_database.sql:/docker-entrypoint-initdb.d/create_database.sql
+            - ./devops/database/load.sql:/docker-entrypoint-initdb.d/load.sql
+        ports:  
+            - 3308:3306
+        networks:
+            - backend
+
+networks:
+    backend:
+        driver: bridge
