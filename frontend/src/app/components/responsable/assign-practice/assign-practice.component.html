@@ -1,7 +1,7 @@
 <div class="header">
     <h1>Estas son las prácticas que puedes seleccionar.El orden de preferencia se establecera en función del orden de selección.</h1>
 </div>
-<table mat-table dataSource = "dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Aplicante Column -->
   <ng-container matColumnDef="Aplicante">

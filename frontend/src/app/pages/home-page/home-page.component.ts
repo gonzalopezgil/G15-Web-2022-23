@@ -12,13 +12,20 @@ export class HomePageComponent implements OnInit{
   constructor(private router: Router,private UsersService: UsersService) {};
 
   ngOnInit(): void {
-    let user_type = this.UsersService.user_type();
-    if(user_type == '1'){
-      this.router.navigate(['dashboard-users']);
-    }else if (user_type == '2'){
-      this.router.navigate(['dashboard-tutors']);
-    }
+    // let user_type = this.UsersService.user_type();
+    // if(user_type == '1'){
+    //   this.router.navigate(['dashboard-users']);
+    // }else if (user_type == '2'){
+    //   this.router.navigate(['dashboard-tutors']);
+    // }
+    // const helper = new JwtHelperService();
+    // let token = sessionStorage.getItem('token');
+    // if (token){
+    //   let decodedToken = helper.decodeToken(token);
+    //   console.log(decodedToken["CLAIM_TOKEN"])
+    // }
+
   }
-  }
+}
 
 

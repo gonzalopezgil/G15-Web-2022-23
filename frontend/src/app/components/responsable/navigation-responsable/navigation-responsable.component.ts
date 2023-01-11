@@ -20,11 +20,9 @@ export class NavigationResponsableComponent {
     ngOnInit(): void {
       this.router.navigate(['dashboard-responsable/welcome']);
     }
-  
+
     logout(): void {
       this.AuthService.logout();
       this.router.navigate(['login']);
     }
-  
-  }
 }
