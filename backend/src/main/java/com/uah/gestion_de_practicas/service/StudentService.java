@@ -98,7 +98,16 @@ public class StudentService {
         return requestService.getRequestsByStudentId(student_id);
     }
 
-    public Boolean isAvailableForPractice(Long student_id){
+    public Boolean isAvailableForPractice(Long student_id) {
         return studentRepository.hasActivePractice(student_id).isEmpty();
-    }   
+    }
+    
+    /** 
+     * Get the students of a tutor
+     * @param tutor_id Id of the tutor
+     * @return A list with all the students of the tutor
+     */
+    public List<Student> getStudentsFromTutor(Long tutor_id) {
+        return studentRepository.getStudentsFromTutor(tutor_id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.uah.gestion_de_practicas.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,9 +49,10 @@ public class UserController {
 
     /**
      * Get all the users
+     * Only the supervisor can access this endpoint
      * @return ResponseEntity<List<UserDTO>> list of all the users
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")   
     @GetMapping("")
     @ApiOperation("Get all the users")
     public ResponseEntity <List<UserDTO>> getAllUsers() {
@@ -64,12 +66,20 @@ public class UserController {
 
     /**
      * Get a user by its id
+     * Only the user itself, the tutor of the user or the supervisor can access this endpoint
      * @param id Long id of the user
      * @return ResponseEntity<UserDTO> the user
      */
     @GetMapping("/{id}")
     @ApiOperation("Get a user by its id")
-    public ResponseEntity<UserDTO> getUserById(@ApiParam ("The id of the user") @PathVariable(name = "id") Long id) {
+    public ResponseEntity<UserDTO> getUserById(@ApiParam("The id of the user") @PathVariable(name = "id") Long id) {
+
+        // Security check
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!userService.isAuthorized(username, id)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         User user = userService.getUser(id);
         if (user != null)
             return ResponseEntity.ok(new UserDTO(user));

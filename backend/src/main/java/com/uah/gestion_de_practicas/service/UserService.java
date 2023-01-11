@@ -7,11 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.model.User;
 import com.uah.gestion_de_practicas.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service class for the User class.
@@ -119,6 +121,29 @@ public class UserService implements UserDetailsService {
         } else {
             return new SimpleGrantedAuthority("NONE");
         }
+    }
+
+    /** 
+     * Checks if a user is authorized to access the information.
+     * The user itself, the tutor of the student or the supervisor are authorized.
+     * @param username Username of the real user trying to access the information.
+     * @param id Id of the user whose information is being accessed.
+     * @return True if the user is authorized, false otherwise.
+     */
+    public boolean isAuthorized(String username, Long id) {
+        User user = getUserByUsername(username);
+        if (user == null) return false;
+        if (user.getId().equals(id)) return true;
+
+        String role = getRole(user.getId()).getAuthority();
+
+        if (role.equals("ROLE_SUPERVISOR")) return true;
+        if (role.equals("ROLE_TUTOR")) {
+            List<Student> students = studentService.getStudentsFromTutor(user.getId());
+            List<Long> ids = students.stream().filter(student -> student.getId()==id).map(student -> student.getId()).collect(Collectors.toList());
+            return (ids.size() > 0);
+        }
+        return false;
     }
 
     // ------------------- OVERRIDDEN METHODS ------------------- //
