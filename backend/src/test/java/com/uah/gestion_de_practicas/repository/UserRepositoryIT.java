@@ -1,34 +1,42 @@
-// package com.uah.gestion_de_practicas.repository;
+package com.uah.gestion_de_practicas.repository;
 
-// import static org.junit.Assert.assertEquals;
-// import static org.junit.Assert.assertTrue;
-// import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-// import org.junit.Test;
-// import org.junit.runner.RunWith;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.test.context.SpringBootTest;
-// import org.springframework.test.context.junit4.SpringRunner;
-// import com.uah.gestion_de_practicas.model.User;
+import java.util.ArrayList;
+import java.util.List;
 
-// @RunWith(SpringRunner.class)
-// @SpringBootTest
-// public class UserRepositoryIT {
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.model.User;
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserRepositoryIT {
     
-//     @Autowired
-//     private UserRepository userRepository;
+    @Autowired
+    private PracticeRepository practiceRepository;
 
-//     @Test
-//     public void saveUser(){
-//         // Set up test
-//         User user = new User("Alex1","1234","Alex","Gonzalez","12345678A","alexgonzalez@gmail.com");
-//         User saved_user = userRepository.save(user);
-//         user.setId(saved_user.getId());
+    @Test
+    public void saveUser(){
+        List<Long> list = new ArrayList<Long>();
+        list.add(1L);
+        list.add(5L);
+        list.add(2L);
 
-//         // Verify that the user saved is the same as the input user
-//         assertEquals(user, saved_user);
 
-//     }
+        List<Practice> lista = practiceRepository.findAllById(list);
+
+        for (Practice practice : lista) {
+            System.out.println(practice.getId());
+        }
+
+    }
 
 //     @Test
 //     public void getUser(){
@@ -68,4 +76,4 @@
 //         // Verify that the user has been updated that the updated user is different than the originally saved
 //         assertNotEquals(user, updated_user);
 //     }
-// }
+}
