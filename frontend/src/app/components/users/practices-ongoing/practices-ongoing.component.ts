@@ -7,7 +7,7 @@ import { PracticesService } from 'src/app/services/practices.service';
   templateUrl: './practices-ongoing.component.html',
   styleUrls: ['./practices-ongoing.component.scss']
 })
-export class PracticesOngoingComponent {
+export class PracticesOngoingComponent implements OnInit {
     practice: Practica | undefined;
     constructor(private PracticeService: PracticesService) { }
   

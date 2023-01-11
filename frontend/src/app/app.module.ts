@@ -30,6 +30,20 @@ import { DashboardresponsableComponent } from './components/responsable/dashboar
 import { DashboardResponsableComponent } from './components/responsable/dashboard-responsable/dashboard-responsable.component';
 import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
 import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
+import { PasswordsMatchValidator } from './validators/passwords-match-validator/passwords-match-validator.component';
+import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
+import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
+import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
+import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
+import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
+import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
+import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
+import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +68,21 @@ import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assig
     DashboardresponsableComponent,
     DashboardResponsableComponent,
     AssignPracticeComponent,
-    PopUpAssignPracticesComponent
+    PopUpAssignPracticesComponent,
+    AboutUsPageComponent,
+    RegisterPageComponent,
+    RegisterFormComponent,
+    PasswordsMatchValidator,
+    DashboardTutorsComponent,
+    NavigationTutorsComponent,
+    RegistercompanyComponent,
+    DeletecompanyComponent,
+    ChangetutorcompanyComponent,
+    TutorregisterformComponent,
+    TutorregisterPagesComponent,
+    PopUpTutorregisterComponent,
+    TutordataComponent,
+    TutorreportsComponent
   ],
   imports: [
     BrowserModule,

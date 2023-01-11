@@ -1,0 +1,7 @@
+# Ignore all node_modules
+node_modules
+.angular
+
+# Ignore all .gitignore files
+**/.gitignore
+**/.editorconfig

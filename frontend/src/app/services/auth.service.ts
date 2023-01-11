@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-  
-    login(email: string, password: string): Observable<any> {
+
+    login(username: string, password: string): Observable<any> {
       let body = {
-        email: email,
+        username: username,
         password: password
       }
-      
-      return this.http.post('https://reqres.in/api/login', body);
+
+      return this.http.post("http://localhost:8080/api/users/login", body);
     }
     logout(): void {
       sessionStorage.removeItem('token');

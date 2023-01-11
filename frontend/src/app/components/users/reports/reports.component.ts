@@ -11,7 +11,7 @@ import { PracticesService } from 'src/app/services/practices.service';
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
-export class ReportsComponent {
+export class ReportsComponent implements OnInit {
   practice: Practica | undefined;
   user: User | undefined;
   tutor: Tutor | undefined;

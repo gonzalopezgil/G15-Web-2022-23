@@ -69,6 +69,11 @@
   </tr>
 
 </table>
+<mat-paginator [pageSize]="5" 
+                 showFirstLastButtons
+                 aria-label="Seleciona la pagina de practicas">
+  </mat-paginator>
+
 <div class="button">
   <button mat-raised-button (click)="guardar()">Guardar la seleccion de practicas</button>
   <button mat-raised-button [routerLink]="['/dashboard-users']">Volver</button>
