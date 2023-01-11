@@ -7,12 +7,12 @@
                 <mat-icon>info</mat-icon>
                 <span>About us</span>
             </button>
-            <button mat-menu-item routerLink="/login">
+            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/login">
                 <mat-icon>login</mat-icon>
                 <span>Login</span>
             </button>
         </mat-menu>
-        
+
         <img [matMenuTriggerFor]="menu" src="favicon.ico">
     </mat-toolbar>
 </p>

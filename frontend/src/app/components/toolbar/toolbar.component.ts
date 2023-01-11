@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class ToolbarComponent {
 
+  isLoggedIn: Boolean = false;
+
+  constructor() {
+    if (sessionStorage.getItem('token')) {
+      this.isLoggedIn = true;
+    }
+  }
+
+
 }

@@ -1,6 +1,5 @@
-import { Component,OnInit,Output,EventEmitter } from '@angular/core';
+import { Component,OnInit,Output,EventEmitter, Input, OnChanges } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,33 +8,31 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginFormComponent {
   loginForm: FormGroup = new FormGroup({});
+  @Input() loginError: String = "";
   @Output() loginAction: EventEmitter<{}> = new EventEmitter<{}>();
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {};
+  constructor(private fb: FormBuilder) {};
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['',Validators.compose([Validators.required, Validators.email])],
+      username: ['',Validators.required],
       password: ['',Validators.required]
     });
   }
 
-  get email() { 
-    return this.loginForm.get('email'); 
+  get username() {
+    return this.loginForm.get('username');
   }
 
-  get password() { 
-    return this.loginForm.get('password'); 
+  get password() {
+    return this.loginForm.get('password');
   }
 
   //Submit del formulario login
 
   submitLogin(){
     if (this.loginForm.valid) {
-      //console.table(this.loginForm.value);
-      //TODO: Llamar al servicio de login
       this.loginAction.emit(this.loginForm.value);
-      //this.loginForm.reset();
     }
   }
 }

@@ -1,6 +1,8 @@
 <div>
     <app-toolbar></app-toolbar>
 </div>
-<app-login-form (loginAction)="loginUser($event)">
-    
-</app-login-form>
+
+<div class="center">
+  <app-login-form *ngIf="!this.loadingState" (loginAction)="loginUser($event)" [loginError]="loginError"></app-login-form>
+  <mat-spinner *ngIf="this.loadingState"></mat-spinner>
+</div>
