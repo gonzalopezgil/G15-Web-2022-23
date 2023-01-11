@@ -1,10 +1,12 @@
 package com.uah.gestion_de_practicas.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Company;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
@@ -89,8 +91,23 @@ public class TutorService {
      */
     public boolean isAuthorized(String username, Long company_id) {
         Tutor tutor = tutorRepository.findTutorByUsername(username).orElse(null);
-        if (tutor == null || tutor.getCompany().getId() != company_id) return false;
+        if (tutor == null || tutor.getCompany().getId() != company_id)
+            return false;
         return (tutor.getRemoval_date() == null);
+    }
+    
+    /** 
+     * Checks if a tutor is authorized to modify or access the information of a list of practices.
+     * @param username, Username of the tutor.
+     * @param practices_ids, List of practices ids.
+     * @return True if the tutor is authorized, false otherwise.
+     */
+    public boolean isAuthorized(String username, List<Long> practices_ids) {
+        List<String> tutors_username = tutorRepository.getTutorOfPractices(practices_ids);
+        if (tutors_username.size() == 0 || !tutors_username.contains(username)) {
+            return false;
+        }
+        return true;
     }
 
     /** 

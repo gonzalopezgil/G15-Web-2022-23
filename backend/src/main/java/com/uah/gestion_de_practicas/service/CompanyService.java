@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
@@ -163,11 +164,16 @@ public class CompanyService {
 
     /**
      * Publishes the reports of the practices of a company.
+     * Only the tutor of the company can publish the report.
      * @param practices, List of practices to be published.
+     * @param tutor_username, Username of the tutor that wants to publish the reports.
      * @return A list with the practices updated of the company.
      */
-    public List<Practice> publishReports(List<Practice> practices) {
-        return practiceService.saveAllPractices(practices);
+    public List<Practice> publishReports(List<PracticeDTO> practices, String tutor_username) {
+        if (!tutorService.isAuthorized(tutor_username)) {
+            return null;
+        }
+        return practiceService.saveAllPractices(practices, tutor_username);
     }
 
 

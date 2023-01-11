@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.CompanyStudentsDTO;
+import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Practice;
@@ -159,14 +160,18 @@ public class CompanyController {
     @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}/practice")
     @ApiOperation("The tutor of a company publishes the reports of the students in the company")
-    public ResponseEntity<List<Practice>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices with the reports to be published") @RequestBody List<Practice> practices) {
+    public ResponseEntity<List<Practice>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices DTO with the reports to be published") @RequestBody List<PracticeDTO> practices) {
         if (id == null || practices == null) {
             return ResponseEntity.badRequest().build();
         }
         if (companyService.getCompany(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        List<Practice> updated_practices = companyService.publishReports(practices);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Practice> updated_practices = companyService.publishReports(practices, username);
+        if (updated_practices == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(updated_practices);
     }
     
