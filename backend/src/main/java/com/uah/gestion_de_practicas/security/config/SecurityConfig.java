@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] STUDENT_WHITELIST = {
         "/api/users/students/**",
         "/api/company/**",
-        "/api/practice/**",
+        "/api/practices/**",
+        "/api/practices/offers/**",
         "/api/users/**"
     };
 
@@ -56,8 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] ADMIN_WHITELIST = {
-        "/api/**",
-        "/api/**/**",
+        "/api/users/supervisors/**",
     };
 
     @Autowired
@@ -98,9 +98,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() // Exception Handler
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // Not creating sessions, only using tokens
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll() // Allow access to swagger and login endpoints
-                .antMatchers(STUDENT_WHITELIST).access("hasAnyRole('ROLE_STUDENT','ROLE_TUTOR','ROLE_SUPERVISOR')") // Restrict the access to the student endpoints
-                .antMatchers(TUTOR_WHITELIST).access("hasAnyRole('ROLE_TUTOR','ROLE_SUPERVISOR')") // Restrict the access to the tutor endpoints
-                .antMatchers(ADMIN_WHITELIST).access("hasRole('ROLE_SUPERVISOR')") // Restrict the access to the admin endpoints
+                .antMatchers(STUDENT_WHITELIST).access("hasAnyRole('STUDENT','TUTOR','SUPERVISOR')") // Restrict the access to the student endpoints
+                .antMatchers(TUTOR_WHITELIST).access("hasAnyRole('TUTOR','SUPERVISOR')") // Restrict the access to the tutor endpoints
+                .antMatchers(ADMIN_WHITELIST).access("hasRole('SUPERVISOR')") // Restrict the access to the admin endpoints
                 .anyRequest().authenticated(); // Restrict the access to any other request
         
 

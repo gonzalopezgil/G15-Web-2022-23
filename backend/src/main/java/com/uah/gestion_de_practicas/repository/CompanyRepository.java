@@ -15,4 +15,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("SELECT new com.uah.gestion_de_practicas.repository.dao.CompanyStudentsDAO(c.id, c.name, c.description, COUNT(c)) FROM Company c INNER JOIN Offer o ON c.id = o.company INNER JOIN Practice p ON o.id = p.offer WHERE p.end_date IS NULL GROUP BY c.id, c.name, c.description")
     public List<CompanyStudentsDAO> getAllCompaniesWithStudents();
     
+    @Query("SELECT new com.uah.gestion_de_practicas.model.Company(c.id, c.name, c.description, c.mail_suffix, c.phone, c.address, c.city, c.postal_code) FROM Company c WHERE c.name = ?1")
+    public Company getCompanyByName(String name);
+
 }

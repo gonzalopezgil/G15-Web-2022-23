@@ -42,6 +42,22 @@ public class Company {
         this.postal_code = postal_code;
     }
 
+    /**
+     * Constructor for the Company class.
+     * @param name, the name of the company.
+     * @param description, the description of the company.
+     */
+    public Company(Long id, String name, String description, String mail_suffix, String phone, String address, String city, int postal_code) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.mail_suffix = mail_suffix;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.postal_code = postal_code;
+    }
+
     // ------------------- GETTERS -------------------
     /**
      * Get the id of the company, this is the primary key of the company.

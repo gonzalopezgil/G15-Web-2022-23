@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiParam;
  * Rest Controller for the Practice endpoint
  */
 @RestController
-@RequestMapping("/api/practice")
+@RequestMapping("/api/practices")
 public class PracticeController {
     private final PracticeService practiceService;
     private final RequestService requestService;

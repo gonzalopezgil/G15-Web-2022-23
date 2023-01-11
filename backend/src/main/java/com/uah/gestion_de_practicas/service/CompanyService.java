@@ -176,6 +176,7 @@ public class CompanyService {
         return practiceService.saveAllPractices(practices, tutor_username);
     }
 
-
-    
+    public Company getCompanyByName(String name) {
+        return companyRepository.getCompanyByName(name);
+    }
 }
