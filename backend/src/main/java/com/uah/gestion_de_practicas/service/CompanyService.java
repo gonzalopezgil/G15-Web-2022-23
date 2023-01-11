@@ -100,6 +100,19 @@ public class CompanyService {
         return saved_company;
     }
 
+    /** 
+     * Update a company by a tutor.
+     * @param company, Company to be updated.
+     * @param tutor_username Username of the tutor that updates the company.
+     */
+    public Company updateCompanyByTutor(Company company, String tutor_username) {
+        if (!tutorService.isAuthorized(tutor_username, company.getId())) {
+            return null;
+        }
+
+        return companyRepository.save(company);
+    }
+
     /**
      * Gets all the companies from the database with their students.
      * @return A list with all the companies and their students.

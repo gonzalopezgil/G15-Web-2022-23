@@ -96,22 +96,27 @@ public class CompanyController {
 
     /**
      * Endpoint to modify the information of a company
+     * Only the tutor of the company or the supervisor can modify the information of a company
      * @param id, the id of the company
      * @param company, the company object with the new information
      * @return the modified company in the body of the response
      */
+    @PreAuthorize("hasAnyRole('ROLE_TUTOR','ROLE_SUPERVISOR')")
     @PostMapping("/{id}")
     @ApiOperation("Modifying the information of a company")
     public ResponseEntity<Company> modifyCompany(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The company object with the new information") @RequestBody Company company) {
-        if (id == null || company == null) {
+        if (id == null || company == null || !id.equals(company.getId())) {
             return ResponseEntity.badRequest().build();
         }
         if (companyService.getCompany(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        Company modified_company = companyService.saveCompany(company);
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Company modified_company = companyService.updateCompanyByTutor(company, username);
         if (modified_company == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         return ResponseEntity.ok(modified_company);
     }

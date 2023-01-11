@@ -76,7 +76,20 @@ public class TutorService {
      */
     public boolean isAuthorized(String username) {
         Tutor tutor = tutorRepository.findTutorByUsername(username).orElse(null);
-        if (tutor == null) return false;
+        if (tutor == null)
+            return false;
+        return (tutor.getRemoval_date() == null);
+    }
+    
+    /** 
+     * Checks if a tutor is authorized to modify the information of a company.
+     * @param username Username of the tutor.
+     * @param company_id Id of the company.
+     * @return True if the tutor is authorized, false otherwise.
+     */
+    public boolean isAuthorized(String username, Long company_id) {
+        Tutor tutor = tutorRepository.findTutorByUsername(username).orElse(null);
+        if (tutor == null || tutor.getCompany().getId() != company_id) return false;
         return (tutor.getRemoval_date() == null);
     }
 
