@@ -84,7 +84,7 @@ public class PracticeService {
      * @param tutor_username, Username of the tutor.
      * @return A list with all the saved practices.
      */
-    public List<SimplePracticeDAO> saveAllPractices(List<SimplePracticeDAO> practices, String tutor_username) {
+    public List<Practice> saveAllPractices(List<SimplePracticeDAO> practices, String tutor_username) {
         HashMap<Long, SimplePracticeDAO> map = new HashMap<>();
         for (SimplePracticeDAO p: practices) {
             map.put(p.getId(), p);
@@ -103,8 +103,7 @@ public class PracticeService {
         if (!tutorService.isAuthorized(tutor_username, practices_ids)) {
             return null;
         }
-        List<Practice> saved_practices = practiceRepository.saveAll(practices_all_info);
-        return SimplePracticeDAO.fromPractices(saved_practices);
+        return practiceRepository.saveAll(practices_all_info);
     }
 
     // ------------------- SPECIFIC OPERATIONS ------------------- //

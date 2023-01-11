@@ -169,7 +169,7 @@ public class CompanyService {
      * @param tutor_username, Username of the tutor that wants to publish the reports.
      * @return A list with the practices updated of the company.
      */
-    public List<SimplePracticeDAO> publishReports(List<SimplePracticeDAO> practices, String tutor_username) {
+    public List<Practice> publishReports(List<SimplePracticeDAO> practices, String tutor_username) {
         if (!tutorService.isAuthorized(tutor_username)) {
             return null;
         }

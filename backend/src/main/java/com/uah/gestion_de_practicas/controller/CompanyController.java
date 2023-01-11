@@ -167,11 +167,11 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<SimplePracticeDAO> updated_practices = companyService.publishReports(practices, username);
+        List<Practice> updated_practices = companyService.publishReports(practices, username);
         if (updated_practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        return ResponseEntity.ok(updated_practices);
+        return ResponseEntity.ok(SimplePracticeDAO.fromPractices(updated_practices));
     }
     
     /**
