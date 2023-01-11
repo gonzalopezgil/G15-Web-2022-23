@@ -92,6 +92,25 @@ public class UserController {
     }
 
     /**
+     * Get a user by its name
+     * Only the user itself, the tutor of the user or the supervisor can access this endpoint
+     * @return ResponseEntity<UserDTO> the user
+     */
+    @GetMapping("/profile")
+    @ApiOperation("Get a user by its username")
+    public ResponseEntity<UserDTO> getUserByUsername() {
+
+        // Security check
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User user = userService.getUserByUsername(username);
+        if (user != null)
+            return ResponseEntity.ok(new UserDTO(user));
+        else
+            return ResponseEntity.notFound().build();
+    }
+
+    /**
      * Logs in a user by its username and password
      * @param authDTO AuthDTO containing the username and password of the user
      * @return ResponseEntity<JwtResponse> the JWT token if the user was logged in, Unauthorized otherwise
