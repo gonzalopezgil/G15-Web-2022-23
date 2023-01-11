@@ -32,7 +32,6 @@ export class LoginPageComponent implements OnInit {
       (response) => {
         console.log(response);
         if(response.token){
-          sessionStorage.setItem('user-type','2');
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         }

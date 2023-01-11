@@ -3,22 +3,17 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
       <mat-toolbar class="header">Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['/dashboard-responsable/practices']" >
+        <a mat-list-item [routerLink]="['/dashboard-responsable/users-reports']">
           <h3 style="color:rgb(255, 255, 255)">
-            Seleccion de practicas
-          </h3>
-        </a>
-        <a mat-list-item [routerLink]="['/dashboard-responsable/usersReports']">
-          <h3 style="color:rgb(255, 255, 255)">
-            Informe de practicas
+            Informe de alumnos del sistema
           </h3>
         </a>
         <a mat-list-item [routerLink]="['/dashboard-responsable/assign-practices']">
           <h3 style="color:rgb(255, 255, 255)">
-            Practicas asignadas sin terminar
+            Asignar practicas a alumnos
           </h3>
         </a>
-        <a mat-list-item [routerLink]="['/dashboard-users/responsabledata']">
+        <a mat-list-item [routerLink]="['/dashboard-responsable/responsable-data']">
           <h3 style="color:rgb(255, 255, 255)">
             Ver datos de la cuenta
           </h3>

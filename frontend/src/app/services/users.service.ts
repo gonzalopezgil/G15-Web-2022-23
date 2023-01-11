@@ -31,9 +31,4 @@ export class UsersService {
     console.log('Password changed to: ' + password);
     console.log('Confirm password: ' + confirmPassword);
   }
-
-  user_type(){
-    let user_type = sessionStorage.getItem('user-type');
-    return user_type;
-  }
 }

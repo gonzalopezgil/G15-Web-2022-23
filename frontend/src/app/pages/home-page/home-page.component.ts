@@ -1,6 +1,7 @@
 import { UsersService } from 'src/app/services/users.service';
 import { Component,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit{
 
-  constructor(private router: Router,private UsersService: UsersService) {};
+  constructor(private router: Router,private authService: AuthService) {};
 
   ngOnInit(): void {
     // let user_type = this.UsersService.user_type();
@@ -18,12 +19,21 @@ export class HomePageComponent implements OnInit{
     // }else if (user_type == '2'){
     //   this.router.navigate(['dashboard-tutors']);
     // }
-    // const helper = new JwtHelperService();
-    // let token = sessionStorage.getItem('token');
-    // if (token){
-    //   let decodedToken = helper.decodeToken(token);
-    //   console.log(decodedToken["CLAIM_TOKEN"])
-    // }
+
+    let role = this.authService.getRole();
+    switch(role){
+      case 'ROLE_STUDENT':
+        this.router.navigate(['dashboard-users']);
+        break;
+      case 'ROLE_TUTOR':
+        this.router.navigate(['dashboard-tutors']);
+        break;
+      case 'ROLE_SUPERVISOR':
+        this.router.navigate(['dashboard-responsable']);
+        break;
+      default:
+        this.router.navigate(['login']);
+    }
 
   }
 }

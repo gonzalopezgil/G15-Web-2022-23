@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { LayoutModule } from '@angular/cdk/layout';
 import { NavigationResponsableComponent } from './navigation-responsable.component';
 
 describe('NavigationResponsableComponent', () => {
@@ -13,7 +14,7 @@ describe('NavigationResponsableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationResponsableComponent ]
+      declarations: [ NavigationResponsableComponent ],
       imports: [
         NoopAnimationsModule,
         LayoutModule,

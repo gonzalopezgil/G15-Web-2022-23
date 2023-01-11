@@ -1,5 +1,6 @@
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
 import { UserGuard } from './guards/user.guard';
+import { ResponsableGuard } from './guards/responsable.guard';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
 import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
@@ -20,10 +21,12 @@ import { UsersReportsComponent } from './components/responsable/users-reports/us
 import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { TutorGuard } from './guards/tutor.guard';
+
 
 const routes: Routes = [
   {
@@ -127,10 +130,10 @@ const routes: Routes = [
       }
     ]
   },
-  { 
+  {
     path: 'dashboard-responsable',
     component: DashboardResponsableComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,ResponsableGuard],
     children: [
       {
         path: 'welcome',
@@ -138,18 +141,18 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'usersreports',
+        path: 'users-reports',
         component: UsersReportsComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'assignpractices',
+        path: 'assign-practices',
         component: AssignPracticeComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'responsabledata',
-        component: UserdataComponent,
+        path: 'responsable-data',
+        component: ResponsabledataComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -163,7 +166,7 @@ const routes: Routes = [
     path: 'about-us',
     component: AboutUsPageComponent,
     pathMatch: 'full'
-  }    
+  }
 ];
 
 @NgModule({
