@@ -55,8 +55,12 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_SUPERVISOR')")   
     @GetMapping("")
     @ApiOperation("Get all the users")
-    public ResponseEntity <List<UserDTO>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<User> users = userService.getAllUsers(username);
+        if (users == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         // Convert the list of users to a list of UserDTOs
         List<UserDTO> userDTOs = users.stream().map(UserDTO::new).collect(Collectors.toList());

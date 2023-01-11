@@ -72,7 +72,12 @@ public class CompanyController {
     @GetMapping("")
     @ApiOperation("The supervisor gets an overview of the companies with the number of students doing their practices in each one")
     public ResponseEntity<List<CompanyStudentsDTO>> getAllCompaniesWithStudents() {
-        List<CompanyStudentsDTO> companies_with_students = CompanyStudentsDTO.fromDAO(companyService.getAllCompaniesWithStudents());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<CompanyStudentsDTO> companies_with_students = CompanyStudentsDTO
+                .fromDAO(companyService.getAllCompaniesWithStudents(username));
+        if (companies_with_students == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         return ResponseEntity.ok(companies_with_students);
     }
     

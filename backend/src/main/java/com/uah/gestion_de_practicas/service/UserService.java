@@ -77,9 +77,14 @@ public class UserService implements UserDetailsService {
 
     /**
      * Gets all the users from the database.
+     * Only the supervisor can obtain this information.
+     * @param supervisor_username Username of the supervisor that wants to obtain the information.
      * @return A list with all the users.
      */
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return userRepository.findAll();
     }
 

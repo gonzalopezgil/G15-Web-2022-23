@@ -38,11 +38,17 @@ public class CompanyService {
      */
     private final TutorService tutorService;
 
-    public CompanyService(CompanyRepository companyRepository, StudentService studentService, PracticeService practiceService, TutorService tutorService) {
+    /**
+     * Service class for the Supervisor class
+     */
+    private final SupervisorService supervisorService;
+
+    public CompanyService(CompanyRepository companyRepository, StudentService studentService, PracticeService practiceService, TutorService tutorService, SupervisorService supervisorService) {
         this.companyRepository = companyRepository;
         this.studentService = studentService;
         this.practiceService = practiceService;
         this.tutorService = tutorService;
+        this.supervisorService = supervisorService;
     }
 
     // ------------------- CRUD OPERATIONS ------------------- //
@@ -115,9 +121,14 @@ public class CompanyService {
 
     /**
      * Gets all the companies from the database with their students.
+     * Only the supervisor can obtain this information.
+     * @param supervisor_username Username of the supervisor that wants to obtain the information.
      * @return A list with all the companies and their students.
      */
-    public List<CompanyStudentsDAO> getAllCompaniesWithStudents() {
+    public List<CompanyStudentsDAO> getAllCompaniesWithStudents(String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return companyRepository.getAllCompaniesWithStudents();
     }
 
