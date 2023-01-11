@@ -60,7 +60,7 @@ export class TutorsService {
     console.log(form.value);
     return true;
   }
-  
+
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de tutor");
     console.log('oldpassword: ' + oldpassword);
@@ -75,6 +75,10 @@ export class TutorsService {
   saveReports(reports: Report[]) {
     console.log(reports);
   }
-    
+
+  registerTutor(tutor: Tutor): Observable<any> {
+    return this.http.post('http://localhost:3000/api/tutors', tutor);
+  }
+
 }
 

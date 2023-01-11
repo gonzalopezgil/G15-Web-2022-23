@@ -56,7 +56,7 @@ import { TutorreportsComponent } from './components/tutors/tutorreports/tutorrep
     AboutUsPageComponent,
     RegisterPageComponent,
     RegisterFormComponent,
-    PasswordsMatchValidator
+    PasswordsMatchValidator,
     DashboardTutorsComponent,
     NavigationTutorsComponent,
     RegistercompanyComponent,

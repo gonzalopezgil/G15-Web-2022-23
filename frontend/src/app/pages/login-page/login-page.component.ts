@@ -21,13 +21,13 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  
+
 
   loginUser(value: any): void {
     let { username, password } = value;
 
     this.loadingState = true;
-    
+
     this.authService.login(username,password).subscribe(
       (response) => {
         console.log(response);
@@ -40,7 +40,7 @@ export class LoginPageComponent implements OnInit {
       (error) => {
         if (error.status === 401)
           this.loginError = "Las credenciales no son validas"
-        this.loadingState = false;
+          this.loadingState = false;
       },
       () => {
         this.loginError = "";
