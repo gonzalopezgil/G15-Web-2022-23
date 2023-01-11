@@ -3,7 +3,6 @@ import { UserGuard } from './guards/user.guard';
 import { ResponsableGuard } from './guards/responsable.guard';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
-import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
 import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
@@ -12,12 +11,11 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { PracticesComponent } from './components/users/practices/practices.component';
+import { PracticesReportComponent } from './components/responsable/practices/practices.component';
 import { ReportsComponent } from './components/users/reports/reports.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
-import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
-import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
 import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -133,7 +131,7 @@ const routes: Routes = [
   {
     path: 'dashboard-responsable',
     component: DashboardResponsableComponent,
-    canActivate: [AuthGuard,ResponsableGuard],
+    canActivate: [AuthGuard, ResponsableGuard],
     children: [
       {
         path: 'welcome',
@@ -141,13 +139,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'users-reports',
-        component: UsersReportsComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'assign-practices',
-        component: AssignPracticeComponent,
+        path: 'practices',
+        component: PracticesReportComponent,
         canActivate: [AuthGuard]
       },
       {
