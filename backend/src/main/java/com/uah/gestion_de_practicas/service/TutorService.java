@@ -82,7 +82,7 @@ public class TutorService {
     }
     
     /** 
-     * Checks if a tutor is authorized to modify the information of a company.
+     * Checks if a tutor is authorized to modify or access the information of a company.
      * @param username Username of the tutor.
      * @param company_id Id of the company.
      * @return True if the tutor is authorized, false otherwise.

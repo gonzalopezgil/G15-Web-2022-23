@@ -96,12 +96,12 @@ public class CompanyController {
 
     /**
      * Endpoint to modify the information of a company
-     * Only the tutor of the company or the supervisor can modify the information of a company
+     * Only the tutor of the company can modify the information of a company
      * @param id, the id of the company
      * @param company, the company object with the new information
      * @return the modified company in the body of the response
      */
-    @PreAuthorize("hasAnyRole('ROLE_TUTOR','ROLE_SUPERVISOR')")
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}")
     @ApiOperation("Modifying the information of a company")
     public ResponseEntity<Company> modifyCompany(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The company object with the new information") @RequestBody Company company) {
