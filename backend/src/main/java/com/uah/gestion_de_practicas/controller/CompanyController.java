@@ -3,6 +3,7 @@ package com.uah.gestion_de_practicas.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,7 @@ public class CompanyController {
      * @param tutor, the tutor who is registering the company
      * @return the registered company in the body of the response
      */
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("")
     @ApiOperation("Registration of a new company by a tutor")
     public ResponseEntity<Company> registerCompany(@ApiParam("The company to be registered") @RequestBody Company company) {
@@ -57,6 +59,7 @@ public class CompanyController {
      * @param supervisor, the supervisor who is requesting the list
      * @return the list of companies with their students in the body of the response
      */
+    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @GetMapping("")
     @ApiOperation("The supervisor gets an overview of the companies with the number of students doing their practices in each one")
     public ResponseEntity<List<CompanyStudentsDTO>> getAllCompaniesWithStudents() {
@@ -111,6 +114,7 @@ public class CompanyController {
      * @param tutor, the tutor of the company
      * @return the list of students in the body of the response
      */
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping("/{id}/students")
     @ApiOperation("The tutor of a company gets the list of actual students in the company")
     public ResponseEntity<List<StudentDTO>> getStudentsInCompany(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {
@@ -131,6 +135,7 @@ public class CompanyController {
      * @param practices, the list of practices with the reports to be published
      * @return the list of reports of the students in the body of the response
      */
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @PostMapping("/{id}/practice")
     @ApiOperation("The tutor of a company publishes the reports of the students in the company")
     public ResponseEntity<List<Practice>> publishReports(@ApiParam("The id of the company") @PathVariable(name = "id") Long id, @ApiParam("The list of practices with the reports to be published") @RequestBody List<Practice> practices) {
@@ -151,6 +156,7 @@ public class CompanyController {
      * @param tutor, the tutor who is requesting the history
      * @return the list of practices in the body of the response
      */
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping("/{id}/practice")
     @ApiOperation("The tutor of a company gets the history of practices of the company, completed or in progress")
     public ResponseEntity<List<Practice>> getPracticeHistory(@ApiParam("The id of the company") @PathVariable(name = "id") Long id) {

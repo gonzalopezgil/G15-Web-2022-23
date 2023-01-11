@@ -3,6 +3,7 @@ package com.uah.gestion_de_practicas.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -88,6 +89,7 @@ public class PracticeController {
      * greater exp_grades.
      * @return a list of practices with the assigned offers
      */
+    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @PostMapping("/assignation")
     @ApiOperation("Assign available offers to students with greater exp_grades")
     public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices(){
@@ -106,6 +108,7 @@ public class PracticeController {
      * Endpoint to obtain a report of all the practices completed and their evaluation
      * @return a list of practices with the assigned offers
      */
+    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @GetMapping("/report")
     @ApiOperation("Obtain a report of all the practices completed and their evaluation")
     public ResponseEntity<List<SimplePracticeDAO>> getPracticesReport(){
