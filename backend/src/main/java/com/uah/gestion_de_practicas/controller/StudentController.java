@@ -118,8 +118,12 @@ public class StudentController {
         List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
         HashMap<Long, String> tutors = tutorService.getTutorByPractice(completedPractices);
 
-        PDFHandler pdfHandler = new UserReportHandler(student, completedPractices, tutors);
-        pdfHandler.generatePDF(response);
+        try{
+            PDFHandler pdfHandler = new UserReportHandler(student, completedPractices, tutors);
+            pdfHandler.generatePDF(response.getOutputStream());
+        }catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
 
         return ResponseEntity.ok().build();
     }

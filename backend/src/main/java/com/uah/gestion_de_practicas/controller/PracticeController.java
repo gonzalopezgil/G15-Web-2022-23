@@ -1,6 +1,7 @@
 package com.uah.gestion_de_practicas.controller;
 
 import java.util.Date;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
 import com.uah.gestion_de_practicas.handlers.PDFHandler;
 import com.uah.gestion_de_practicas.handlers.PracticeAssignmentHandler;
 import com.uah.gestion_de_practicas.model.Practice;
@@ -117,9 +119,9 @@ public class PracticeController {
      * @return a list of practices with the assigned offers
      */
     @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
-    @PostMapping("/assignation")
+    @PostMapping("/assign-practices")
     @ApiOperation("Assign available offers to students with greater exp_grades")
-    public ResponseEntity assignPractices(HttpServletResponse response){
+    public ResponseEntity<List<PracticeAssignmentDTO>> assignPractices(){
         List<Practice> practices = requestService.getPracticeAssignments();
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         practices = practiceService.saveAllPractices(practices, username);
@@ -131,20 +133,38 @@ public class PracticeController {
             offerService.saveOffer(practice.getOffer());
         }
 
-        // List<PracticeAssignmentDTO> assignmentDTO = PracticeAssignmentDTO.fromPractices(practices);
+        List<PracticeAssignmentDTO> assignmentDTO = PracticeAssignmentDTO.fromPractices(practices);
 
+        PracticeAssignmentHandler handler = new PracticeAssignmentHandler(practices);
+        handler.generatePDF();
+
+        return ResponseEntity.ok(assignmentDTO);
+    }
+
+    /**
+     * Endpoint to download the latest practice assignation of students
+     * Only the supervisor can access this endpoint
+     * @return a pdf file with the latest assignation
+     */
+    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
+    @GetMapping("/assignation")
+    @ApiOperation("Download the latest assignation of practices")
+    public ResponseEntity downloadAssignation(HttpServletResponse response){
         response.setContentType("application/pdf");
         Date now = new Date();
         String currentDateTime = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(now);
-        String headerValue = String.format("attachment; filename=\"%s\"", "assignation_" + currentDateTime + ".pdf");
-
+        String headerValue = String.format("attachment; filename=\"%s\"", "asignacion_" + currentDateTime + ".pdf");
         response.setHeader("Content-Disposition", headerValue);
-        PDFHandler handler = new PracticeAssignmentHandler("Asignacion de practicas", practices);
-        handler.generatePDF(response);
+
+        try {
+            PracticeAssignmentHandler handler = new PracticeAssignmentHandler();
+            handler.downloadPdf(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
 
         return ResponseEntity.ok().build();
     }
-
    
     
     /**

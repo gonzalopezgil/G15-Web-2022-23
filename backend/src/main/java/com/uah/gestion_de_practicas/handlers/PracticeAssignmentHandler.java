@@ -1,22 +1,36 @@
 package com.uah.gestion_de_practicas.handlers;
 
-import java.text.SimpleDateFormat;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.uah.gestion_de_practicas.model.Practice;
 
 public class PracticeAssignmentHandler extends PDFHandler {
 
     private final List<Practice> assignment;
+    private final String assignationPath = "/tmp/assignation.pdf";
 
-    public PracticeAssignmentHandler(String title, List<Practice> assignment) {
-        super(title);
+    public PracticeAssignmentHandler(List<Practice> assignment) {
+        super("Asignacion de practicas");
         this.assignment = assignment;
+    }
+
+    public PracticeAssignmentHandler(){
+        super("Asignacion de practicas");
+        this.assignment = null;
     }
 
     @Override
@@ -56,6 +70,32 @@ public class PracticeAssignmentHandler extends PDFHandler {
         }
 
         return assignment;
+    }
+
+    private void copy(InputStream is, OutputStream os) throws IOException
+    {
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+
+        while ((bytesRead = is.read(buffer)) != -1) {
+            os.write(buffer, 0, bytesRead);
+        }
+    }
+
+    public void downloadPdf(HttpServletResponse response) {
+        try(FileInputStream input_stream = new FileInputStream(this.assignationPath)){
+            this.copy(input_stream, response.getOutputStream());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generatePDF() {
+        try(FileOutputStream output_stream = new FileOutputStream(this.assignationPath)){ 
+            super.generatePDF(output_stream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

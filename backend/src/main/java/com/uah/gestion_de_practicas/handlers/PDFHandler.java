@@ -1,5 +1,6 @@
 package com.uah.gestion_de_practicas.handlers;
 
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,10 +37,10 @@ public class PDFHandler extends PdfPageEventHelper {
         this.creationDate = this.dateFormatter.format(new Date());
     }
 
-    public void generatePDF(HttpServletResponse response) {
+    public void generatePDF(OutputStream output_stream) {
         try {
             Document document = new Document(PageSize.A4, 34, 20, 100, 50);
-            PdfWriter.getInstance(document, response.getOutputStream()).setPageEvent(this);
+            PdfWriter.getInstance(document, output_stream).setPageEvent(this);
 
             document.open();
 
