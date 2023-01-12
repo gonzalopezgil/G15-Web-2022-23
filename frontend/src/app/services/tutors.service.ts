@@ -24,8 +24,7 @@ export class TutorsService {
       }
     };
 
-    return this.http.get<Tutor>('http://localhost:8080/api/tutor/'+id, httpOptions);
-
+    return this.http.get<Tutor>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
   }
 
   getStubbyTutor(): Tutor {
