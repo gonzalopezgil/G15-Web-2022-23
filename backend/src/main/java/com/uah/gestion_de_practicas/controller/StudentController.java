@@ -1,6 +1,5 @@
 package com.uah.gestion_de_practicas.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -61,7 +60,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     @ApiOperation("Delete a student by its id.")
-    public ResponseEntity deleteStudent(@ApiParam("Identifier of the student") @PathVariable Long id) {
+    public ResponseEntity<Void> deleteStudent(@ApiParam("Identifier of the student") @PathVariable Long id) {
         if (studentService.getStudent(id) == null) {
             return ResponseEntity.notFound().build();
         }

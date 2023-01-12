@@ -42,7 +42,7 @@ public class SupervisorController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Update a supervisor by id")
-    public ResponseEntity updateSupervisor(@ApiParam("Identifier of the supervisor") @PathVariable Long id, @ApiParam("New object for the supervisor") @RequestBody Supervisor supervisor) {
+    public ResponseEntity<Void> updateSupervisor(@ApiParam("Identifier of the supervisor") @PathVariable Long id, @ApiParam("New object for the supervisor") @RequestBody Supervisor supervisor) {
         if (supervisor.getId() != id) {
             return ResponseEntity.badRequest().build();
         }
@@ -53,7 +53,7 @@ public class SupervisorController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete a supervisor by id")
-    public ResponseEntity deleteSupervisor(@ApiParam("Identifier of the supervisor") @PathVariable Long id) {
+    public ResponseEntity<Void> deleteSupervisor(@ApiParam("Identifier of the supervisor") @PathVariable Long id) {
         if (supervisorService.getSupervisor(id) == null) {
             return ResponseEntity.notFound().build();
         }

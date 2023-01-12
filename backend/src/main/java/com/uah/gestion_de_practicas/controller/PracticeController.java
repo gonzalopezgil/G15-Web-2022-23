@@ -1,10 +1,7 @@
 package com.uah.gestion_de_practicas.controller;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
-import com.uah.gestion_de_practicas.handlers.PDFHandler;
-import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 import com.uah.gestion_de_practicas.model.Practice;
-import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
@@ -48,15 +42,12 @@ public class PracticeController {
 
     /**
      * Endpoint to obtain a list of all the practices
-     * Only the supervisor can access this information
      * @return a list of all the practices
      */
-    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @GetMapping("")
     @ApiOperation("Get all the practices")
     public ResponseEntity<List<SimplePracticeDAO>> getPractices() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<SimplePracticeDAO> practices = practiceService.getAllPractices(username);
+        List<SimplePracticeDAO> practices = practiceService.getAllPractices();
         if (practices == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

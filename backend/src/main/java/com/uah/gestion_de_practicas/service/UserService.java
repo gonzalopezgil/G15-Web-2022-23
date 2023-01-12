@@ -142,8 +142,8 @@ public class UserService implements UserDetailsService {
 
         String role = getRole(user.getId()).getAuthority();
 
-        if (role.equals("ROLE_SUPERVISOR")) return true;
-        if (role.equals("ROLE_TUTOR")) {
+        if (role.equals("ROLE_SUPERVISOR") && supervisorService.isAuthorized(username)) return true;
+        if (role.equals("ROLE_TUTOR") && tutorService.isAuthorized(username)) {
             List<Student> students = studentService.getStudentsFromTutor(user.getId());
             List<Long> ids = students.stream().filter(student -> student.getId()==id).map(student -> student.getId()).collect(Collectors.toList());
             return (ids.size() > 0);

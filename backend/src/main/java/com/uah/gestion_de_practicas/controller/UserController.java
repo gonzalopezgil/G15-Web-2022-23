@@ -123,7 +123,7 @@ public class UserController {
         }
         User user = userService.getUserByUsername(authDTO.getUsername());
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         Authentication authentication = authManager.authenticate(
