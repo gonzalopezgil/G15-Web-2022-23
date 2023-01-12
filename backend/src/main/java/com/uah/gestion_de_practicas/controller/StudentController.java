@@ -29,7 +29,6 @@ import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.models.Response;
 
 @RestController
 @RequestMapping("/api/users/students")
@@ -101,7 +100,7 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     @GetMapping("/{id}/report")
     @ApiOperation("Obtain a report document of a student's practices")
-    public ResponseEntity generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity<Void> generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
         
         response.setContentType("application/pdf");
         Date now = new Date();

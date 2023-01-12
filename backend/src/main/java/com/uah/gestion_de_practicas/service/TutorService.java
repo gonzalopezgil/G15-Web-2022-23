@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Company;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
-import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
 
 /**
  * Service class for the Tutor class.
