@@ -1,5 +1,6 @@
 package com.uah.gestion_de_practicas.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
+import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
 
 /**
  * Service class for the Tutor class.
@@ -122,5 +124,13 @@ public class TutorService {
         tutor.setCompany(company);
         return tutorRepository.save(tutor);
     }
-    
+
+    public HashMap<Long, String> getTutorByPractice(List<Practice> practices) {
+        HashMap<Long, String> tutors = new HashMap<>();
+        for (Practice practice : practices) {
+            tutors.put(practice.getId(), tutorRepository.getTutorByCompany(practice.getOffer().getCompany().getId()).getCompleteName());
+        }
+
+        return tutors;
+    }
 }

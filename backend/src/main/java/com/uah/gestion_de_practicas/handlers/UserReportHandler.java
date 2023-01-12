@@ -1,6 +1,7 @@
 package com.uah.gestion_de_practicas.handlers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.itextpdf.text.Element;
@@ -15,11 +16,13 @@ public class UserReportHandler extends PDFHandler {
 
     private final Student user;
     private final List<Practice> completedPractices;
+    private final HashMap<Long, String> tutorsPerPractice;
     
-    public UserReportHandler(Student user, List<Practice> completedPractices) {
+    public UserReportHandler(Student user, List<Practice> completedPractices, HashMap<Long, String> tutorsPerPractice) {
         super("Informe de practicas del alumno");
         this.user = user;
         this.completedPractices = completedPractices;
+        this.tutorsPerPractice = tutorsPerPractice;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class UserReportHandler extends PDFHandler {
         List<Element> content = new ArrayList<>();
 
         // Add titles previous to user information
-        content.add(new Phrase("Informe de practicas de " + user.getFirstName() + " " + user.getLastName()+"\n", this.titleFont));
+        content.add(new Phrase("Informe de practicas de " + user.getFirst_name() + " " + user.getLast_name()+"\n", this.titleFont));
         content.add(new Phrase("Informacion del usuario", this.subtitleFont));
 
         // Add user information table
@@ -37,7 +40,7 @@ public class UserReportHandler extends PDFHandler {
         content.add(new Phrase("Practicas realizadas \n", this.subtitleFont));
 
         // Add completed practices list
-        content.addAll(setPracticesList(completedPractices));
+        content.addAll(setPracticesList(completedPractices, tutorsPerPractice));
 
         return content;
     }
@@ -53,7 +56,7 @@ public class UserReportHandler extends PDFHandler {
         
         // Table content
         profileInformation.addCell("Nombre Completo");
-        profileInformation.addCell(user.getFirstName() + " " + user.getLastName());
+        profileInformation.addCell(user.getFirst_name() + " " + user.getLast_name());
         profileInformation.addCell("Grado universitario");
         profileInformation.addCell(user.getDegree());
         profileInformation.addCell("Universidad");
@@ -74,7 +77,7 @@ public class UserReportHandler extends PDFHandler {
         return profileInformation;
     }
 
-    public List<Element> setPracticesList(List<Practice> practices){
+    public List<Element> setPracticesList(List<Practice> practices, HashMap<Long, String> tutors){
         List<Element> practiceList = new ArrayList<>();
 
         for (Practice practice : practices) {
@@ -85,7 +88,7 @@ public class UserReportHandler extends PDFHandler {
             practiceList.add(new Phrase(company.getName() + " - " + offer.getPosition()+"\n", this.subsubtitleFont));
             practiceList.add(new Phrase("Oferta de practicas: "+offer.getDescription()+"\n", this.textFont));
             practiceList.add(new Phrase("Duracion de practicas:  " + offer.getWeeks()+" semanas, de "+practice.getStart_date().toString()+" a "+ practice.getEnd_date().toString() + "\n", this.textFont));
-
+            practiceList.add(new Phrase("Tutor de practicas asignado: " + tutors.get(practice.getId()) + "\n", this.textFont));
         }
 
         return practiceList;

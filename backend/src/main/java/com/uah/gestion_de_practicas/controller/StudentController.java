@@ -2,8 +2,10 @@ package com.uah.gestion_de_practicas.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +25,10 @@ import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.handlers.PDFHandler;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
+import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
+import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
 import com.uah.gestion_de_practicas.service.StudentService;
+import com.uah.gestion_de_practicas.service.TutorService;
 import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 
 import io.swagger.annotations.ApiOperation;
@@ -33,9 +38,11 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/api/users/students")
 public class StudentController {
     private final StudentService studentService;
+    private final TutorService tutorService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, TutorService tutorService) {
         this.studentService = studentService;
+        this.tutorService = tutorService;
     }
 
     @GetMapping("")
@@ -107,8 +114,9 @@ public class StudentController {
 
         Student student = studentService.getStudent(id);
         List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
+        HashMap<Long, String> tutors = tutorService.getTutorByPractice(completedPractices);
 
-        PDFHandler pdfHandler = new UserReportHandler(student, completedPractices);
+        PDFHandler pdfHandler = new UserReportHandler(student, completedPractices, tutors);
         pdfHandler.generatePDF(response);
     }
 }
