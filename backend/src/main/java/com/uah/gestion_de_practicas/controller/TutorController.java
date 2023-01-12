@@ -92,7 +92,6 @@ public class TutorController {
         return ResponseEntity.ok(tutor);
     }
 
-    @ApiIgnore
     @PutMapping("/{id}")
     @ApiOperation("Update a tutor by its id.")
     public ResponseEntity<Void> updateTutor(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id, @ApiParam("New tutor's attributes") @RequestBody TutorDTO tutor) {
