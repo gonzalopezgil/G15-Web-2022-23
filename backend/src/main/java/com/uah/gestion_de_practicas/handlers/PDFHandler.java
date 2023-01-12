@@ -1,5 +1,6 @@
 package com.uah.gestion_de_practicas.handlers;
 
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,19 +26,21 @@ public class PDFHandler extends PdfPageEventHelper {
     final Font subtitleFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
     final Font subsubtitleFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
     final Font textFont = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+
+    final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
     
     private final String title;
     private final String creationDate;
 
     public PDFHandler(String title) {
         this.title = title;
-        this.creationDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        this.creationDate = this.dateFormatter.format(new Date());
     }
 
-    public void generatePDF(HttpServletResponse response) {
+    public void generatePDF(OutputStream output_stream) {
         try {
             Document document = new Document(PageSize.A4, 34, 20, 100, 50);
-            PdfWriter.getInstance(document, response.getOutputStream()).setPageEvent(this);
+            PdfWriter.getInstance(document, output_stream).setPageEvent(this);
 
             document.open();
 

@@ -84,6 +84,7 @@ public class User {
     * Get the last name of the user.
     */
     @Column(name = "apellidos")
+    // public String getLastName()
     public String getLast_name() {
         return last_name;
     }
@@ -153,6 +154,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     // ------------------ EQUALS ------------------
     /**
