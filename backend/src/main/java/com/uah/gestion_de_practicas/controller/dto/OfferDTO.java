@@ -4,9 +4,10 @@ import lombok.ToString;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.util.List;
-import java.util.Date;
+import java.sql.Date;
 import java.util.stream.Collectors;
 
+import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Offer;
 
 @Data
@@ -44,7 +45,10 @@ public class OfferDTO {
     public OfferDTO() {
     }
 
-    public static OfferDTO fromOffer(Offer offer){
+    public static OfferDTO fromOffer(Offer offer) {
+        if (offer == null)
+            return null;
+
         return new OfferDTO(
                 offer.getId(),
                 offer.getPosition(),
@@ -61,7 +65,28 @@ public class OfferDTO {
         );
     }
 
-    public static List<OfferDTO> fromOffers(List<Offer> offers){
+    public static List<OfferDTO> fromOffers(List<Offer> offers) {
+        if (offers == null)
+            return null;
         return offers.stream().map(OfferDTO::fromOffer).collect(Collectors.toList());
+    }
+
+    public static Offer toOffer(OfferDTO offerDTO, Company company) {
+        if (offerDTO == null)
+            return null;
+        Offer offer = new Offer();
+        offer.setId(offerDTO.getId());
+        offer.setPosition(offerDTO.getPosition());
+        offer.setCategory(offerDTO.getCategory());
+        offer.setCompany(company);
+        offer.setAddress(offerDTO.getAddress());
+        offer.setRequirements(offerDTO.getRequirements());
+        offer.setDescription(offerDTO.getDescription());
+        offer.setSchedule(offerDTO.getSchedule());
+        offer.setWeeks(offerDTO.getWeeks());
+        offer.setSalary(offerDTO.getSalary());
+        offer.setVacancies(offerDTO.getVacancies());
+        offer.setStart_date(offerDTO.getStart_date());
+        return offer;
     }
 }
