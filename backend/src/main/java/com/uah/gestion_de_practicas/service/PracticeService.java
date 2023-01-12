@@ -30,10 +30,16 @@ public class PracticeService {
      */
     private final TutorService tutorService;
 
+    /** 
+     * Service class fot the Supervisor class.
+     */
+    private final SupervisorService supervisorService;
 
-    public PracticeService(PracticeRepository practiceRepository, TutorService tutorService) {
+
+    public PracticeService(PracticeRepository practiceRepository, TutorService tutorService, SupervisorService supervisorService) {
         this.practiceRepository = practiceRepository;
         this.tutorService = tutorService;
+        this.supervisorService = supervisorService;
     }
 
     // ------------------- CRUD OPERATIONS ------------------- //
@@ -47,9 +53,16 @@ public class PracticeService {
 
     /**
      * Gets a practice from the database.
+     * Only the tutor of the practice or the supervisor can access this information.
      * @param id, Id of the practice to be retrieved.
+     * @param username, Username of the user trying to access
      */
-    public SimplePracticeDAO getPractice(Long id) {
+    public SimplePracticeDAO getPractice(Long id, String username) {
+        ArrayList<Long> ids = new ArrayList<>();
+        ids.add(id);
+        if (!supervisorService.isAuthorized(username) && !tutorService.isAuthorized(username, ids)) {
+            return null;
+        }
         return practiceRepository.findPracticeById(id).orElse(null);
     }
 
@@ -63,18 +76,28 @@ public class PracticeService {
 
     /**
      * Gets all the practices from the database.
+     * Only the supervisor can access this information.
+     * @param supervisor_username, Username of the supervisor.
      * @return A list with all the practices.
      */
-    public List<SimplePracticeDAO> getAllPractices() {
+    public List<SimplePracticeDAO> getAllPractices(String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return practiceRepository.findAllPractices();
     }
 
     /** 
      * Saves a list of practices in the database.
+     * Only the supervisor can save this information.
      * @param practices, List of practices to be saved.
+     * @param supervisor_username, Username of the supervisor.
      * @return A list with all the saved practices.
      */
-    public List<Practice> saveAllPractices(List<Practice> practices) {
+    public List<Practice> saveAllPractices(List<Practice> practices, String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return practiceRepository.saveAll(practices);
     }
 
@@ -85,7 +108,7 @@ public class PracticeService {
      * @param tutor_username, Username of the tutor.
      * @return A list with all the saved practices.
      */
-    public List<Practice> saveAllPractices(List<ReportDAO> practices, String tutor_username) {
+    public List<Practice> saveAllReports(List<ReportDAO> practices, String tutor_username) {
         HashMap<Long, ReportDAO> map = new HashMap<>();
         for (ReportDAO p: practices) {
             map.put(p.getId(), p);
@@ -122,9 +145,14 @@ public class PracticeService {
 
     /**
      * Gets the practices that are completed.
+     * Only the supervisor can access this information
+     * @param supervisor_username, Username of the supervisor.
      * @return A list with all the completed practices.
      */
-    public List<SimplePracticeDAO> getReport(){
+    public List<SimplePracticeDAO> getReport(String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return practiceRepository.getCompletedPractices();
     }
 }

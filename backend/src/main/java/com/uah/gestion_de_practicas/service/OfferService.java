@@ -40,12 +40,19 @@ public class OfferService {
     // ------------------- CRUD OPERATIONS ------------------- //
 
     /**
-     * Saves an offer in the database.
+     * A tutor saves an offer in the database.
      */
     public Offer saveOffer(Offer offer, String tutor_username) {
         if (!tutorService.isAuthorized(tutor_username, offer.getCompany().getId())) {
             return null;
         }
+        return offerRepository.save(offer);
+    }
+
+    /**
+     * Saves an offer in the database.
+     */
+    public Offer saveOffer(Offer offer) {
         return offerRepository.save(offer);
     }
 

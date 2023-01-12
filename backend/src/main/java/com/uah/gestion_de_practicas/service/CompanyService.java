@@ -174,7 +174,7 @@ public class CompanyService {
         if (!tutorService.isAuthorized(tutor_username)) {
             return null;
         }
-        return practiceService.saveAllPractices(practices, tutor_username);
+        return practiceService.saveAllReports(practices, tutor_username);
     }
 
 

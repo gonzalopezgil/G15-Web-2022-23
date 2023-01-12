@@ -47,15 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] STUDENT_WHITELIST = {
         "/api/users/students/**",
         "/api/company/**",
-        "/api/practice/**",
         "/api/users/**",
-        
-        // TODO: Remove this when the endpoint security is implemented
         "/api/practices/**"
     };
 
     private static final String[] TUTOR_WHITELIST = {
         "/api/users/tutors/**",
+        "/api/practice/**",
     };
 
     private static final String[] ADMIN_WHITELIST = {

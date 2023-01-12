@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.service.OfferService;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import com.uah.gestion_de_practicas.controller.dto.OfferDTO;
 import com.uah.gestion_de_practicas.model.Offer;
 
@@ -34,6 +39,7 @@ public class OfferController {
      * @return a list of offers
      */
     @GetMapping("")
+    @ApiOperation("Get all the offers")
     public ResponseEntity<List<OfferDTO>> getAllOffers() {
         return ResponseEntity.ok(OfferDTO.fromOffers(offerService.getAllOffers()));
     }
@@ -45,7 +51,8 @@ public class OfferController {
      * @return the created offer in the body of the response
      */
     @PostMapping("")
-    public ResponseEntity<OfferDTO> createOffer(OfferDTO offer) {
+    @ApiOperation("Create a new offer")
+    public ResponseEntity<OfferDTO> createOffer(@ApiParam("The offer to be saved") @RequestBody OfferDTO offer) {
         if (offer == null || offer.getId() != null || offer.getCompany_id() == null || offer.getStart_date() == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -64,7 +71,8 @@ public class OfferController {
      * @return the offer in the body of the response
      */
     @GetMapping("/{id}")
-    public ResponseEntity<OfferDTO> getOffer(@PathVariable Long id) {
+    @ApiOperation("Get an offer by its id")
+    public ResponseEntity<OfferDTO> getOffer(@ApiParam("The id of the offer to be retrieved") @PathVariable Long id) {
         if (id == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -82,7 +90,8 @@ public class OfferController {
      * @return the updated offer in the body of the response
      */
     @PutMapping("/{id}")
-    public ResponseEntity<OfferDTO> updateOffer(@PathVariable Long id, OfferDTO offer) {
+    @ApiOperation("Update an offer")
+    public ResponseEntity<OfferDTO> updateOffer(@ApiParam("The id the offer to be updated") @PathVariable Long id, @ApiParam("Offer to be updated") @RequestBody OfferDTO offer) {
         if (id == null || offer == null || offer.getId() != null || !id.equals(offer.getId()) || offer.getCompany_id() == null || offer.getStart_date() == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -100,7 +109,8 @@ public class OfferController {
      * @param id, the id of the offer to be deleted
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOffer(@PathVariable Long id) {
+    @ApiOperation("Delete an offer")
+    public ResponseEntity<Void> deleteOffer(@ApiParam("Id of the offer to be deleted") @PathVariable Long id) {
         if (id == null) {
             return ResponseEntity.badRequest().build();
         }
