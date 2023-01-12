@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] TUTOR_WHITELIST = {
-        "/api/practice/**",
+        "/api/practices/**",
     };
 
     private static final String[] ADMIN_WHITELIST = {
