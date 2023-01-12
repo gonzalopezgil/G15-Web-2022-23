@@ -1,11 +1,9 @@
 package com.uah.gestion_de_practicas.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,14 +23,13 @@ import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
 import com.uah.gestion_de_practicas.handlers.PDFHandler;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
-import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
-import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
 import com.uah.gestion_de_practicas.service.StudentService;
 import com.uah.gestion_de_practicas.service.TutorService;
 import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.Response;
 
 @RestController
 @RequestMapping("/api/users/students")
@@ -104,7 +101,8 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     @GetMapping("/{id}/report")
     @ApiOperation("Obtain a report document of a student's practices")
-    public void generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+        
         response.setContentType("application/pdf");
         Date now = new Date();
         String currentDateTime = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(now);
@@ -113,10 +111,16 @@ public class StudentController {
         response.setHeader("Content-Disposition", headerValue);
 
         Student student = studentService.getStudent(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
         HashMap<Long, String> tutors = tutorService.getTutorByPractice(completedPractices);
 
         PDFHandler pdfHandler = new UserReportHandler(student, completedPractices, tutors);
         pdfHandler.generatePDF(response);
+
+        return ResponseEntity.ok().build();
     }
 }
