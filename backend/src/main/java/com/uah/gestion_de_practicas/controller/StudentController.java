@@ -1,6 +1,7 @@
 package com.uah.gestion_de_practicas.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -23,18 +24,22 @@ import com.uah.gestion_de_practicas.handlers.PDFHandler;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.service.StudentService;
+import com.uah.gestion_de_practicas.service.TutorService;
 import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.Response;
 
 @RestController
 @RequestMapping("/api/users/students")
 public class StudentController {
     private final StudentService studentService;
+    private final TutorService tutorService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, TutorService tutorService) {
         this.studentService = studentService;
+        this.tutorService = tutorService;
     }
 
     @GetMapping("")
@@ -96,7 +101,8 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     @GetMapping("/{id}/report")
     @ApiOperation("Obtain a report document of a student's practices")
-    public void generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+        
         response.setContentType("application/pdf");
         Date now = new Date();
         String currentDateTime = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(now);
@@ -105,9 +111,20 @@ public class StudentController {
         response.setHeader("Content-Disposition", headerValue);
 
         Student student = studentService.getStudent(id);
-        List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-        PDFHandler pdfHandler = new UserReportHandler(student, completedPractices);
-        pdfHandler.generatePDF(response);
+        List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
+        HashMap<Long, String> tutors = tutorService.getTutorByPractice(completedPractices);
+
+        try{
+            PDFHandler pdfHandler = new UserReportHandler(student, completedPractices, tutors);
+            pdfHandler.generatePDF(response.getOutputStream());
+        }catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
