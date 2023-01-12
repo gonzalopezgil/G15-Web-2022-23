@@ -5,16 +5,31 @@ import { Tutor } from '../interfaces/tutor';
 import { Observable } from 'rxjs';
 import { Report } from '../interfaces/report';
 import { reports } from '../mocks/reports.mock';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService:AuthService) { }
 
-  getTutor(): Tutor {
-    return {
+  getTutor(): Observable<Tutor> {
+    let id = this.authService.getId();
+    let token = sessionStorage.getItem('token');
+    let httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+
+    return this.http.get<Tutor>('http://localhost:8080/api/tutor/'+id, httpOptions);
+
+  }
+
+  getStubbyTutor(): Tutor {
+     return {
       name: 'Juan',
       lastname: 'Pérez',
       username: 'juanperez',
@@ -22,7 +37,6 @@ export class TutorsService {
       email: 'xd@gmail.com',
       admissionDate: new Date(),
     };
-
   }
 
   registerPractice(form: FormGroup) {

@@ -19,7 +19,7 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.UserService.getUser();
-    this.tutor = this.TutorService.getTutor();
+    this.tutor = this.TutorService.getStubbyTutor();
     this.practice = this.PracticeService.getPractice(0);
   }
 

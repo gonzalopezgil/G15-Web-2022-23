@@ -19,7 +19,8 @@ export class RegistercompanyComponent {
       phone:  ['', Validators.required, Validators.pattern('^[0-9]{9}$')],
       address: ['', Validators.required],
       city: ['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      postal_code: ['', Validators.required, Validators.pattern('^[0-9]{5}$')]
+      postal_code: ['', Validators.required, Validators.pattern('^[0-9]{5}$')],
+      description: ['', Validators.required]
     });
   }
 
@@ -29,6 +30,7 @@ export class RegistercompanyComponent {
   get address() { return this.form.get('address'); }
   get city() { return this.form.get('city'); }
   get postal_code() { return this.form.get('postal_code'); }
+  get description() { return this.form.get('description'); }
 
   clearForm() {
     this.form.reset();

@@ -43,6 +43,7 @@ import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorre
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
 import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
+import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { CompanyViewComponent } from './components/tutors/company-view/company-v
     PopUpTutorregisterComponent,
     TutordataComponent,
     TutorreportsComponent,
-    CompanyViewComponent
+    CompanyViewComponent,
+    OffersViewComponent
   ],
   imports: [
     BrowserModule,

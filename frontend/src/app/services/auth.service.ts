@@ -22,6 +22,17 @@ export class AuthService {
       sessionStorage.removeItem('token');
     }
 
+    getId(): String {
+      const helper = new JwtHelperService();
+      let token = sessionStorage.getItem('token');
+      let id = "";
+      if (token){
+        let decodedToken = helper.decodeToken(token);
+        id = decodedToken.id;
+      }
+      return id;
+    }
+
     getRole(): String {
       const helper = new JwtHelperService();
       let token = sessionStorage.getItem('token');

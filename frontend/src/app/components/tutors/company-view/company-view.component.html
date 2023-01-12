@@ -1,1 +1,27 @@
-<p>company-view works!</p>
+<mat-card class="info-card">
+  <mat-card-header>
+    <mat-card-title>Datos de tu empresa:</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <div>
+          <label for="name">Nombre de la empresa: </label>
+      </div>
+      <div>
+          <label for="mail_suffix">Sufijo de correo: </label>
+      </div>
+      <div>
+          <label for="phone">Telefono: </label>
+      </div>
+      <div>
+          <label for="address">Direccion: </label>
+      </div>
+      <div>
+          <label for="description">Descripcion: </label>
+      </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button>Cambiar tutor</button>
+    <button mat-raised-button>Dar de baja</button>
+    <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
+  </mat-card-actions>
+</mat-card>

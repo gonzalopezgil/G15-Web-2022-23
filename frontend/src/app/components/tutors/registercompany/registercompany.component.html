@@ -59,6 +59,12 @@
               El codigo postal debe ser un numero de 5 digitos
             </mat-error>
           </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Descripcion:" formControlName="description"></textarea>
+            <mat-error *ngIf="description?.errors?.['required'] && description?.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
