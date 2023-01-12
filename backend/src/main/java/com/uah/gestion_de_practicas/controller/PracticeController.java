@@ -52,11 +52,7 @@ public class PracticeController {
     @GetMapping("")
     @ApiOperation("Get all the practices")
     public ResponseEntity<List<SimplePracticeDAO>> getPractices() {
-        List<SimplePracticeDAO> practices = practiceService.getAllPractices();
-        if (practices == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-        return ResponseEntity.ok(practices);
+        return ResponseEntity.ok(practiceService.getAllPractices());
     }
 
     /**

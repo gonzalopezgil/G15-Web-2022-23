@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // -- auth 
         "/api/users/login",
         "/api/users/tutors",
+        "/api/practices/**",
 
         // -- error
         "/error/**"
@@ -49,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/api/users/students/**",
         "/api/company/**",
         "/api/users/**",
-        "/api/practices/**"
     };
 
     private static final String[] TUTOR_WHITELIST = {
