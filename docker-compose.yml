@@ -10,7 +10,7 @@ services:
     #     networks:
     #         - backend
     backend:
-        image: nicolaemolnar/gestion-de-practicas-back:2.3
+        image: nicolaemolnar/gestion-de-practicas-back:2.7
         container_name: back_gdp
         restart: always
         environment:

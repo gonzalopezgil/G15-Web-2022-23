@@ -61,6 +61,10 @@ export class TutorsService {
     return true;
   }
 
+  registerCompany(form: FormGroup){
+    console.log(form.value);
+  }
+
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de tutor");
     console.log('oldpassword: ' + oldpassword);

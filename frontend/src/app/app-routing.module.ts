@@ -3,7 +3,6 @@ import { UserGuard } from './guards/user.guard';
 import { ResponsableGuard } from './guards/responsable.guard';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
-import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
 import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';

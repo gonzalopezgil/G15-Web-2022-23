@@ -12,39 +12,51 @@
     <mat-card-content>
       <form [formGroup]="form" (submit)="onSubmit()">
         <mat-form-field>
-          <input matInput placeholder="Titulo de la practica:" formControlName="titulo" />
-          <mat-error *ngIf="titulo?.errors?.['required'] && titulo?.touched">
-            <p class="errors">Este campo es obligatorio</p>
+          <input matInput placeholder="Nombre de la empresa:" formControlName="name" />
+          <mat-error *ngIf="name?.errors?.['required'] && name?.touched">
+            Este campo es obligatorio
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Empresa:" formControlName="empresa" />
-          <mat-error *ngIf="empresa?.errors?.['required'] && empresa?.touched">
-            <p class="errors">Este campo es obligatorio</p>
+          <input matInput placeholder="Sufijo de correo:" formControlName="mail_sufix" />
+          <mat-error *ngIf="mail_suffix?.errors?.['required'] && mail_suffix?.touched">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="mail_suffix?.errors?.['pattern'] && mail_suffix?.touched">
+            Formato invalido (@example.com)
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Plazas:" formControlName="plazas" />
-            <mat-error *ngIf="plazas?.errors?.['required'] && plazas?.touched">
-              <p class="errors">Este campo es obligatorio</p>
+            <input matInput placeholder="Telefono:" formControlName="phone" />
+            <mat-error *ngIf="phone?.errors?.['required'] && phone?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="phone?.errors?.['pattern'] && phone?.touched">
+              Introduce un numero de 9 digitos
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Horario:" formControlName="horario" />
-            <mat-error *ngIf="empresa?.errors?.['required'] && empresa?.touched">
-              <p class="errors">Este campo es obligatorio</p>
+            <input matInput placeholder="Direccion:" formControlName="address" />
+            <mat-error *ngIf="address?.errors?.['required'] && address?.touched">
+              Este campo es obligatorio
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Dias de la semana:" formControlName="dias" />
-            <mat-error *ngIf="dias?.errors?.['required'] && dias?.touched">
-              <p class="errors">Este campo es obligatorio</p>
+            <input matInput placeholder="Ciudad:" formControlName="city" />
+            <mat-error *ngIf="city?.errors?.['required'] && city?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="city?.errors?.['pattern'] && city?.touched">
+              Las ciudades no pueden contener numeros
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Semanas:" formControlName="semanas" />
-            <mat-error *ngIf="semanas?.errors?.['required'] && semanas?.touched">
-              <p class="errors">Este campo es obligatorio</p>
+            <input matInput placeholder="Codigo Postal:" formControlName="postal_code" />
+            <mat-error *ngIf="postal_code?.errors?.['required'] && postal_code?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="postal_code?.errors?.['pattern'] && postal_code?.touched">
+              El codigo postal debe ser un numero de 5 digitos
             </mat-error>
           </mat-form-field>
       </form>

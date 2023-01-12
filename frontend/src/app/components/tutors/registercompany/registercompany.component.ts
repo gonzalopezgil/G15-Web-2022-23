@@ -14,21 +14,21 @@ export class RegistercompanyComponent {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      titulo: ['', Validators.required],
-      empresa: ['', Validators.required],
-      plazas:  ['', Validators.required],
-      horario: ['', Validators.required],
-      dias: ['', Validators.required],
-      semanas: ['', Validators.required]
+      name: ['', Validators.required],
+      mail_suffix: ['', Validators.required, Validators.pattern('@[a-z0-9.-]+\.[a-z]{2,3}$')],
+      phone:  ['', Validators.required, Validators.pattern('^[0-9]{9}$')],
+      address: ['', Validators.required],
+      city: ['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
+      postal_code: ['', Validators.required, Validators.pattern('^[0-9]{5}$')]
     });
   }
 
-  get titulo() { return this.form.get('titulo'); }
-  get empresa() { return this.form.get('empresa'); }
-  get plazas() { return this.form.get('plazas'); }
-  get horario() { return this.form.get('horario'); }
-  get dias() { return this.form.get('dias'); }
-  get semanas() { return this.form.get('semanas'); }
+  get name() { return this.form.get('name'); }
+  get mail_suffix() { return this.form.get('mail_suffix'); }
+  get phone() { return this.form.get('phone'); }
+  get address() { return this.form.get('address'); }
+  get city() { return this.form.get('city'); }
+  get postal_code() { return this.form.get('postal_code'); }
 
   clearForm() {
     this.form.reset();
@@ -36,7 +36,7 @@ export class RegistercompanyComponent {
 
   onSubmit() {
     if(this.form.valid) {
-      this.TutorsService.registerPractice(this.form);
+      this.TutorsService.registerCompany(this.form);
     }
   }
 
