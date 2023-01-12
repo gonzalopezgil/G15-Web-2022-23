@@ -90,7 +90,7 @@ export class TutorsService {
       company: form.value.company,
       newtutor: form.value.newtutor
     });
-  }
+  });
 }
 
   createTutor(form: FormGroup): boolean {

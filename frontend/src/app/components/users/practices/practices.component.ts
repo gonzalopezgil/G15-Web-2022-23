@@ -36,7 +36,7 @@ export class PracticesComponent implements AfterViewInit{
       for (let i = 0; i < data.length; i++) {
         data[i].positiontable = data[i].id;
         this.PracticesService.getCompanyName(data[i].company_id).subscribe((company:Company) => {
-          data[i].empresa = company.name;
+          data[i].company_name = company.name;
         });
       }
       this.dataSource.data = data;
@@ -63,7 +63,6 @@ export class PracticesComponent implements AfterViewInit{
   guardar(): void {
     let practicasSeleccionadas: Offer[] = [];
        for (let item of this.selection.selected) {
-         console.log(item.id);
          practicasSeleccionadas.push(item);
        }
        this.dialog.open(PopUpPracticesComponent, {

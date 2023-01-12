@@ -44,8 +44,6 @@ export class PopUpPasswordComponent implements OnInit {
     if(this.form.valid) {
       if(this.data){
         this.UserService.changePassword(this.form.value.password, this.form.value.oldpassword, this.form.value.confirmpassword);
-      }else{
-        this.TutorService.changePassword(this.form.value.password, this.form.value.oldpassword, this.form.value.confirmpassword);
       }
     }
   }
