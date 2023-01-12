@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.controller.dto.OfferSelection;
 import com.uah.gestion_de_practicas.model.Offer;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Request;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.StudentRepository;
@@ -23,11 +24,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final RequestService requestService;
     private final OfferService offerService;
+    private final PracticeService practiceService;
 
-    public StudentService(StudentRepository studentRepository, RequestService requestService, OfferService offerService) {
+    public StudentService(StudentRepository studentRepository, RequestService requestService, OfferService offerService, PracticeService practiceService) {
         this.studentRepository = studentRepository;
         this.requestService = requestService;
         this.offerService = offerService;
+        this.practiceService = practiceService;
     }
 
 
@@ -109,5 +112,10 @@ public class StudentService {
      */
     public List<Student> getStudentsFromTutor(Long tutor_id) {
         return studentRepository.getStudentsFromTutor(tutor_id);
+    }
+
+
+    public List<Practice> getCompletedPractices(Long id) {
+        return practiceService.getCompletedPracticesByStudent(id);
     }
 }

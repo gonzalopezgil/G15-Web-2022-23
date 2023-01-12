@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.Document;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.PracticeRepository;
 import com.uah.gestion_de_practicas.repository.dao.ReportDAO;
@@ -126,5 +127,13 @@ public class PracticeService {
      */
     public List<SimplePracticeDAO> getReport(){
         return practiceRepository.getCompletedPractices();
+    }
+
+    /**
+     * Gets the practices that are completed for a specific student.
+     * @return A list with all the completed practices.
+     */
+    public List<Practice> getCompletedPracticesByStudent(Long id){
+        return practiceRepository.getCompletedPracticesByStudent(id);
     }
 }

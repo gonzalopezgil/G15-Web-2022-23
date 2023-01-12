@@ -1,8 +1,14 @@
 package com.uah.gestion_de_practicas.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.OfferSelection;
 import com.uah.gestion_de_practicas.controller.dto.StudentDTO;
+import com.uah.gestion_de_practicas.handlers.PDFHandler;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.service.StudentService;
+import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -83,5 +92,23 @@ public class StudentController {
         }
 
         return ResponseEntity.ok(OfferSelection.fromRequests(studentService.selectOffers(id, offerSelections)));
+    }
+
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    @GetMapping("/{id}/report")
+    @ApiOperation("Obtain a report document of a student's practices")
+    public void generateReport(@ApiParam("The id of the student") @PathVariable Long id, HttpServletResponse response) {
+        response.setContentType("application/pdf");
+        Date now = new Date();
+        String currentDateTime = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(now);
+        String headerValue = String.format("attachment; filename=\"%s\"", "report_" + currentDateTime + ".pdf");
+
+        response.setHeader("Content-Disposition", headerValue);
+
+        Student student = studentService.getStudent(id);
+        List<Practice> completedPractices = studentService.getCompletedPractices(student.getId());
+
+        PDFHandler pdfHandler = new UserReportHandler(student, completedPractices);
+        pdfHandler.generatePDF(response);
     }
 }

@@ -1,6 +1,10 @@
 package com.uah.gestion_de_practicas.controller;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
+import com.uah.gestion_de_practicas.handlers.PDFHandler;
+import com.uah.gestion_de_practicas.handlers.UserReportHandler;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
@@ -26,7 +33,7 @@ import io.swagger.annotations.ApiParam;
  * Rest Controller for the Practice endpoint
  */
 @RestController
-@RequestMapping("/api/practice")
+@RequestMapping("/api/practices")
 public class PracticeController {
     private final PracticeService practiceService;
     private final RequestService requestService;
@@ -103,6 +110,8 @@ public class PracticeController {
         List<PracticeAssignmentDTO> assignmentDTO = PracticeAssignmentDTO.fromPractices(practices);
         return ResponseEntity.ok(assignmentDTO);
     }
+
+   
     
     /**
      * Endpoint to obtain a report of all the practices completed and their evaluation
