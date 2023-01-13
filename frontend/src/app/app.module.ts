@@ -26,7 +26,6 @@ import { NavigationResponsableComponent } from './components/responsable/navigat
 import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
 import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
 import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
-import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
 import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -43,6 +42,9 @@ import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorre
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
 import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,6 @@ import { PracticeAssignedComponent } from './components/responsable/practice-ass
     ResponsabledataComponent,
     UsersReportsComponent,
     DashboardResponsableComponent,
-    AssignPracticeComponent,
     PopUpAssignPracticesComponent,
     AboutUsPageComponent,
     RegisterPageComponent,
@@ -80,7 +81,8 @@ import { PracticeAssignedComponent } from './components/responsable/practice-ass
     PopUpTutorregisterComponent,
     TutordataComponent,
     TutorreportsComponent,
-    PracticeAssignedComponent
+    PracticeAssignedComponent,
+    PracticesReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { PracticeAssignedComponent } from './components/responsable/practice-ass
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

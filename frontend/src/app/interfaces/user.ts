@@ -1,11 +1,11 @@
 export interface User {
-    name: string;
+    first_name: string;
     username: string;
-    lastname: string;
+    last_name: string;
     dni: string;
     mail: string;
-    grade: string;
+    degree: string;
     dob: string;
     phone: string;
-    hours: number;
+    total_hours: number;
 }

@@ -11,7 +11,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { PracticesComponent } from './components/users/practices/practices.component';
-import { PracticesReportComponent } from './components/responsable/practices/practices.component';
+import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
 import { ReportsComponent } from './components/users/reports/reports.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
@@ -140,8 +140,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'practices',
-        component: PracticesReportComponent,
+        path: 'practices-reports',
+        component: PracticesReportsComponent,
         canActivate: [AuthGuard],
         children: [
           {

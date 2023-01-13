@@ -22,6 +22,6 @@ export class AssignPracticeComponent {
   }
   aceptar(): void {
     console.log("prácticas asignadas");
-    this.dialog.open(PopUpAssignPracticesComponent);
+    //this.dialog.open(PopUpAssignPracticesComponent);
   }
 }
