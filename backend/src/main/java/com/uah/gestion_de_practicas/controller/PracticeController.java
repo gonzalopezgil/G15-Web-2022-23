@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
+import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.handlers.PracticeAssignmentHandler;
+import com.uah.gestion_de_practicas.model.Offer;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
+import com.uah.gestion_de_practicas.service.StudentService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -53,15 +57,21 @@ public class PracticeController {
     private final OfferService offerService;
 
     /**
+     * Service to manage the students
+     */
+    private final StudentService studentService;
+
+    /**
      * Constructor of the class
      * @param practiceService, the service to manage the practices
      * @param requestService, the service to manage the requests
      * @param offerService, the service to manage the offers
      */
-    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService) {
+    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService, StudentService studentService) {
         this.practiceService = practiceService;
         this.requestService = requestService;
         this.offerService = offerService;
+        this.studentService = studentService;
     }
 
     /**
@@ -106,9 +116,23 @@ public class PracticeController {
      */
     @PostMapping("")
     @ApiOperation("Save a new practice")
-    public ResponseEntity<Practice> savePractice(@ApiParam("The practice to be saved") @RequestBody Practice practice) {
+    public ResponseEntity<PracticeDTO> savePractice(@ApiParam("The practice to be saved") @RequestBody PracticeDTO practiceDTO) {
         log.info("Practice saved successfully");
-        return ResponseEntity.ok(practiceService.savePractice(practice));
+        // Fetch the student and offer from the database
+        Student student = studentService.getStudent(practiceDTO.getStudent_id());
+        Offer offer = offerService.getOffer(practiceDTO.getOffer_id());
+
+        // Create the new practice
+        Practice practice = new Practice();
+        practice.setStudent(student);
+        practice.setOffer(offer);
+        practice.setId(practiceDTO.getId());
+        practice.setMark(practiceDTO.getMark());
+        practice.setReport(practiceDTO.getReport());
+        practice.setStart_date(practiceDTO.getStart_date());
+        practice.setEnd_date(practiceDTO.getEnd_date());
+        
+        return ResponseEntity.ok(PracticeDTO.fromPractice(practiceService.savePractice(practice)));
     }
 
 

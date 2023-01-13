@@ -1453,3 +1453,33 @@ Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: Invalid path: 'o
 2023-01-13 08:53:10.643  INFO 50576 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-01-13 08:53:10.645  INFO 50576 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 2023-01-13 08:53:30.937  INFO 50576 --- [http-nio-8080-exec-1] c.u.g.controller.TutorController         : Offers retrieved successfully
+2023-01-13 12:19:28.644  INFO 155102 --- [main] c.u.g.GestionDePracticasApplication      : Starting GestionDePracticasApplication using Java 17.0.5 on manjaro with PID 155102 (/home/k0rriban/Documents/Repositories/G15-Web-2022-23/backend/target/classes started by k0rriban in /home/k0rriban/Documents/Repositories/G15-Web-2022-23)
+2023-01-13 12:19:28.650  INFO 155102 --- [main] c.u.g.GestionDePracticasApplication      : The following profiles are active: prod
+2023-01-13 12:19:30.854  INFO 155102 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-13 12:19:31.124  INFO 155102 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 212 ms. Found 8 JPA repository interfaces.
+2023-01-13 12:19:32.109  INFO 155102 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@65afeb6d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-13 12:19:32.116  INFO 155102 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-13 12:19:33.271  INFO 155102 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-01-13 12:19:33.287  INFO 155102 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-13 12:19:33.288  INFO 155102 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-01-13 12:19:33.586  INFO 155102 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-13 12:19:33.587  INFO 155102 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4713 ms
+2023-01-13 12:19:33.795  WARN 155102 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-13 12:19:34.371  INFO 155102 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-13 12:19:34.545  INFO 155102 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-01-13 12:19:35.113  INFO 155102 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-01-13 12:19:35.451  INFO 155102 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-13 12:19:35.642  INFO 155102 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-13 12:19:35.705  INFO 155102 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-01-13 12:19:37.334  INFO 155102 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-13 12:19:37.352  INFO 155102 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-13 12:19:40.244  INFO 155102 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4df8443f, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e44f989, org.springframework.security.web.header.HeaderWriterFilter@193d73d3, org.springframework.web.filter.CorsFilter@79aa675b, org.springframework.security.web.authentication.logout.LogoutFilter@1db9d253, com.uah.gestion_de_practicas.security.jwt.JwtRequestFilter@37dc7661, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@542c6165, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@601ca994, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3fe59f84, org.springframework.security.web.session.SessionManagementFilter@123d666b, org.springframework.security.web.access.ExceptionTranslationFilter@72e4ffa2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4865434e]
+2023-01-13 12:19:40.849  INFO 155102 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-13 12:19:42.237  INFO 155102 --- [main] c.u.g.GestionDePracticasApplication      : Started GestionDePracticasApplication in 14.408 seconds (JVM running for 15.612)
+2023-01-13 12:19:52.351  INFO 155102 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-13 12:19:52.351  INFO 155102 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-01-13 12:19:52.356  INFO 155102 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2023-01-13 12:20:16.418  INFO 155102 --- [http-nio-8080-exec-2] c.u.g.controller.UserController          : Generating the JWT token
+2023-01-13 12:20:16.672  INFO 155102 --- [http-nio-8080-exec-2] c.u.g.controller.UserController          : The user has successfully logged in
+2023-01-13 12:21:14.209  INFO 155102 --- [http-nio-8080-exec-8] c.u.g.controller.PracticeController      : Practice saved successfully
+2023-01-13 12:21:37.260  INFO 155102 --- [http-nio-8080-exec-9] c.u.g.controller.PracticeController      : Practice saved successfully
