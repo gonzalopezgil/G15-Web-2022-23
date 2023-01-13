@@ -1,17 +1,29 @@
-<mat-card class="report-card">
+<ng-container *ngIf="offer_id != -1; else noOffer">
+  <mat-card class="report-card">
     <mat-card-header>
       <mat-card-title>Datos de tu practica ya realizada</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <h1> Nombre del alumno: {{user?.name}}</h1>
-        <h1> Empresa: {{practice?.empresa}}</h1>
-        <h1> Nombre de la practica: {{practice?.titulo}}</h1>
-        <h1> Tutor de la practica: {{tutor?.name}}</h1>
-        <h1> Horario: {{practice?.horario}}</h1>
-        <h1> Semanas: {{practice?.semanas}}</h1>
+        <h1> Nombre del alumno: {{student.first_name}}</h1>
+        <h1> Empresa: {{this.companyName}}</h1>
+        <h1> Nombre de la practica: {{offer.position}}</h1>
+        <h1> Horario: {{offer.schedule}}</h1>
+        <h1> Semanas: {{offer.weeks}}</h1>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button >Generar informe</button>
         <button mat-button [routerLink]="['/dashboard-users']">Volver</button>
     </mat-card-actions>
   </mat-card>
+</ng-container>
+
+<ng-template #noOffer>
+  <mat-card class="report-card">
+    <mat-card-header>
+      <mat-card-title>No tienes practicas en curso</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/dashboard-users']">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+

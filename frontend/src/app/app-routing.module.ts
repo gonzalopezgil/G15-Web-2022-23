@@ -22,6 +22,9 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
+import { RegisterofferComponent } from './components/tutors/registeroffer/registeroffer.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
+import { TutorGuard } from './guards/tutor.guard';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { TutorGuard } from './guards/tutor.guard';
 import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
@@ -58,7 +61,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path:'register-company',
+        path:'registeroffer',
+        component: RegisterofferComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'registercompany',
         component: RegistercompanyComponent,
         canActivate: [AuthGuard],
       },

@@ -22,16 +22,20 @@ export class AuthService {
       sessionStorage.removeItem('token');
     }
 
-    getId(): String {
+    getToken(): String {
+      return sessionStorage.getItem('token') || '';
+    }
+
+
+    getId(): number {
       const helper = new JwtHelperService();
       let token = sessionStorage.getItem('token');
-      let id = "";
+      let id = -1;
       if (token){
         let decodedToken = helper.decodeToken(token);
-        id = decodedToken.id;
+        id = decodedToken["id"];
+        }
       }
-      return id;
-    }
 
     getRole(): String {
       const helper = new JwtHelperService();

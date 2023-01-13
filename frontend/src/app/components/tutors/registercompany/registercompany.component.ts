@@ -1,6 +1,6 @@
-import { TutorsService } from 'src/app/services/tutors.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TutorsService } from 'src/app/services/tutors.service';
 
 @Component({
   selector: 'app-registercompany',
@@ -31,7 +31,7 @@ export class RegistercompanyComponent {
   get city() { return this.form.get('city'); }
   get postal_code() { return this.form.get('postal_code'); }
   get description() { return this.form.get('description'); }
-
+  
   clearForm() {
     this.form.reset();
   }

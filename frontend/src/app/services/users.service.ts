@@ -1,29 +1,17 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
+import { Student } from '../interfaces/student';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService: AuthService) { }
 
-  getUser(): User {
-    let user:User = {
-      name: 'Carlos',
-      username: 'carlos',
-      lastname: 'Fernandez',
-      dni:  '12345678',
-      mail: 'carlos@gmail.com',
-      grade: '1',
-      dob: '01/01/2000',
-      phone: '123456789',
-      hours: 0
-    }
-
-    return user;
-  }
+  
 
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de user");
@@ -31,4 +19,32 @@ export class UsersService {
     console.log('Password changed to: ' + password);
     console.log('Confirm password: ' + confirmPassword);
   }
+
+  getStudent(): Observable<Student>{
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+      let id = this.authService.getId();
+      return this.http.get<Student>("http://localhost:8080/api/users/students/"+id, httpOptions);
+
+  }
+
+  getPDF(): Observable<any>{
+    const options = {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+        'Content-disposition': 'attachment;filename="filename.pdf"',
+        'Content-Description' :' File Transfer',
+        'Pragma': 'public',
+      },
+      responseType: 'blob' as 'json'
+    };
+    let id = this.authService.getId();
+    return this.http.get<any>("http://localhost:8080/api/users/students/"+ id + "/report",options);
+  }
+
 }

@@ -1,3 +1,5 @@
+import { Company } from './../interfaces/company';
+import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +14,8 @@ import { AuthService } from './auth.service';
 })
 export class TutorsService {
 
-  constructor(private http: HttpClient, private authService:AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
 
   getTutor(): Observable<Tutor> {
     let id = this.authService.getId();
@@ -38,16 +41,52 @@ export class TutorsService {
     };
   }
 
-  registerPractice(form: FormGroup) {
-    /**return this.http.post('http://localhost:3000/api/practices', {
-      titulo: form.value.titulo,
-      empresa: form.value.empresa,
-      plazas: form.value.plazas,
-      horario: form.value.horario,
-      dias: form.value.dias,
-      semanas: form.value.semanas
-    });**/
-    console.log(form.value);
+  registerCompany(form: FormGroup) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.post('http://localhost:8080/api/company', {
+      address: form.value.address,
+      city: form.value.city,
+      description: form.value.description,
+      mail_suffix: form.value.mail_suffix,
+      name: form.value.name,
+      phone: form.value.phone,
+      postal_code: form.value.postal_code,
+    }, httpOptions);
+  }
+
+  getCompanybyName(name:String): Observable<Company> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<Company>('http://localhost:8080/api/company/'+name, httpOptions);
+  }
+
+
+  registerOffer(form: FormGroup) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    let comp:Company;
+    this.getCompanybyName(form.value.empresa).subscribe(data => {
+      comp=data;
+      return this.http.post('http://localhost:8080/api/practices/offers', {
+
+
+    });
+  });
+    
+
   }
 
   deletePractice(form: FormGroup) {
@@ -58,12 +97,15 @@ export class TutorsService {
   }
 
   changeTutor(form: FormGroup) {
-    /**return this.http.put('http://localhost:3000/api/tutors', {
+    let company: Company;
+    this.getCompanybyName(form.value.company).subscribe(data => {
+      company = data;
+    return this.http.put('http://localhost:8080/api/tutors', {
       company: form.value.company,
       newtutor: form.value.newtutor
-    });**/
-    console.log(form.value);
-  }
+    });
+  });
+}
 
   createTutor(form: FormGroup): boolean {
     /**return this.http.post('http://localhost:3000/api/tutors', {
