@@ -27,6 +27,15 @@ export class PracticeAssignedComponent {
   @Output() messageEvent = new EventEmitter<UnassignedPractice[]>();
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);;
   solicitudes: Solicitud[] = [];
+  practica: PracticaUser = {
+    end_date: '',
+    id: -1,
+    mark: -1,
+    offer_id: -1,
+    report: '',
+    start_date: new Date(),
+    student_id: -1
+  }
   data: UnassignedPractice[] = [];
   alumno: Student = {
     id: -1,
@@ -77,34 +86,36 @@ export class PracticeAssignedComponent {
       (solicitudes) => {
         this.solicitudes = solicitudes;
         for(let i = 0; i<this.solicitudes.length; i++){
-          this.userService.getStudentBy(this.solicitudes[i].aplicante).subscribe(
+          console.log(solicitudes[i].student_id)
+          this.userService.getStudentBy(this.solicitudes[i].student_id).subscribe(
             (alumno) => {
               this.alumno = alumno;
-              this.empresaService.getCompanyById(this.solicitudes[i].empresa).subscribe(
-                (empresa) => {
-                  this.empresa = empresa;
-                  this.practiceService.getPracticesResponsable().subscribe(
-                    (practicas) =>{
-                      for (let i = 0; i<practicas.length;i++){
-                        if(this.solicitudes[i].aplicante == practicas[i].student_id)
-                          this.offerService.getOfferById(this.oferta.company_id).subscribe(
-                            (oferta) => {
-                            this.oferta = oferta;
-                            this.data[i]= { name : alumno.first_name + " " + alumno.last_name, companyName : empresa.name, position: oferta.position, f_inicio : oferta.start_date}
-                            console.log(this.dataSource.data)
-                            this.dataSource._updateChangeSubscription();
-                          }
-                        )
-                      }
+              this.practiceService.getPracticeById(this.solicitudes[i].practices_id).subscribe(
+                (practica) => {
+                  this.practica = practica;
+                  this.offerService.getOfferById(practica.offer_id).subscribe(
+                    (oferta) =>{
+                      this.oferta = oferta;
+                          this.empresaService.getCompanyById(this.oferta.company_id).subscribe(
+                            (empresa) => {
+                              this.empresa = empresa;
+                              this.data[i]= { name : alumno.first_name + " " + alumno.last_name, companyName : empresa.name, position: oferta.position, start_date : new Date(oferta.start_date)}
+                              console.log(this.dataSource.data)
+                              this.dataSource._updateChangeSubscription();
+                            }
+                          )
+                        }
+                      )
                     }
                   )
                 }
               )
             }
-          )
-        }
-      }
-    )
+          }
+        )
+
+
+
     console.log(this.data);
     this.dataSource.data = this.data
   }

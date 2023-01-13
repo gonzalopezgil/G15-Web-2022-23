@@ -1,4 +1,4 @@
 export interface Solicitud {
-    aplicante: number;
-    empresa: number;
+    student_id: number;
+    practices_id: number;
 }

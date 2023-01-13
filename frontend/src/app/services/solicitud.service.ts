@@ -18,6 +18,6 @@ export class SolicitudService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.post<Solicitud[]>(this.envService.getApiUrl()+'/api/practices/assign-practices',httpOptions)
+    return this.http.post<Solicitud[]>(this.envService.getApiUrl()+'/api/practices/assign-practices',{}, httpOptions)
   }
 }

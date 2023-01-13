@@ -5,6 +5,6 @@ export interface PracticaUser {
     mark: number,
     offer_id: number,
     report: string,
-    start_date: string,
+    start_date: Date,
     student_id: number
 }

@@ -78,6 +78,15 @@ export class PracticesService {
       };
       return this.http.get<PracticaUser[]>(this.envService.getApiUrl()+'/api/practices/', httpOptions);
     }
+    getPracticeById(id:number): Observable<PracticaUser>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.get<PracticaUser>(this.envService.getApiUrl()+'/api/practices/'+ id, httpOptions);
+    }
     confirmAssignation(): Observable<any>{
       const httpOptions = {
         headers: {
