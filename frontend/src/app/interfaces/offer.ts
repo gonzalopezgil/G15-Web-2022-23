@@ -1,10 +1,6 @@
-export interface Offer{
-    id: number;
-    positiontable: number;
-    company_id: number;
-    position: string;
-    vacancies: number;
-    schedule: string;
-    weeks: number;
+import { SimpleOffer } from "./simple_offer";
+
+export interface Offer extends SimpleOffer{
+    pos: number;
     company_name: string;
-  }
+}

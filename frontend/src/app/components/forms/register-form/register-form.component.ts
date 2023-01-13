@@ -19,8 +19,8 @@ export class RegisterFormComponent {
     ]),
     nif: new FormControl('', [Validators.required, Validators.pattern('[0-9]{8}-[A-Z]{1}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    name: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
-    surname: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]),
+    name: new FormControl('', [Validators.pattern('[a-zA-Z ]*'), Validators.required]),
+    surname: new FormControl('', [Validators.pattern('[a-zA-Z ]*'), Validators.required]),
   });
   @Output() registerAction: EventEmitter<{}> = new EventEmitter<{}>();
 

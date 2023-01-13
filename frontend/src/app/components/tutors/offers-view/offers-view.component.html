@@ -1,36 +1,36 @@
 <div class="header">
   <h1>Tus ofertas de practicas</h1>
 </div>
-<table mat-table class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Posicion Column -->
-  <ng-container matColumnDef="Posicion">
+  <ng-container matColumnDef="pos">
     <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.pos}} </td>
   </ng-container>
 
   <!-- Horario Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Puesto </th>
-    <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container>
 
   <!-- Horas Column -->
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef> Categoria </th>
-    <td mat-cell *matCellDef="let element"> {{element.horas}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
   </ng-container>
 
   <!-- Plazas Column -->
   <ng-container matColumnDef="vacancies">
     <th mat-header-cell *matHeaderCellDef> Plazas </th>
-    <td mat-cell *matCellDef="let element"></td>
+    <td mat-cell *matCellDef="let element"> {{element.vacancies}} </td>
   </ng-container>
 
   <!-- Fecha Column -->
   <ng-container matColumnDef="start_date">
     <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
-    <td mat-cell *matCellDef="let element"></td>
+    <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -44,6 +44,6 @@
 
 <div class="button">
   <!-- Add new offer button -->
-  <button mat-raised-button>+ Oferta</button>
+  <button mat-raised-button (click)="newOffer()">+ Oferta</button>
   <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
 </div>

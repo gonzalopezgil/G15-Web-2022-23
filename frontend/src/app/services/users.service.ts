@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from '../interfaces/student';
 import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,24 @@ export class UsersService {
 
   constructor(private http: HttpClient,private authService: AuthService) { }
 
-  
+
 
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de user");
     console.log('oldpassword: ' + oldpassword);
     console.log('Password changed to: ' + password);
     console.log('Confirm password: ' + confirmPassword);
+  }
+
+  getUser(): Observable<User>{
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    let id = this.authService.getId();
+    return this.http.get<User>("http://localhost:8080/api/users/"+id, httpOptions);
   }
 
   getStudent(): Observable<Student>{
@@ -29,7 +41,16 @@ export class UsersService {
     };
       let id = this.authService.getId();
       return this.http.get<Student>("http://localhost:8080/api/users/students/"+id, httpOptions);
+  }
 
+  getStudentBy(id: any): Observable<Student>{
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<Student>("http://localhost:8080/api/users/students/"+id, httpOptions);
   }
 
   getPDF(): Observable<any>{

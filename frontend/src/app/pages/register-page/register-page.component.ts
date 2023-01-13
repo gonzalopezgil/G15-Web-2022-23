@@ -20,19 +20,28 @@ export class RegisterPageComponent {
   }
 
   registerUser(value: any): void {
-  //   let { username, password, nif, email, name, surname } = value;
-  //   let tutor = {username, password, nif, email, name, surname};
-  //   let response = this.tutorService.registerTutor(tutor);
-  //   this.pending = true;
-  //   response.subscribe(
-  //     (response) => {
-  //       if(response.token){
-  //         sessionStorage.setItem('token', response.token);
-  //         this.router.navigate(['/home']);
-  //       }
+    let tutor = {
+      username: value.username,
+      password: value.password,
+      nif: value.nif,
+      email: value.email,
+      name: value.name,
+      lastname: value.surname,
+      admission_date: new Date(),
+      active: false
+    }
 
-  //     }
-  //   );
-  //   this.pending = false;
+    let response = this.tutorService.registerTutor(tutor);
+    this.pending = true;
+    response.subscribe(
+      (response) => {
+        if(response.status == 200) {
+          this.router.navigate(['/login']);
+        }else {
+          this.pending = false;
+        }
+      }
+    );
+    this.pending = false;
   }
 }

@@ -6,18 +6,19 @@ import { HttpClient } from '@angular/common/http';
 import { Tutor } from '../interfaces/tutor';
 import { Observable } from 'rxjs';
 import { Report } from '../interfaces/report';
-import { reports } from '../mocks/reports.mock';
-import { AuthService } from './auth.service';
+import { Practice } from '../interfaces/practice';
+import { Offer } from '../interfaces/offer';
+import { PracticesService } from './practices.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorsService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private practiceService: PracticesService) { }
 
 
-  getTutor(): Observable<Tutor> {
+  getTutor(): Observable<any> {
     let id = this.authService.getId();
     let token = sessionStorage.getItem('token');
     let httpOptions = {
@@ -27,7 +28,7 @@ export class TutorsService {
       }
     };
 
-    return this.http.get<Tutor>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
+    return this.http.get<any>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
   }
 
   getStubbyTutor(): Tutor {
@@ -37,7 +38,8 @@ export class TutorsService {
       username: 'juanperez',
       nif: '12345678A',
       email: 'xd@gmail.com',
-      admissionDate: new Date(),
+      admission_date: new Date(),
+      active: true
     };
   }
 
@@ -69,6 +71,15 @@ export class TutorsService {
     return this.http.get<Company>('http://localhost:8080/api/company/'+name, httpOptions);
   }
 
+  getCompany(id_company: any): Observable<Company> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<Company>('http://localhost:8080/api/company/'+id_company, httpOptions);
+  }
 
   registerOffer(form: FormGroup) {
     const httpOptions = {
@@ -85,7 +96,7 @@ export class TutorsService {
 
     });
   });
-    
+
 
   }
 
@@ -116,10 +127,6 @@ export class TutorsService {
     return true;
   }
 
-  registerCompany(form: FormGroup){
-    console.log(form.value);
-  }
-
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de tutor");
     console.log('oldpassword: ' + oldpassword);
@@ -127,17 +134,33 @@ export class TutorsService {
     console.log('Confirm password: ' + confirmPassword);
   }
 
-  getReports(): Report[] {
-    return reports;
+  getPracticesByTutor(): Observable<any> {
+    let id = this.authService.getId();
+    let token = sessionStorage.getItem('token');
+    let httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    return this.http.get<Practice[]>('http://localhost:8080/api/users/tutors/'+id+'/practices', httpOptions);
   }
 
-  saveReports(reports: Report[]) {
-    console.log(reports);
+  getOffersByTutor(): Observable<Offer[]> {
+    let id = this.authService.getId();
+    let token = sessionStorage.getItem('token');
+    let httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    return this.http.get<Offer[]>('http://localhost:8080/api/users/tutors/'+id+'/offers', httpOptions);
   }
+
 
   registerTutor(tutor: Tutor): Observable<any> {
-    return this.http.post('http://localhost:3000/api/tutors', tutor);
+    return this.http.post('http://localhost:8080/api/users/tutors', tutor);
   }
-
 }
 
