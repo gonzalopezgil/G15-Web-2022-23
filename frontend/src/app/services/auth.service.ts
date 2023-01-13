@@ -34,9 +34,8 @@ export class AuthService {
       if (token){
         let decodedToken = helper.decodeToken(token);
         id = decodedToken["id"];
+        }
       }
-      return id;
-    }
 
     getRole(): String {
       const helper = new JwtHelperService();

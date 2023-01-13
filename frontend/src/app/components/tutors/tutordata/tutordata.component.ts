@@ -14,7 +14,9 @@ export class TutordataComponent {
   constructor(private tutorService: TutorsService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.tutor = this.tutorService.getTutor();
+    this.tutorService.getTutor().subscribe((tutor) => {
+      this.tutor = tutor;
+    });
   }
 
   changePassword() {

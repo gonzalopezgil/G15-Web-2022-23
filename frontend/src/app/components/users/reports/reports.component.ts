@@ -63,7 +63,6 @@ export class ReportsComponent implements OnInit {
                 });
                 break;
               }
-
             }
           });
         this.UserService.getStudent().subscribe((student: Student) => {

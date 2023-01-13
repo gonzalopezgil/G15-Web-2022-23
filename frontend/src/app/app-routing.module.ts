@@ -3,7 +3,6 @@ import { UserGuard } from './guards/user.guard';
 import { ResponsableGuard } from './guards/responsable.guard';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
-import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
 import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
@@ -27,6 +26,9 @@ import { RegisterofferComponent } from './components/tutors/registeroffer/regist
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { TutorGuard } from './guards/tutor.guard';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { TutorGuard } from './guards/tutor.guard';
+import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
+import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
 
 
 const routes: Routes = [
@@ -69,22 +71,22 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path:'deletecompany',
-        component: DeletecompanyComponent,
+        path:'company',
+        component: CompanyViewComponent,
         canActivate: [AuthGuard],
       },
       {
-        path:'changetutor',
-        component: ChangetutorcompanyComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path:'reports',
+        path:'practices',
         component: TutorreportsComponent,
         canActivate: [AuthGuard],
       },
       {
-        path:'tutordata',
+        path:'offers',
+        component: OffersViewComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path:'profile',
         component: TutordataComponent,
         canActivate: [AuthGuard],
       },

@@ -3,36 +3,35 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
       <mat-toolbar class="header">Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['/dashboard-tutors/registercompany']">
+        <a mat-list-item [routerLink]="['/dashboard-tutors/register-company']">
           <h3 style="color:rgb(255, 255, 255)">
-            Dar de alta a la empresa
+            Alta de empresa
           </h3>
         </a>
-        <a mat-list-item [routerLink]="['/dashboard-tutors/deletecompany']">
-            <h3 style="color:rgb(255, 255, 255)">
-              Dar de baja a la empresa
-            </h3>
-          </a>
-          <a mat-list-item [routerLink]="['/dashboard-tutors/registeroffer']">
-            <h3 style="color:rgb(255, 255, 255)">
-              Dar de alta una oferta
-            </h3>
-          </a>
-          <a mat-list-item [routerLink]="['/dashboard-tutors/changetutor']">
-            <h3 style="color:rgb(255, 255, 255)">
-              Cambiar la empresa a otro tutor
-            </h3>
-          </a>
-          <a mat-list-item [routerLink]="['/dashboard-tutors/reports']">
-            <h3 style="color:rgb(255, 255, 255)">
-              Generar informe de sus alumnos
-            </h3>
-          </a>
-          <a mat-list-item [routerLink]="['/dashboard-tutors/tutordata']">
-            <h3 style="color:rgb(255, 255, 255)">
-              Ver datos de la cuenta
-            </h3>
-          </a>
+
+        <a mat-list-item [routerLink]="['/dashboard-tutors/company']">
+          <h3 style="color:rgb(255, 255, 255)">
+            Mi empresa
+          </h3>
+        </a>
+
+        <a mat-list-item [routerLink]="['/dashboard-tutors/practices']">
+          <h3 style="color:rgb(255, 255, 255)">
+            Mis practicas asignadas
+          </h3>
+        </a>
+
+        <a mat-list-item [routerLink]="['/dashboard-tutors/offers']">
+          <h3 style="color:rgb(255, 255, 255)">
+            Ofertas de practicas
+          </h3>
+        </a>
+
+        <a mat-list-item [routerLink]="['/dashboard-tutors/profile']">
+          <h3 style="color:rgb(255, 255, 255)">
+            Mi perfil
+          </h3>
+        </a>
         <a mat-list-item (click)="logout()">
           <h3 style="color:rgb(255, 255, 255)">
             Cerrar sesion

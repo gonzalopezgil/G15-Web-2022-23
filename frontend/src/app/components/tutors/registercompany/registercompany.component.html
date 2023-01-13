@@ -1,58 +1,76 @@
 <mat-card>
-    <mat-card-header class="header">
-      <mat-card-title >
-        <h1>Registrar una empresa</h1>
-      </mat-card-title>
-    </mat-card-header>
+  <mat-card-header class="header">
+    <mat-card-title >
+      <h1>Alta de empresa ofertadora</h1>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>Bienvenido al formulario de alta de empresa, aqui puedes dar de alta una empresa nueva. Todos los tutores activos de la aplicacion deben tener una empresa dada de alta, ya sea creando una nueva empresa en la aplicacion, o siendo asociado a una ya existente. Si tu empresa ya existe, pide al tutor activo que te de de alta como sustituto, si quieres crear una nueva empresa, rellena los campos siguientes:</p>
+    </mat-card-subtitle>
+
+  </mat-card-header>
+  <div class="center-content">
     <mat-card-content>
       <form [formGroup]="form" (submit)="onSubmit()">
-      <mat-form-field class="form">
-        <input matInput placeholder="Nombre empresa:" formControlName="name" />
-        <mat-error *ngIf="name?.errors?.['required'] && name?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Sufijo de la empresa:" formControlName="mail_suffix" />
-        <mat-error *ngIf="mail_suffix?.errors?.['required'] && mail_suffix?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Telefono:" formControlName="phone" />
-        <mat-error *ngIf="phone?.errors?.['required'] && phone?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Direccion:" formControlName="address" />
-        <mat-error *ngIf="address?.errors?.['required'] && address?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Ciudad:" formControlName="city" />
-        <mat-error *ngIf="city?.errors?.['required'] && city?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Codigo postal:" formControlName="postal_code" />
-        <mat-error *ngIf="postal_code?.errors?.['required'] && postal_code?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="form">
-        <input matInput placeholder="Descripcion:" formControlName="description" />
-        <mat-error *ngIf="description?.errors?.['required'] && description?.touched">
-          <p class="errors">Este campo es obligatorio</p>
-        </mat-error>
-      </mat-form-field>
-    </form>
+        <mat-form-field>
+          <input matInput placeholder="Nombre de la empresa:" formControlName="name" />
+          <mat-error *ngIf="name?.errors?.['required'] && name?.touched">
+            Este campo es obligatorio
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Sufijo de correo:" formControlName="mail_sufix" />
+          <mat-error *ngIf="mail_suffix?.errors?.['required'] && mail_suffix?.touched">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="mail_suffix?.errors?.['pattern'] && mail_suffix?.touched">
+            Formato invalido (@example.com)
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Telefono:" formControlName="phone" />
+            <mat-error *ngIf="phone?.errors?.['required'] && phone?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="phone?.errors?.['pattern'] && phone?.touched">
+              Introduce un numero de 9 digitos
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Direccion:" formControlName="address" />
+            <mat-error *ngIf="address?.errors?.['required'] && address?.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Ciudad:" formControlName="city" />
+            <mat-error *ngIf="city?.errors?.['required'] && city?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="city?.errors?.['pattern'] && city?.touched">
+              Las ciudades no pueden contener numeros
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Codigo Postal:" formControlName="postal_code" />
+            <mat-error *ngIf="postal_code?.errors?.['required'] && postal_code?.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="postal_code?.errors?.['pattern'] && postal_code?.touched">
+              El codigo postal debe ser un numero de 5 digitos
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Descripcion:" formControlName="description"></textarea>
+            <mat-error *ngIf="description?.errors?.['required'] && description?.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+      </form>
     </mat-card-content>
-    <mat-card-actions class="button">
+    <mat-card-actions>
       <button type="submit" mat-raised-button [disabled]="form.invalid" (click)="onSubmit()">Enviar</button>
       <button mat-raised-button (click)="clearForm()">Borrar datos</button>
       <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
     </mat-card-actions>
-  </mat-card>
+  </div>
+</mat-card>
