@@ -1,63 +1,66 @@
-<div class="header">
+  <div class="header">
     <h1>Tus informes de alumnos</h1>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
+
     <!-- Posicion Column -->
-    <ng-container matColumnDef="Posicion">
+    <ng-container matColumnDef="pos">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.pos}} </td>
     </ng-container>
-  
+
     <!-- Nombre Column -->
-    <ng-container matColumnDef="Nombre">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
-  
+
     <!-- Horario Column -->
-    <ng-container matColumnDef="Horario">
+    <ng-container matColumnDef="schedule">
       <th mat-header-cell *matHeaderCellDef> Horario </th>
-      <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.schedule}} </td>
     </ng-container>
-  
+
     <!-- Horas Column -->
-    <ng-container matColumnDef="Horas">
-      <th mat-header-cell *matHeaderCellDef> Horas </th>
-      <td mat-cell *matCellDef="let element"> {{element.horas}} </td>
+    <ng-container matColumnDef="weeks">
+      <th mat-header-cell *matHeaderCellDef> Semanas </th>
+      <td mat-cell *matCellDef="let element"> {{element.weeks}} </td>
     </ng-container>
-  
+
     <!-- Anotaciones Column -->
-    <ng-container matColumnDef="Anotaciones">
-      <th mat-header-cell *matHeaderCellDef> Anotaciones </th>
+    <ng-container matColumnDef="report">
+      <th mat-header-cell *matHeaderCellDef> Evaluacion </th>
       <td mat-cell *matCellDef="let element">
         <mat-form-field>
-          <input matInput placeholder="" [(ngModel)]="element.anotaciones">
+          <textarea matInput placeholder="" [(ngModel)]="element.evaluation"></textarea>
         </mat-form-field>
       </td>
     </ng-container>
-  
+
     <!-- Nota Column -->
-    <ng-container matColumnDef="Nota">
+    <ng-container matColumnDef="mark">
         <th mat-header-cell *matHeaderCellDef> Nota </th>
         <td mat-cell *matCellDef="let element">
           <mat-form-field>
-            <input matInput placeholder="" [(ngModel)]="element.nota">
+            <input matInput placeholder="" [(ngModel)]="element.mark">
           </mat-form-field>
         </td>
       </ng-container>
-    
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </tr>
-  
+
   </table>
-  <mat-paginator [pageSize]="5" 
+  <mat-paginator [pageSize]="10"
                    showFirstLastButtons
                    aria-label="Seleciona la pagina de practicas">
     </mat-paginator>
-  
+
   <div class="button">
-    <button mat-raised-button (click)="guardar()">Guardar la seleccion de practicas</button>
+    <button mat-raised-button (click)="guardar()">Guardar la evaluacion de practicas</button>
     <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
   </div>
+<!-- <div class="container" *ngIf="!this.loadingState">
+  <mat-spinner class="spinner"></mat-spinner>
+</div> -->

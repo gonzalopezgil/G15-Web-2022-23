@@ -1,0 +1,29 @@
+<div class="container">
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Datos de tu empresa:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <label for="name">Nombre de la empresa: {{this.company.name}} </label>
+        </div>
+        <div>
+            <label for="mail_suffix">Sufijo de correo: @{{this.company.mail_suffix}} </label>
+        </div>
+        <div>
+            <label for="phone">Telefono: {{this.company.phone}} </label>
+        </div>
+        <div>
+            <label for="address">Direccion: {{this.company.address +", " + this.company.city + ", " + this.company.postal_code}} </label>
+        </div>
+        <div>
+            <label for="description">Descripcion: {{this.company.description}} </label>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button>Cambiar tutor</button>
+      <button mat-raised-button>Dar de baja</button>
+      <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

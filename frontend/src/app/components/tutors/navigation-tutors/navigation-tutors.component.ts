@@ -3,6 +3,7 @@ import { Component ,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { TutorsService } from 'src/app/services/tutors.service';
 
 @Component({
   selector: 'app-navigation-tutors',
@@ -10,17 +11,24 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navigation-tutors.component.scss']
 })
 export class NavigationTutorsComponent  implements OnInit{
-  
+
+  activeTutor: Boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router,private AuthService: AuthService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router,private AuthService: AuthService, private tutorService: TutorsService) { }
 
   ngOnInit(): void {
-    this.router.navigate(['dashboard-tutors/welcome']);
+
+    this.tutorService.getTutor().subscribe((tutor_response) => {
+      if (tutor_response.company_id != null) {
+        this.activeTutor = true;
+      }
+      this.router.navigate(['dashboard-tutors/welcome']);
+    });
   }
 
   logout(): void {

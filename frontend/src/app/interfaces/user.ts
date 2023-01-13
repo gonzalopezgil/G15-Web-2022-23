@@ -1,11 +1,7 @@
-export interface User {
-    first_name: string;
+export interface User{
     username: string;
+    first_name: string;
     last_name: string;
-    dni: string;
-    mail: string;
-    degree: string;
-    dob: string;
-    phone: string;
-    total_hours: number;
+    nif: string;
+    email: string;
 }

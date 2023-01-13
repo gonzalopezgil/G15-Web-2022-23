@@ -56,6 +56,9 @@
                 <mat-error *ngIf="registerForm.controls['name'].hasError('pattern')">
                     El formato no es correcto
                 </mat-error>
+                <mat-error *ngIf="registerForm.controls['name'].hasError('required')">
+                    Este campo es es obligatorio
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -63,6 +66,9 @@
                 <input matInput formControlName="surname">
                 <mat-error *ngIf="registerForm.controls['surname'].hasError('pattern')">
                     El formato no es correcto
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['surname'].hasError('required')">
+                    Este campo es es obligatorio
                 </mat-error>
             </mat-form-field>
 

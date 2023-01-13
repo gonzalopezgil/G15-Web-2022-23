@@ -33,7 +33,7 @@ import { RegisterFormComponent } from './components/forms/register-form/register
 import { PasswordsMatchValidator } from './validators/passwords-match-validator/passwords-match-validator.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
 import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
-import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { RegisterofferComponent } from './components/tutors/registeroffer/registeroffer.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
@@ -45,6 +45,10 @@ import { PracticeAssignedComponent } from './components/responsable/practice-ass
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
+import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
+import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/pop-up-add-offer.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,7 @@ import { PracticesReportsComponent } from './components/responsable/practices-re
     PasswordsMatchValidator,
     DashboardTutorsComponent,
     NavigationTutorsComponent,
-    RegistercompanyComponent,
+    RegisterofferComponent,
     DeletecompanyComponent,
     ChangetutorcompanyComponent,
     TutorregisterformComponent,
@@ -83,6 +87,10 @@ import { PracticesReportsComponent } from './components/responsable/practices-re
     TutorreportsComponent,
     PracticeAssignedComponent,
     PracticesReportsComponent
+    RegistercompanyComponent,
+    CompanyViewComponent,
+    OffersViewComponent,
+    PopUpAddOfferComponent
   ],
   imports: [
     BrowserModule,

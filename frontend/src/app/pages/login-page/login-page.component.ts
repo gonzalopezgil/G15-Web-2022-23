@@ -30,14 +30,13 @@ export class LoginPageComponent implements OnInit {
 
     this.authService.login(username,password).subscribe(
       (response) => {
-        console.log(response);
         if(response.token){
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         }
       },
       (error) => {
-        if (error.status === 401)
+        if (error.status !== 200)
           this.loginError = "Las credenciales no son validas"
           this.loadingState = false;
       },
