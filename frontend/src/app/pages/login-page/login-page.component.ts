@@ -9,6 +9,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  loadingState: Boolean = false;
+  loginError: String = "";
+
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -18,23 +21,28 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+
+
   loginUser(value: any): void {
-    let { email, password } = value;
-    
-    this.authService.login(email,password).subscribe(
+    let { username, password } = value;
+
+    this.loadingState = true;
+
+    this.authService.login(username,password).subscribe(
       (response) => {
         if(response.token){
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         }
-
-        
       },
       (error) => {
-        console.error(`Error en el login: ${error}`);
+        if (error.status !== 200)
+          this.loginError = "Las credenciales no son validas"
+          this.loadingState = false;
       },
       () => {
-        console.info('Login finalizado');
+        this.loginError = "";
+        this.loadingState = false;
       });
   }
 }

@@ -1,0 +1,13 @@
+:host {
+    flex: layout;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header{
+    justify-content: center;
+}
+
+.errors{
+    color: red;
+}

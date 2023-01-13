@@ -1,0 +1,37 @@
+<div class="container">
+<mat-card *ngIf="!this.loadingState">
+  <mat-card-header>
+    <mat-card-title>Datos de tu cuenta:</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <div>
+          <label for="username">Nombre de usuario: {{tutor.username}}</label>
+      </div>
+      <div>
+          <label for="name">Nombre: {{tutor.name}}</label>
+      </div>
+      <div>
+          <label for="lastname">Apellidos: {{tutor.lastname}}</label>
+      </div>
+      <div>
+          <label for="dni">DNI: {{tutor.nif}}</label>
+      </div>
+      <div>
+          <label for="mail">Correo: {{tutor.email}}</label>
+      </div>
+      <div>
+          <label for="start_date">Fecha de alta: {{tutor.admission_date | date:'dd/MM/yyyy'}}</label>
+      </div>
+      <div>
+          <label for="active_tutor">Tutor activo: {{tutor.active ? "Si" : "No"}}</label>
+      </div>
+  </mat-card-content>
+  <mat-card-actions>
+      <button mat-raised-button (click)="changePassword()">Modificar contraseña</button>
+      <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
+  </mat-card-actions>
+</mat-card>
+
+
+  <mat-spinner *ngIf="this.loadingState"></mat-spinner>
+</div>

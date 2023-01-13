@@ -1,0 +1,36 @@
+<div class="header">
+  <h1>Aquí se presentan los alumnos: </h1>
+</div>
+<table mat-table: dataSource = "dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef> Nombre de usuario </th>
+    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="lastname">
+    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+    <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nif">
+    <th mat-header-cell *matHeaderCellDef> DNI </th>
+    <td mat-cell *matCellDef="let element"> {{element.nif}} </td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+  <ng-container matColumnDef="degree">
+    <th mat-header-cell *matHeaderCellDef> Grado </th>
+    <td mat-cell *matCellDef="let element"> {{element.degree}} </td>
+  </ng-container>
+  <ng-container matColumnDef="total_hours">
+    <th mat-header-cell *matHeaderCellDef> Horas </th>
+    <td mat-cell *matCellDef="let element"> {{element.total_hours}} </td>
+  </ng-container>
+</table>
+<div class="button">
+  <button mat-raised-button routerLink = "'/dashboard-responsable'">Volver</button>
+</div>
