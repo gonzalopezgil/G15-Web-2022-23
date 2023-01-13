@@ -10,16 +10,26 @@
 
 // import org.junit.Test;
 // import org.junit.jupiter.api.DisplayName;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.authentication.AuthenticationManager;
 
 // import com.uah.gestion_de_practicas.controller.dto.UserDTO;
 // import com.uah.gestion_de_practicas.model.User;
+// import com.uah.gestion_de_practicas.security.jwt.JwtTokenUtil;
 // import com.uah.gestion_de_practicas.service.UserService;
 
 // @DisplayName("User Controller Unit Tests")
 // public class UserControllerTest {
-
+    
 //     private UserService userService = mock(UserService.class);
-//     private UserController userController = new UserController(userService);
+
+//     @Autowired
+//     private AuthenticationManager authManager;
+
+//     @Autowired
+//     private JwtTokenUtil jwtTokenUtil;
+
+//     private UserController userController = new UserController(userService, authManager, jwtTokenUtil);
 
 //     @Test
 //     public void getAllUsers() {
