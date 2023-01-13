@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.controller.dto.OfferSelection;
 import com.uah.gestion_de_practicas.model.Offer;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Request;
 import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.StudentRepository;
@@ -23,11 +24,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final RequestService requestService;
     private final OfferService offerService;
+    private final PracticeService practiceService;
 
-    public StudentService(StudentRepository studentRepository, RequestService requestService, OfferService offerService) {
+    public StudentService(StudentRepository studentRepository, RequestService requestService, OfferService offerService, PracticeService practiceService) {
         this.studentRepository = studentRepository;
         this.requestService = requestService;
         this.offerService = offerService;
+        this.practiceService = practiceService;
     }
 
 
@@ -98,7 +101,21 @@ public class StudentService {
         return requestService.getRequestsByStudentId(student_id);
     }
 
-    public Boolean isAvailableForPractice(Long student_id){
+    public Boolean isAvailableForPractice(Long student_id) {
         return studentRepository.hasActivePractice(student_id).isEmpty();
-    }   
+    }
+    
+    /** 
+     * Get the students of a tutor
+     * @param tutor_id Id of the tutor
+     * @return A list with all the students of the tutor
+     */
+    public List<Student> getStudentsFromTutor(Long tutor_id) {
+        return studentRepository.getStudentsFromTutor(tutor_id);
+    }
+
+
+    public List<Practice> getCompletedPractices(Long id) {
+        return practiceService.getCompletedPracticesByStudent(id);
+    }
 }

@@ -21,6 +21,9 @@ public interface PracticeRepository extends JpaRepository<Practice,Long> {
     @Query("SELECT p FROM Practice p INNER JOIN Offer o ON p.offer.id = o.id WHERE o.company.id = ?1")
     List<Practice> getPracticeHistory(Long id);
 
+    @Query("SELECT p FROM Practice p WHERE p.student.id = ?1 AND p.end_date IS NOT NULL")
+    List<Practice> getCompletedPracticesByStudent(Long id);
+
     @Query("SELECT new com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO(p.id, p.student.id, p.offer.id, p.mark, p.report, p.start_date, p.end_date) FROM Practice p WHERE p.end_date IS NOT NULL")
     List<SimplePracticeDAO> getCompletedPractices();
 }

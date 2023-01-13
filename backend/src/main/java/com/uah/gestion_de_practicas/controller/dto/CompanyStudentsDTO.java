@@ -29,6 +29,9 @@ public class CompanyStudentsDTO {
     }
 
     public static List<CompanyStudentsDTO> fromDAO(List<CompanyStudentsDAO> company_students_dao_list) {
+        if (company_students_dao_list == null) {
+            return null;
+        }
         return company_students_dao_list.stream().map(company_students_dao -> CompanyStudentsDTO.fromDAO(company_students_dao)).collect(Collectors.toList());
     }
 }
