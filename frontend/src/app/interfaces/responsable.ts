@@ -5,6 +5,6 @@ export interface responsable {
     lastname: string;
     dni: string;
     mail: string;
-    f_alta: string;
-    f_baja: string;
+    admission_date: Date,
+    removal_date: Date
 }

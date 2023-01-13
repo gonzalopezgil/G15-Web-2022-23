@@ -20,7 +20,7 @@ export class UsersService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.get<User>('http://localhost:8080/api/users/students/'+idAlumno, httpOptions);
+    return this.http.get<User>('http://localhost:8080/api/users/'+idAlumno, httpOptions);
   }
   constructor(private http: HttpClient,private authService: AuthService) { }
 

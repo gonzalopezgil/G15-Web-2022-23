@@ -87,6 +87,7 @@ export class PracticesReportsComponent {
                       this.empresa = empresa;
                       this.data[i]= { nameUser : alumno.first_name, lastnameUser : alumno.last_name, gradeUser : alumno.degree, companyName : empresa.name, hours : alumno.total_hours, mark : practicas[i].mark}
                       console.log(this.dataSource.data)
+                      this.dataSource.data[i] = this.data[i];
                       this.dataSource._updateChangeSubscription();
                     }
                   )
@@ -98,7 +99,7 @@ export class PracticesReportsComponent {
       }
     )
     console.log(this.data);
-    this.dataSource.data = this.data
+
   }
   aceptar():void{
     this.dialog.open(PopUpAssignPracticesComponent);
