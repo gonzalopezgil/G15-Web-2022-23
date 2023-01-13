@@ -1,6 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component,OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { User } from 'src/app/interfaces/user';
+import { Student } from 'src/app/interfaces/student';
 import { UsersService } from 'src/app/services/users.service';
 import { PopUpPasswordComponent } from '../../pop-ups/pop-up-password/pop-up-password.component';
 
@@ -10,15 +11,24 @@ import { PopUpPasswordComponent } from '../../pop-ups/pop-up-password/pop-up-pas
   styleUrls: ['./userdata.component.scss']
 })
 
-export class UserdataComponent {
-  user: User | undefined;
+export class UserdataComponent  implements OnInit{
+  user: Student | undefined;
   constructor(private usersService: UsersService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.user = this.usersService.getUser();
+    this.usersService.getStudent().subscribe((data: Student) => {
+      this.user = data;
+    });
   }
 
   changePassword() {
-    this.dialog.open(PopUpPasswordComponent); 
+    this.dialog.open(PopUpPasswordComponent, { data: true});
+  }
+  generatePDF() {
+    this.usersService.getPDF().subscribe((data: any) => {
+        const file = new Blob([data], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      });
   }
 }

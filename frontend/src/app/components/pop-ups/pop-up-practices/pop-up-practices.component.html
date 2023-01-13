@@ -1,14 +1,14 @@
 <ng-container *ngIf="this.seleccioncorrecta; else noseleccion">
-  <h1 mat-dialog-title>Tu orden de seleccion actual es:</h1>
+  <h1 mat-dialog-title>Tu orden de selección actual es:</h1>
   <li mat-dialog-content *ngFor="let item of practicas">
-    Has seleccionado la practica {{item.posicion}}
+    Has seleccionado la práctica {{item.id}}
   </li>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Volver</button>
-    <button mat-button mat-dialog-close>Enviar seleccion</button>
+    <button mat-button mat-dialog-close (click)="seleccionarPracticas()">Enviar selección</button>
   </div>
 </ng-container>
 <ng-template #noseleccion>
-  <h1 mat-dialog-title>Error en la seleccion , debes elegir al menos 1 practica y no mas de 10.</h1>
+  <h1 mat-dialog-title>Error en la selección , debes elegir al menos 1 práctica y no más de 10.</h1>
   <button mat-button mat-dialog-close>Volver</button>
 </ng-template>

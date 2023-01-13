@@ -22,6 +22,33 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
 import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop-up-password.component';
+import { NavigationResponsableComponent } from './components/responsable/navigation-responsable/navigation-responsable.component';
+import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
+import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
+import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
+import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
+import { PasswordsMatchValidator } from './validators/passwords-match-validator/passwords-match-validator.component';
+import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
+import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
+import { RegisterofferComponent } from './components/tutors/registeroffer/registeroffer.component';
+import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
+import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
+import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
+import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorregister-pages.component';
+import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
+import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
+import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
+import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
+import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
+import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/pop-up-add-offer.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +65,32 @@ import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop
     WelcomeComponent,
     PracticesOngoingComponent,
     UserdataComponent,
-    PopUpPasswordComponent
+    PopUpPasswordComponent,
+    NavigationResponsableComponent,
+    ResponsabledataComponent,
+    UsersReportsComponent,
+    DashboardResponsableComponent,
+    PopUpAssignPracticesComponent,
+    AboutUsPageComponent,
+    RegisterPageComponent,
+    RegisterFormComponent,
+    PasswordsMatchValidator,
+    DashboardTutorsComponent,
+    NavigationTutorsComponent,
+    RegisterofferComponent,
+    DeletecompanyComponent,
+    ChangetutorcompanyComponent,
+    TutorregisterformComponent,
+    TutorregisterPagesComponent,
+    PopUpTutorregisterComponent,
+    TutordataComponent,
+    TutorreportsComponent,
+    PracticeAssignedComponent,
+    PracticesReportsComponent,
+    RegistercompanyComponent,
+    CompanyViewComponent,
+    OffersViewComponent,
+    PopUpAddOfferComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +99,8 @@ import { PopUpPasswordComponent } from './components/pop-ups/pop-up-password/pop
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,32 +7,26 @@
                 <label for="username">Nombre de usuario: {{user?.username}}</label>
             </div>
             <div>
-                <label for="name">Nombre: {{user?.name}}</label>
+                <label for="name">Nombre: {{user?.first_name}}</label>
             </div>
             <div>
-                <label for="lastname">Apellidos: {{user?.lastname}}</label>
+                <label for="lastname">Apellidos: {{user?.last_name}}</label>
             </div>
             <div>
-                <label for="dni">DNI: {{user?.dni}}</label>
+                <label for="dni">DNI: {{user?.nif}}</label>
             </div>
             <div>
-                <label for="mail">Correo: {{user?.mail}}</label>
+                <label for="mail">Correo: {{user?.email}}</label>
             </div>
             <div>
-                <label for="grade">Grado: {{user?.grade}}</label>
+                <label for="grade">Grado: {{user?.degree}}</label>
             </div>
             <div>
-                <label for="dob">Fecha de nacimiento: {{user?.dob}}</label>
-            </div>
-            <div>
-                <label for="phone">Telefono: {{user?.phone}}</label>
-            </div>
-            <div>
-                <label for="hours">Horas totales: {{user?.hours}}</label>
+                <label for="hours">Horas totales: {{user?.total_hours}}</label>
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button (click)="changePassword()">Modificar contraseña</button>
+            <button mat-raised-button (click)="generatePDF()">Generar informe PDF</button>
             <button mat-raised-button [routerLink]="['/dashboard-users']">Volver</button>
         </mat-card-actions>
       </mat-card>
