@@ -1,13 +1,13 @@
 <mat-card>
   <mat-card-header class="header">
     <mat-card-title >
-      <h1>Registrar practicas</h1>
+      <h1>Registrar prácticas</h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="form" (submit)="onSubmit()">
     <mat-form-field class="form">
-      <input matInput placeholder="Titulo de la practica:" formControlName="titulo" />
+      <input matInput placeholder="Título de la práctica:" formControlName="titulo" />
       <mat-error *ngIf="titulo?.errors?.['required'] && titulo?.touched">
         <p class="errors">Este campo es obligatorio</p>
       </mat-error>
@@ -31,7 +31,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form">
-        <input matInput placeholder="Dias de la semana:" formControlName="dias" />
+        <input matInput placeholder="Días de la semana:" formControlName="dias" />
         <mat-error *ngIf="dias?.errors?.['required'] && dias?.touched">
           <p class="errors">Este campo es obligatorio</p>
         </mat-error>

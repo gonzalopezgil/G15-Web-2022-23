@@ -1,5 +1,5 @@
 <div class="header">
-  <h1>Estas son las practicas que están por ser aceptadas:</h1>
+  <h1>Estas son las prácticas que están por ser aceptadas:</h1>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
@@ -31,9 +31,9 @@
 </table>
 <mat-paginator [pageSize]="5"
                  showFirstLastButtons
-                 aria-label="Seleciona la pagina de practicas">
+                 aria-label="Seleciona la página de prácticas">
   </mat-paginator>
 <div class="button">
-  <button mat-raised-button (click) = "aceptar()" >Asignar practicas pendientes</button>
+  <button mat-raised-button (click) = "aceptar()" >Asignar prácticas pendientes</button>
   <button mat-raised-button [routerLink] = "'/dashboard-responsable'" >Volver</button>
 </div>

@@ -6,8 +6,8 @@
   <div *ngIf="!this.loadingState">
     <app-login-form (loginAction)="loginUser($event)" [loginError]="loginError"> </app-login-form>
     <div class="flex-column">
-        <p>Quieres ofertar practicas?</p>
-        <a routerLink="/register">Registrate como tutor </a>
+        <p>Quieres ofertar prácticas?</p>
+        <a routerLink="/register">Regístrate como tutor </a>
     </div>
   </div>
   <div *ngIf="this.loadingState">

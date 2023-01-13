@@ -8,7 +8,7 @@
       <td mat-cell *matCellDef="let element"> {{element.name}}</td>
   </ng-container>
   <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> Posicion</th>
+      <th mat-header-cell *matHeaderCellDef> Posición</th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container>
   <ng-container matColumnDef="company">
@@ -27,6 +27,6 @@
                  aria-label="Seleciona la pagina de practicas">
   </mat-paginator>
 <div class="button">
-  <button mat-raised-button (click)="generatePdf()">Generar pdf de la ultima asignacion</button>
+  <button mat-raised-button (click)="generatePdf()">Generar pdf de la última asignación</button>
   <button mat-raised-button routerLink = "'/dashboard-responsable'" >Volver</button>
 </div>

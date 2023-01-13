@@ -4,13 +4,13 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Posicion Column -->
-  <ng-container matColumnDef="Posicion">
+  <ng-container matColumnDef="Posición">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element"> {{element.positiontable}} </td>
   </ng-container>
 
   <!-- Titulo Column -->
-  <ng-container matColumnDef="Titulo">
+  <ng-container matColumnDef="Título">
     <th mat-header-cell *matHeaderCellDef> Titulo </th>
     <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container>
@@ -65,11 +65,11 @@
 </table>
 <mat-paginator [pageSize]="5"
                  showFirstLastButtons
-                 aria-label="Seleciona la pagina de practicas">
+                 aria-label="Seleciona la página de prácticas">
   </mat-paginator>
 
 <div class="button">
-  <button mat-raised-button (click)="guardar()">Guardar la seleccion de practicas</button>
+  <button mat-raised-button (click)="guardar()">Guardar la selección de prácticas</button>
   <button mat-raised-button [routerLink]="['/dashboard-users']">Volver</button>
 </div>
 

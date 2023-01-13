@@ -4,7 +4,7 @@
       <h1>Alta de empresa ofertadora</h1>
     </mat-card-title>
     <mat-card-subtitle>
-      <p>Bienvenido al formulario de alta de empresa, aqui puedes dar de alta una empresa nueva. Todos los tutores activos de la aplicacion deben tener una empresa dada de alta, ya sea creando una nueva empresa en la aplicacion, o siendo asociado a una ya existente. Si tu empresa ya existe, pide al tutor activo que te de de alta como sustituto, si quieres crear una nueva empresa, rellena los campos siguientes:</p>
+      <p>Bienvenido al formulario de alta de empresa, aqui puedes dar de alta una empresa nueva. Todos los tutores activos de la aplicación deben tener una empresa dada de alta, ya sea creando una nueva empresa en la aplicación, o siendo asociado a una ya existente. Si tu empresa ya existe, pide al tutor activo que te de de alta como sustituto, si quieres crear una nueva empresa, rellena los campos siguientes:</p>
     </mat-card-subtitle>
 
   </mat-card-header>
@@ -23,20 +23,20 @@
             Este campo es obligatorio
           </mat-error>
           <mat-error *ngIf="mail_suffix?.errors?.['pattern'] && mail_suffix?.touched">
-            Formato invalido (@example.com)
+            Formato inválido (@example.com)
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Telefono:" formControlName="phone" />
+            <input matInput placeholder="Teléfono:" formControlName="phone" />
             <mat-error *ngIf="phone?.errors?.['required'] && phone?.touched">
               Este campo es obligatorio
             </mat-error>
             <mat-error *ngIf="phone?.errors?.['pattern'] && phone?.touched">
-              Introduce un numero de 9 digitos
+              Introduce un número de 9 dígitos
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Direccion:" formControlName="address" />
+            <input matInput placeholder="Dirección:" formControlName="address" />
             <mat-error *ngIf="address?.errors?.['required'] && address?.touched">
               Este campo es obligatorio
             </mat-error>
@@ -47,20 +47,20 @@
               Este campo es obligatorio
             </mat-error>
             <mat-error *ngIf="city?.errors?.['pattern'] && city?.touched">
-              Las ciudades no pueden contener numeros
+              Las ciudades no pueden contener números
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Codigo Postal:" formControlName="postal_code" />
+            <input matInput placeholder="Código Postal:" formControlName="postal_code" />
             <mat-error *ngIf="postal_code?.errors?.['required'] && postal_code?.touched">
               Este campo es obligatorio
             </mat-error>
             <mat-error *ngIf="postal_code?.errors?.['pattern'] && postal_code?.touched">
-              El codigo postal debe ser un numero de 5 digitos
+              El código postal debe ser un número de 5 digitos
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <textarea matInput placeholder="Descripcion:" formControlName="description"></textarea>
+            <textarea matInput placeholder="Descripción:" formControlName="description"></textarea>
             <mat-error *ngIf="description?.errors?.['required'] && description?.touched">
               Este campo es obligatorio
             </mat-error>

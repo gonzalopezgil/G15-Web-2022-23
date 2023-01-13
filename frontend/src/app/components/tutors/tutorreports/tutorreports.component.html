@@ -29,7 +29,7 @@
 
     <!-- Anotaciones Column -->
     <ng-container matColumnDef="report">
-      <th mat-header-cell *matHeaderCellDef> Evaluacion </th>
+      <th mat-header-cell *matHeaderCellDef> Evaluación </th>
       <td mat-cell *matCellDef="let element">
         <mat-form-field>
           <textarea matInput placeholder="" [(ngModel)]="element.evaluation"></textarea>
@@ -54,11 +54,11 @@
   </table>
   <mat-paginator [pageSize]="10"
                    showFirstLastButtons
-                   aria-label="Seleciona la pagina de practicas">
+                   aria-label="Seleciona la página de prácticas">
     </mat-paginator>
 
   <div class="button">
-    <button mat-raised-button (click)="guardar()">Guardar la evaluacion de practicas</button>
+    <button mat-raised-button (click)="guardar()">Guardar la evaluación de prácticas</button>
     <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
   </div>
 <!-- <div class="container" *ngIf="!this.loadingState">

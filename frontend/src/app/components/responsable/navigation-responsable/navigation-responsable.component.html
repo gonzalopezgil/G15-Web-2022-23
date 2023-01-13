@@ -1,11 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-      <mat-toolbar class="header">Menu</mat-toolbar>
+      <mat-toolbar class="header">Menú</mat-toolbar>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/dashboard-responsable/practices-reports']">
           <h3 style="color:rgb(255, 255, 255)">
-            Informe de practicas del sistema
+            Informe de prácticas del sistema
           </h3>
         </a>
         <a mat-list-item [routerLink]="['/dashboard-responsable/responsable-data']">
@@ -15,7 +15,7 @@
         </a>
         <a mat-list-item (click)="logout()">
           <h3 style="color:rgb(255, 255, 255)">
-            Cerrar sesion
+            Cerrar sesión
           </h3>
         </a>
       </mat-nav-list>
