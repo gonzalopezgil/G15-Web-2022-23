@@ -1,5 +1,5 @@
 --------------------RESPONSABLES--------------------
-INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (1,'fito.pozo.zamora', '!S#PHdWiC5', 'Fito', 'Pozo Zamora', '40902637N', 'fito.pozo.zamora@uah.es');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (1,'admin', 'admin', 'Fito', 'Pozo Zamora', '40902637N', 'admin@uah.es');
 INSERT INTO responsable (id_usuario, f_alta, f_baja) VALUES (1,'2022-04-28', NULL);
 
 --------------------ALUMNOS--------------------
@@ -18,7 +18,7 @@ INSERT INTO alumno (id_usuario, grado, nota_exp, f_nacimiento, telefono, horas_t
 INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (6,'maría.pilar.boada.sola', 'AhV5LDJsj*', 'María', 'Pilar Boada Sola', '51714443R', 'maría.pilar.boada.sola@edu.uah.es');
 INSERT INTO alumno (id_usuario, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (6,'Ingeniería de telecomunicaciones', 5, '1999-02-21', '+34 824912368', 350);
 
-INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (7,'cristian.márquez.real', 'c7LRU8ZV$s', 'Cristian', 'Márquez Real', '96311225J', 'cristian.márquez.real@edu.uah.es');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (7,'alumno', 'alumno', 'Cristian', 'Márquez Real', '96311225J', 'alumno@edu.uah.es');
 INSERT INTO alumno (id_usuario, grado, nota_exp, f_nacimiento, telefono, horas_totales) VALUES (7,'Ingeniería informática', 8, '2000-11-06', '+34 859228307', 350);
 
 INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (8,'noelia.oriana.huerta.cid', '!VoYI^xym9', 'Noelia', 'Oriana Huerta Cid', '77931804F', 'noelia.oriana.huerta.cid@edu.uah.es');
@@ -75,7 +75,7 @@ INSERT INTO tutor (id_usuario, f_alta, f_baja,id_empresa) VALUES (19, '2022-12-2
 INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (20,'julie.cuevas.arana', '2ENvX&Ho*k', 'Julie', 'Cuevas Arana', '65269707P', 'julie.cuevas.arana@camino-plc.es');
 INSERT INTO tutor (id_usuario, f_alta, f_baja,id_empresa) VALUES (20, '2021-04-15', NULL, 4);
 
-INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (21,'juan.antonio.carreño.rocamora', '_0BslaCuGp', 'Juan', 'Antonio Carreño Rocamora', '82498679W', 'juan.antonio.carreño.rocamora@soto-zaragoza.es');
+INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (21,'tutor', 'tutor', 'Juan', 'Antonio Carreño Rocamora', '82498679W', 'tutor@soto-zaragoza.es');
 INSERT INTO tutor (id_usuario, f_alta, f_baja,id_empresa) VALUES (21, '2021-03-25', NULL, 5);
 
 INSERT INTO usuario (id_usuario, nombre_usuario, contrasena, nombre, apellidos, DNI, correo) VALUES (22,'casandra.de.duran', 'q28KdJQC#q', 'Casandra', 'de Duran', '78147780J', 'casandra.de.duran@ortuño-tello.es');
