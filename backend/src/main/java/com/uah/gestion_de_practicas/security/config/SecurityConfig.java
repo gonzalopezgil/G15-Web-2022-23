@@ -55,14 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] STUDENT_WHITELIST = {
         "/api/users/students/**",
         "/api/company/**",
-        "/api/users/**",
+        "/api/users/**"
     };
 
     /** 
      * Whitelist of the endpoints that can be accessed by tutors and supervisor
      */
     private static final String[] TUTOR_WHITELIST = {
-        "/api/practice/**",
+        "/api/practice/**"
     };
 
     /** 
@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     private static final String[] ADMIN_WHITELIST = {
         "/api/**",
-        "/api/**/**",
+        "/api/**/**"
     };
 
     /** 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.AuthDTO;
+import com.uah.gestion_de_practicas.controller.dto.PasswordDTO;
 import com.uah.gestion_de_practicas.controller.dto.UserDTO;
 import com.uah.gestion_de_practicas.model.User;
 import com.uah.gestion_de_practicas.security.jwt.JwtTokenUtil;
@@ -144,7 +145,8 @@ public class UserController {
      */
     @PostMapping("/login")
     @ApiOperation("Logs in a user by its username and password")
-    public ResponseEntity<JwtResponse> logInUser(@ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
+    public ResponseEntity<JwtResponse> logInUser(
+            @ApiParam("JSON containing the username and password of the user") @RequestBody AuthDTO authDTO) {
         if (authDTO.getUsername() == null || authDTO.getPassword() == null) {
             log.warn("Bad request in the login: username or password is null");
             return ResponseEntity.badRequest().build();
@@ -158,16 +160,44 @@ public class UserController {
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authDTO.getUsername(),
-                        authDTO.getPassword()
-                )
-        );
+                        authDTO.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         log.info("Generating the JWT token");
         String jwt = jwtTokenUtil.generateJwtToken(authentication, user.getId());
 
         log.info("The user has successfully logged in");
         return ResponseEntity.ok(new JwtResponse(jwt));
-    }    
+    }
+
+    /** 
+     * Endpoint to change the password of a user
+     * @param passwordDTO PasswordDTO containing the old password and the new password
+     * @return ResponseEntity<Void> OK if the password was changed, Unauthorized otherwise
+     */
+    @PostMapping("/password")
+    @ApiOperation("Endpoint to change the password of a user")            
+    public ResponseEntity<Void> changePassword(
+            @ApiParam("JSON containing the old password and the new password") @RequestBody PasswordDTO passwordDTO) {
+        if (passwordDTO.getOldPassword() == null || passwordDTO.getNewPassword() == null || passwordDTO.getOldPassword() == passwordDTO.getNewPassword()) {
+            log.warn("Bad request in the change password");
+            return ResponseEntity.badRequest().build();
+        }
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserByUsername(username);
+        if (user == null) {
+            log.warn("The user has not been found");
+            return ResponseEntity.notFound().build();
+        }
+
+        if (!userService.changePassword(user, passwordDTO.getOldPassword(), passwordDTO.getNewPassword())) {
+            log.warn("The password has not been changed");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        log.info("The password has been successfully changed");
+        return ResponseEntity.ok().build();
+    }
 }
