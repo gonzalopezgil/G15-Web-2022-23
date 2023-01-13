@@ -57,25 +57,25 @@ def create_sql(file_name, fake, generator , n_sep):
             file.write(insert_user(supervisor) + insert_supervisor(supervisor) + "\n")
 
         # Insert student data
-        students = generator.generate_students(fake, 5)
+        students = generator.generate_students(fake, 15)
         file.write("--"*n_sep + "ALUMNOS" + "--"*n_sep + "\n")
         for student in students:
             file.write(insert_user(student) + insert_student(student) + "\n")
 
         # Insert company data
-        companies = generator.generate_companies(fake, 2)
+        companies = generator.generate_companies(fake, 5)
         file.write("--"*n_sep + "EMPRESAS" + "--"*n_sep + "\n")
         for company in companies:
             file.write(insert_company(company) + "\n")
 
         # Insert tutor data
-        tutors = generator.generate_tutors(fake, 5, companies)
+        tutors = generator.generate_tutors(fake, 15, companies)
         file.write("--"*n_sep + "TUTORES" + "--"*n_sep + "\n")
         for tutor in tutors:
             file.write(insert_user(tutor) + insert_tutor(tutor) + "\n")
 
         # Insert offer data
-        offers = generator.generate_offers(fake, 5, companies)
+        offers = generator.generate_offers(fake, 25, companies)
         file.write("--"*n_sep + "OFERTAS" + "--"*n_sep + "\n")
         for offer in offers:
             file.write(insert_offer(offer) + "\n")
