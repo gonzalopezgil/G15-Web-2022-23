@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.uah.gestion_de_practicas.controller.dto.OfferDTO;
+import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.controller.dto.TutorDTO;
+import com.uah.gestion_de_practicas.model.Offer;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
 import com.uah.gestion_de_practicas.service.TutorService;
 
@@ -128,6 +132,52 @@ public class TutorController {
         tutorService.deleteTutor(id);
         log.info("Tutor deleted successfully");
         return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Endpoint to get all the practices of a tutor.
+     * Only the tutor itself and the supervisor can obtain the information.
+     * @param id, the id of the tutor.
+     * @return a list with all the practices of the tutor.
+     */
+    @GetMapping("/{id}/practices")
+    @ApiOperation("Get all the practices of a tutor.")
+    public ResponseEntity<List<PracticeDTO>> getPracticesByTutor(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id) {
+        if (id == null || tutorService.getTutor(id) == null) {
+            log.warn("Tutor not found by id in the database");
+            return ResponseEntity.notFound().build();
+        }
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Practice> practices = tutorService.getPracticesByTutor(id, username);
+        if (practices == null) {
+            log.warn("User does not have permission to get the practices of the tutor.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        log.info("Practices retrieved successfully");
+        return ResponseEntity.ok(PracticeDTO.fromPractices(practices));
+    }
+
+    /**
+     * Endpoint to get all the offers of a tutor.
+     * Only the tutor itself and the supervisor can obtain the information.
+     * @param id, the id of the tutor.
+     * @return a list with all the offers of the tutor.
+     */
+    @GetMapping("/{id}/offers")
+    @ApiOperation("Get all the offers of a tutor.")
+    public ResponseEntity<List<OfferDTO>> getOffersByTutor(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id) {
+        if (id == null || tutorService.getTutor(id) == null) {
+            log.warn("Tutor not found by id in the database");
+            return ResponseEntity.notFound().build();
+        }
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Offer> offers = tutorService.getOffersByTutor(id, username);
+        if (offers == null) {
+            log.warn("User does not have permission to get the offers of the tutor.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        log.info("Offers retrieved successfully");
+        return ResponseEntity.ok(OfferDTO.fromOffers(offers));
     }
 
 }

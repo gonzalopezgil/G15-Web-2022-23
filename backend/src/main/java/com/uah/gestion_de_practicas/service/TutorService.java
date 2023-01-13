@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Company;
+import com.uah.gestion_de_practicas.model.Offer;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
@@ -163,5 +164,19 @@ public class TutorService {
         }
 
         return tutors;
+    }
+
+    /**
+     * Gets the practices of a tutor.
+     * @param id, Id of the tutor.
+     * @param username, Username of the user trying to access the information.
+     * @return A list with the practices of the tutor.
+     */
+    public List<Practice> getPracticesByTutor(Long id, String username) {
+        return tutorRepository.getPracticesByTutor(id);
+    }
+
+    public List<Offer> getOffersByTutor(Long id, String username) {
+        return tutorRepository.getOffersByTutor(id);
     }
 }

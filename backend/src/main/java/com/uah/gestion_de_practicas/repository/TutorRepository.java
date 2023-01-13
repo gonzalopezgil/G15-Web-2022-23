@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.uah.gestion_de_practicas.model.Offer;
+import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
 import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
@@ -28,4 +30,10 @@ public interface TutorRepository extends JpaRepository<Tutor,Long> {
 
     @Query("SELECT new com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO(t.first_name, t.last_name, t.id) FROM Tutor t WHERE t.company.id = ?1 AND t.removal_date IS NULL")
     TutorPerPracticeDAO getTutorByCompany(Long company_id);
+
+    @Query("SELECT p FROM Practice p INNER JOIN Offer o on p.offer.id = o.id INNER JOIN Company c on o.company.id = c.id INNER JOIN Tutor t on c.id = t.company.id WHERE t.id = ?1")
+    List<Practice> getPracticesByTutor(Long id);
+
+    @Query("SELECT o FROM Offer o INNER JOIN Company c on o.company.id = c.id INNER JOIN Tutor t on c.id = t.company.id WHERE t.id = ?1")
+    List<Offer> getOffersByTutor(Long id);
 }
