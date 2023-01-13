@@ -8,13 +8,14 @@ import { Offer } from '../interfaces/offer';
 import { Company } from '../interfaces/company';
 import { Practice } from '../interfaces/practice';
 import { SimpleOffer } from '../interfaces/simple_offer';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PracticesService {
 
-  constructor(private http: HttpClient,private authService: AuthService) { }
+  constructor(private http: HttpClient,private authService: AuthService, private envService:EnvService) { }
 
 
     getOffers(): Observable<Offer[]>{
@@ -24,7 +25,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.get<Offer[]>("http://localhost:8080/api/practices/offers", httpOptions);
+      return this.http.get<Offer[]>(this.envService.getApiUrl()+"/api/practices/offers", httpOptions);
     }
 
     getOffer(id: any): Observable<Offer>{
@@ -34,7 +35,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.get<Offer>("http://localhost:8080/api/practices/offers/"+id, httpOptions);
+      return this.http.get<Offer>(this.envService.getApiUrl()+"/api/practices/offers/"+id, httpOptions);
     }
 
     updateOffer(offer: Offer){
@@ -44,7 +45,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.put("http://localhost:8080/api/practices/offers/"+offer.id, offer, httpOptions);
+      return this.http.put(this.envService.getApiUrl()+"/api/practices/offers/"+offer.id, offer, httpOptions);
     }
 
 
@@ -55,7 +56,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.post("http://localhost:8080/api/practices/offers/", offer, httpOptions);
+      return this.http.post(this.envService.getApiUrl()+"/api/practices/offers/", offer, httpOptions);
     }
 
 
@@ -66,7 +67,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.get<Practica[]>("http://localhost:8080/api/practices", httpOptions);
+      return this.http.get<Practica[]>(this.envService.getApiUrl()+"/api/practices", httpOptions);
     }
     getPracticesResponsable(): Observable<PracticaUser[]>{
       const httpOptions = {
@@ -75,7 +76,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.get<PracticaUser[]>('http://localhost:8080/api/practices/', httpOptions);
+      return this.http.get<PracticaUser[]>(this.envService.getApiUrl()+'/api/practices/', httpOptions);
     }
     confirmAssignation(): Observable<any>{
       const httpOptions = {
@@ -84,7 +85,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.post('http://localhost:8080/api/practices/assign-practices',httpOptions)
+      return this.http.post(this.envService.getApiUrl()+'/api/practices/assign-practices',httpOptions)
     }
 
     savePractice(practice: Practice){
@@ -94,7 +95,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.post("http://localhost:8080/api/practices/", practice, httpOptions);
+      return this.http.post(this.envService.getApiUrl()+"/api/practices/", practice, httpOptions);
     }
 
 
@@ -105,7 +106,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.get<Company>("http://localhost:8080/api/company/"+id, httpOptions);
+      return this.http.get<Company>(this.envService.getApiUrl()+"/api/company/"+id, httpOptions);
     }
     selectPractices(practices: Offer[]){
       const httpOptions = {
@@ -122,7 +123,7 @@ export class PracticesService {
                     "preference" : i+1});
       }
       console.log(JSON.parse(JSON.stringify(array)));
-      return this.http.post("http://localhost:8080/api/users/students/2/selection", practices, httpOptions);
+      return this.http.post(this.envService.getApiUrl()+"/api/users/students/2/selection", practices, httpOptions);
     }
     getReport(): Observable<any>{
       const options = {
@@ -135,6 +136,6 @@ export class PracticesService {
         },
         responseType: 'blob' as 'json'
       };
-      return this.http.get('http://localhost:8080/api/practices/report',options)
+      return this.http.get(this.envService.getApiUrl()+'/api/practices/report',options)
     }
 }

@@ -9,13 +9,14 @@ import { Report } from '../interfaces/report';
 import { Practice } from '../interfaces/practice';
 import { Offer } from '../interfaces/offer';
 import { PracticesService } from './practices.service';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorsService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private practiceService: PracticesService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private practiceService: PracticesService, private envService: EnvService) { }
 
 
   getTutor(): Observable<any> {
@@ -28,7 +29,7 @@ export class TutorsService {
       }
     };
 
-    return this.http.get<any>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
+    return this.http.get<any>(this.envService.getApiUrl()+'/api/users/tutors/'+id, httpOptions);
   }
 
   getStubbyTutor(): Tutor {
@@ -50,7 +51,7 @@ export class TutorsService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.post('http://localhost:8080/api/company', {
+    return this.http.post(this.envService.getApiUrl()+'/api/company', {
       address: form.value.address,
       city: form.value.city,
       description: form.value.description,
@@ -68,7 +69,7 @@ export class TutorsService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.get<Company>('http://localhost:8080/api/company/'+name, httpOptions);
+    return this.http.get<Company>(this.envService.getApiUrl()+'/api/company/'+name, httpOptions);
   }
 
   getCompany(id_company: any): Observable<Company> {
@@ -78,7 +79,7 @@ export class TutorsService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.get<Company>('http://localhost:8080/api/company/'+id_company, httpOptions);
+    return this.http.get<Company>(this.envService.getApiUrl()+'/api/company/'+id_company, httpOptions);
   }
 
   registerOffer(form: FormGroup) {
@@ -91,7 +92,7 @@ export class TutorsService {
     let comp:Company;
     this.getCompanybyName(form.value.empresa).subscribe(data => {
       comp=data;
-      return this.http.post('http://localhost:8080/api/practices/offers', {
+      return this.http.post(this.envService.getApiUrl()+'/api/practices/offers', {
 
 
     });
@@ -111,7 +112,7 @@ export class TutorsService {
     let company: Company;
     this.getCompanybyName(form.value.company).subscribe(data => {
       company = data;
-    return this.http.put('http://localhost:8080/api/tutors', {
+    return this.http.put(this.envService.getApiUrl()+'/api/tutors', {
       company: form.value.company,
       newtutor: form.value.newtutor
     });
@@ -143,7 +144,7 @@ export class TutorsService {
         'Authorization': 'Bearer ' + token
       }
     };
-    return this.http.get<Practice[]>('http://localhost:8080/api/users/tutors/'+id+'/practices', httpOptions);
+    return this.http.get<Practice[]>(this.envService.getApiUrl()+'/api/users/tutors/'+id+'/practices', httpOptions);
   }
 
   getOffersByTutor(): Observable<Offer[]> {
@@ -155,12 +156,12 @@ export class TutorsService {
         'Authorization': 'Bearer ' + token
       }
     };
-    return this.http.get<Offer[]>('http://localhost:8080/api/users/tutors/'+id+'/offers', httpOptions);
+    return this.http.get<Offer[]>(this.envService.getApiUrl()+'/api/users/tutors/'+id+'/offers', httpOptions);
   }
 
 
   registerTutor(tutor: Tutor): Observable<any> {
-    return this.http.post('http://localhost:8080/api/users/tutors', tutor);
+    return this.http.post(this.envService.getApiUrl()+'/api/users/tutors', tutor);
   }
 }
 

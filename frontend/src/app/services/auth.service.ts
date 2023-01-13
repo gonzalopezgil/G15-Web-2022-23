@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private envService:EnvService) { }
 
     login(username: string, password: string): Observable<any> {
       let body = {
@@ -16,7 +17,7 @@ export class AuthService {
         password: password
       }
 
-      return this.http.post("http://localhost:8080/api/users/login", body);
+      return this.http.post(this.envService.getApiUrl() + "/api/users/login", body);
     }
     logout(): void {
       sessionStorage.removeItem('token');

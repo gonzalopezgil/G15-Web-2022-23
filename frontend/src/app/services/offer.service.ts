@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Offers } from '../interfaces/offers'
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfferService {
 
-  constructor(private http:HttpClient, private authService:AuthService) { }
+  constructor(private http:HttpClient, private authService:AuthService, private envService:EnvService) { }
   getOfferById(idOferta:number): Observable<Offers>{
     const httpOptions = {
       headers: {
@@ -17,6 +18,6 @@ export class OfferService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.get<Offers>('http://localhost:8080/api/practices/offers/'+idOferta, httpOptions);
+    return this.http.get<Offers>(this.envService.getApiUrl()+'/api/practices/offers/'+idOferta, httpOptions);
   }
 }
