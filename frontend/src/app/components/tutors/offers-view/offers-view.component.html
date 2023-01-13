@@ -1,7 +1,7 @@
 <div class="header">
   <h1>Tus ofertas de practicas</h1>
 </div>
-<table mat-table class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Posicion Column -->
   <ng-container matColumnDef="pos">
@@ -44,6 +44,6 @@
 
 <div class="button">
   <!-- Add new offer button -->
-  <button mat-raised-button>+ Oferta</button>
+  <button mat-raised-button (click)="newOffer()">+ Oferta</button>
   <button mat-raised-button [routerLink]="['/dashboard-tutors']">Volver</button>
 </div>
