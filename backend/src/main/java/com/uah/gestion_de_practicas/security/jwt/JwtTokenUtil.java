@@ -1,8 +1,8 @@
 package com.uah.gestion_de_practicas.security.jwt;
 
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,19 +14,33 @@ import java.util.Date;
  * Methods to generate and validate JWT tokens
  */
 @Component
+@Slf4j
 public class JwtTokenUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
-
+    /** 
+     * Secret key to sign the JWT token
+     */
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
+    /** 
+     * Expiration time of the JWT token
+     */
     @Value("${app.jwt.expiration-ms}")
     private int jwtExpirationMs;
 
+    /** 
+     * Key to get the authorities from the JWT token
+     */
     @Value("${app.jwt.authorities-key}")
     private String AUTHORITIES_KEY;
 
+    /** 
+     * Method to generate a JWT token
+     * @param authentication, Authentication object
+     * @param id, id of the user
+     * @return String, JWT token
+     */
     public String generateJwtToken(Authentication authentication, Long id) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
@@ -41,10 +55,20 @@ public class JwtTokenUtil {
                 .compact();
     }
 
+    /** 
+     * Method to get the username from the JWT token
+     * @param token, JWT token
+     * @return String, username
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /** 
+     * Method to validate the JWT token
+     * @param authToken, JWT token to validate
+     * @return true if the token is valid, false otherwise
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

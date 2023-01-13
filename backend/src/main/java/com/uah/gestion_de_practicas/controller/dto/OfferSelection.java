@@ -6,6 +6,9 @@ import lombok.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * DTO to manage the offer selection data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

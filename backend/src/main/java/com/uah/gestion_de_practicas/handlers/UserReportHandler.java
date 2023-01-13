@@ -12,6 +12,9 @@ import com.uah.gestion_de_practicas.model.Offer;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Student;
 
+/** 
+ * Handler class for the user report PDF.
+ */
 public class UserReportHandler extends PDFHandler {
 
     private final Student user;

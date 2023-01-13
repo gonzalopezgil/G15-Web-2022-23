@@ -1,7 +1,5 @@
 package com.uah.gestion_de_practicas.security.jwt;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +9,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.uah.gestion_de_practicas.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,9 +23,9 @@ import java.io.IOException;
  * It is executed for each incoming request for validating the JWT token.
  * If the token is valid, it is added to the context to specify that the current user is authenticated.
  */
+@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
     public static final String BEARER = "Bearer ";
 
     @Autowired
@@ -62,14 +62,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
+            log.error("Cannot set user authentication: {}", e);
         }
 
         filterChain.doFilter(request, response);
     }
 
     /**
-     * A partir de una cabecera Authorization extrae el token
+     * Extracts the JWT token from the request header
      * @param request
      * @return
      */

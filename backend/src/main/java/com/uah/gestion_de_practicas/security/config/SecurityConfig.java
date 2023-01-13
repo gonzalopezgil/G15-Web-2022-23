@@ -26,6 +26,9 @@ import com.uah.gestion_de_practicas.service.UserService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /** 
+     * Whitelist of the endpoints that don't need authentication
+     */
     private static final String[] AUTH_WHITELIST = {
         // -- swagger ui
         "/v2/api-docs",
@@ -40,57 +43,84 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // -- auth 
         "/api/users/login",
         "/api/users/tutors",
+        "/api/practices/**",
 
         // -- error
         "/error/**"
     };
 
+    /** 
+     * Whitelist of the endpoints that can be accessed by students, tutors and supervisor
+     */
     private static final String[] STUDENT_WHITELIST = {
         "/api/users/students/**",
         "/api/company/**",
-        "/api/users/**",
-        "/api/practices/**"
+        "/api/users/**"
     };
 
+    /** 
+     * Whitelist of the endpoints that can be accessed by tutors and supervisor
+     */
     private static final String[] TUTOR_WHITELIST = {
-        "/api/practices/**",
+        "/api/practice/**"
     };
 
+    /** 
+     * Whitelist of the endpoints that can be accessed by the supervisor
+     */
     private static final String[] ADMIN_WHITELIST = {
         "/api/**",
-        "/api/**/**",
+        "/api/**/**"
     };
 
+    /** 
+     * Service to manage the users
+     */
     @Autowired
     private UserService userService;
 
+    /** 
+     * Class to manage the unauthorized access
+     */
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
-    // ================ CREACIÓN DE BEANS ======================
+    /** 
+     * Bean to manage the JWT token
+     */
     @Bean
     public JwtRequestFilter authenticationJwtTokenFilter() {
         return new JwtRequestFilter();
     }
 
+    /** 
+     * Bean to manage the authentication
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-    // DEPRECATED
-    // TODO: Change with the BCryptPasswordEncoder
+    /** 
+     * Bean to encode the password
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    /** 
+     * Configure the authentication manager
+     */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
+    /** 
+     * Configure the security of the application
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Cross-Site Request Forgery CSRF

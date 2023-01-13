@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/** 
+ * DAO to manage the tutor data.
+ */
 @Data
 @ToString
 @EqualsAndHashCode

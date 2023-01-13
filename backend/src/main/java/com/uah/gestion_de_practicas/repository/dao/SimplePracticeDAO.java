@@ -12,6 +12,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/** 
+ * DAO to manage the practice data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

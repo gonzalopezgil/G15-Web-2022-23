@@ -173,5 +173,21 @@ public class UserService implements UserDetailsService {
     }
 
 
+    /** 
+     * Changes the password of a user.
+     * @param user User whose password is being changed.
+     * @param oldPassword Old password of the user.
+     * @param newPassword New password of the user.
+     */
+    public boolean changePassword(User user, String oldPassword, String newPassword) {
+        if (user.getPassword().equals(oldPassword)) {
+            user.setPassword(newPassword);
+            saveUser(user);
+            return true;
+        }
+        return false;
+    }
+
+
     
 }

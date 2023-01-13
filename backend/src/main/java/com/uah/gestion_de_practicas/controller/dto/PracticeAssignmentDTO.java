@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 import com.uah.gestion_de_practicas.model.Practice;
 
-@Data
-@EqualsAndHashCode
-@ToString
 /**
  * DTO for returning practice assignations without sensitive information
  */
+@Data
+@EqualsAndHashCode
+@ToString
 public class PracticeAssignmentDTO {
     private Long student_id;
     private Long practice_id;

@@ -16,6 +16,7 @@ import com.uah.gestion_de_practicas.service.OfferService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 
 import com.uah.gestion_de_practicas.controller.dto.OfferDTO;
 import com.uah.gestion_de_practicas.model.Offer;
@@ -23,12 +24,19 @@ import com.uah.gestion_de_practicas.model.Offer;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/practices/offers")
 public class OfferController {
 
-    
+    /** 
+     * Service to manage the offers
+     */
     private final OfferService offerService;
 
+    /** 
+     * Constructor of the class
+     * @param offerService, the service to manage the offers
+     */
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
@@ -41,6 +49,7 @@ public class OfferController {
     @GetMapping("")
     @ApiOperation("Get all the offers")
     public ResponseEntity<List<OfferDTO>> getAllOffers() {
+        log.info("List of all the offers obtained successfully");
         return ResponseEntity.ok(OfferDTO.fromOffers(offerService.getAllOffers()));
     }
 
@@ -54,14 +63,17 @@ public class OfferController {
     @ApiOperation("Create a new offer")
     public ResponseEntity<OfferDTO> createOffer(@ApiParam("The offer to be saved") @RequestBody OfferDTO offer) {
         if (offer == null || offer.getId() != null || offer.getCompany_id() == null || offer.getStart_date() == null) {
+            log.warn("Bad request to create a new offer");
             return ResponseEntity.badRequest().build();
         }
         
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Offer saved_offer = offerService.saveOffer(OfferDTO.toOffer(offer, offerService.getCompany(offer.getCompany_id())), username);
         if (saved_offer == null) {
+            log.warn("The user is not authorized to create this offer");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Offer created successfully");
         return ResponseEntity.ok(OfferDTO.fromOffer(saved_offer));
     }
 
@@ -74,11 +86,14 @@ public class OfferController {
     @ApiOperation("Get an offer by its id")
     public ResponseEntity<OfferDTO> getOffer(@ApiParam("The id of the offer to be retrieved") @PathVariable Long id) {
         if (id == null) {
+            log.warn("Bad request to get an offer by its id");
             return ResponseEntity.badRequest().build();
         }
-        if (offerService.getOffer(id) == null)
+        if (offerService.getOffer(id) == null) {
+            log.warn("The offer searched by id does not exist");
             return ResponseEntity.notFound().build();
-        
+        }
+        log.info("Offer searched by id retrieved successfully");
         return ResponseEntity.ok(OfferDTO.fromOffer(offerService.getOffer(id)));
     }
 
@@ -92,14 +107,18 @@ public class OfferController {
     @PutMapping("/{id}")
     @ApiOperation("Update an offer")
     public ResponseEntity<OfferDTO> updateOffer(@ApiParam("The id the offer to be updated") @PathVariable Long id, @ApiParam("Offer to be updated") @RequestBody OfferDTO offer) {
-        if (id == null || offer == null || offer.getId() != null || !id.equals(offer.getId()) || offer.getCompany_id() == null || offer.getStart_date() == null) {
+        if (id == null || offer == null || offer.getId() != null || !id.equals(offer.getId())
+                || offer.getCompany_id() == null || offer.getStart_date() == null) {
+            log.warn("Bad request to update an offer");
             return ResponseEntity.badRequest().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Offer saved_offer = offerService.saveOffer(OfferDTO.toOffer(offer, offerService.getCompany(offer.getCompany_id())), username);
         if (saved_offer == null) {
+            log.warn("The user is not authorized to update this offer");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Offer updated successfully");
         return ResponseEntity.ok(OfferDTO.fromOffer(saved_offer));
     }
 
@@ -112,12 +131,15 @@ public class OfferController {
     @ApiOperation("Delete an offer")
     public ResponseEntity<Void> deleteOffer(@ApiParam("Id of the offer to be deleted") @PathVariable Long id) {
         if (id == null) {
+            log.warn("Bad request to delete an offer");
             return ResponseEntity.badRequest().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!offerService.deleteOffer(id, username)) {
+            log.warn("The user is not authorized to delete this offer");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Offer deleted successfully");
         return ResponseEntity.ok().build();
     }
 
