@@ -96,7 +96,7 @@ public class PracticeTest {
         practice.setStart_date(start_date);
 
         // When
-        Date result = practice.getStart_date();
+        Date result = new Date(practice.getStart_date().getTime());
 
         // Then
         Assertions.assertEquals(start_date, result);
@@ -110,7 +110,7 @@ public class PracticeTest {
         practice.setEnd_date(end_date);
 
         // When
-        Date result = practice.getEnd_date();
+        Date result = new Date(practice.getEnd_date().getTime());
 
         // Then
         Assertions.assertEquals(end_date, result);
