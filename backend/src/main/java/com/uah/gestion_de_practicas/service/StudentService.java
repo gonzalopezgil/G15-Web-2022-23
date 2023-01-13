@@ -77,14 +77,29 @@ public class StudentService {
         return studentRepository.getStudentsFromCompany(id);
     }
 
+    /** 
+     * Gets all the unassigned students.
+     * @return A list with all the unassigned students.
+     */
     public List<Student> getAllUnassignedStudents() {
         return studentRepository.getAllUnassignedStudents();
     }
 
+    /** 
+     * Gets all the students that are elegible for an offer.
+     * @param offer_id Id of the offer.
+     * @return A list with all the elegible students.
+     */
     public List<Student> getElegibleStudents(Long offer_id){
         return studentRepository.getElegibleForOffer(offer_id);
     }
 
+    /** 
+     * Saves the preferences of a student for a list of offers.
+     * @param student_id, Id of the student.
+     * @param selections, List of offers and preferences.
+     * @return A list with all the requests of the student.
+     */
     public List<Request> selectOffers(Long student_id, List<OfferSelection> selections){
         Student student = studentRepository.findById(student_id).orElse(null);
         requestService.deleteRequestsByStudentId(student_id);
@@ -97,10 +112,20 @@ public class StudentService {
         return requestService.getRequestsByStudentId(student_id);
     }
 
+    /** 
+     * Gets all the requests of a student.
+     * @param student_id, Id of the student.
+     * @return A list with all the requests of the student.
+     */
     public List<Request> getRequestsByStudentId(Long student_id){
         return requestService.getRequestsByStudentId(student_id);
     }
 
+    /** 
+     * Checks if a student has an active practice.
+     * @param student_id, Id of the student.
+     * @return True if the student has an active practice, false otherwise.
+     */
     public Boolean isAvailableForPractice(Long student_id) {
         return studentRepository.hasActivePractice(student_id).isEmpty();
     }
@@ -114,7 +139,11 @@ public class StudentService {
         return studentRepository.getStudentsFromTutor(tutor_id);
     }
 
-
+    /** 
+     * Get completed practices of a student
+     * @param id Id of the student
+     * @return A list with all the completed practices of the student
+     */
     public List<Practice> getCompletedPractices(Long id) {
         return practiceService.getCompletedPracticesByStudent(id);
     }

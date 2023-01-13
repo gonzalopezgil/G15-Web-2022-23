@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * DTO to manage the user data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

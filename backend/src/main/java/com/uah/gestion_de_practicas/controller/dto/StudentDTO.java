@@ -9,12 +9,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Data
-@EqualsAndHashCode
-@ToString
 /**
  * DTO for returning a student without sensitive information
  */
+@Data
+@EqualsAndHashCode
+@ToString
 public class StudentDTO {
 
     private Long id;

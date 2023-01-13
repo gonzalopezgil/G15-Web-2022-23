@@ -142,8 +142,8 @@ public class UserService implements UserDetailsService {
 
         String role = getRole(user.getId()).getAuthority();
 
-        if (role.equals("ROLE_SUPERVISOR")) return true;
-        if (role.equals("ROLE_TUTOR")) {
+        if (role.equals("ROLE_SUPERVISOR") && supervisorService.isAuthorized(username)) return true;
+        if (role.equals("ROLE_TUTOR") && tutorService.isAuthorized(username)) {
             List<Student> students = studentService.getStudentsFromTutor(user.getId());
             List<Long> ids = students.stream().filter(student -> student.getId()==id).map(student -> student.getId()).collect(Collectors.toList());
             return (ids.size() > 0);
@@ -170,6 +170,22 @@ public class UserService implements UserDetailsService {
         authorities.add(getRole(user.getId()));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+    }
+
+
+    /** 
+     * Changes the password of a user.
+     * @param user User whose password is being changed.
+     * @param oldPassword Old password of the user.
+     * @param newPassword New password of the user.
+     */
+    public boolean changePassword(User user, String oldPassword, String newPassword) {
+        if (user.getPassword().equals(oldPassword)) {
+            user.setPassword(newPassword);
+            saveUser(user);
+            return true;
+        }
+        return false;
     }
 
 

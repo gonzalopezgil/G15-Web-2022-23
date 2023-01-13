@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.Document;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.repository.PracticeRepository;
 import com.uah.gestion_de_practicas.repository.dao.ReportDAO;
@@ -85,6 +84,14 @@ public class PracticeService {
         if (!supervisorService.isAuthorized(supervisor_username)) {
             return null;
         }
+        return practiceRepository.findAllPractices();
+    }
+
+    /**
+     * Gets all the practices from the database.
+     * @return A list with all the practices.
+     */
+    public List<SimplePracticeDAO> getAllPractices() {
         return practiceRepository.findAllPractices();
     }
 

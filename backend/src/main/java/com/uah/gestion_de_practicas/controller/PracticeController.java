@@ -1,11 +1,11 @@
 package com.uah.gestion_de_practicas.controller;
 
 import java.util.Date;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,49 +19,70 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uah.gestion_de_practicas.controller.dto.PracticeAssignmentDTO;
-import com.uah.gestion_de_practicas.handlers.PDFHandler;
+import com.uah.gestion_de_practicas.controller.dto.PracticeDTO;
 import com.uah.gestion_de_practicas.handlers.PracticeAssignmentHandler;
+import com.uah.gestion_de_practicas.model.Offer;
 import com.uah.gestion_de_practicas.model.Practice;
+import com.uah.gestion_de_practicas.model.Student;
 import com.uah.gestion_de_practicas.repository.dao.SimplePracticeDAO;
 import com.uah.gestion_de_practicas.service.OfferService;
 import com.uah.gestion_de_practicas.service.PracticeService;
 import com.uah.gestion_de_practicas.service.RequestService;
+import com.uah.gestion_de_practicas.service.StudentService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.models.Response;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Rest Controller for the Practice endpoint
  */
 @RestController
+@Slf4j
 @RequestMapping("/api/practices")
 public class PracticeController {
+    /** 
+     * Service to manage the practices
+     */
     private final PracticeService practiceService;
+
+    /**
+     * Service to manage the requests
+     */
     private final RequestService requestService;
+
+    /**
+     * Service to manage the offers
+     */
     private final OfferService offerService;
 
-    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService) {
+    /**
+     * Service to manage the students
+     */
+    private final StudentService studentService;
+
+    /**
+     * Constructor of the class
+     * @param practiceService, the service to manage the practices
+     * @param requestService, the service to manage the requests
+     * @param offerService, the service to manage the offers
+     */
+    public PracticeController(PracticeService practiceService, RequestService requestService, OfferService offerService, StudentService studentService) {
         this.practiceService = practiceService;
         this.requestService = requestService;
         this.offerService = offerService;
+        this.studentService = studentService;
     }
 
     /**
      * Endpoint to obtain a list of all the practices
-     * Only the supervisor can access this information
      * @return a list of all the practices
      */
-    @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @GetMapping("")
     @ApiOperation("Get all the practices")
     public ResponseEntity<List<SimplePracticeDAO>> getPractices() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<SimplePracticeDAO> practices = practiceService.getAllPractices(username);
-        if (practices == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-        return ResponseEntity.ok(practices);
+        log.info("All the practices obtained successfully");
+        return ResponseEntity.ok(practiceService.getAllPractices());
     }
 
     /**
@@ -74,13 +95,16 @@ public class PracticeController {
     @ApiOperation("Get a practice by its id")
     public ResponseEntity<SimplePracticeDAO> getPracticeById(@ApiParam("The id of the practice") @PathVariable Long id) {
         if (id == null) {
+            log.warn("Bad request to get a practice by id: id is null");
             return ResponseEntity.badRequest().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         SimplePracticeDAO practice = practiceService.getPractice(id, username);
         if (practice == null) {
+            log.warn("The user does not have access to the practice requested by id");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Practice obtained by id successfully");
         return ResponseEntity.ok(practice);
     }
 
@@ -90,11 +114,25 @@ public class PracticeController {
      * @param practice, the practice to be saved
      * @return the saved practice
      */
-    // @ApiIgnore
     @PostMapping("")
     @ApiOperation("Save a new practice")
-    public ResponseEntity<Practice> savePractice(@ApiParam("The practice to be saved") @RequestBody Practice practice) {
-        return ResponseEntity.ok(practiceService.savePractice(practice));
+    public ResponseEntity<PracticeDTO> savePractice(@ApiParam("The practice to be saved") @RequestBody PracticeDTO practiceDTO) {
+        log.info("Practice saved successfully");
+        // Fetch the student and offer from the database
+        Student student = studentService.getStudent(practiceDTO.getStudent_id());
+        Offer offer = offerService.getOffer(practiceDTO.getOffer_id());
+
+        // Create the new practice
+        Practice practice = new Practice();
+        practice.setStudent(student);
+        practice.setOffer(offer);
+        practice.setId(practiceDTO.getId());
+        practice.setMark(practiceDTO.getMark());
+        practice.setReport(practiceDTO.getReport());
+        practice.setStart_date(practiceDTO.getStart_date());
+        practice.setEnd_date(practiceDTO.getEnd_date());
+        
+        return ResponseEntity.ok(PracticeDTO.fromPractice(practiceService.savePractice(practice)));
     }
 
 
@@ -103,10 +141,10 @@ public class PracticeController {
      * @param id, the id of the practice
      * @return the deleted practice
      */
-    // @ApiIgnore
     @DeleteMapping("/{id}")
     @ApiOperation("Delete a practice by its id")
     public ResponseEntity<String> deletePractice(@ApiParam("The id of the practice to be deleted") @PathVariable Long id) {  
+        log.info("Practice deleted successfully");
         practiceService.deletePractice(id);
         return ResponseEntity.ok("Practice "+ id + " deleted");
     }
@@ -126,6 +164,7 @@ public class PracticeController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         practices = practiceService.saveAllPractices(practices, username);
         if (practices.isEmpty()) {
+            log.warn("Not found any practice to assign");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         
@@ -138,18 +177,20 @@ public class PracticeController {
         PracticeAssignmentHandler handler = new PracticeAssignmentHandler(practices);
         handler.generatePDF();
 
+        log.info("Practices assigned successfully");
         return ResponseEntity.ok(assignmentDTO);
     }
 
     /**
      * Endpoint to download the latest practice assignation of students
      * Only the supervisor can access this endpoint
+     * @param response, the response of the request
      * @return a pdf file with the latest assignation
      */
     @PreAuthorize("hasRole('ROLE_SUPERVISOR')")
     @GetMapping("/assignation")
     @ApiOperation("Download the latest assignation of practices")
-    public ResponseEntity downloadAssignation(HttpServletResponse response){
+    public ResponseEntity<Void> downloadAssignation(HttpServletResponse response){
         response.setContentType("application/pdf");
         Date now = new Date();
         String currentDateTime = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(now);
@@ -160,9 +201,10 @@ public class PracticeController {
             PracticeAssignmentHandler handler = new PracticeAssignmentHandler();
             handler.downloadPdf(response);
         } catch (Exception e) {
+            log.error("Impossible to download the assignation");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
+        log.info("Assignation downloaded successfully");
         return ResponseEntity.ok().build();
     }
    
@@ -179,8 +221,10 @@ public class PracticeController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<SimplePracticeDAO> practices = practiceService.getReport(username);
         if (practices == null) {
+            log.warn("The user does not have access to the report");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Report obtained successfully");
         return ResponseEntity.ok(practices);
     }
 }

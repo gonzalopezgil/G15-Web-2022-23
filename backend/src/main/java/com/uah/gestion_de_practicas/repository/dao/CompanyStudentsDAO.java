@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTO for returning the company with the number of students that are doing practices in it
+ * DAO for returning the company with the number of students that are doing practices in it
  */
 @Data
 @EqualsAndHashCode

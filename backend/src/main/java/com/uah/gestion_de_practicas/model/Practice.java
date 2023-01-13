@@ -1,6 +1,6 @@
 package com.uah.gestion_de_practicas.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 

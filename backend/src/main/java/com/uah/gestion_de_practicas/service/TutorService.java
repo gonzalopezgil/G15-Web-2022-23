@@ -2,16 +2,15 @@ package com.uah.gestion_de_practicas.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.uah.gestion_de_practicas.model.Company;
+import com.uah.gestion_de_practicas.model.Offer;
 import com.uah.gestion_de_practicas.model.Practice;
 import com.uah.gestion_de_practicas.model.Tutor;
 import com.uah.gestion_de_practicas.repository.TutorRepository;
 import com.uah.gestion_de_practicas.repository.dao.TutorDAO;
-import com.uah.gestion_de_practicas.repository.dao.TutorPerPracticeDAO;
 
 /**
  * Service class for the Tutor class.
@@ -25,8 +24,14 @@ public class TutorService {
      */
     private final TutorRepository tutorRepository;
 
-    public TutorService(TutorRepository tutorRepository) {
+    /** 
+     * Service to manage the supervisor's data.
+     */
+    private final SupervisorService supervisorService;
+
+    public TutorService(TutorRepository tutorRepository, SupervisorService supervisorService) {
         this.tutorRepository = tutorRepository;
+        this.supervisorService = supervisorService;
     }
 
     // ------------------- CRUD OPERATIONS ------------------- //
@@ -40,16 +45,33 @@ public class TutorService {
 
     /**
      * Gets a tutor from the database.
-     * @param id Id of the tutor to be retrieved.
+     * Only the tutor itself and the supervisor can obtain the information.
+     * @param username, Username of the user trying to access the information.
+     * @param id, Id of the tutor to be retrieved.
+     * @return The tutor with the given id.
+     */
+    public TutorDAO getTutor(Long id, String username) {
+        if (!supervisorService.isAuthorized(username) && !isAuthorized(username)
+                && tutorRepository.findTutorByUsername(username).get().getId() != id) {
+            return null;
+        }
+        return tutorRepository.getTutorById(id).orElse(null);
+    }
+
+    /** 
+     * Gets a tutor from the database
+     * @param id, Id of the tutor to be retrieved
+     * @return The tutor with the given id
      */
     public TutorDAO getTutor(Long id) {
         return tutorRepository.getTutorById(id).orElse(null);
     }
 
+
     /**
      * Updates a tutor in the database.
-     * @param id Id of the tutor to be updated.
-     * @param tutor Tutor object with the new data.
+     * @param id, Id of the tutor to be updated.
+     * @param tutor, Tutor object with the new data.
      */
     public void updateTutor(Tutor tutor) {
         tutorRepository.save(tutor);
@@ -65,9 +87,14 @@ public class TutorService {
 
     /**
      * Gets all the tutors from the database.
+     * Only the supervisor can access this information.
+     * @param supervisor_username, Username of the supervisor
      * @return A list with all the tutors.
      */
-    public List<TutorDAO> getAllTutors() {
+    public List<TutorDAO> getAllTutors(String supervisor_username) {
+        if (!supervisorService.isAuthorized(supervisor_username)) {
+            return null;
+        }
         return tutorRepository.getAllTutors();
     }
 
@@ -75,7 +102,7 @@ public class TutorService {
 
     /** 
      * Checks if a tutor is authorized to access the information.
-     * @param username Username of the tutor.
+     * @param username, Username of the tutor.
      * @return True if the tutor is authorized, false otherwise.
      */
     public boolean isAuthorized(String username) {
@@ -87,8 +114,8 @@ public class TutorService {
     
     /** 
      * Checks if a tutor is authorized to modify or access the information of a company.
-     * @param username Username of the tutor.
-     * @param company_id Id of the company.
+     * @param username, Username of the tutor.
+     * @param company_id Id, of the company.
      * @return True if the tutor is authorized, false otherwise.
      */
     public boolean isAuthorized(String username, Long company_id) {
@@ -114,8 +141,8 @@ public class TutorService {
 
     /** 
      * Updates the company of a tutor.
-     * @param username Username of the tutor to be updated.
-     * @param company Company object with the information of the new company.
+     * @param username, Username of the tutor to be updated.
+     * @param company, Company object with the information of the new company.
      * @return The updated tutor.
      */
     public Tutor updateTutorCompany(String username, Company company) {
@@ -125,6 +152,11 @@ public class TutorService {
         return tutorRepository.save(tutor);
     }
 
+    /** 
+     * Gets the tutors of a list of practices.
+     * @param practices, List of practices.
+     * @return A HashMap with the id of the practice and the name of the tutor.
+     */
     public HashMap<Long, String> getTutorByPractice(List<Practice> practices) {
         HashMap<Long, String> tutors = new HashMap<>();
         for (Practice practice : practices) {
@@ -132,5 +164,19 @@ public class TutorService {
         }
 
         return tutors;
+    }
+
+    /**
+     * Gets the practices of a tutor.
+     * @param id, Id of the tutor.
+     * @param username, Username of the user trying to access the information.
+     * @return A list with the practices of the tutor.
+     */
+    public List<Practice> getPracticesByTutor(Long id, String username) {
+        return tutorRepository.getPracticesByTutor(id);
+    }
+
+    public List<Offer> getOffersByTutor(Long id, String username) {
+        return tutorRepository.getOffersByTutor(id);
     }
 }

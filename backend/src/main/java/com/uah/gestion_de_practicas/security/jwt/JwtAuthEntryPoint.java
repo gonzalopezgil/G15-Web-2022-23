@@ -1,10 +1,10 @@
 package com.uah.gestion_de_practicas.security.jwt;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +15,12 @@ import java.io.IOException;
  * Class that rejects all unauthenticated requests and sends error code 401
  */
 @Component
+@Slf4j
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
-    private static final Logger log = LoggerFactory.getLogger(JwtAuthEntryPoint.class);
-
+    /** 
+     * Method that rejects all unauthenticated requests and sends error code 401
+     */
     @Override
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
