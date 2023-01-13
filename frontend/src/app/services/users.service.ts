@@ -13,20 +13,16 @@ export class UsersService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUser(): User {
-    let user:User = {
-      first_name: 'Carlos',
-      username: 'carlos',
-      last_name: 'Fernandez',
-      dni:  '12345678',
-      mail: 'carlos@gmail.com',
-      degree: '1',
-      dob: '01/01/2000',
-      phone: '123456789',
-      total_hours: 0
-    }
-
-    return user;
+  getUser(): Observable<User> {
+    let token = this.authService.getToken();
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      }
+    };
+    let idResponsable = this.authService.getId();
+    return this.http.get<User>('http://localhost:8080/api/users/'+idResponsable, httpOptions);
   }
   getUserById(idAlumno:number): Observable<User> {
     const httpOptions = {

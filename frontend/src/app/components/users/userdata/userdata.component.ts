@@ -15,10 +15,10 @@ export class UserdataComponent  implements OnInit{
   constructor(private usersService: UsersService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.user = this.usersService.getUser();
+    //this.user = this.usersService.getUser();
   }
 
   changePassword() {
-    this.dialog.open(PopUpPasswordComponent, { data: true}); 
+    this.dialog.open(PopUpPasswordComponent, { data: true});
   }
 }

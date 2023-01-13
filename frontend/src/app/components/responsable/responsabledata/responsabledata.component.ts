@@ -15,10 +15,14 @@ export class ResponsabledataComponent {
   constructor(private responsableService: ResponsableService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.responsable = this.responsableService.getResponsable();
+    this.responsableService.getResponsable().subscribe(
+      (data) => {
+        this.responsable = data
+      }
+    );
   }
 
   changePassword() {
-    this.dialog.open(PopUpPasswordComponent); 
+    this.dialog.open(PopUpPasswordComponent);
   }
 }
