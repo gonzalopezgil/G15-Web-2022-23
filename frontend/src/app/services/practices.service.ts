@@ -5,14 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { Offer } from '../interfaces/offer';
 import { Observable } from 'rxjs';
 import { Company } from '../interfaces/company';
+import { Practice } from '../interfaces/practice';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PracticesService {
   constructor(private http: HttpClient,private authService: AuthService) { }
-  
-    
+
+
     getOffers(): Observable<Offer[]>{
       const httpOptions = {
         headers: {
@@ -22,6 +23,17 @@ export class PracticesService {
       };
       return this.http.get<Offer[]>("http://localhost:8080/api/practices/offers", httpOptions);
     }
+
+    getOffer(id: any): Observable<Offer>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.get<Offer>("http://localhost:8080/api/practices/offers/"+id, httpOptions);
+    }
+
     getPractices(): Observable<Practica[]>{
       const httpOptions = {
         headers: {
@@ -30,6 +42,16 @@ export class PracticesService {
         }
       };
       return this.http.get<Practica[]>("http://localhost:8080/api/practices", httpOptions);
+    }
+
+    savePractice(practice: Practice){
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.put("http://localhost:8080/api/practices/"+practice.id, practice, httpOptions);
     }
 
 

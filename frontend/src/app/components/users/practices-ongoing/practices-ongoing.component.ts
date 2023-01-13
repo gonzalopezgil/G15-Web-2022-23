@@ -16,18 +16,20 @@ export class PracticesOngoingComponent implements OnInit {
     offers: Offer[] = [];
     offer: Offer = {
       id: -1,
-      positiontable: -1,
+      pos: -1,
       company_id: -1,
       position: "",
       vacancies: -1,
+      category: "",
       schedule: "",
       weeks: -1,
+      start_date: new Date(),
       company_name: "",
     }
     companyName: string = "";
 
     constructor(private PracticeService: PracticesService,private authService: AuthService) { }
-  
+
     ngOnInit(): void {
       let id = this.authService.getId();
       this.PracticeService.getPractices().subscribe(
@@ -50,11 +52,11 @@ export class PracticesOngoingComponent implements OnInit {
                   });
                   break;
                 }
-                
+
               }
             });
-  
+
         });
     }
-  
+
   }

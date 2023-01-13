@@ -29,20 +29,22 @@ export class ReportsComponent implements OnInit {
   offers: Offer[] = [];
   offer: Offer = {
     id: -1,
-    positiontable: -1,
+    pos: -1,
     company_id: -1,
     position: "",
     vacancies: -1,
     schedule: "",
+    category: "",
     weeks: -1,
     company_name: "",
+    start_date: new Date(),
   }
   companyName: string = "";
   constructor(private UserService: UsersService, private TutorService: TutorsService, private PracticeService: PracticesService,private authService: AuthService) { }
 
   ngOnInit(): void {
     let id = this.authService.getId();
-    
+
     this.PracticeService.getPractices().subscribe(
       (data) => {
         this.practices = data;

@@ -6,14 +6,16 @@ import { HttpClient } from '@angular/common/http';
 import { Tutor } from '../interfaces/tutor';
 import { Observable } from 'rxjs';
 import { Report } from '../interfaces/report';
-import { reports } from '../mocks/reports.mock';
+import { Practice } from '../interfaces/practice';
+import { Offer } from '../interfaces/offer';
+import { PracticesService } from './practices.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorsService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private practiceService: PracticesService) { }
 
 
   getTutor(): Observable<any> {
@@ -36,7 +38,7 @@ export class TutorsService {
       username: 'juanperez',
       nif: '12345678A',
       email: 'xd@gmail.com',
-      admissionDate: new Date(),
+      admission_date: new Date(),
       active: true
     };
   }
@@ -141,16 +143,24 @@ export class TutorsService {
         'Authorization': 'Bearer ' + token
       }
     };
-    return this.http.get<any>('http://localhost:8080/api/practices/'+id, httpOptions);
+    return this.http.get<Practice[]>('http://localhost:8080/api/users/tutors/'+id+'/practices', httpOptions);
   }
 
-  saveReports(reports: Report[]) {
-    console.log(reports);
+  getOffersByTutor(): Observable<Offer[]> {
+    let id = this.authService.getId();
+    let token = sessionStorage.getItem('token');
+    let httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    return this.http.get<Offer[]>('http://localhost:8080/api/users/tutors/'+id+'/offers', httpOptions);
   }
+
 
   registerTutor(tutor: Tutor): Observable<any> {
-    return this.http.post('http://localhost:3000/api/tutors', tutor);
+    return this.http.post('http://localhost:8080/api/users/tutors', tutor);
   }
-
 }
 

@@ -41,7 +41,16 @@ export class UsersService {
     };
       let id = this.authService.getId();
       return this.http.get<Student>("http://localhost:8080/api/users/students/"+id, httpOptions);
+  }
 
+  getStudentBy(id: any): Observable<Student>{
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<Student>("http://localhost:8080/api/users/students/"+id, httpOptions);
   }
 
   getPDF(): Observable<any>{

@@ -34,7 +34,7 @@ export class PracticesComponent implements AfterViewInit{
   ngOnInit(): void{
     this.PracticesService.getOffers().subscribe((data: Offer[]) => {
       for (let i = 0; i < data.length; i++) {
-        data[i].positiontable = data[i].id;
+        data[i].pos = data[i].id;
         this.PracticesService.getCompanyName(data[i].company_id).subscribe((company:Company) => {
           data[i].company_name = company.name;
         });
@@ -52,12 +52,12 @@ export class PracticesComponent implements AfterViewInit{
     this.selection.select(...this.dataSource.data);
   }
 
-  
+
   checkboxLabel(row?: Offer): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.positiontable + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.pos + 1}`;
   }
 
   guardar(): void {
@@ -66,6 +66,6 @@ export class PracticesComponent implements AfterViewInit{
          practicasSeleccionadas.push(item);
        }
        this.dialog.open(PopUpPracticesComponent, {
-         data: practicasSeleccionadas});       
+         data: practicasSeleccionadas});
   }
 }

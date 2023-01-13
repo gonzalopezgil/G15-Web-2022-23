@@ -4,6 +4,6 @@ export interface Tutor {
     lastname: string;
     nif: string;
     email: string;
-    admissionDate: Date;
+    admission_date: Date;
     active: boolean;
 }

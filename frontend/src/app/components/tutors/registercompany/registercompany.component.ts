@@ -10,16 +10,16 @@ import { TutorsService } from 'src/app/services/tutors.service';
 export class RegistercompanyComponent {
   form: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder,private TutorsService: TutorsService) { }
+  constructor(private fb: FormBuilder,private tutorService: TutorsService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      mail_suffix: ['', Validators.required, Validators.pattern('@[a-z0-9.-]+\.[a-z]{2,3}$')],
-      phone:  ['', Validators.required, Validators.pattern('^[0-9]{9}$')],
+      mail_suffix: ['', Validators.required],
+      phone:  ['', Validators.required ],
       address: ['', Validators.required],
-      city: ['', Validators.required, Validators.pattern('^[a-zA-Z]+$')],
-      postal_code: ['', Validators.required, Validators.pattern('^[0-9]{5}$')],
+      city: ['', Validators.required],
+      postal_code: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
@@ -31,14 +31,17 @@ export class RegistercompanyComponent {
   get city() { return this.form.get('city'); }
   get postal_code() { return this.form.get('postal_code'); }
   get description() { return this.form.get('description'); }
-  
+
   clearForm() {
     this.form.reset();
   }
 
   onSubmit() {
     if(this.form.valid) {
-      this.TutorsService.registerCompany(this.form);
+      this.tutorService.registerCompany(this.form).subscribe(
+        (res) => {
+          console.log(res);
+        });
     }
   }
 

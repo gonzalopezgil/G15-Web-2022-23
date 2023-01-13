@@ -18,7 +18,7 @@ export class TutordataComponent {
   ngOnInit(): void {
     this.tutorService.getTutor().subscribe((tutor_response) => {
       console.log(tutor_response)
-      this.tutor.admissionDate = tutor_response.admission_date;
+      this.tutor.admission_date = tutor_response.admission_date;
       this.tutor.active = tutor_response.removal_date == null && tutor_response.admission_date != null;
       this.userService.getUser().subscribe((user_response) => {
         this.tutor.username = user_response.username;
