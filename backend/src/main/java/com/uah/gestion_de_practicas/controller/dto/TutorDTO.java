@@ -7,9 +7,14 @@ import com.uah.gestion_de_practicas.model.Tutor;
 
 import lombok.*;
 
+/** 
+ * DTO to manage the tutor data.
+ */
 @Data
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class TutorDTO {
     private Long user_id;
     private String username;
@@ -22,22 +27,15 @@ public class TutorDTO {
     private Date admission_date;
     private Date removal_date;
 
-    public TutorDTO(Long user_id, String username, String password, String name, String surname, String nif, String email, Long company_id, Date admission_date, Date removal_date) {
-        this.user_id = user_id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.nif = nif;
-        this.email = email;
-        this.company_id = company_id;
-        this.admission_date = admission_date;
-        this.removal_date = removal_date;
-    }
-
     public Tutor toTutor() {
         Company company = new Company();
         company.setId(company_id);
         return new Tutor(username, password, name, surname, nif, email, admission_date, removal_date, company);
+    }
+
+    public static Tutor toTutor(TutorDTO tutor) {
+        Company company = new Company();
+        company.setId(tutor.getCompany_id());
+        return new Tutor(tutor.getUsername(), tutor.getPassword(), tutor.getName(), tutor.getSurname(), tutor.getNif(), tutor.getEmail(), tutor.getAdmission_date(), tutor.getRemoval_date(), company);
     }
 }

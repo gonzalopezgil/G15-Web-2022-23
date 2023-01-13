@@ -49,59 +49,58 @@
 //     @Test
 //     public void registerCompany() {
 //         // Set up test
-//         Company company = new Company("Company Example", "Description Example");
+//         Company company = new Company("Company Example", "Description Example", "@gmail.com", "612333333", "Street", "City", 12345);
 //         Tutor tutor = new Tutor("gonza", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com",
 //                         Date.valueOf("2021-05-01"), null, company);
 
 //         // Execute the method
-//         Company registered_company = companyController.registerCompany(company, tutor).getBody();
-//         HttpStatus status_unregistered = companyController.registerCompany(company, null).getStatusCode();
+
+//         Company registered_company = companyController.registerCompany(company).getBody();
 
 //         // Assert the result
 //         assertEquals(company, registered_company);
-//         assertEquals(HttpStatus.BAD_REQUEST, status_unregistered);
 //     }
 
-//     // @Test
-//     // public void getAllCompaniesWithStudents() {
-//     //     // Set up test
-//     //     Company company = new Company("Company 1", "Description 1");
+//     @Test
+//     public void getAllCompaniesWithStudents() {
+//         // Set up test
+//         Company company = new Company("Company 1", "Description 1");
 
-//     //     company = companyService.saveCompany(company);
+//         company = companyService.saveCompany(company);
 
-//     //     Offer offer1 = new Offer("Backend developer", "Web", company.getId(), "Street", "None", "Description 1",
-//     //             "8 hours per day", 12, 500.0, 5);
-//     //     Offer offer2 = new Offer("Frontend developer", "Web", company.getId(), "Street", "None", "Description 1",
-//     //             "8 hours per day", 12, 500.0, 5);
+//         Offer offer1 = new Offer("Backend developer", "Web", company.getId(), "Street", "None", "Description 1",
+//                 "8 hours per day", 12, 500.0, 5);
+//         Offer offer2 = new Offer("Frontend developer", "Web", company.getId(), "Street", "None", "Description 1",
+//                 "8 hours per day", 12, 500.0, 5);
 
-//     //     offerService.saveOffer(offer1);
-//     //     offerService.saveOffer(offer2);
+//         offerService.saveOffer(offer1);
+//         offerService.saveOffer(offer2);
 
-//     //     Student student1 = new Student("gonza", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com", "GII",
-//     //             Date.valueOf("2001-01-03"), "612345678", 8.9, 300);
-//     //     Student student2 = new Student("gonza2", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com", "GII",
-//     //             Date.valueOf("2001-01-03"), "612345678", 8.9, 300);
+//         Student student1 = new Student("gonza", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com", "GII",
+//                 Date.valueOf("2001-01-03"), "612345678", 8.9, 300);
+//         Student student2 = new Student("gonza2", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com", "GII",
+//                 Date.valueOf("2001-01-03"), "612345678", 8.9, 300);
 
-//     //     studentService.saveStudent(student1);
-//     //     studentService.saveStudent(student2);
+//         studentService.saveStudent(student1);
+//         studentService.saveStudent(student2);
 
-//     //     Practice practice1 = new Practice(student1.getId(), offer1.getId(), null, null, null, null);
-//     //     Practice practice2 = new Practice(student2.getId(), offer2.getId(), null, null, null, null);
+//         Practice practice1 = new Practice(student1.getId(), offer1.getId(), null, null, null, null);
+//         Practice practice2 = new Practice(student2.getId(), offer2.getId(), null, null, null, null);
 
-//     //     practiceService.savePractice(practice1);
-//     //     practiceService.savePractice(practice2);
+//         practiceService.savePractice(practice1);
+//         practiceService.savePractice(practice2);
 
-//     //     Supervisor supervisor = new Supervisor("gonza", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com",
-//     //             Date.valueOf("2021-05-01"), null);
+//         Supervisor supervisor = new Supervisor("gonza", "1234", "Gonzalo", "López", "12345566X", "gonza@gmail.com",
+//                 Date.valueOf("2021-05-01"), null);
 
-//     //     // Execute the method
-//     //     List<CompanyStudentsDTO> companies = companyController.getAllCompaniesWithStudents(supervisor).getBody();
+//         // Execute the method
+//         List<CompanyStudentsDTO> companies = companyController.getAllCompaniesWithStudents(supervisor).getBody();
 
-//     //     // Assert the result
-//     //     List<CompanyStudentsDTO> expected_companies = List.of(new CompanyStudentsDTO(company.getId(), company.getName(), company.getDescription(), 2L));
+//         // Assert the result
+//         List<CompanyStudentsDTO> expected_companies = List.of(new CompanyStudentsDTO(company.getId(), company.getName(), company.getDescription(), 2L));
 
-//     //     assertEquals(expected_companies, companies);
-//     // }
+//         assertEquals(expected_companies, companies);
+//     }
 
 //     @Test
 //     public void getCompanyById() {

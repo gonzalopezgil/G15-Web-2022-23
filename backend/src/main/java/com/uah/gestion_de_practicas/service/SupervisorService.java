@@ -57,4 +57,17 @@ public class SupervisorService {
     public List<Supervisor> getAllSupervisors() {
         return supervisorRepository.findAll();
     }
+
+    // ------------------- CUSTOM OPERATIONS ------------------- //
+
+    /** 
+     * Checks if the supervisor is authorized to access the information.
+     * @param username Username of the supervisor.
+     * @return True if the supervisor is authorized, false otherwise.
+     */
+    public boolean isAuthorized(String username) {
+        Supervisor supervisor = supervisorRepository.findSupervisorByUsername(username).orElse(null);
+        if (supervisor == null) return false;
+        return (supervisor.getRemoval_date() == null);
+    }
 }

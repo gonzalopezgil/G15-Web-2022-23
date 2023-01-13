@@ -23,7 +23,9 @@ public class RequestService {
      */
     private final RequestRepository requestRepository;
 
-
+    /** 
+     * Constructor for the RequestService class.
+     */
     public RequestService(RequestRepository requestRepository, OfferService offerService) {
         this.requestRepository = requestRepository;
     }
@@ -96,10 +98,19 @@ public class RequestService {
         return requestRepository.findAll();
     }
  
+    /** 
+     * Gets all the requests from the database for a given student.
+     * @param studentId, Id of the student.
+     * @return A list with all the requests for the given student.
+     */
     public List<Request> getRequestsByStudentId(Long studentId) {
         return requestRepository.findAllByStudentId(studentId);
     }
 
+    /** 
+     * Deletes all the requests from the database for a given student.
+     * @param student_id, Id of the student.
+     */
     public void deleteRequestsByStudentId(Long student_id) {
         requestRepository.deleteByStudentId(student_id);
     }

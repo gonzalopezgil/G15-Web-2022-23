@@ -1,6 +1,6 @@
 package com.uah.gestion_de_practicas.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -65,7 +65,7 @@ public class Practice {
      * @return the id of the student.
      */
     @JoinColumn(name = "id_alumno")
-    @ManyToOne(targetEntity = Student.class, cascade = CascadeType.REMOVE)
+    @ManyToOne(targetEntity = Student.class)
     public Student getStudent() {
         return student;
     }
@@ -75,7 +75,7 @@ public class Practice {
      * @return the id of the offer.
      */
     @JoinColumn(name = "id_oferta")
-    @ManyToOne(targetEntity = Offer.class, cascade = CascadeType.REMOVE)
+    @ManyToOne(targetEntity = Offer.class)
     public Offer getOffer() {
         return offer;
     }

@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/** 
+ * DTO to manage the authentication data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

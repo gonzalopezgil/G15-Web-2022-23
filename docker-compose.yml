@@ -2,7 +2,7 @@ version: '3.8' # Por tener docker v19.03.0 o superior
 
 services:
     frontend:
-        image: nicolaemolnar/gestion-de-practicas-front:0.2
+        image: nicolaemolnar/gestion-de-practicas-front:1.0
         container_name: front_gdp
         restart: always
         ports:
@@ -10,7 +10,7 @@ services:
         networks:
             - backend
     backend:
-        image: nicolaemolnar/gestion-de-practicas-back:2.9
+        image: nicolaemolnar/gestion-de-practicas-back:3.0
         container_name: back_gdp
         restart: always
         environment:

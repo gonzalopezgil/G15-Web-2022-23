@@ -7,6 +7,9 @@ import com.uah.gestion_de_practicas.model.Supervisor;
 
 import lombok.*;
 
+/**
+ * DTO to manage the supervisor data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

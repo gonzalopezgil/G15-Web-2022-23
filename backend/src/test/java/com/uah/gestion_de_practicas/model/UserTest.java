@@ -62,10 +62,10 @@ public class UserTest{
     public void TestGetFirstName(){
         // Given
         String first_name = "Daniel";
-        user.setFirstName(first_name);
+        user.setFirst_name(first_name);
         
         // When
-        String result = user.getFirstName();
+        String result = user.getFirst_name();
         
         // Then
         Assertions.assertEquals(first_name, result);
@@ -76,10 +76,10 @@ public class UserTest{
     public void TestGetLastName(){
         // Given
         String last_name = "Martinez";
-        user.setLastName(last_name);
+        user.setLast_name(last_name);
         
         // When
-        String result = user.getLastName();
+        String result = user.getLast_name();
         
         // Then
         Assertions.assertEquals(last_name, result);
