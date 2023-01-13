@@ -27,14 +27,23 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig {
 
+    /** 
+     * Configuration of the API Key
+     */
     private ApiKey apiKey() { 
         return new ApiKey("JWT", "Authorization", "header"); 
     }
 
+    /** 
+     * Configuration of the security context
+     */
     private SecurityContext securityContext() { 
         return SecurityContext.builder().securityReferences(defaultAuth()).build(); 
     } 
     
+    /** 
+     * Configuration of the default authorization
+     */
     private List<SecurityReference> defaultAuth() { 
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything"); 
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1]; 
@@ -42,6 +51,9 @@ public class SwaggerConfig {
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes)); 
     }
 
+    /** 
+     * Configuration of the Swagger API
+     */
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
@@ -54,6 +66,9 @@ public class SwaggerConfig {
                 .build();
     }
 
+    /** 
+     * Configuration of the API details
+     */
     private ApiInfo apiDetails(){
         return new ApiInfo("Gestión de Practicas API REST",
                 "Documentación de la API REST que gestiona las prácticas de los alumnos de la UAH",

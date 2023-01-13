@@ -7,6 +7,9 @@ import com.uah.gestion_de_practicas.model.Tutor;
 
 import lombok.*;
 
+/** 
+ * DTO to manage the tutor data.
+ */
 @Data
 @ToString
 @EqualsAndHashCode

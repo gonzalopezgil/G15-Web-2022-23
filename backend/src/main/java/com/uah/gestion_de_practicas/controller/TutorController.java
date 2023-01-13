@@ -21,12 +21,13 @@ import com.uah.gestion_de_practicas.service.TutorService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import springfox.documentation.annotations.ApiIgnore;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Rest Controller for the Tutor endpoint
  */
 @RestController
+@Slf4j
 @RequestMapping("/api/users/tutors")
 public class TutorController {
 
@@ -51,8 +52,10 @@ public class TutorController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<TutorDAO> tutors = tutorService.getAllTutors(username);
         if (tutors == null) {
+            log.warn("User does not have permission to get all the tutors.");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("All the tutors have been retrieved successfully.");
         return ResponseEntity.ok(tutors);
     }
 
@@ -66,9 +69,10 @@ public class TutorController {
     @ApiOperation("Create a new tutor.")
     public ResponseEntity<Void> saveTutor(@ApiParam("Object with the new tutor") @RequestBody TutorDTO tutor) {
         if (tutor == null || tutor.getUser_id() != null || tutorService.getTutor(tutor.getUser_id()) != null) {
+            log.warn("Bad request registering a new tutor");
             return ResponseEntity.badRequest().build();
         }
-        
+        log.info("New tutor registered successfully");
         tutorService.saveTutor(TutorDTO.toTutor(tutor));
         return ResponseEntity.ok().build();
     }
@@ -82,31 +86,47 @@ public class TutorController {
     @ApiOperation("Get a tutor by its id.")
     public ResponseEntity<TutorDAO> getTutorById(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id) {
         if (id == null || tutorService.getTutor(id) == null) {
+            log.warn("Tutor not found by id in the database");
             return ResponseEntity.notFound().build();
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         TutorDAO tutor = tutorService.getTutor(id, username);
         if (tutor == null) {
+            log.warn("User does not have permission to get the tutor.");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        log.info("Tutor retrieved successfully");
         return ResponseEntity.ok(tutor);
     }
 
+    /** 
+     * Endpoint to update a tutor by its id.
+     * @param id, the id of the tutor.
+     * @param tutor, the new attributes of the tutor.
+     * @return a response entity with the status of the response.
+     */
     @PutMapping("/{id}")
     @ApiOperation("Update a tutor by its id.")
     public ResponseEntity<Void> updateTutor(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id, @ApiParam("New tutor's attributes") @RequestBody TutorDTO tutor) {
         if (tutor.getUser_id() != id) {
+            log.warn("Bad request updating a tutor: id does not match");
             return ResponseEntity.badRequest().build();
         }
-
         tutorService.updateTutor(tutor.toTutor());
+        log.info("Tutor updated successfully");
         return ResponseEntity.ok().build();
     }
 
+    /** 
+     * Endpoint to delete a tutor by its id.
+     * @param id, the id of the tutor.
+     * @return the tutor deleted.
+     */ 
     @DeleteMapping("/{id}")
     @ApiOperation("Delete a tutor by its id.")
     public ResponseEntity<Void> deleteTutor(@ApiParam("Identifier of the tutor") @PathVariable(name = "id") Long id) {
         tutorService.deleteTutor(id);
+        log.info("Tutor deleted successfully");
         return ResponseEntity.ok().build();
     }
 

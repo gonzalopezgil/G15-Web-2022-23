@@ -151,6 +151,11 @@ public class TutorService {
         return tutorRepository.save(tutor);
     }
 
+    /** 
+     * Gets the tutors of a list of practices.
+     * @param practices, List of practices.
+     * @return A HashMap with the id of the practice and the name of the tutor.
+     */
     public HashMap<Long, String> getTutorByPractice(List<Practice> practices) {
         HashMap<Long, String> tutors = new HashMap<>();
         for (Practice practice : practices) {

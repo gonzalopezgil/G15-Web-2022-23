@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -20,6 +18,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/** 
+ * Class to manage the PDF generation.
+ */
 public class PDFHandler extends PdfPageEventHelper {
     // Definition of fonts
     final Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);

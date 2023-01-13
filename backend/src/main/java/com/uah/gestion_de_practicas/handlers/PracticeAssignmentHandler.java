@@ -11,13 +11,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.uah.gestion_de_practicas.model.Practice;
 
+/** 
+ * Handler class for the practice assignment PDF.
+ */
 public class PracticeAssignmentHandler extends PDFHandler {
 
     private final List<Practice> assignment;

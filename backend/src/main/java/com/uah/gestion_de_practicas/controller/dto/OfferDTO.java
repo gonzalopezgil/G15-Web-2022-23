@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 import com.uah.gestion_de_practicas.model.Company;
 import com.uah.gestion_de_practicas.model.Offer;
 
+/** 
+ * DTO to manage the offer data.
+ */
 @Data
 @EqualsAndHashCode
 @ToString

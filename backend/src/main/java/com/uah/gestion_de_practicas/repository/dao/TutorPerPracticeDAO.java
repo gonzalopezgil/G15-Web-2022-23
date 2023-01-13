@@ -2,9 +2,11 @@ package com.uah.gestion_de_practicas.repository.dao;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/** 
+ * DAO to manage the tutor data per practice.
+ */
 @Data
 @ToString
 @EqualsAndHashCode

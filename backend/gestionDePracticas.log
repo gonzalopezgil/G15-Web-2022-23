@@ -1,31 +1,37 @@
-2023-01-13 01:01:01.438  INFO 22517 --- [main] c.u.g.GestionDePracticasApplication      : Starting GestionDePracticasApplication using Java 17.0.5 on Mac-mini-de-Gonzalo.local with PID 22517 (/Users/gonzalo/GitHub/G15-Web-2022-23/backend/target/classes started by gonzalo in /Users/gonzalo/GitHub/G15-Web-2022-23/backend)
-2023-01-13 01:01:01.439  INFO 22517 --- [main] c.u.g.GestionDePracticasApplication      : The following profiles are active: prod
-2023-01-13 01:01:01.835  INFO 22517 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-01-13 01:01:01.874  INFO 22517 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 8 JPA repository interfaces.
-2023-01-13 01:01:02.053  INFO 22517 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6d074b14' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2023-01-13 01:01:02.055  INFO 22517 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2023-01-13 01:01:02.208  INFO 22517 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2023-01-13 01:01:02.216  INFO 22517 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-01-13 01:01:02.216  INFO 22517 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
-2023-01-13 01:01:02.273  INFO 22517 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-01-13 01:01:02.273  INFO 22517 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 809 ms
-2023-01-13 01:01:02.296  WARN 22517 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-01-13 01:01:02.359  INFO 22517 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-01-13 01:01:02.387  INFO 22517 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
-2023-01-13 01:01:02.460  INFO 22517 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-01-13 01:01:02.510  INFO 22517 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-01-13 01:01:02.576  INFO 22517 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-01-13 01:01:02.592  INFO 22517 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
-2023-01-13 01:01:02.921  INFO 22517 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-01-13 01:01:02.925  INFO 22517 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-01-13 01:01:03.596  INFO 22517 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@255482cb, org.springframework.security.web.context.SecurityContextPersistenceFilter@1f4b8027, org.springframework.security.web.header.HeaderWriterFilter@218fc40d, org.springframework.web.filter.CorsFilter@40ecead5, org.springframework.security.web.authentication.logout.LogoutFilter@58267ba1, com.uah.gestion_de_practicas.security.jwt.JwtRequestFilter@5b643d6e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@769b1d1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16a14076, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@641255d1, org.springframework.security.web.session.SessionManagementFilter@37823482, org.springframework.security.web.access.ExceptionTranslationFilter@3e574f9c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@12d8e6b6]
-2023-01-13 01:01:03.676  INFO 22517 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-13 01:01:03.870  INFO 22517 --- [main] c.u.g.GestionDePracticasApplication      : Started GestionDePracticasApplication in 2.663 seconds (JVM running for 2.863)
-2023-01-13 01:01:15.457  INFO 22517 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-01-13 01:01:15.457  INFO 22517 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-01-13 01:01:15.470  INFO 22517 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
-2023-01-13 01:01:36.377 ERROR 22517 --- [http-nio-8080-exec-6] c.u.g.security.jwt.JwtTokenUtil          : JWT token is expired: JWT expired at 2023-01-12T11:19:36Z. Current time: 2023-01-13T01:01:36Z, a difference of 49320376 milliseconds.  Allowed clock skew: 0 milliseconds.
-2023-01-13 01:01:36.378 ERROR 22517 --- [http-nio-8080-exec-6] c.u.g.security.jwt.JwtAuthEntryPoint     : Unauthorized error: Full authentication is required to access this resource
-2023-01-13 01:01:49.122  INFO 22517 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-01-13 01:01:49.126  INFO 22517 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-01-13 01:01:49.143  INFO 22517 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-01-13 03:27:35.100  INFO 7719 --- [main] c.u.g.GestionDePracticasApplication      : Starting GestionDePracticasApplication using Java 17.0.5 on Mac-mini-de-Gonzalo.local with PID 7719 (/Users/gonzalo/GitHub/G15-Web-2022-23/backend/target/classes started by gonzalo in /Users/gonzalo/GitHub/G15-Web-2022-23/backend)
+2023-01-13 03:27:35.102  INFO 7719 --- [main] c.u.g.GestionDePracticasApplication      : The following profiles are active: prod
+2023-01-13 03:27:35.534  INFO 7719 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-13 03:27:35.572  INFO 7719 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 8 JPA repository interfaces.
+2023-01-13 03:27:35.781  INFO 7719 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3e5fd2b1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-13 03:27:35.784  INFO 7719 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-13 03:27:35.910  INFO 7719 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-01-13 03:27:35.916  INFO 7719 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-13 03:27:35.916  INFO 7719 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2023-01-13 03:27:35.974  INFO 7719 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-13 03:27:35.975  INFO 7719 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 845 ms
+2023-01-13 03:27:36.004  WARN 7719 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-13 03:27:36.084  INFO 7719 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-13 03:27:36.109  INFO 7719 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2023-01-13 03:27:36.174  INFO 7719 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-01-13 03:27:36.222  INFO 7719 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-13 03:27:36.272  INFO 7719 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-13 03:27:36.288  INFO 7719 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2023-01-13 03:27:36.663  INFO 7719 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-13 03:27:36.668  INFO 7719 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-13 03:27:37.389  INFO 7719 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6d514259, org.springframework.security.web.context.SecurityContextPersistenceFilter@5605a59b, org.springframework.security.web.header.HeaderWriterFilter@4402ed61, org.springframework.web.filter.CorsFilter@77e1b84c, org.springframework.security.web.authentication.logout.LogoutFilter@499445d2, com.uah.gestion_de_practicas.security.jwt.JwtRequestFilter@5d01a2eb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d164938, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@501b15b9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@12d8e6b6, org.springframework.security.web.session.SessionManagementFilter@99948fe, org.springframework.security.web.access.ExceptionTranslationFilter@2530baf6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@222dc36c]
+2023-01-13 03:27:37.485  INFO 7719 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-13 03:27:37.751  INFO 7719 --- [main] c.u.g.GestionDePracticasApplication      : Started GestionDePracticasApplication in 3.052 seconds (JVM running for 3.246)
+2023-01-13 03:28:03.465  INFO 7719 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-13 03:28:03.466  INFO 7719 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-01-13 03:28:03.469  INFO 7719 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-01-13 03:28:03.629  INFO 7719 --- [http-nio-8080-exec-1] c.u.g.controller.UserController          : Generating the JWT token
+2023-01-13 03:28:03.681  INFO 7719 --- [http-nio-8080-exec-1] c.u.g.controller.UserController          : The user has successfully logged in
+2023-01-13 03:28:24.454  INFO 7719 --- [http-nio-8080-exec-2] c.u.g.controller.UserController          : The user by username has been successfully retrieved
+2023-01-13 03:28:33.141  INFO 7719 --- [http-nio-8080-exec-3] c.u.g.controller.OfferController         : List of all the offers obtained successfully
+2023-01-13 03:29:04.881  WARN 7719 --- [http-nio-8080-exec-5] c.u.g.controller.PracticeController      : The user does not have access to the practice requested by id
+2023-01-13 03:29:34.530  INFO 7719 --- [http-nio-8080-exec-6] c.u.g.controller.StudentController       : List of all the students obtained successfully
+2023-01-13 03:29:48.548  INFO 7719 --- [http-nio-8080-exec-7] c.u.g.controller.PracticeController      : All the practices obtained successfully
+2023-01-13 03:29:59.827 ERROR 7719 --- [http-nio-8080-exec-8] c.u.g.security.jwt.JwtAuthEntryPoint     : Unauthorized error: Bad credentials
+2023-01-13 03:30:08.561  INFO 7719 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-13 03:30:08.564  INFO 7719 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-01-13 03:30:08.587  INFO 7719 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
