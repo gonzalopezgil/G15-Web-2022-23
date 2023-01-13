@@ -1,1 +1,32 @@
-<p>practice-assigned works!</p>
+<div class="header">
+  <h1>muy buenas:</h1>
+</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Posicion</th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+  <ng-container matColumnDef="company">
+    <th mat-header-cell *matHeaderCellDef> Empresa </th>
+    <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="f_inicio">
+    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+    <td mat-cell *matCellDef="let element"> {{element.f_inicio}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSize]="5"
+                 showFirstLastButtons
+                 aria-label="Seleciona la pagina de practicas">
+  </mat-paginator>
+<div class="button">
+  <button mat-raised-button (click)="generatePdf()">Generar pdf de la ultima asignacion</button>
+  <button mat-raised-button routerLink = "'/dashboard-responsable'" >Volver</button>
+</div>

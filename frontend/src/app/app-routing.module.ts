@@ -143,13 +143,13 @@ const routes: Routes = [
         path: 'practices-reports',
         component: PracticesReportsComponent,
         canActivate: [AuthGuard],
-        children: [
-          {
-            path: 'practice-assigned',
-            component: PracticeAssignedComponent
-          }
-        ]
       },
+      {
+        path: 'practice-assigned',
+        component: PracticeAssignedComponent,
+        canActivate: [AuthGuard]
+      },
+
       {
         path: 'responsable-data',
         component: ResponsabledataComponent,

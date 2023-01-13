@@ -15,6 +15,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { OfferService } from 'src/app/services/offer.service';
 import { PracticesService } from 'src/app/services/practices.service';
+import { delay } from 'rxjs';
 @Component({
   selector: 'app-practices-reports',
   templateUrl: './practices-reports.component.html',
@@ -74,24 +75,19 @@ export class PracticesReportsComponent {
     this.practicesService.getPracticesResponsable().subscribe(
       (practicas) => {
         this.practicas = practicas;
-        console.log(this.practicas);
         for(let i = 0; i<this.practicas.length; i++){
           this.userService.getUserById(this.practicas[i].student_id).subscribe(
             (alumno) => {
               this.alumno = alumno;
-              console.log(alumno.first_name)
-              console.log(this.alumno)
               this.offerService.getOfferById(this.practicas[i].offer_id).subscribe(
                 (oferta) => {
                   this.oferta = oferta;
-                  console.log(this.oferta)
                   this.empresaService.getCompanyById(this.oferta.company_id).subscribe(
                     (empresa) => {
                       this.empresa = empresa;
-
                       this.data[i]= { nameUser : alumno.first_name, lastnameUser : alumno.last_name, gradeUser : alumno.degree, companyName : empresa.name, hours : alumno.total_hours, mark : practicas[i].mark}
                       console.log(this.dataSource.data)
-                      this.dataSource.data[i] = this.data[i]
+                      this.dataSource._updateChangeSubscription();
                     }
                   )
                 }
@@ -101,9 +97,11 @@ export class PracticesReportsComponent {
         }
       }
     )
+    console.log(this.data);
+    this.dataSource.data = this.data
   }
-  aceptar(): void {
-    console.log("prácticas asignadas");
-    //this.dialog.open(PopUpAssignPracticesComponent);
+  aceptar():void{
+    this.dialog.open(PopUpAssignPracticesComponent);
   }
+
 }
