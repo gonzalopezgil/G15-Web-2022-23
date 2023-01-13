@@ -82,7 +82,7 @@ import { OffersViewComponent } from './components/tutors/offers-view/offers-view
     PopUpTutorregisterComponent,
     TutordataComponent,
     TutorreportsComponent,
-    RegistercompanyComponent
+    RegistercompanyComponent,
     CompanyViewComponent,
     OffersViewComponent
   ],

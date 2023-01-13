@@ -26,7 +26,6 @@ import { RegisterofferComponent } from './components/tutors/registeroffer/regist
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { TutorGuard } from './guards/tutor.guard';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
-import { TutorGuard } from './guards/tutor.guard';
 import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
 import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
 
@@ -66,7 +65,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path:'registercompany',
+        path:'register-company',
         component: RegistercompanyComponent,
         canActivate: [AuthGuard],
       },

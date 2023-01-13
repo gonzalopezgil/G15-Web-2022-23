@@ -7,7 +7,6 @@ import { Tutor } from '../interfaces/tutor';
 import { Observable } from 'rxjs';
 import { Report } from '../interfaces/report';
 import { reports } from '../mocks/reports.mock';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class TutorsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
-  getTutor(): Observable<Tutor> {
+  getTutor(): Observable<any> {
     let id = this.authService.getId();
     let token = sessionStorage.getItem('token');
     let httpOptions = {
@@ -27,7 +26,7 @@ export class TutorsService {
       }
     };
 
-    return this.http.get<Tutor>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
+    return this.http.get<any>('http://localhost:8080/api/users/tutors/'+id, httpOptions);
   }
 
   getStubbyTutor(): Tutor {
@@ -38,6 +37,7 @@ export class TutorsService {
       nif: '12345678A',
       email: 'xd@gmail.com',
       admissionDate: new Date(),
+      active: true
     };
   }
 
@@ -69,6 +69,15 @@ export class TutorsService {
     return this.http.get<Company>('http://localhost:8080/api/company/'+name, httpOptions);
   }
 
+  getCompany(id_company: any): Observable<Company> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<Company>('http://localhost:8080/api/company/'+id_company, httpOptions);
+  }
 
   registerOffer(form: FormGroup) {
     const httpOptions = {
@@ -85,7 +94,7 @@ export class TutorsService {
 
     });
   });
-    
+
 
   }
 
@@ -116,10 +125,6 @@ export class TutorsService {
     return true;
   }
 
-  registerCompany(form: FormGroup){
-    console.log(form.value);
-  }
-
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log("Cambio password de tutor");
     console.log('oldpassword: ' + oldpassword);
@@ -127,8 +132,16 @@ export class TutorsService {
     console.log('Confirm password: ' + confirmPassword);
   }
 
-  getReports(): Report[] {
-    return reports;
+  getPracticesByTutor(): Observable<any> {
+    let id = this.authService.getId();
+    let token = sessionStorage.getItem('token');
+    let httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    return this.http.get<any>('http://localhost:8080/api/practices/'+id, httpOptions);
   }
 
   saveReports(reports: Report[]) {

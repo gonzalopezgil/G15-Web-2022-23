@@ -5,4 +5,5 @@ export interface Tutor {
     nif: string;
     email: string;
     admissionDate: Date;
+    active: boolean;
 }
