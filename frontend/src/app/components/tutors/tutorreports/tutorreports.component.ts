@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { TutorsService } from 'src/app/services/tutors.service';
 import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
@@ -29,6 +29,12 @@ export class TutorreportsComponent {
   }
 
   ngOnInit(): void{
+    this.downloadReports();
+  }
+
+  downloadReports(){
+    this.dataSource.data = [];
+    this.reports = [];
     this.tutorService.getPracticesByTutor().subscribe((practiceList: Practice[]) => {
       for (let i = 0; i < practiceList.length; i++) {
         this.practiceService.getOffer(practiceList[i].offer_id).subscribe((offer) => {
@@ -46,7 +52,7 @@ export class TutorreportsComponent {
                 offer_id: practiceList[i].offer_id,
                 student_id: practiceList[i].student_id,
               }
-
+              this.reports.push(structuredClone(report));
               this.dataSource.data.push(report);
               this.dataSource._updateChangeSubscription();
           });
@@ -55,10 +61,9 @@ export class TutorreportsComponent {
     });
   }
 
-
-
   guardar(): void {
-    for (let report of this.dataSource.data) {
+    for (let pos=0 ; pos < this.reports.length ; pos++) {
+      let report = this.dataSource.data[pos];
       let practice = {
         id: report.id,
         offer_id: report.offer_id,
@@ -68,8 +73,13 @@ export class TutorreportsComponent {
         start_date: report.start_date,
         end_date: report.end_date,
       }
-      this.practiceService.savePractice(practice);
+      this.practiceService.savePractice(practice).subscribe((response) => {
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        this.router.navigate(['/dashboard-tutors']);
+      });
     }
-    this.router.navigate(['/dashboard-tutors']);
   }
 }
+

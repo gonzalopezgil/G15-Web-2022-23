@@ -51,7 +51,7 @@ export class PracticesService {
           'Authorization': 'Bearer ' + this.authService.getToken(),
         }
       };
-      return this.http.put("http://localhost:8080/api/practices/"+practice.id, practice, httpOptions);
+      return this.http.post("http://localhost:8080/api/practices/", practice, httpOptions);
     }
 
 
