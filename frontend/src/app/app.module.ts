@@ -34,7 +34,7 @@ import { RegisterFormComponent } from './components/forms/register-form/register
 import { PasswordsMatchValidator } from './validators/passwords-match-validator/passwords-match-validator.component';
 import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tutors.component';
 import { NavigationTutorsComponent } from './components/tutors/navigation-tutors/navigation-tutors.component';
-import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
+import { RegisterofferComponent } from './components/tutors/registeroffer/registeroffer.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { ChangetutorcompanyComponent } from './components/tutors/changetutorcompany/changetutorcompany.component';
 import { TutorregisterformComponent } from './components/forms/tutorregisterform/tutorregisterform.component';
@@ -42,6 +42,7 @@ import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorre
 import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
+import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 
 @NgModule({
   declarations: [
@@ -71,14 +72,15 @@ import { TutorreportsComponent } from './components/tutors/tutorreports/tutorrep
     PasswordsMatchValidator,
     DashboardTutorsComponent,
     NavigationTutorsComponent,
-    RegistercompanyComponent,
+    RegisterofferComponent,
     DeletecompanyComponent,
     ChangetutorcompanyComponent,
     TutorregisterformComponent,
     TutorregisterPagesComponent,
     PopUpTutorregisterComponent,
     TutordataComponent,
-    TutorreportsComponent
+    TutorreportsComponent,
+    RegistercompanyComponent
   ],
   imports: [
     BrowserModule,

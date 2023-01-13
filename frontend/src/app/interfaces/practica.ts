@@ -1,10 +1,9 @@
 export interface Practica {
+    end_date: string;
     id: number;
-    posicion: number;
-    titulo: string;
-    empresa: string;
-    plazas: number;
-    horario: string;
-    dias: string;
-    semanas: number;
-  }
+    mark: number;
+    offer_id: number;
+    report: string;
+    start_date: string;
+    student_id: number;
+}
