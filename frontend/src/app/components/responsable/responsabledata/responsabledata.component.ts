@@ -19,8 +19,8 @@ export class ResponsabledataComponent {
     dni: '',
     mail: '',
     username: '',
-    f_alta: '',
-    f_baja: '',
+    admission_date: new Date(2018, 0O5, 0O5, 17, 23, 42, 11),
+    removal_date: new Date(2018, 0O5, 0O5, 17, 23, 42, 11),
   };
 
   constructor(private responsableService: ResponsableService, private userService: UsersService, private dialog: MatDialog) { }
@@ -28,16 +28,20 @@ export class ResponsabledataComponent {
   ngOnInit(): void {
     this.responsableService.getResponsable().subscribe(
       (data) => {
-        this.userService.getUserById(data.user_id).subscribe((user_data) => {
-          this.responsable.name = user_data.first_name;
-          this.responsable.lastname = user_data.last_name;
-          this.responsable.dni = user_data.nif;
-          this.responsable.mail = user_data.email;
-          this.responsable.username = user_data.username;
-          this.responsable.f_alta = data.f_alta;
-          this.responsable.f_baja = data.f_baja;
-        });
-      });
+        this.userService.getUserById(data.user_id).subscribe(
+          (user_data) => {
+            this.responsable.name = user_data.first_name;
+            this.responsable.lastname = user_data.last_name;
+            this.responsable.dni = user_data.nif;
+            this.responsable.mail = user_data.email;
+            this.responsable.username = user_data.username;
+            this.responsable.admission_date = data.admission_date;
+            this.responsable.removal_date = data.removal_date;
+            console.log(data.admission_date);
+          }
+        );
+      }
+    );
   }
 
   changePassword() {

@@ -21,7 +21,7 @@ export class UsersService {
         'Authorization': 'Bearer ' + this.authService.getToken(),
       }
     };
-    return this.http.get<User>(this.envService.getApiUrl()+'/api/users/students/'+idAlumno, httpOptions);
+    return this.http.get<User>(this.envService.getApiUrl()+'/api/users/'+idAlumno, httpOptions);
   }
   constructor(private http: HttpClient,private authService: AuthService, private envService: EnvService) { }
 

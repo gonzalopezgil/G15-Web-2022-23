@@ -110,7 +110,7 @@ export class PracticeAssignedComponent {
   }
   generatePdf(): void {
     this.practiceService.getReport().subscribe(
-      (data: any) =>{
+      (data) =>{
         const file = new Blob([data], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(file);
         window.open(fileURL);
