@@ -1,17 +1,29 @@
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from '../interfaces/student';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
+import { AuthService } from './auth.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+ 
+  getUserById(idAlumno:number): Observable<User> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken(),
+      }
+    };
+    return this.http.get<User>('http://localhost:8080/api/users/students/'+idAlumno, httpOptions);
+  }
   constructor(private http: HttpClient,private authService: AuthService) { }
-
 
 
   changePassword(password: string, oldpassword: string, confirmPassword: string) {

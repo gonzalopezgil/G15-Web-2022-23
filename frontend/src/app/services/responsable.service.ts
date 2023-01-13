@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { responsable } from '../interfaces/responsable';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Token } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
 export class ResponsableService {
 
-  constructor() { }
-  getResponsable(): responsable {
-    let responsable:responsable = {
-      name: 'Pedro',
-      username: 'pedro',
-      lastname: 'Alvarez',
-      dni:  '79959955',
-      mail: 'pedro@gmail.com',
-      f_alta: '02/05/2015',
-      f_baja: '',
-    }
-
-    return responsable;
+  constructor(private authService: AuthService, private http:HttpClient) { }
+  getResponsable(): Observable<responsable> {
+    let token = this.authService.getToken();
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      }
+    };
+    let idResponsable = this.authService.getId();
+    return this.http.get<responsable>('http://localhost:8080/api/users/supervisors/'+idResponsable, httpOptions);
   }
   changePassword(password: string, oldpassword: string, confirmPassword: string) {
     console.log('oldpassword: ' + oldpassword);

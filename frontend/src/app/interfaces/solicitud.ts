@@ -1,4 +1,4 @@
 export interface Solicitud {
-    aplicante: string;
-    empresa: string;
+    aplicante: number;
+    empresa: number;
 }

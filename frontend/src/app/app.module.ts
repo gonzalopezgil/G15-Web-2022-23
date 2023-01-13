@@ -26,7 +26,6 @@ import { NavigationResponsableComponent } from './components/responsable/navigat
 import { ResponsabledataComponent } from './components/responsable/responsabledata/responsabledata.component';
 import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
 import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
-import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
 import { PopUpAssignPracticesComponent } from './components/pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -42,6 +41,10 @@ import { TutorregisterPagesComponent } from './pages/tutorregister-pages/tutorre
 import { PopUpTutorregisterComponent } from './components/pop-ups/pop-up-tutorregister/pop-up-tutorregister.component';
 import { TutordataComponent } from './components/tutors/tutordata/tutordata.component';
 import { TutorreportsComponent } from './components/tutors/tutorreports/tutorreports.component';
+import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
 import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
@@ -67,7 +70,6 @@ import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/po
     ResponsabledataComponent,
     UsersReportsComponent,
     DashboardResponsableComponent,
-    AssignPracticeComponent,
     PopUpAssignPracticesComponent,
     AboutUsPageComponent,
     RegisterPageComponent,
@@ -83,6 +85,8 @@ import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/po
     PopUpTutorregisterComponent,
     TutordataComponent,
     TutorreportsComponent,
+    PracticeAssignedComponent,
+    PracticesReportsComponent
     RegistercompanyComponent,
     CompanyViewComponent,
     OffersViewComponent,
@@ -95,7 +99,8 @@ import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/po
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

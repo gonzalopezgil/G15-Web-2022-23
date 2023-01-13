@@ -22,7 +22,7 @@ export class UserdataComponent  implements OnInit{
   }
 
   changePassword() {
-    this.dialog.open(PopUpPasswordComponent, { data: true}); 
+    this.dialog.open(PopUpPasswordComponent, { data: true});
   }
   generatePDF() {
     this.usersService.getPDF().subscribe((data: any) => {

@@ -11,12 +11,11 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { PracticesComponent } from './components/users/practices/practices.component';
+import { PracticesReportsComponent } from './components/responsable/practices-reports/practices-reports.component';
 import { ReportsComponent } from './components/users/reports/reports.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PracticesOngoingComponent } from './components/users/practices-ongoing/practices-ongoing.component';
 import { UserdataComponent } from './components/users/userdata/userdata.component';
-import { AssignPracticeComponent } from './components/responsable/assign-practice/assign-practice.component';
-import { UsersReportsComponent } from './components/responsable/users-reports/users-reports.component';
 import { DashboardResponsableComponent } from './pages/dashboard-responsable/dashboard-responsable.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -25,6 +24,7 @@ import { DashboardTutorsComponent } from './pages/dashboard-tutors/dashboard-tut
 import { RegisterofferComponent } from './components/tutors/registeroffer/registeroffer.component';
 import { DeletecompanyComponent } from './components/tutors/deletecompany/deletecompany.component';
 import { TutorGuard } from './guards/tutor.guard';
+import { PracticeAssignedComponent } from './components/responsable/practice-assigned/practice-assigned.component';
 import { RegistercompanyComponent } from './components/tutors/registercompany/registercompany.component';
 import { CompanyViewComponent } from './components/tutors/company-view/company-view.component';
 import { OffersViewComponent } from './components/tutors/offers-view/offers-view.component';
@@ -140,7 +140,7 @@ const routes: Routes = [
   {
     path: 'dashboard-responsable',
     component: DashboardResponsableComponent,
-    canActivate: [AuthGuard,ResponsableGuard],
+    canActivate: [AuthGuard, ResponsableGuard],
     children: [
       {
         path: 'welcome',
@@ -148,15 +148,16 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'users-reports',
-        component: UsersReportsComponent,
-        canActivate: [AuthGuard]
+        path: 'practices-reports',
+        component: PracticesReportsComponent,
+        canActivate: [AuthGuard],
       },
       {
-        path: 'assign-practices',
-        component: AssignPracticeComponent,
+        path: 'practice-assigned',
+        component: PracticeAssignedComponent,
         canActivate: [AuthGuard]
       },
+
       {
         path: 'responsable-data',
         component: ResponsabledataComponent,

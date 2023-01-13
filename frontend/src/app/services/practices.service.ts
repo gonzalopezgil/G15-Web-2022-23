@@ -2,8 +2,12 @@ import { Practica } from './../interfaces/practica';
 import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Offer } from '../interfaces/offer';
+import { Practica } from '../interfaces/practica';
+import { ELEMENT_DATA } from '../mocks/practicas.mock';
 import { Observable } from 'rxjs';
+import { PracticaUser } from '../interfaces/practica-user';
+import { AuthService } from './auth.service';
+import { Offer } from '../interfaces/offer';
 import { Company } from '../interfaces/company';
 import { Practice } from '../interfaces/practice';
 import { SimpleOffer } from '../interfaces/simple_offer';
@@ -12,6 +16,10 @@ import { SimpleOffer } from '../interfaces/simple_offer';
   providedIn: 'root'
 })
 export class PracticesService {
+
+    getPractices(): Practica[] {
+      let data= ELEMENT_DATA;
+      return data;
   constructor(private http: HttpClient,private authService: AuthService) { }
 
 
@@ -66,6 +74,24 @@ export class PracticesService {
       };
       return this.http.get<Practica[]>("http://localhost:8080/api/practices", httpOptions);
     }
+    getPracticesResponsable(): Observable<PracticaUser[]>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.get<PracticaUser[]>('http://localhost:8080/api/practices/', httpOptions);
+    }
+    confirmAssignation(): Observable<any>{
+      const httpOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+        }
+      };
+      return this.http.post('http://localhost:8080/api/practices/assign-practices',httpOptions)
+    }
 
     savePractice(practice: Practice){
       const httpOptions = {
@@ -103,5 +129,18 @@ export class PracticesService {
       }
       console.log(JSON.parse(JSON.stringify(array)));
       return this.http.post("http://localhost:8080/api/users/students/2/selection", practices, httpOptions);
+    }
+    getReport(): Observable<any>{
+      const options = {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Authorization': 'Bearer ' + this.authService.getToken(),
+          'Content-disposition': 'attachment;filename="filename.pdf"',
+          'Content-Description' :' File Transfer',
+          'Pragma': 'public',
+        },
+        responseType: 'blob' as 'json'
+      };
+      return this.http.get('http://localhost:8080/api/practices/report',options)
     }
 }
