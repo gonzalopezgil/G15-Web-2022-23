@@ -14,6 +14,7 @@ import {UnassignedPractice} from 'src/app/interfaces/unassigned-practice'
 import { PopUpAssignPracticesComponent } from '../../pop-ups/pop-up-assign-practices/pop-up-assign-practices.component';
 import { SolicitudService } from 'src/app/services/solicitud.service';
 import { Solicitud } from 'src/app/interfaces/solicitud';
+import { Student } from 'src/app/interfaces/student';
 
 @Component({
   selector: 'app-practice-assigned',
@@ -27,15 +28,14 @@ export class PracticeAssignedComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);;
   solicitudes: Solicitud[] = [];
   data: UnassignedPractice[] = [];
-  alumno: User = {
+  alumno: Student = {
+    id: -1,
     first_name: '',
     username: '',
     last_name: '',
-    dni: '',
-    mail: '',
+    nif: '',
+    email: '',
     degree: '',
-    dob: '',
-    phone: '',
     total_hours: 0,
   };
   empresa: Company =
@@ -77,7 +77,7 @@ export class PracticeAssignedComponent {
       (solicitudes) => {
         this.solicitudes = solicitudes;
         for(let i = 0; i<this.solicitudes.length; i++){
-          this.userService.getUserById(this.solicitudes[i].aplicante).subscribe(
+          this.userService.getStudentBy(this.solicitudes[i].aplicante).subscribe(
             (alumno) => {
               this.alumno = alumno;
               this.empresaService.getCompanyById(this.solicitudes[i].empresa).subscribe(

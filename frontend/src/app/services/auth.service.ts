@@ -9,9 +9,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-    getToken(): String {
-      return sessionStorage.getItem('token') || '';
-    }
 
     login(username: string, password: string): Observable<any> {
       let body = {

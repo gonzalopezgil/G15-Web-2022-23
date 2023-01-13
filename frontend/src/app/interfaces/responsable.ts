@@ -1,4 +1,5 @@
 export interface responsable {
+    user_id: number;
     name: string;
     username: string;
     lastname: string;

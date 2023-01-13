@@ -86,7 +86,7 @@ import { PopUpAddOfferComponent } from './components/pop-ups/pop-up-add-offer/po
     TutordataComponent,
     TutorreportsComponent,
     PracticeAssignedComponent,
-    PracticesReportsComponent
+    PracticesReportsComponent,
     RegistercompanyComponent,
     CompanyViewComponent,
     OffersViewComponent,

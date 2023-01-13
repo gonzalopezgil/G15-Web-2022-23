@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Solicitud } from '../interfaces/solicitud';
-import { ELEMENT_DATA } from '../mocks/solicitudes.mock';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';

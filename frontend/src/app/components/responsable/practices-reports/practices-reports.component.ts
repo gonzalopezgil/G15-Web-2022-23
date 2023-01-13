@@ -16,6 +16,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { OfferService } from 'src/app/services/offer.service';
 import { PracticesService } from 'src/app/services/practices.service';
 import { delay } from 'rxjs';
+import { Student } from 'src/app/interfaces/student';
 @Component({
   selector: 'app-practices-reports',
   templateUrl: './practices-reports.component.html',
@@ -28,15 +29,14 @@ export class PracticesReportsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);;
   practicas: PracticaUser[] = [];
   data: practiceReport[] = [];
-  alumno: User = {
+  alumno: Student = {
+    id: -1,
     first_name: '',
     username: '',
     last_name: '',
-    dni: '',
-    mail: '',
+    nif: '',
+    email: '',
     degree: '',
-    dob: '',
-    phone: '',
     total_hours: 0,
   };
   empresa: Company =
@@ -76,7 +76,7 @@ export class PracticesReportsComponent {
       (practicas) => {
         this.practicas = practicas;
         for(let i = 0; i<this.practicas.length; i++){
-          this.userService.getUserById(this.practicas[i].student_id).subscribe(
+          this.userService.getStudentBy(this.practicas[i].student_id).subscribe(
             (alumno) => {
               this.alumno = alumno;
               this.offerService.getOfferById(this.practicas[i].offer_id).subscribe(

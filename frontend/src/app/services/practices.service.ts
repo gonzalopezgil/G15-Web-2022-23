@@ -2,11 +2,8 @@ import { Practica } from './../interfaces/practica';
 import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Practica } from '../interfaces/practica';
-import { ELEMENT_DATA } from '../mocks/practicas.mock';
 import { Observable } from 'rxjs';
 import { PracticaUser } from '../interfaces/practica-user';
-import { AuthService } from './auth.service';
 import { Offer } from '../interfaces/offer';
 import { Company } from '../interfaces/company';
 import { Practice } from '../interfaces/practice';
@@ -17,9 +14,6 @@ import { SimpleOffer } from '../interfaces/simple_offer';
 })
 export class PracticesService {
 
-    getPractices(): Practica[] {
-      let data= ELEMENT_DATA;
-      return data;
   constructor(private http: HttpClient,private authService: AuthService) { }
 
 

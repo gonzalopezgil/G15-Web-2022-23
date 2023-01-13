@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { responsable } from 'src/app/interfaces/responsable';
 import { ResponsableService } from 'src/app/services/responsable.service';
+import { UsersService } from 'src/app/services/users.service';
 import { PopUpPasswordComponent } from '../../pop-ups/pop-up-password/pop-up-password.component';
 
 @Component({
@@ -11,15 +12,32 @@ import { PopUpPasswordComponent } from '../../pop-ups/pop-up-password/pop-up-pas
 })
 
 export class ResponsabledataComponent {
-  responsable: responsable | undefined;
-  constructor(private responsableService: ResponsableService,private dialog: MatDialog) { }
+  responsable: responsable = {
+    user_id: -1,
+    name: '',
+    lastname: '',
+    dni: '',
+    mail: '',
+    username: '',
+    f_alta: '',
+    f_baja: '',
+  };
+
+  constructor(private responsableService: ResponsableService, private userService: UsersService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.responsableService.getResponsable().subscribe(
       (data) => {
-        this.responsable = data
-      }
-    );
+        this.userService.getUserById(data.user_id).subscribe((user_data) => {
+          this.responsable.name = user_data.first_name;
+          this.responsable.lastname = user_data.last_name;
+          this.responsable.dni = user_data.nif;
+          this.responsable.mail = user_data.email;
+          this.responsable.username = user_data.username;
+          this.responsable.f_alta = data.f_alta;
+          this.responsable.f_baja = data.f_baja;
+        });
+      });
   }
 
   changePassword() {

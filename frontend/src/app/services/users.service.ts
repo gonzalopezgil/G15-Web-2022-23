@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Student } from '../interfaces/student';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
-import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -13,7 +12,7 @@ import { AuthService } from './auth.service';
 })
 export class UsersService {
 
- 
+
   getUserById(idAlumno:number): Observable<User> {
     const httpOptions = {
       headers: {
